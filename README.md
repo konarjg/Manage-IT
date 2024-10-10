@@ -8,12 +8,12 @@ Zasady prowadzenia projektu:
 6. Budujemy aplikacje według wzorca MVC, tzn oddzielamy warstwę danych, warstwę UI i warstwę zdarzeń
 
 Wersja webowa:
-Backend: asp.net
-Frontend: JS + CSS + XML
+1. Backend: asp.net
+2. Frontend: JS + CSS + XML
 
-Wersja desktopowa
-Backend: WPF
-Frontend: XML
+Wersja desktopowa:
+1. Backend: WPF
+2. Frontend: XML
 
 Ustawienie środowiska pracy:
 1. Instalujemy visual studio community 2022 z modułami asp.net i programowanie aplikacji w języku C#
