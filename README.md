@@ -5,6 +5,7 @@ Zasady prowadzenia projektu:
 3. Kod piszemy według zasad clean code
 4. Pracujemy w Agile
 5. Komentarze, w ostateczności kod ma być czytelny bez nich
+6. Budujemy aplikacje według wzorca MVC, tzn oddzielamy warstwę danych, warstwę UI i warstwę zdarzeń
 
 Wersja webowa:
 Backend: asp.net
@@ -35,3 +36,9 @@ Wykonywanie zadań:
 9. Utwórz pull request i poczekaj na zatwierdzenie przez kierownika
 10. NIGDY NIE TWÓRZ PULL REQUESTÓW NA BRANCH INNY NIŻ MAIN!!!
 11. Po zatwierdzeniu zmerguj pull request z branchem main
+
+Przydatne linki:
+1. https://learn.microsoft.com/en-us/dotnet/csharp/ -> dokumentacja C# plus wiele przykładów, zawiera także dokumentację WPF i ASP.NET
+2. https://www.w3schools.com/git/ -> poradnik korzystania z git
+3. https://refactoring.guru/design-patterns/csharp -> wzorce projektowe w C#
+4. https://www.lambdatest.com/learning-hub/unit-testing -> testy jednostkowe, poradnik i dobre praktyki
