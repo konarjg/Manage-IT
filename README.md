@@ -23,6 +23,7 @@ Ustawienie środowiska pracy:
 5. Wpisujemy komendę git remote add origin https://github.com/konarjg/Manage-IT -> dodaje link do repozytorium w chmurze github pod nazwą origin
 6. Wpisujemy komendę git pull origin -> pobiera cały kod z chmury od ostatniej zatwierdzonej zmiany
 7. Wpisujemy komendę git switch imie -> przełącza nas z lokalnego branchu na branch o naszym imieniu, tutaj prowadzimy naszą całą pracę
+8. Otwieramy plik Manage IT.sln
 
 Wykonywanie zadań:
 1. Wejdź na https://trello.com/b/2YgmexjY/manage-it i sprawdź aktualne przydzielone zadanie
