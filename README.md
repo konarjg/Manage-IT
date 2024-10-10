@@ -11,7 +11,7 @@ Wersja webowa:
 Backend: asp.net
 Frontend: JS + CSS + XML
 
-Wersja dekstopowa
+Wersja desktopowa
 Backend: WPF
 Frontend: XML
 
