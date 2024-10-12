@@ -32,7 +32,7 @@ Wykonywanie zadań:
 4. Wpisz komendę git pull origin imie, aby pobrać najnowsze zmiany na twoim branchu
 5. PAMIĘTAJ, BY ZAWSZE PISAĆ KOD TYLKO NA SWOIM BRANCHU I NIE MODYFIKOWAĆ INNYCH PLIKÓW NIŻ TE PRZEWIDZIANE W ZADANIU!!!
 6. Zacznij pisać kod
-7. Wpisz komendę git push origin main, aby podesłać każdą zmianę do chmury, najlepiej kilka razy w trakcie pracy po większych postępach
+7. Wpisz komendę git push origin imie, aby podesłać każdą zmianę do chmury, najlepiej kilka razy w trakcie pracy po większych postępach
 8. Po ukończeniu zadania wejdź na https://github.com/konarjg/Manage-IT
 9. Utwórz pull request i poczekaj na zatwierdzenie przez kierownika
 10. NIGDY NIE TWÓRZ PULL REQUESTÓW NA BRANCH INNY NIŻ MAIN!!!
