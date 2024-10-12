@@ -8,7 +8,7 @@ Zasady prowadzenia projektu:
 6. Budujemy aplikacje według wzorca MVC, tzn oddzielamy warstwę danych, warstwę UI i warstwę zdarzeń
 
 Wersja webowa:
-1. Backend: asp.net
+1. Backend: php
 2. Frontend: JS + CSS + XML
 
 Wersja desktopowa:
