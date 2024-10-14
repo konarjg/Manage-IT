@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace WebTests
 {
     [TestClass]
-    public class DatabaseAccessTests
+    public class MockDatabaseAccessTests
     {
         [TestMethod]
         public void ProcessQueryInsertShouldHaveNullResultsAndReturnTrue()

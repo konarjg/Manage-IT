@@ -31,6 +31,9 @@ internal class DatabaseContext : DbContext
             case Type t when t == typeof(Task):
                 return (DbSet<T>)Convert.ChangeType(Tasks, typeof(DbSet<T>));
 
+            case Type t when t == typeof(TaskList):
+                return (DbSet<T>)Convert.ChangeType(TaskLists, typeof(DbSet<T>));
+
             case Type t when t == typeof(TaskDetails):
                 return (DbSet<T>)Convert.ChangeType(TaskDetails, typeof(DbSet<T>));
 
