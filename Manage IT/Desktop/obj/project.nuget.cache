@@ -1,14 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "MUl9JT9EpCpzGL83vZ92G+CQzJp5f3TKvVau/QbEXS7WNM3Owg0H6Ellqa7QMyoT96XXRzbWJn+pINDKWOAr/g==",
+  "dgSpecHash": "BDRtKmHRVU7IDCDQz2Du6svw6RKQZo287sdidN9qciC9VtmhD4ZZc2nb+yvJMf1sPxSxMUnmpB2XDqfOO6BSSg==",
   "success": true,
   "projectFilePath": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Desktop\\Desktop.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\konis\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.35\\microsoft.entityframeworkcore.6.0.35.nupkg.sha512",
     "C:\\Users\\konis\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.35\\microsoft.entityframeworkcore.abstractions.6.0.35.nupkg.sha512",
     "C:\\Users\\konis\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\6.0.35\\microsoft.entityframeworkcore.analyzers.6.0.35.nupkg.sha512",
+    "C:\\Users\\konis\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\6.0.35\\microsoft.entityframeworkcore.relational.6.0.35.nupkg.sha512",
     "C:\\Users\\konis\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\6.0.0\\microsoft.extensions.caching.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\konis\\.nuget\\packages\\microsoft.extensions.caching.memory\\6.0.2\\microsoft.extensions.caching.memory.6.0.2.nupkg.sha512",
+    "C:\\Users\\konis\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\konis\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\6.0.1\\microsoft.extensions.dependencyinjection.6.0.1.nupkg.sha512",
     "C:\\Users\\konis\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\konis\\.nuget\\packages\\microsoft.extensions.logging\\6.0.0\\microsoft.extensions.logging.6.0.0.nupkg.sha512",

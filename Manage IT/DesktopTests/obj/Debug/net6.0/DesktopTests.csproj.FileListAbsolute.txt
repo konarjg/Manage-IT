@@ -101,3 +101,16 @@ C:\Users\konis\Desktop\Manage IT\Manage IT\DesktopTests\obj\Debug\net6.0\refint\
 C:\Users\konis\Desktop\Manage IT\Manage IT\DesktopTests\obj\Debug\net6.0\DesktopTests.pdb
 C:\Users\konis\Desktop\Manage IT\Manage IT\DesktopTests\obj\Debug\net6.0\DesktopTests.genruntimeconfig.cache
 C:\Users\konis\Desktop\Manage IT\Manage IT\DesktopTests\obj\Debug\net6.0\ref\DesktopTests.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\DesktopTests\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\DesktopTests\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\DesktopTests\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\DesktopTests\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\DesktopTests\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\DesktopTests\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\DesktopTests\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\DesktopTests\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\DesktopTests\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\DesktopTests\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\DesktopTests\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\DesktopTests\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\DesktopTests\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll

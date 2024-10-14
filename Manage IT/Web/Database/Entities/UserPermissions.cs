@@ -4,11 +4,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
 
-internal class UserPermissionsContext : DbContext
-{
-    public DbSet<UserPermissions> UserPermissions { get; set; }
-}
-
 [Table("UserPermissions")]
 public class UserPermissions
 {

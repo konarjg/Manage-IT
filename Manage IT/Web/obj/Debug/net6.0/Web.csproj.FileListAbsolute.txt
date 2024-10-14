@@ -24,3 +24,11 @@ C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Debug\net6.0\refint\Web.dll
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Debug\net6.0\Web.pdb
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Debug\net6.0\Web.genruntimeconfig.cache
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Debug\net6.0\ref\Web.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Debug\net6.0\Web.csproj.CopyComplete
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll

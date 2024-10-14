@@ -2,23 +2,74 @@
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Web.Database
+namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
+
+internal class DatabaseContext : DbContext
 {
-    public class Database : IDisposable
+    public DbSet<Prefix> Prefixes { get; set; }
+    public DbSet<Project> Projects { get; set; }
+    public DbSet<ProjectMembers> ProjectMembers { get; set; }
+    public DbSet<Task> Tasks { get; set; }
+    public DbSet<TaskDetails> TaskDetails { get; set; }
+    public DbSet<TaskList> TaskLists { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<UserPermissions> UserPermissions { get; set; }
+
+    public DbSet<T> GetDatabaseSet<T>() where T : class
     {
-        public List<DbContext> Entities { get; private set; }
-
-        public Database()
+        switch (typeof(T))
         {
+            case Type t when t == typeof(Prefix):
+                return (DbSet<T>)Convert.ChangeType(Prefixes, typeof(DbSet<T>));
 
+            case Type t when t == typeof(Project):
+                return (DbSet<T>)Convert.ChangeType(Projects, typeof(DbSet<T>));
+
+            case Type t when t == typeof(ProjectMembers):
+                return (DbSet<T>)Convert.ChangeType(ProjectMembers, typeof(DbSet<T>));
+
+            case Type t when t == typeof(Task):
+                return (DbSet<T>)Convert.ChangeType(Tasks, typeof(DbSet<T>));
+
+            case Type t when t == typeof(TaskDetails):
+                return (DbSet<T>)Convert.ChangeType(TaskDetails, typeof(DbSet<T>));
+
+            case Type t when t == typeof(User):
+                return (DbSet<T>)Convert.ChangeType(Users, typeof(DbSet<T>));
+
+            case Type t when t == typeof(UserPermissions):
+                return (DbSet<T>)Convert.ChangeType(UserPermissions, typeof(DbSet<T>));
         }
 
-        public void Dispose()
+        return null;
+    }
+}
+
+public class Database : IDisposable
+{
+    private DatabaseContext DatabaseContext;
+
+    public Database()
+    {
+        DatabaseContext = new DatabaseContext();
+    }
+
+    public void Dispose()
+    {
+        DatabaseContext.Dispose();
+    }
+
+    public bool ExecuteQuery<T>(FormattableString query, out List<T> results) where T : class
+    {
+        try
         {
-            foreach (var entity in Entities)
-            {
-                entity.Dispose();
-            }
+            results = DatabaseContext.GetDatabaseSet<T>().FromSqlInterpolated(query).ToList();
+            return true;
+        }
+        catch (Exception exception)
+        {
+            results = null;
+            return false;
         }
     }
 }

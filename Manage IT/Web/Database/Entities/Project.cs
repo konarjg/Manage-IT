@@ -4,11 +4,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
 
-public class ProjectContext : DbContext
-{
-    public DbSet<Project> Projects { get; set; }
-}
-
 [Table("Projects")]
 public class Project
 {
