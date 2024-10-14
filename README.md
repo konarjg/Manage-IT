@@ -32,11 +32,11 @@ Wykonywanie zadań:
 4. Wpisz komendę git pull origin imie, aby pobrać najnowsze zmiany na twoim branchu
 5. PAMIĘTAJ, BY ZAWSZE PISAĆ KOD TYLKO NA SWOIM BRANCHU I NIE MODYFIKOWAĆ INNYCH PLIKÓW NIŻ TE PRZEWIDZIANE W ZADANIU!!!
 6. Zacznij pisać kod
-7. Wpisz komendę git push origin imie, aby podesłać każdą zmianę do chmury, najlepiej kilka razy w trakcie pracy po większych postępach
-8. Po ukończeniu zadania wejdź na https://github.com/konarjg/Manage-IT
-9. Utwórz pull request i poczekaj na zatwierdzenie przez kierownika
-10. NIGDY NIE TWÓRZ PULL REQUESTÓW NA BRANCH INNY NIŻ MAIN!!!
-11. Po zatwierdzeniu zmerguj pull request z branchem main
+8. Wpisz komendy git add -A następnie git commit -a -m "OPIS ZMIAN" i potem git push origin imie, aby podesłać każdą zmianę do chmury, najlepiej kilka razy w trakcie pracy po większych postępach
+9. Po ukończeniu zadania wejdź na https://github.com/konarjg/Manage-IT
+10. Utwórz pull request i poczekaj na zatwierdzenie przez kierownika
+11. NIGDY NIE TWÓRZ PULL REQUESTÓW NA BRANCH INNY NIŻ MAIN!!!
+12. Po zatwierdzeniu zmerguj pull request z branchem main
 
 Przydatne linki:
 1. https://learn.microsoft.com/en-us/dotnet/csharp/ -> dokumentacja C# plus wiele przykładów, zawiera także dokumentację WPF i ASP.NET
