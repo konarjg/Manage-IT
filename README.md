@@ -9,7 +9,7 @@ Zasady prowadzenia projektu:
 
 Wersja webowa:
 1. Backend: asp.net
-2. Frontend: JS + CSS + XML
+2. Frontend: JS + CSS + CSHTML
 
 Wersja desktopowa:
 1. Backend: WPF
