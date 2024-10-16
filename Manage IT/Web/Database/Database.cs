@@ -15,36 +15,49 @@ internal class DatabaseContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<UserPermissions> UserPermissions { get; set; }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<ProjectMembers>().HasNoKey();
+        modelBuilder.Entity<UserPermissions>().HasNoKey();
+        modelBuilder.Entity<TaskDetails>().HasNoKey();
+        base.OnModelCreating(modelBuilder);
+    }
+
     public DbSet<T> GetDatabaseSet<T>() where T : class
     {
         switch (typeof(T))
         {
             case Type t when t == typeof(Prefix):
-                return (DbSet<T>)Convert.ChangeType(Prefixes, typeof(DbSet<T>));
+                return Prefixes as DbSet<T>;
 
             case Type t when t == typeof(Project):
-                return (DbSet<T>)Convert.ChangeType(Projects, typeof(DbSet<T>));
+                return Projects as DbSet<T>;
 
             case Type t when t == typeof(ProjectMembers):
-                return (DbSet<T>)Convert.ChangeType(ProjectMembers, typeof(DbSet<T>));
+                return ProjectMembers as DbSet<T>;
 
             case Type t when t == typeof(Task):
-                return (DbSet<T>)Convert.ChangeType(Tasks, typeof(DbSet<T>));
+                return Tasks as DbSet<T>;
 
             case Type t when t == typeof(TaskList):
-                return (DbSet<T>)Convert.ChangeType(TaskLists, typeof(DbSet<T>));
+                return TaskLists as DbSet<T>;
 
             case Type t when t == typeof(TaskDetails):
-                return (DbSet<T>)Convert.ChangeType(TaskDetails, typeof(DbSet<T>));
+                return TaskDetails as DbSet<T>;
 
             case Type t when t == typeof(User):
-                return (DbSet<T>)Convert.ChangeType(Users, typeof(DbSet<T>));
+                return Users as DbSet<T>;
 
             case Type t when t == typeof(UserPermissions):
-                return (DbSet<T>)Convert.ChangeType(UserPermissions, typeof(DbSet<T>));
+                return UserPermissions as DbSet<T>;
         }
 
         return null;
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer("Server=sql.bsite.net\\MSSQL2016;Database=manageit_ManageIT;User Id=manageit_ManageIT;Password=ManageIT;");
     }
 }
 
@@ -66,7 +79,16 @@ public class Database : IDisposable
     {
         try
         {
+            if (query.Format.Contains("INSERT") || query.Format.Contains("UPDATE") || query.Format.Contains("DELETE"))
+            {
+                results = null;
+                DatabaseContext.Database.ExecuteSqlInterpolated(query);
+                DatabaseContext.SaveChanges();
+                return true;
+            }
+            
             results = DatabaseContext.GetDatabaseSet<T>().FromSqlInterpolated(query).ToList();
+            DatabaseContext.SaveChanges();
             return true;
         }
         catch (Exception exception)

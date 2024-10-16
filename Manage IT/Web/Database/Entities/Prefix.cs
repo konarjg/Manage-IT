@@ -4,10 +4,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
 
-[Table("Prefixes")]
+[Table("dbo.Prefixes")]
 public class Prefix
 {
     [Key]
-    public int PrefixId { get; set; }
+    public short PrefixId { get; set; }
     public string Country { get; set; }
+
+    public override string ToString()
+    {
+        return string.Format("PrefixId: {0}, Country: {1}", PrefixId, Country);
+    }
 }
