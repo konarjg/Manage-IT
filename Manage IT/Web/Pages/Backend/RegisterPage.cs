@@ -33,13 +33,11 @@ public class RegisterPage : PageModel
         user.PhoneNumber = phoneNumber;
         user.PrefixId = PrefixManager.Instance.GetPrefixByCountry(country).PrefixId;
 
-        /*
-        if (UserManager.RegisterUser(user))
+        if (UserManager.Instance.RegisterUser(user))
         {
             return;
         }
         
         Error = "Could not create an account!";
-        */
     }
 }
