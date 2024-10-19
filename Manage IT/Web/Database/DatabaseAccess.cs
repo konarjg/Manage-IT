@@ -7,9 +7,16 @@ public class DatabaseAccess
 {
     private List<FormattableString> QueryBuffer;
 
+    public static DatabaseAccess Instance { get; private set; }
+
     public DatabaseAccess()
     {
         QueryBuffer = new List<FormattableString>();
+    }
+
+    public static void Instantiate()
+    {
+        Instance = new DatabaseAccess();
     }
 
     private void OnDatabaseUpdateRequested()
