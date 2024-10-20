@@ -16,10 +16,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\konis\Desktop\Manage IT\Manage IT\Web
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/MainPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFpblBhZ2UuY3NodG1s
+[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/RegisterPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0ZXJQYWdlLmNzaHRtbA==
+[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/RegisterForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0ZXJGb3JtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
