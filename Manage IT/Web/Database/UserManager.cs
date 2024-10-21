@@ -13,9 +13,11 @@ public class UserManager
 
     public bool RegisterUser(User user)
     {
-        user.Login, user.Password, user.Email, user.Prefix, user.Phone;
+        
         //INSERT INTO Users(Login,Password,Email,Prefix,PhoneNumber) VALUES...
-         var query = FormattableStringFactory.Create("INSERT INTO dbo.Users (Login,Password,Email,Prefix,PhoneNumber) VALUES ('{0}', '{1}','{2)',{3},{4})", Login, Password, Email, Prefix, PhoneNumber);
+        List<User> users;
+        var query = FormattableStringFactory.Create("INSERT INTO dbo.Users (Login,Password,Email,Prefix,PhoneNumber) VALUES ('{0}', '{1}','{2)',{3},{4})", user.Login, user.Password, user.Email, user.Prefix, user.Phone);
+        //AccessDatabase.Instance.ProcessQuery(query, out users);
         return false;
     }
 
