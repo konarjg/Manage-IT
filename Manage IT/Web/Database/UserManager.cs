@@ -16,7 +16,7 @@ public class UserManager
         
         //INSERT INTO Users(Login,Password,Email,Prefix,PhoneNumber) VALUES...
         List<User> users;
-        var query = FormattableStringFactory.Create("INSERT INTO dbo.Users (Login,Password,Email,Prefix,PhoneNumber) VALUES ('{0}', '{1}','{2)',{3},{4})", user.Login, user.Password, user.Email, user.Prefix, user.Phone);
+        var query = FormattableStringFactory.Create("INSERT INTO dbo.Users (Login,Password,Email,PrefixId,PhoneNumber) VALUES ('{0}', '{1}','{2)',{3},{4})", user.Login, user.Password, user.Email, user.PrefixId, user.PhoneNumber);
         //AccessDatabase.Instance.ProcessQuery(query, out users);
         return false;
     }
