@@ -1,0 +1,13 @@
+﻿@page
+@model RegisterForm
+@{
+    <html>
+        <body>
+            <p>@Model.Error</p>
+
+            <form method="post" action="/Register">
+                <input value="Submit" type="submit"/>
+            </form>
+        </body>
+    </html>
+}

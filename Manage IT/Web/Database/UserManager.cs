@@ -1,30 +1,28 @@
+using EFModeling.EntityProperties.DataAnnotations.Annotations;
+
 public class UserManager
 {
-  User CurrentSessionUser;
+    public static User CurrentSessionUser { get; private set; }
 
-  private void LoginUser(string login, string password) {
+    public static UserManager Instance { get; private set; }
 
-  }
+    public static void Instantiate()
+    {
 
-  private void LoginUser(string email, string password) {
+    }
 
-  }
+    public bool RegisterUser(User user)
+    {
+        return false;
+    }
 
-  private void RegisterUser(string login, string email, string password, Prefix prefix, int phoneNumber){
+    public bool LoginUser(User user)
+    {
+        return false;
+    }
 
-  }
-
-  private void ChangeCredentials(string newLogin, string newEmail, string newPassword, Prefix newPrefix, int newPhoneNumber) {
-
-  }
-
-  private void RemoveAccount(string email, string password){
-      $password = mysqli_query("SELECT * FROM Users WHERE email = " + email + "",database);
-        if()
-        "DELETE FROM Users WHERE 
-  }
-
-  private void RemoveAccount(string login, string password){
-
-  }
+    private bool UserExists(User user)
+    {
+        return false;
+    }
 }
