@@ -21,8 +21,10 @@ public class UserManager
 
     public bool LoginUser(User user)
     {
-        //SELECT email,password FROM Users
-        //SELECT login,password FROM Users
+        List<User> user;
+        var queryLogin = FormattableStringFactory.Create("SELECT * FROM dbo.Users WHERE Login = '{0}'",user.Login);
+        var queryEmail = FormattableStringFactory.Create("SELECT * FROM dbo.Users WHERE Email = '{0}'",user.Email);
+        bool success = DatabaseAccess.Instance.ProcessQuery(queryLogin, out user) || DatabaseAccess.Instance.ProcessQuery(queryEmail, out user);
         return false;
     }
 
