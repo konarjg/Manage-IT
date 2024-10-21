@@ -13,7 +13,6 @@ public class UserManager
 
     public bool RegisterUser(User user)
     {
-        
         //INSERT INTO Users(Login,Password,Email,Prefix,PhoneNumber) VALUES...
         List<User> users;
         var query = FormattableStringFactory.Create("INSERT INTO dbo.Users (Login,Password,Email,PrefixId,PhoneNumber) VALUES ('{0}', '{1}','{2)',{3},{4})", user.Login, user.Password, user.Email, user.PrefixId, user.PhoneNumber);
