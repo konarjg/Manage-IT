@@ -13,7 +13,6 @@ public class UserManager
 
     public bool RegisterUser(User user)
     {
-        //INSERT INTO Users(Login,Password,Email,Prefix,PhoneNumber) VALUES...
         List<User> users;
         var query = FormattableStringFactory.Create("INSERT INTO dbo.Users (Login,Password,Email,PrefixId,PhoneNumber) VALUES ('{0}', '{1}','{2)',{3},{4})", user.Login, user.Password, user.Email, user.PrefixId, user.PhoneNumber);
         return AccessDatabase.Instance.ProcessQuery(query, out users);
@@ -30,7 +29,9 @@ public class UserManager
 
     private bool UserExists(User user)
     {
-        //SELECT user FROM Users
-        return false;
+        List<User> existingUser;
+        var queryUserExists = FormattableStringFactory.Create("SELECT * FROM dbo.Users WHERE Login = '{0}'",user.Login);
+        bool success = DatabaseAccess.Instance.ProcessQuery(queryUserExists, out existingUser);
+        return existingUser == null && existingUser.Count() == 0;
     }
 }
