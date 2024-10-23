@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
 
-[Table("UserPermissions")]
+[Table("dbo.UserPermissions")]
 public class UserPermissions
 {
     [ForeignKey("UserId")]

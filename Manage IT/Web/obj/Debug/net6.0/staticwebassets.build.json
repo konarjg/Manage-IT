@@ -1,11 +1,46 @@
 {
   "Version": 1,
-  "Hash": "I45YKMxdLd4rSIfiy4Jy7K87CK1wxLboE3ngw90NHmQ=",
+  "Hash": "1S4VfmIZq3lF/ulrNM7EOqcLSQHn1cOZQg8QE94k+e8=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\obj\\Debug\\net6.0\\scopedcss\\bundle\\Web.styles.css",
+      "SourceId": "Web",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\obj\\Debug\\net6.0\\scopedcss\\bundle\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "Web.styles.css",
+      "AssetKind": "All",
+      "AssetMode": "CurrentProject",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ApplicationBundle",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\obj\\Debug\\net6.0\\scopedcss\\bundle\\Web.styles.css"
+    },
+    {
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Web.bundle.scp.css",
+      "SourceId": "Web",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "Web.bundle.scp.css",
+      "AssetKind": "All",
+      "AssetMode": "Reference",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ProjectBundle",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Web.bundle.scp.css"
+    }
+  ]
 }

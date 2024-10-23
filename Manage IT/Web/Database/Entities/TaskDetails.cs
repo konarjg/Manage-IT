@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
 
-[Table("TaskDetails")]
+[Table("dbo.TaskDetails")]
 public class TaskDetails
 {
     [ForeignKey("UserId")]

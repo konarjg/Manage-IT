@@ -1,11 +1,46 @@
 {
   "Version": 1,
-  "Hash": "OrvDg3qJLOunq18Yfg2PyeGk/NAfOlRmPU1mOC6XpPY=",
+  "Hash": "87HS8CxYEnaSW9KHv4QQqP+FczJ5nXjRmunQVQFh+pQ=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
   "ManifestType": "Publish",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\obj\\Release\\net6.0\\scopedcss\\bundle\\Web.styles.css",
+      "SourceId": "Web",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\obj\\Release\\net6.0\\scopedcss\\bundle\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "Web.styles.css",
+      "AssetKind": "All",
+      "AssetMode": "CurrentProject",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ApplicationBundle",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\obj\\Release\\net6.0\\scopedcss\\bundle\\Web.styles.css"
+    },
+    {
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\obj\\Release\\net6.0\\scopedcss\\projectbundle\\Web.bundle.scp.css",
+      "SourceId": "Web",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\obj\\Release\\net6.0\\scopedcss\\projectbundle\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "Web.bundle.scp.css",
+      "AssetKind": "All",
+      "AssetMode": "Reference",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ProjectBundle",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\obj\\Release\\net6.0\\scopedcss\\projectbundle\\Web.bundle.scp.css"
+    }
+  ]
 }
