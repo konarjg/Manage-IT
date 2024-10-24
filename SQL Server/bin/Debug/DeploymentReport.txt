@@ -1,0 +1,19 @@
+﻿** Highlights
+     Tables that will be recreated with data migrated
+       [dbo].[Prefixes]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Recreate table
+       [dbo].[Prefixes] (Table)
+
+** Supporting actions
+     Drop
+       [dbo].[Users_Prefixes] (Foreign Key)
+     Create
+       [dbo].[Users_Prefixes] (Foreign Key)

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
 
-[Table("Users")]
+[Table("dbo.Users")]
 public class User
 {
     [Key]
@@ -13,6 +13,6 @@ public class User
     public string Password { get; set; }
     public string Email { get; set; }
     [ForeignKey("PrefixId")]
-    public int PrefixId { get; set; }
-    public int PhoneNumber { get; set; }
+    public short PrefixId { get; set; }
+    public string PhoneNumber { get; set; }
 }

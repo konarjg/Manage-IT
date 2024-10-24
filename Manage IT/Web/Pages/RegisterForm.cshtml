@@ -1,12 +1,43 @@
 ﻿@page
 @model RegisterForm
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
+    <!DOCTYPE html>
     <html>
-        <body>
-            <p>@Model.Error</p>
+        <head>
+            <meta charset="utf-32" />
+            <link rel="stylesheet" href="~/Web.styles.css" type="text/css" />
+        </head>
 
-            <form method="post" action="/Register">
-                <input value="Submit" type="submit"/>
+        <body>
+            <form method="post">
+                <div class="container">
+                    <div><label class="error">@Model.Error</label></div>
+                    <div><label class="title">Register</label></div>
+                    <div><label class="label">Email</label></div>
+                    <div><input placeholder="youremail123@gmail.com" type="email" name="email"/></div>
+                    <div><label class="label">Username</label></div>
+                    <div><input placeholder="mike123" type="text" name="login" /></div>
+                    
+                    <div><label class="label">Country Code</label></div>
+                    <div>
+                        <select name="country">
+                            @foreach (var prefix in PrefixManager.Instance.Prefixes)
+                            {
+                                <option value="@prefix.Country">@string.Format("{0} {1}", prefix.ToString(), Model.GetFlag(prefix.Country))</option>
+                            }
+                        </select>
+                    </div>
+                    
+
+                    <div><label class="label">Phone Number</label></div>
+                    <div><input placeholder="123052345" type="number" name="phoneNumber"/></div>
+                    <div><label class="label">Password</label></div>
+                    <div><input placeholder="!Qwerty123" type="password" name="password"/></div>
+                    <div><label class="label">Confirm Password</label></div>
+                    <div><input placeholder="!Qwerty123" type="password" name="confirmPassword" /></div>
+                    <div><input value="Register" type="submit" class="submit"/></div>
+                </div>
             </form>
         </body>
     </html>

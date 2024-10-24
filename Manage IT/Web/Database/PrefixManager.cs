@@ -1,4 +1,5 @@
 ﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Metrics;
 using System.Runtime.CompilerServices;
 
@@ -41,7 +42,7 @@ public class PrefixManager
     public static bool AddPrefix(int prefixId, string country)
     {
         List<Prefix> prefixes;
-        var query = FormattableStringFactory.Create("INSERT INTO dbo.Prefixes (PrefixId, Country) VALUES ({0}, '{1}')", prefixId, country);
+        var query = FormattableStringFactory.Create($"INSERT INTO dbo.Prefixes (PrefixId, Country) VALUES ({prefixId}, '{country}')");
         
         return DatabaseAccess.Instance.ProcessQuery(query, out prefixes);
     }

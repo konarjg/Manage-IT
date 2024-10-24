@@ -1,0 +1,6 @@
+C:\Users\konis\Desktop\Manage IT\SQL Server\bin\Debug\SQL Server.dacpac
+C:\Users\konis\Desktop\Manage IT\SQL Server\obj\Debug\SQL Server.sqlproj.AssemblyReference.cache
+C:\Users\konis\Desktop\Manage IT\SQL Server\obj\Debug\SQL_Server.dll
+C:\Users\konis\Desktop\Manage IT\SQL Server\obj\Debug\SQL_Server.pdb
+C:\Users\konis\Desktop\Manage IT\SQL Server\bin\Debug\SQL_Server.dll
+C:\Users\konis\Desktop\Manage IT\SQL Server\bin\Debug\SQL_Server.pdb

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
 
-[Table("Projects")]
+[Table("dbo.Projects")]
 public class Project
 {
     [Key]

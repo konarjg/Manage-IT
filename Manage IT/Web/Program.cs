@@ -9,5 +9,8 @@ DatabaseAccess.Instantiate();
 PrefixManager.Instantiate();
 UserManager.Instantiate();
 
+app.UseHttpsRedirection();
+app.UseHsts();
 app.MapRazorPages();
+app.UseStaticFiles();
 app.Run();
