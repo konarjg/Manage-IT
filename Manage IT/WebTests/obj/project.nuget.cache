@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Xi26FRdqfo8AWGfM+G82eVm2D/0WwbD3jAE9P+2+GvbzZWYIt8RUJ74PUbXwv9Q/Wvl+hutap1SAyaNjhvYmjg==",
+  "dgSpecHash": "5GLYCD76CQtR93haSEgaqOzgOsh5DTMd0j3jz7xogKQJ+gYkm1g4aBt7gEEaDQAwmbqEh0AW9zZZLnyh6FGXzA==",
   "success": true,
   "projectFilePath": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\WebTests\\WebTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\konis\\.nuget\\packages\\coverlet.collector\\3.2.0\\coverlet.collector.3.2.0.nupkg.sha512",
+    "C:\\Users\\konis\\.nuget\\packages\\mediabrowser.common\\4.8.10\\mediabrowser.common.4.8.10.nupkg.sha512",
     "C:\\Users\\konis\\.nuget\\packages\\microsoft.codecoverage\\17.5.0\\microsoft.codecoverage.17.5.0.nupkg.sha512",
     "C:\\Users\\konis\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\konis\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.7\\microsoft.data.sqlclient.2.1.7.nupkg.sha512",

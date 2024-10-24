@@ -13,6 +13,6 @@ public class Prefix
 
     public override string ToString()
     {
-        return string.Format("PrefixId: {0}, Country: {1}", PrefixId, Country);
+        return string.Format("+{0} {1}", PrefixId, Country);
     }
 }

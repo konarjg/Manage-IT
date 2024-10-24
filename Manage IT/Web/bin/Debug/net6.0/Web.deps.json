@@ -8,12 +8,33 @@
     ".NETCoreApp,Version=v6.0": {
       "Web/1.0.0": {
         "dependencies": {
+          "MediaBrowser.Common": "4.8.10",
           "Microsoft.EntityFrameworkCore": "6.0.35",
           "Microsoft.EntityFrameworkCore.Relational": "6.0.35",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.35"
         },
         "runtime": {
           "Web.dll": {}
+        }
+      },
+      "MediaBrowser.Common/4.8.10": {
+        "runtime": {
+          "lib/netstandard2.0/Emby.Media.Model.dll": {
+            "assemblyVersion": "4.8.10.0",
+            "fileVersion": "4.8.10.0"
+          },
+          "lib/netstandard2.0/Emby.Web.GenericEdit.dll": {
+            "assemblyVersion": "4.8.10.0",
+            "fileVersion": "4.8.10.0"
+          },
+          "lib/netstandard2.0/MediaBrowser.Common.dll": {
+            "assemblyVersion": "4.8.10.0",
+            "fileVersion": "4.8.10.0"
+          },
+          "lib/netstandard2.0/MediaBrowser.Model.dll": {
+            "assemblyVersion": "4.8.10.0",
+            "fileVersion": "4.8.10.0"
+          }
         }
       },
       "Microsoft.CSharp/4.5.0": {},
@@ -434,6 +455,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "MediaBrowser.Common/4.8.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-YsfE4EiUDW614Yypx4654sc2P/3BvyiyKD5g1HbaQVfhXHyS8pCFp5fX8QSZIZCZnpPMxjixNaZosgXibs2q6Q==",
+      "path": "mediabrowser.common/4.8.10",
+      "hashPath": "mediabrowser.common.4.8.10.nupkg.sha512"
     },
     "Microsoft.CSharp/4.5.0": {
       "type": "package",

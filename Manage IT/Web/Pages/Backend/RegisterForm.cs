@@ -1,7 +1,9 @@
 ﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
+using System.Globalization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Text;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 public class RegisterForm : PageModel
 {
@@ -10,6 +12,21 @@ public class RegisterForm : PageModel
     private Regex EmailValidation = new Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}");
     private Regex PasswordValidation = new Regex("^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$");
     private Regex PhoneNumberValidation = new Regex("^{4,15}");
+
+    public string GetFlag(string country)
+    {
+        var regions = CultureInfo.GetCultures(CultureTypes.SpecificCultures).Select(x => new RegionInfo(x.LCID));
+        var englishRegion = regions.FirstOrDefault(region => region.EnglishName.Contains(country));
+        
+        if (englishRegion == null)
+        {
+            return "🏳";
+        }
+
+        var countryAbbrev = englishRegion.TwoLetterISORegionName;
+        return ConvertToFlag(countryAbbrev);
+    }
+    public string ConvertToFlag(string countryCode) => string.Concat(countryCode.ToUpper().Select(x => char.ConvertFromUtf32(x + 0x1F1A5)));
 
     public void OnGet()
     {

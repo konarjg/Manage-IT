@@ -67,3 +67,7 @@ C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Release\net6.0\Web.staticweba
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\scopedcss\Pages\Index.cshtml.rz.scp.css
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\scopedcss\projectbundle\Web.bundle.scp.css
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\scopedcss\Pages\RegisterForm.cshtml.rz.scp.css
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Release\net6.0\Emby.Media.Model.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Release\net6.0\Emby.Web.GenericEdit.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Release\net6.0\MediaBrowser.Common.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Release\net6.0\MediaBrowser.Model.dll

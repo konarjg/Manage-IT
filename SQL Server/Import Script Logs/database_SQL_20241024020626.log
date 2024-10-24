@@ -1,0 +1,12 @@
+24.10.2024 04:06:26	This log contains information about the import operation of the script 'database.SQL' into project 'SQL Server' on computer 'MISIA' by user'konis.
+24.10.2024 04:06:26	Started importing file: C:\Users\konis\Documents\Toad Data Modeler\GeneratedScripts\database.SQL 
+24.10.2024 04:06:26	File name C:\Users\konis\Documents\Toad Data Modeler\GeneratedScripts\database.SQL (size: 5018)
+24.10.2024 04:06:26	Parsing import script
+24.10.2024 04:06:26	Total number of batches in script: 33
+24.10.2024 04:06:26	Total number of statements in script: 33
+24.10.2024 04:06:26	The script was successfully imported into the project.
+24.10.2024 04:06:26	Analyzing schema objects...
+24.10.2024 04:06:26	Scanning project for duplicate elements
+24.10.2024 04:06:26	Finished duplicate element processing
+24.10.2024 04:06:26	A summary of the import was saved to the following location: C:\Users\konis\Desktop\Manage IT\SQL Server\Import Script Logs\database_SQL_20241024020626.log
+24.10.2024 04:06:26	Click Finish to continue...

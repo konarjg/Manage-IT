@@ -5,6 +5,7 @@
     <!DOCTYPE html>
     <html>
         <head>
+            <meta charset="utf-32" />
             <link rel="stylesheet" href="~/Web.styles.css" type="text/css" />
         </head>
 
@@ -21,8 +22,10 @@
                     <div><label class="label">Country Code</label></div>
                     <div>
                         <select name="country">
-                            <option value="Poland">+48 Poland</option>
-                            <option value="Amogus">+69 Amogus</option>
+                            @foreach (var prefix in PrefixManager.Instance.Prefixes)
+                            {
+                                <option value="@prefix.Country">@string.Format("{0} {1}", prefix.ToString(), Model.GetFlag(prefix.Country))</option>
+                            }
                         </select>
                     </div>
                     

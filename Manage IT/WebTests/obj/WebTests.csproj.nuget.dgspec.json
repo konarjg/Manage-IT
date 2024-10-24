@@ -140,6 +140,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "MediaBrowser.Common": {
+              "target": "Package",
+              "version": "[4.8.10, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.35, )"

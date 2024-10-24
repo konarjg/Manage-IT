@@ -6,6 +6,10 @@ C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\Web
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\Web.deps.json
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\Web.runtimeconfig.json
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\Web.pdb
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\Emby.Media.Model.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\Emby.Web.GenericEdit.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\MediaBrowser.Common.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\MediaBrowser.Model.dll
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\Microsoft.Data.SqlClient.dll
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.dll
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Abstractions.dll
