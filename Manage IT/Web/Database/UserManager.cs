@@ -21,7 +21,7 @@ public class UserManager
         }
 
         List<User> users;
-        var query = FormattableStringFactory.Create($"INSERT INTO dbo.Users (Login,Password,Email,PrefixId,PhoneNumber) VALUES ('{user.Login}', '{user.Password}','{user.Email})',{user.PrefixId},{user.PhoneNumber})");
+        var query = FormattableStringFactory.Create($"INSERT INTO dbo.Users (Login,Password,Email,PrefixId,PhoneNumber) VALUES ('{user.Login}', '{user.Password}','{user.Email}',{user.PrefixId},{user.PhoneNumber})");
 
         error = "";
         var success = DatabaseAccess.Instance.ProcessQuery(query, out users);
@@ -38,7 +38,7 @@ public class UserManager
     public bool LoginUserViaUsername(User user)
     {
         List<User> users;
-        var query = FormattableStringFactory.Create("SELECT * FROM dbo.Users WHERE Login = '{0}' AND Password = '{1}'", user.Login, user.Password);
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE Login = '{user.Login}' AND Password = '{user.Password}'");
         bool success = DatabaseAccess.Instance.ProcessQuery(query, out users)
             && users != null && users.Count != 0;
 
@@ -53,7 +53,7 @@ public class UserManager
     public bool LoginUserViaEmail(User user)
     {
         List<User> users;
-        var query = FormattableStringFactory.Create("SELECT * FROM dbo.Users WHERE Email = '{0}' AND Password = '{1}'", user.Email, user.Password);
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE Email = '{user.Email}' AND Password = '{user.Password}'");
         bool success = DatabaseAccess.Instance.ProcessQuery(query, out users) 
             && users != null && users.Count != 0;
 
@@ -68,7 +68,7 @@ public class UserManager
     private bool UserExists(User user)
     {
         List<User> existingUsers;
-        var queryUserExists = FormattableStringFactory.Create("SELECT * FROM dbo.Users WHERE Email = '{0}'", user.Email);
+        var queryUserExists = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE Email = '{user.Email}'");
         bool success = DatabaseAccess.Instance.ProcessQuery(queryUserExists, out existingUsers);
 
         if (existingUsers == null || !success)
