@@ -93,12 +93,14 @@ public class RegisterForm : PageModel
             return;
         }
 
-        if (UserManager.Instance.RegisterUser(user))
+        string error;
+
+        if (UserManager.Instance.RegisterUser(user, out error))
         {
-            Error = "";
+            //TODO Redirect to project management panel
             return;
         }
 
-        Error = "There was an unexpected error! Could not create an account.";
+        Error = error;
     }
 }

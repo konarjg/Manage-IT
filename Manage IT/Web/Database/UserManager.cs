@@ -1,4 +1,5 @@
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
+using System.Runtime.CompilerServices;
 
 public class UserManager
 {
@@ -11,27 +12,70 @@ public class UserManager
         Instance = new UserManager();
     }
 
-    public bool RegisterUser(User user)
+    public bool RegisterUser(User user, out string error)
     {
+        if (UserExists(user))
+        {
+            error = "Account with this email already exists!";
+            return false;
+        }
+
         List<User> users;
-        var query = FormattableStringFactory.Create("INSERT INTO dbo.Users (Login,Password,Email,PrefixId,PhoneNumber) VALUES ('{0}', '{1}','{2)',{3},{4})", user.Login, user.Password, user.Email, user.PrefixId, user.PhoneNumber);
-        return AccessDatabase.Instance.ProcessQuery(query, out users);
+        var query = FormattableStringFactory.Create($"INSERT INTO dbo.Users (Login,Password,Email,PrefixId,PhoneNumber) VALUES ('{user.Login}', '{user.Password}','{user.Email})',{user.PrefixId},{user.PhoneNumber})");
+
+        error = "";
+        var success = DatabaseAccess.Instance.ProcessQuery(query, out users);
+        
+        if (!success)
+        {
+            error = "There was an unexpected error! Could not create an account.";
+            return false;
+        }
+
+        return true;
     }
 
-    public bool LoginUser(User user)
+    public bool LoginUserViaUsername(User user)
     {
-        List<User> user;
-        var queryLogin = FormattableStringFactory.Create("SELECT * FROM dbo.Users WHERE Login = '{0}'",user.Login);
-        var queryEmail = FormattableStringFactory.Create("SELECT * FROM dbo.Users WHERE Email = '{0}'",user.Email);
-        bool success = DatabaseAccess.Instance.ProcessQuery(queryLogin, out user) || DatabaseAccess.Instance.ProcessQuery(queryEmail, out user);
-        return false;
+        List<User> users;
+        var query = FormattableStringFactory.Create("SELECT * FROM dbo.Users WHERE Login = '{0}' AND Password = '{1}'", user.Login, user.Password);
+        bool success = DatabaseAccess.Instance.ProcessQuery(query, out users)
+            && users != null && users.Count != 0;
+
+        if (success)
+        {
+            CurrentSessionUser = user;
+        }
+
+        return success;
+    }
+
+    public bool LoginUserViaEmail(User user)
+    {
+        List<User> users;
+        var query = FormattableStringFactory.Create("SELECT * FROM dbo.Users WHERE Email = '{0}' AND Password = '{1}'", user.Email, user.Password);
+        bool success = DatabaseAccess.Instance.ProcessQuery(query, out users) 
+            && users != null && users.Count != 0;
+
+        if (success)
+        {
+            CurrentSessionUser = user;
+        }
+
+        return success;
     }
 
     private bool UserExists(User user)
     {
-        List<User> existingUser;
-        var queryUserExists = FormattableStringFactory.Create("SELECT * FROM dbo.Users WHERE Login = '{0}'",user.Login);
-        bool success = DatabaseAccess.Instance.ProcessQuery(queryUserExists, out existingUser);
-        return existingUser == null && existingUser.Count() == 0;
+        List<User> existingUsers;
+        var queryUserExists = FormattableStringFactory.Create("SELECT * FROM dbo.Users WHERE Email = '{0}'", user.Email);
+        bool success = DatabaseAccess.Instance.ProcessQuery(queryUserExists, out existingUsers);
+
+        if (existingUsers == null || !success)
+        {
+            return true;
+        }
+
+        return existingUsers.Count == 0;
     }
 }
