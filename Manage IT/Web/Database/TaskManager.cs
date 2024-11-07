@@ -41,8 +41,20 @@ public class TaskManager
     }
 
     //Update task info with new values
-    public bool UpdateTask(Task task)
+    public bool UpdateTask(Task task,string error)
     {
+        var taskToBeUpdated = FormattableStringFactory.Create($"UPDATE dbo.Tasks SET Deadline = {task.Deadline},Description = '{task.Description}' WHERE TaskId = '{task.ID}');
+        if(error!="")
+            return false;
+        return true;
+    }
+
+     //Update task info with new values
+    public bool UpdateTaskWithList(Task task,string error)
+    {
+        var taskToBeUpdated = FormattableStringFactory.Create($"UPDATE dbo.Tasks SET TaskListID = {task.TaskListID},Deadline = {task.Deadline},Description = '{task.Description}' WHERE TaskId = '{task.ID}');
+        if(error!="")
+            return false;
         return true;
     }
 
@@ -56,7 +68,6 @@ public class TaskManager
         var queryTaskDetails = FormattableStringFactory.Create($"DELETE FROM dbo.TaskDetails WHERE TaskId = '{task.ID}');
         bool success = DatabaseAccess.Instance.ProcessQuery(query, out TaskList);                                              
 
-        return success;
         return true;
     }
 }
