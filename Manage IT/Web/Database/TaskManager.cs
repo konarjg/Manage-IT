@@ -16,7 +16,7 @@ public class TaskManager
     //(you must also insert a new record to TaskDetails table)
     public bool AddTaskToTaskList(TaskList list, Task task)
     {
-        
+        List<Task> task;
        var queryTasks = FormattableStringFactory.Create($"INSERT INTO dbo.Tasks (TaskListID,Deadline,Description) VALUES ({list.TaskListID}, '{task.Deadline}','{task.Description}')");
         var queryTasklist = FormattableStringFactory.Create($"INSERT INTO dbo.TaskDetails (TaskID,UserID) VALUES ({task.TaskID}, '{task.Deadline}','{task.Description}')");
          var success = DatabaseAccess.Instance.ProcessQuery(query, out TaskList);
@@ -33,7 +33,7 @@ public class TaskManager
     //Select all tasks for given TaskList
     public bool GetTasksForTaskList(TaskList list, out List<Task> tasks)
     {
-        List<User> tasks;
+        List<Task> tasks;
         var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Tasks WHERE TaskListID = '{tasks.TaskListID}'");
         bool success = DatabaseAccess.Instance.ProcessQuery(query, out tasks)
         tasks = null;
@@ -52,6 +52,7 @@ public class TaskManager
      //Update task info with new values
     public bool UpdateTaskWithList(Task task,string error)
     {
+        List<Task> task;
         var taskToBeUpdated = FormattableStringFactory.Create($"UPDATE dbo.Tasks SET TaskListID = {task.TaskListID},Deadline = {task.Deadline},Description = '{task.Description}' WHERE TaskId = '{task.ID}');
         if(error!="")
             return false;
@@ -62,6 +63,7 @@ public class TaskManager
     //(you must delete it from TaskDetails table too)
     public bool DeleteTask(Task task)
     {
+        List<Task> task;
         var queryTask = FormattableStringFactory.Create($"DELETE FROM dbo.Tasks WHERE TaskId = '{task.ID}');
         bool success = DatabaseAccess.Instance.ProcessQuery(query, out TaskList);
 
