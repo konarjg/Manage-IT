@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "KJ4lf2+VTuYp0cIldaiegrBdkv1Y/VYfTnxViEpB0CZJPbjGP4zvNu1MSuUl+8oATfbPQVB6tDwjuj9mpD8NKw==",
+  "dgSpecHash": "9UHbl2v8qc+2oBztbFkF4DiGM4PLVPdgpjIvmVNgATwVSSLDeHbkEsr52HbyqvJAKg7A3xJrTyL8mKZ6VLZOhA==",
   "success": true,
   "projectFilePath": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\DesktopTests\\DesktopTests.csproj",
   "expectedPackageFiles": [
@@ -38,6 +38,7 @@
     "C:\\Users\\konis\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\konis\\.nuget\\packages\\mstest.testadapter\\2.2.10\\mstest.testadapter.2.2.10.nupkg.sha512",
     "C:\\Users\\konis\\.nuget\\packages\\mstest.testframework\\2.2.10\\mstest.testframework.2.2.10.nupkg.sha512",
+    "C:\\Users\\konis\\.nuget\\packages\\netcore.encrypt\\2.1.1\\netcore.encrypt.2.1.1.nupkg.sha512",
     "C:\\Users\\konis\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\konis\\.nuget\\packages\\nuget.frameworks\\5.11.0\\nuget.frameworks.5.11.0.nupkg.sha512",
     "C:\\Users\\konis\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",

@@ -75,6 +75,20 @@ public class Database : IDisposable
         DatabaseContext.Dispose();
     }
 
+    public bool ExecuteQueryUnknownType(FormattableString query)
+    {
+        try
+        {
+            DatabaseContext.Database.ExecuteSqlInterpolated(query);
+            DatabaseContext.SaveChanges();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+
     public bool ExecuteQuery<T>(FormattableString query, out List<T> results) where T : class
     {
         try

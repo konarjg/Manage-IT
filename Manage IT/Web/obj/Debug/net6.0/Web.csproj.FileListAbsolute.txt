@@ -71,3 +71,5 @@ C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Debug\net6.0\Emby.Media.Model
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Debug\net6.0\Emby.Web.GenericEdit.dll
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Debug\net6.0\MediaBrowser.Common.dll
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Debug\net6.0\MediaBrowser.Model.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Debug\net6.0\NETCore.Encrypt.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Debug\net6.0\Newtonsoft.Json.dll

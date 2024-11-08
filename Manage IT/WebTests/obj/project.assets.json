@@ -816,6 +816,18 @@
           "build/net5.0/MSTest.TestFramework.targets": {}
         }
       },
+      "NETCore.Encrypt/2.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.1/NETCore.Encrypt.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/NETCore.Encrypt.dll": {}
+        }
+      },
       "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
@@ -1364,7 +1376,8 @@
           "MediaBrowser.Common": "4.8.10",
           "Microsoft.EntityFrameworkCore": "6.0.35",
           "Microsoft.EntityFrameworkCore.Relational": "6.0.35",
-          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.35"
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.35",
+          "NETCore.Encrypt": "2.1.1"
         },
         "compile": {
           "bin/placeholder/Web.dll": {}
@@ -2734,6 +2747,18 @@
         "lib/uap10.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.TestFramework.xml",
         "mstest.testframework.2.2.10.nupkg.sha512",
         "mstest.testframework.nuspec"
+      ]
+    },
+    "NETCore.Encrypt/2.1.1": {
+      "sha512": "qw6XuYTz7xtNSRWNm4BltmWTnUZvfI05mcd7NoheIBXmxICP1MpwiyGB8mrl7TLhi+WwUInuwsl69aV6ToqBOQ==",
+      "type": "package",
+      "path": "netcore.encrypt/2.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.1/NETCore.Encrypt.dll",
+        "netcore.encrypt.2.1.1.nupkg.sha512",
+        "netcore.encrypt.nuspec"
       ]
     },
     "Newtonsoft.Json/13.0.1": {
@@ -4254,6 +4279,7 @@
       "Microsoft.EntityFrameworkCore.Relational >= 6.0.35",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.35",
       "Microsoft.NET.Test.Sdk >= 17.5.0",
+      "NETCore.Encrypt >= 2.1.1",
       "Web >= 1.0.0",
       "coverlet.collector >= 3.2.0"
     ]
@@ -4330,6 +4356,10 @@
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
             "version": "[17.5.0, )"
+          },
+          "NETCore.Encrypt": {
+            "target": "Package",
+            "version": "[2.1.1, )"
           },
           "coverlet.collector": {
             "target": "Package",

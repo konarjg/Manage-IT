@@ -1,6 +1,9 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System.Security.Cryptography;
+using NETCore.Encrypt;
 using System.Text;
+using NETCore.Encrypt.Internal;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 public static class Security
 {
@@ -15,5 +18,15 @@ public static class Security
         }
 
         return result;
+    }
+
+    public static string EncryptText(string text)
+    {
+        return EncryptProvider.AESEncrypt(text, PhoneNumberEncryptionKey.Key, PhoneNumberEncryptionKey.IV);
+    }
+
+    public static string DecryptText(string text)
+    {
+        return EncryptProvider.AESDecrypt(text, PhoneNumberEncryptionKey.Key, PhoneNumberEncryptionKey.IV);
     }
 }

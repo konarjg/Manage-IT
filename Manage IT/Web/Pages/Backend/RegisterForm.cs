@@ -63,6 +63,7 @@ public class RegisterForm : PageModel
 
         password = Security.HashText(password, Encoding.ASCII);
         confirmPassword = Security.HashText(confirmPassword, Encoding.ASCII);
+        phoneNumber = Security.EncryptText(phoneNumber);
 
         if (password != confirmPassword)
         {
@@ -98,6 +99,7 @@ public class RegisterForm : PageModel
         if (UserManager.Instance.RegisterUser(user, out error))
         {
             //TODO Redirect to project management panel
+            Error = Security.DecryptText(phoneNumber);
             return;
         }
 

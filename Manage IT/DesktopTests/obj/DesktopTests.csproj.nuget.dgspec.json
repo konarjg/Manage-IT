@@ -69,6 +69,10 @@
               "target": "Package",
               "version": "[17.5.0, )"
             },
+            "NETCore.Encrypt": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
             "coverlet.collector": {
               "target": "Package",
               "version": "[3.2.0, )"

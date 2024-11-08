@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "qY2a/Wn537usQ98fO7yY8OpkbHuNWL/IuABCbkGnR5t/sonvyUXoTGBT66NYRX3P7eRqXBJ3px/DoBTyLL1KVQ==",
+  "dgSpecHash": "wX1Cy7IhFoIMKjXNg8COSw08W2QE8J7/9jCTRjOfi1jo6khiR+7lZ6ffjHUMz/cw7HZQiO8Nw1vQdStsZfbZ7Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\Web.csproj",
   "expectedPackageFiles": [
@@ -31,6 +31,8 @@
     "C:\\Users\\konis\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\konis\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\konis\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\konis\\.nuget\\packages\\netcore.encrypt\\2.1.1\\netcore.encrypt.2.1.1.nupkg.sha512",
+    "C:\\Users\\konis\\.nuget\\packages\\newtonsoft.json\\12.0.1\\newtonsoft.json.12.0.1.nupkg.sha512",
     "C:\\Users\\konis\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\konis\\.nuget\\packages\\system.configuration.configurationmanager\\4.7.0\\system.configuration.configurationmanager.4.7.0.nupkg.sha512",
     "C:\\Users\\konis\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.1\\system.diagnostics.diagnosticsource.6.0.1.nupkg.sha512",
