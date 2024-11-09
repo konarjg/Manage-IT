@@ -22,11 +22,13 @@ public static class Security
 
     public static string EncryptText(string text)
     {
-        return EncryptProvider.AESEncrypt(text, PhoneNumberEncryptionKey.Key, PhoneNumberEncryptionKey.IV);
+        return "";
+        //return EncryptProvider.AESEncrypt(text, PhoneNumberEncryptionKey.Key, PhoneNumberEncryptionKey.IV);
     }
 
     public static string DecryptText(string text)
     {
-        return EncryptProvider.AESDecrypt(text, PhoneNumberEncryptionKey.Key, PhoneNumberEncryptionKey.IV);
+        return "";
+        //return EncryptProvider.AESDecrypt(text, PhoneNumberEncryptionKey.Key, PhoneNumberEncryptionKey.IV);
     }
 }

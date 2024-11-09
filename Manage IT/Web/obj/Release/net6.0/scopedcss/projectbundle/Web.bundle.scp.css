@@ -134,27 +134,27 @@ h1[b-gxtnmvq0np] {
 }
 
 .container input[b-5iyiviodod] {
-    font-size: 32px;
+    font-size: 28px;
 }
 
 .container select[b-5iyiviodod] {
-    font-size: 32px;
+    font-size: 28px;
     width: 400px;
 }
 
 .title[b-5iyiviodod] {
-    font-size: 48px;
+    font-size: 32px;
     font-weight: bolder;
     text-align: center;
 }
 
 .error[b-5iyiviodod] {
-    font-size: 28px;
+    font-size: 24px;
     text-align: center;
     color: red;
 }
 
 .label[b-5iyiviodod] {
-    font-size: 24px;
+    font-size: 18px;
     margin: 0px;
 }
