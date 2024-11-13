@@ -25,6 +25,8 @@ C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\Mic
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\Microsoft.IdentityModel.Tokens.dll
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\NETCore.Encrypt.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\Newtonsoft.Json.dll
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\System.Configuration.ConfigurationManager.dll
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\System.Diagnostics.DiagnosticSource.dll
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\System.Drawing.Common.dll

@@ -5,13 +5,11 @@ using Task = EFModeling.EntityProperties.DataAnnotations.Annotations.Task;
 
 public class DatabaseAccess
 {
-    private List<FormattableString> QueryBuffer;
-
     public static DatabaseAccess Instance { get; private set; }
 
     public DatabaseAccess()
     {
-        QueryBuffer = new List<FormattableString>();
+        
     }
 
     public static void Instantiate()
@@ -19,24 +17,7 @@ public class DatabaseAccess
         Instance = new DatabaseAccess();
     }
 
-    private void OnDatabaseUpdateRequested()
-    {
-        
-    }
-
-    public bool ProcessQuery<T>(FormattableString query, out List<T> results) where T : class
-    {
-        if (query.Format.Contains("INSERT") || query.Format.Contains("UPDATE") || query.Format.Contains("DELETE"))
-        {
-            QueryBuffer.Add(query);
-            results = null;
-            return true;
-        }
-
-        return ExecuteQuery(query, out results);
-    }
-
-    private bool ExecuteQuery<T>(FormattableString query, out List<T> results) where T : class
+    public bool ExecuteQuery<T>(FormattableString query, out List<T> results) where T : class
     {
         bool success;
 

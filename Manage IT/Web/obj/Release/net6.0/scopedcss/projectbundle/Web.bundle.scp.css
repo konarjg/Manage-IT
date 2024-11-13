@@ -18,9 +18,21 @@ h1[b-gxtnmvq0np] {
     height: 100%;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     margin: auto;
+}
+
+.buttons[b-gxtnmvq0np] {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+#image[b-gxtnmvq0np] {
+    width: 50vw;
+    height: 50vh;
 }
 
 @media screen and (max-width: 500px) {
@@ -33,7 +45,7 @@ h1[b-gxtnmvq0np] {
     text-align: center;
     color: #ffffff;
     text-decoration: none;
-    font-size: 22px;
+    font-size: 24px;
     transition: 0.1s;
     background-color: #8080ff80;
     padding: 50px;
@@ -134,27 +146,27 @@ h1[b-gxtnmvq0np] {
 }
 
 .container input[b-5iyiviodod] {
-    font-size: 32px;
+    font-size: 28px;
 }
 
 .container select[b-5iyiviodod] {
-    font-size: 32px;
+    font-size: 28px;
     width: 400px;
 }
 
 .title[b-5iyiviodod] {
-    font-size: 48px;
+    font-size: 32px;
     font-weight: bolder;
     text-align: center;
 }
 
 .error[b-5iyiviodod] {
-    font-size: 28px;
+    font-size: 24px;
     text-align: center;
     color: red;
 }
 
 .label[b-5iyiviodod] {
-    font-size: 24px;
+    font-size: 18px;
     margin: 0px;
 }

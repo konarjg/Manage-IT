@@ -23,7 +23,7 @@ public class PrefixManager
     {
         List<Prefix> prefixes;
         var query = FormattableStringFactory.Create("SELECT * FROM dbo.Prefixes");
-        bool success = DatabaseAccess.Instance.ProcessQuery(query, out prefixes);
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out prefixes);
 
         if (!success)
         {
@@ -44,7 +44,7 @@ public class PrefixManager
         List<Prefix> prefixes;
         var query = FormattableStringFactory.Create($"INSERT INTO dbo.Prefixes (PrefixId, Country) VALUES ({prefixId}, '{country}')");
         
-        return DatabaseAccess.Instance.ProcessQuery(query, out prefixes);
+        return DatabaseAccess.Instance.ExecuteQuery(query, out prefixes);
     }
 
     public static bool RemovePrefix(int prefixId)
@@ -53,6 +53,6 @@ public class PrefixManager
 
         var query = FormattableStringFactory.Create("DELETE FROM dbo.Prefixes WHERE PrefixId = {0}", prefixId);
 
-        return DatabaseAccess.Instance.ProcessQuery(query, out prefixes);
+        return DatabaseAccess.Instance.ExecuteQuery(query, out prefixes);
     }
 }

@@ -5,6 +5,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<DatabaseContext>();
 var app = builder.Build();
 
+//Security.Initialize();
 DatabaseAccess.Instantiate();
 PrefixManager.Instantiate();
 UserManager.Instantiate();
