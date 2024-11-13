@@ -5,6 +5,22 @@
       "PackagePath": "staticwebassets\\Web.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\icon.png",
+      "PackagePath": "staticwebassets\\Graphics\\icon.png"
+    },
+    {
+      "Id": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\iconhov.png",
+      "PackagePath": "staticwebassets\\Graphics\\iconhov.png"
+    },
+    {
+      "Id": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\logo.png",
+      "PackagePath": "staticwebassets\\Graphics\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\main.jpeg",
+      "PackagePath": "staticwebassets\\Graphics\\main.jpeg"
+    },
+    {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.Web.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
