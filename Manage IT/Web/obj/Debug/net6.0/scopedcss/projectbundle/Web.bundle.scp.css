@@ -18,19 +18,21 @@ h1[b-gxtnmvq0np] {
     height: 100%;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     margin: auto;
 }
 
-.container buttons[b-gxtnmvq0np] {
-    width: 100%;
-    height: 100%;
+.buttons[b-gxtnmvq0np] {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-content: center;
     justify-content: center;
-    margin: auto;
+}
+
+#image[b-gxtnmvq0np] {
+    width: 50vw;
+    height: 50vh;
 }
 
 @media screen and (max-width: 500px) {
