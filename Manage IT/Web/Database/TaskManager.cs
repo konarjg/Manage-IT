@@ -1,5 +1,6 @@
 ﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using Task = EFModeling.EntityProperties.DataAnnotations.Annotations.Task;
+using TaskDetails = EFModeling.EntityProperties.DataAnnotations.Annotations.TaskDetails;
 
 public class TaskManager
 {
@@ -41,23 +42,18 @@ public class TaskManager
     }
 
     //Update task info with new values
-    public bool UpdateTask(Task task,string error)
+    public bool UpdateTask(Task task,TaskDetails taskDetails,string error)
     {
-        var taskToBeUpdated = FormattableStringFactory.Create($"UPDATE dbo.Tasks SET Deadline = {task.Deadline},Description = '{task.Description}' WHERE TaskId = '{task.ID}');
+        List<Task> task;
+        List<TaskDetails> taskDetails;
+        var taskToBeUpdated = FormattableStringFactory.Create($"UPDATE dbo.Tasks SET  TaskListID = {task.TaskListID},Deadline = {task.Deadline},Description = '{task.Description}' WHERE TaskId = '{task.ID}'");
+        var updateTaskDetails = FormmatableStringFactory.Create($"UPDATE dbo.TaskDetails SET UserID = {taskDetails.UserID}, TaskID = {taskDetails.TaskID}");
+                                                    
         if(error!="")
             return false;
         return true;
     }
 
-     //Update task info with new values
-    public bool UpdateTaskWithList(Task task,string error)
-    {
-        List<Task> task;
-        var taskToBeUpdated = FormattableStringFactory.Create($"UPDATE dbo.Tasks SET TaskListID = {task.TaskListID},Deadline = {task.Deadline},Description = '{task.Description}' WHERE TaskId = '{task.ID}');
-        if(error!="")
-            return false;
-        return true;
-    }
 
     //Delete task from its list and from database
     //(you must delete it from TaskDetails table too)
