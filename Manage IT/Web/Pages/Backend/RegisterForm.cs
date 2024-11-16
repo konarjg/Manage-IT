@@ -99,7 +99,6 @@ public class RegisterForm : PageModel
         if (UserManager.Instance.RegisterUser(user, out error))
         {
             //TODO Redirect to project management panel
-            Error = Security.DecryptText(phoneNumber);
             return;
         }
 

@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Desktop"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Manage IT" Width="1920" Height="1080">
 
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+            <GradientStop Color="#000000" Offset="0.0"/>
+            <GradientStop Color="#000040" Offset="0.75"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid>
+        <TextBlock Name="Header" Text="Welcome to Manage IT" FontSize="72" TextAlignment="Center" Foreground="White" Padding="50"/>
+        <Button Name="Login" Content="Login" FontSize="48" Width="400" Height="150" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,200,0,0"/>
+        <Button Name="Register" Content="Register" FontSize="48" Width="400" Height="150" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,380,0,0"/>
     </Grid>
 </Window>
