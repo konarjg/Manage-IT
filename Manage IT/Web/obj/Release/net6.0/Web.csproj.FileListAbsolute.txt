@@ -148,3 +148,5 @@ C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\obj\Release\net6.0\refint
 C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\obj\Release\net6.0\Web.pdb
 C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\obj\Release\net6.0\Web.genruntimeconfig.cache
 C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\obj\Release\net6.0\ref\Web.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Release\net6.0\DatabaseAccess.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Release\net6.0\DatabaseAccess.pdb

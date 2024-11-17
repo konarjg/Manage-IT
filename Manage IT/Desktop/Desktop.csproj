@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="main.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="logo.ico" />
   </ItemGroup>
 
@@ -17,6 +21,14 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.35" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.35" />
     <PackageReference Include="NETCore.Encrypt" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DatabaseAccess\DatabaseAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="main.jpeg" />
   </ItemGroup>
 
 </Project>

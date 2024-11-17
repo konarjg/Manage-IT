@@ -1934,10 +1934,26 @@
           }
         }
       },
+      "DatabaseAccess/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.35",
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.35",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.35"
+        },
+        "compile": {
+          "bin/placeholder/DatabaseAccess.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DatabaseAccess.dll": {}
+        }
+      },
       "Web/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "DatabaseAccess": "1.0.0",
           "MediaBrowser.Common": "4.8.10",
           "Microsoft.EntityFrameworkCore": "6.0.35",
           "Microsoft.EntityFrameworkCore.Relational": "6.0.35",
@@ -5936,6 +5952,11 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "DatabaseAccess/1.0.0": {
+      "type": "project",
+      "path": "../DatabaseAccess/DatabaseAccess.csproj",
+      "msbuildProject": "../DatabaseAccess/DatabaseAccess.csproj"
     },
     "Web/1.0.0": {
       "type": "project",

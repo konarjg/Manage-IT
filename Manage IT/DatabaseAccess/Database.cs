@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
 
-internal class DatabaseContext : DbContext
+public class DatabaseContext : DbContext
 {
     public DbSet<Prefix> Prefixes { get; set; }
     public DbSet<Project> Projects { get; set; }

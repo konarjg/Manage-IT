@@ -22,4 +22,8 @@
     <None Include="wwwroot\Graphics\main.jpeg" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DatabaseAccess\DatabaseAccess.csproj" />
+  </ItemGroup>
+
 </Project>

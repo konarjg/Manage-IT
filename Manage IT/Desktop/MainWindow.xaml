@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Desktop"
         mc:Ignorable="d"
-        Title="Manage IT" Width="1920" Height="1080" WindowState="Maximized">
+        Title="Manage IT" Width="2560" Height="1080" WindowState="Maximized" >
 
     <Window.Background>
         <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
@@ -15,8 +15,27 @@
     </Window.Background>
 
     <Grid>
-        <TextBlock Name="Header" Text="Welcome to Manage IT" FontSize="72" TextAlignment="Center" Foreground="White" Padding="50"/>
-        <Button Name="Login" Content="Login" FontSize="48" Width="400" Height="150" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,200,0,0"/>
-        <Button Name="Register" Content="Register" FontSize="48" Width="400" Height="150" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,380,0,0"/>
+        <TextBlock x:Name="Header" Text="Welcome to Manage IT" FontSize="72" TextAlignment="Center" Foreground="White" Padding="50" Margin="-16,61,16,-61"/>
+        <Button x:Name="Login" Click="LoginClick" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="545,264,0,0" Content="Login">
+            <Button.FontSize>48</Button.FontSize>
+            <Button.Width>576</Button.Width>
+            <Button.Height>228</Button.Height>
+            <Button.Foreground>White</Button.Foreground>
+            <Button.Background>#8080ff</Button.Background>
+            <Button.BorderBrush>Gray</Button.BorderBrush>
+            <Button.BorderThickness>5</Button.BorderThickness>
+        </Button>
+
+        <Button x:Name="Register" Click="RegisterClick" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="545,532,0,0" Content="Register">
+            <Button.FontSize>48</Button.FontSize>
+            <Button.Width>576</Button.Width>
+            <Button.Height>228</Button.Height>
+            <Button.Foreground>White</Button.Foreground>
+            <Button.Background>#8080ff</Button.Background>
+            <Button.BorderBrush>Gray</Button.BorderBrush>
+            <Button.BorderThickness>5</Button.BorderThickness>
+        </Button>
+        
+        <Image Source="main.jpeg" Stretch="Fill" Width="800" Height="600" Margin="1164,232,596,232" />
     </Grid>
 </Window>
