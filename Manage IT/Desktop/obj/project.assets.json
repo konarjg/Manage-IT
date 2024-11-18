@@ -762,21 +762,6 @@
             "rid": "win"
           }
         }
-      },
-      "DatabaseAccess/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore": "6.0.35",
-          "Microsoft.EntityFrameworkCore.Relational": "6.0.35",
-          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.35"
-        },
-        "compile": {
-          "bin/placeholder/DatabaseAccess.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/DatabaseAccess.dll": {}
-        }
       }
     }
   },
@@ -1993,16 +1978,10 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
-    },
-    "DatabaseAccess/1.0.0": {
-      "type": "project",
-      "path": "../DatabaseAccess/DatabaseAccess.csproj",
-      "msbuildProject": "../DatabaseAccess/DatabaseAccess.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
-      "DatabaseAccess >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 6.0.35",
       "Microsoft.EntityFrameworkCore.Relational >= 6.0.35",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.35",
@@ -2041,11 +2020,7 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
-          "projectReferences": {
-            "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\DatabaseAccess\\DatabaseAccess.csproj": {
-              "projectPath": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\DatabaseAccess\\DatabaseAccess.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -2094,7 +2069,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

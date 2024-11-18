@@ -57,7 +57,7 @@ public class RegisterForm : PageModel
 
         if (!PhoneNumberValidation.IsMatch(phoneNumber))
         {
-            Error = "Enter a valid phone number!";
+            Error = "Provided phone number is invalid!";
             return;
         }
 

@@ -52,4 +52,4 @@ C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\obj\Release\net6.0-windows\re
 C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\obj\Release\net6.0-windows\Desktop.pdb
 C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\obj\Release\net6.0-windows\Desktop.genruntimeconfig.cache
 C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\obj\Release\net6.0-windows\ref\Desktop.dll
-C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\obj\Release\net6.0-windows\Desktop_Content.g.cs
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Release\net6.0-windows\Desktop.dll.config

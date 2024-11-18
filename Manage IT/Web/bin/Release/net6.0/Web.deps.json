@@ -8,7 +8,6 @@
     ".NETCoreApp,Version=v6.0": {
       "Web/1.0.0": {
         "dependencies": {
-          "DatabaseAccess": "1.0.0",
           "MediaBrowser.Common": "4.8.10",
           "Microsoft.EntityFrameworkCore": "6.0.35",
           "Microsoft.EntityFrameworkCore.Relational": "6.0.35",
@@ -836,16 +835,6 @@
             "fileVersion": "4.700.19.56404"
           }
         }
-      },
-      "DatabaseAccess/1.0.0": {
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore": "6.0.35",
-          "Microsoft.EntityFrameworkCore.Relational": "6.0.35",
-          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.35"
-        },
-        "runtime": {
-          "DatabaseAccess.dll": {}
-        }
       }
     }
   },
@@ -1477,11 +1466,6 @@
       "sha512": "sha512-CeWTdRNfRaSh0pm2gDTJFwVaXfTq6Xwv/sA887iwPTneW7oMtMlpvDIO+U60+3GWTB7Aom6oQwv5VZVUhQRdPQ==",
       "path": "system.windows.extensions/4.7.0",
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
-    },
-    "DatabaseAccess/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     }
   }
 }

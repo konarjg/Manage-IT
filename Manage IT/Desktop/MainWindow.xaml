@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Desktop"
         mc:Ignorable="d"
-        Title="Manage IT" Width="2560" Height="1080" WindowState="Maximized" >
+        Title="Manage IT" Width="2560" Height="1080" WindowState="Maximized">
 
     <Window.Background>
         <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
@@ -14,28 +14,115 @@
         </LinearGradientBrush>
     </Window.Background>
 
-    <Grid>
-        <TextBlock x:Name="Header" Text="Welcome to Manage IT" FontSize="72" TextAlignment="Center" Foreground="White" Padding="50" Margin="-16,61,16,-61"/>
-        <Button x:Name="Login" Click="LoginClick" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="545,264,0,0" Content="Login">
-            <Button.FontSize>48</Button.FontSize>
-            <Button.Width>576</Button.Width>
-            <Button.Height>228</Button.Height>
-            <Button.Foreground>White</Button.Foreground>
-            <Button.Background>#8080ff</Button.Background>
-            <Button.BorderBrush>Gray</Button.BorderBrush>
-            <Button.BorderThickness>5</Button.BorderThickness>
-        </Button>
+    <Window.Resources>
+        <ControlTemplate x:Key="Main">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-        <Button x:Name="Register" Click="RegisterClick" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="545,532,0,0" Content="Register">
-            <Button.FontSize>48</Button.FontSize>
-            <Button.Width>576</Button.Width>
-            <Button.Height>228</Button.Height>
-            <Button.Foreground>White</Button.Foreground>
-            <Button.Background>#8080ff</Button.Background>
-            <Button.BorderBrush>Gray</Button.BorderBrush>
-            <Button.BorderThickness>5</Button.BorderThickness>
-        </Button>
-        
-        <Image Source="main.jpeg" Stretch="Fill" Width="800" Height="600" Margin="1164,232,596,232" />
-    </Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="Header" Text="Welcome to Manage IT" Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="10" FontSize="86" TextAlignment="Center" Foreground="White"/>
+                <Button x:Name="Login" Click="LoginClick" Content="Login" Margin="43,33,86,33">
+                    <Button.FontSize>72</Button.FontSize>
+                    <Grid.Row>3</Grid.Row>
+                    <Grid.RowSpan>5</Grid.RowSpan>
+                    <Grid.Column>1</Grid.Column>
+                    <Grid.ColumnSpan>2</Grid.ColumnSpan>
+                    <Button.Foreground>White</Button.Foreground>
+                    <Button.Background>#8080ff</Button.Background>
+                    <Button.BorderBrush>Gray</Button.BorderBrush>
+                    <Button.BorderThickness>5</Button.BorderThickness>
+                </Button>
+
+                <Button x:Name="Register" Click="RegisterClick" Content="Register" Margin="43,11,86,56">
+                    <Button.FontSize>72</Button.FontSize>
+                    <Grid.Row>8</Grid.Row>
+                    <Grid.RowSpan>5</Grid.RowSpan>
+                    <Grid.Column>1</Grid.Column>
+                    <Grid.ColumnSpan>2</Grid.ColumnSpan>
+                    <Button.Foreground>White</Button.Foreground>
+                    <Button.Background>#8080ff</Button.Background>
+                    <Button.BorderBrush>Gray</Button.BorderBrush>
+                    <Button.BorderThickness>5</Button.BorderThickness>
+                </Button>
+
+                <Image Source="Graphics/main.jpeg" Stretch="Fill" Grid.Row="3" Grid.RowSpan="11" Grid.Column="2" Grid.ColumnSpan="4" Margin="268,0,159,66" />
+            </Grid>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="Register">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="BackButton" Click="BackClick" FontSize="48" Grid.Row="0" Grid.Column="0" Background="Transparent" Content="🏠 Home" BorderThickness="0" Foreground="White" Grid.RowSpan="2"/>
+                <TextBlock x:Name="Header" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="6" Grid.RowSpan="2" FontWeight="Bold" Text="Register" FontSize="58" TextAlignment="Center" Foreground="White"/>
+                <TextBlock x:Name="Error" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
+                <TextBlock Text="Email" Foreground="White" Grid.Row="3" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="Email" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
+                <TextBlock Text="Username" Foreground="White" Grid.Row="5" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="Username" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
+                <TextBlock Text="Phone Number" Foreground="White" Grid.Row="7" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="PhoneNumber" Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
+                <TextBlock Text="Password" Foreground="White" Grid.Row="9" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
+                <PasswordBox x:Name="Password" Grid.Row="10" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" HorizontalContentAlignment="Left"/>
+                <TextBlock Text="Confirm Password" Foreground="White" Grid.Row="11" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
+                <PasswordBox x:Name="ConfirmPassword" Grid.Row="12" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" HorizontalContentAlignment="Left"/>
+                <Button x:Name="RegisterButton" Click="SubmitRegisterFormClick" Content="Register" Grid.Row="13" Grid.Column="2" FontSize="42" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="214,32,214,34" />
+            </Grid>
+        </ControlTemplate>
+    </Window.Resources>
+
+    <Window.Template>
+        <StaticResource ResourceKey="Main"/>
+    </Window.Template>
 </Window>
