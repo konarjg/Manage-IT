@@ -1,5 +1,6 @@
 using Desktop;
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Windows.Markup;
@@ -47,7 +48,16 @@ public class UserManager
 
         if (success)
         {
-            CurrentSessionUser = user;
+            CurrentSessionUser = users[0];
+
+            var username = CurrentSessionUser.Login;
+            var dateTime = DateTime.Now;
+            var successful = success ? "successful" : "failed";
+            var subject = "Alert: New Login Attempt On Your Account!";
+            var body = string.Format("Dear {0}, \nWe noticed a {1} login attempt on your account on {2}. \nIf this was you, no further action is needed. \nIf you did not attempt to log in, please secure your account immediately by changing your password.\nSincerely\nManage IT Team.", username, successful, dateTime.ToString());
+            string error;
+
+            EmailService.SendEmail(CurrentSessionUser.Email, subject, body, out error);
         }
 
         return success;
