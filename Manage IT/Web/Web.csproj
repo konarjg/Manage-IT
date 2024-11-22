@@ -20,6 +20,7 @@
     <None Include="wwwroot\Graphics\iconhov.png" />
     <None Include="wwwroot\Graphics\logo.png" />
     <None Include="wwwroot\Graphics\main.jpeg" />
+    <None Include="wwwroot\zohoverify\verifyforzoho.html" />
   </ItemGroup>
 
 </Project>

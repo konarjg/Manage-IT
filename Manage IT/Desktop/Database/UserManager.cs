@@ -1,6 +1,8 @@
+using Desktop;
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Windows.Markup;
 
 public class UserManager
 {
@@ -33,30 +35,15 @@ public class UserManager
             return false;
         }
 
+        EmailService.SendEmail(user.Email, "Manage IT Account Confirmation", "Your account has been created.", out error);
         return true;
     }
 
-    public bool LoginUserViaUsername(User user)
+    public bool LoginUser(User user)
     {
         List<User> users;
-        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE Login LIKE '{user.Login}' AND Password LIKE '{user.Password}'");
-        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out users)
-            && users != null && users.Count != 0;
-
-        if (success)
-        {
-            CurrentSessionUser = user;
-        }
-
-        return success;
-    }
-
-    public bool LoginUserViaEmail(User user)
-    {
-        List<User> users;
-        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE Email LIKE '{user.Email}' AND Password LIKE '{user.Password}'");
-        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out users) 
-            && users != null && users.Count != 0;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE (Email LIKE '{user.Email}' OR Login LIKE '{user.Login}') AND Password LIKE '{user.Password}'");
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out users);
 
         if (success)
         {

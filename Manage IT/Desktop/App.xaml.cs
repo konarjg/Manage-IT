@@ -18,6 +18,7 @@ namespace Desktop
             base.OnStartup(e);
 
             Security.Initialize();
+            EmailService.Initialize();
             DatabaseAccess.Instantiate();
             UserManager.Instantiate();
             PrefixManager.Instantiate();

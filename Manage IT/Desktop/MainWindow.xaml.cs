@@ -80,6 +80,24 @@ namespace Desktop
             data.Password = password;
         }
 
+        private void SubmitLoginForm(out User data)
+        {
+            var credential = GetTemplateControl<TextBox>("Credential").Text;
+            var password = GetTemplateControl<PasswordBox>("Password").Password;
+
+            if (credential == string.Empty || password == string.Empty)
+            {
+                throw new Exception("You have to fill in every field!");
+            }
+
+            password = Security.HashText(password, Encoding.ASCII);
+
+            data = new();
+            data.Email = credential;
+            data.Login = credential;
+            data.Password = password;
+        }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -93,7 +111,7 @@ namespace Desktop
 
         private void LoginClick(object sender, RoutedEventArgs e)
         {
-
+            SwitchPageTemplate("Login");
         }
 
         private void BackClick(object sender, RoutedEventArgs e)
@@ -111,6 +129,24 @@ namespace Desktop
                 SubmitRegisterForm(out data);
                 RegisterController.SubmitRegisterForm(data, out error);
 
+                GetTemplateControl<TextBlock>("Error").Text = error;
+            }
+            catch (Exception error)
+            {
+                throw error;
+                GetTemplateControl<TextBlock>("Error").Text = error.Message;
+            }
+        }
+
+        public void SubmitLoginFormClick(object sender, RoutedEventArgs e)
+        {
+            User data;
+
+            try
+            {
+                var error = string.Empty;
+                SubmitLoginForm(out data);
+                LoginController.SubmitLoginForm(data, out error);
                 GetTemplateControl<TextBlock>("Error").Text = error;
             }
             catch (Exception error)

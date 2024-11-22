@@ -94,6 +94,9 @@ public class Database : IDisposable
 
     public bool ExecuteQuery<T>(FormattableString query, out List<T> results) where T : class
     {
+        bool success;
+        Exception e = new Exception();
+
         try
         {
             if (query.Format.Contains("INSERT") || query.Format.Contains("UPDATE") || query.Format.Contains("DELETE"))
