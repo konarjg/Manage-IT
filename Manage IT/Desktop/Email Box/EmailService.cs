@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Desktop
 {
@@ -27,6 +28,7 @@ namespace Desktop
             MailAddress to = new(targetEmail);
 
             MailMessage message = new(from, to);
+            message.IsBodyHtml = true;
             message.Subject = subject;
             message.Body = body;
 

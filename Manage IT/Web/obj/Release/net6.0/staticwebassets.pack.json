@@ -21,10 +21,6 @@
       "PackagePath": "staticwebassets\\Graphics\\main.jpeg"
     },
     {
-      "Id": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\zohoverify\\verifyforzoho.html",
-      "PackagePath": "staticwebassets\\zohoverify\\verifyforzoho.html"
-    },
-    {
       "Id": "obj\\Release\\net6.0\\staticwebassets\\msbuild.Web.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

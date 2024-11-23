@@ -70,7 +70,7 @@ namespace Desktop
             }
 
             phoneNumber = Security.EncryptText(phoneNumber);
-            password = Security.HashText(password, Encoding.ASCII);
+            password = Security.HashText(password, Encoding.UTF8);
 
             data = new();
             data.Email = email;
@@ -90,7 +90,7 @@ namespace Desktop
                 throw new Exception("You have to fill in every field!");
             }
 
-            password = Security.HashText(password, Encoding.ASCII);
+            password = Security.HashText(password, Encoding.UTF8);
 
             data = new();
             data.Email = credential;
@@ -122,6 +122,7 @@ namespace Desktop
         private void SubmitRegisterFormClick(object sender, RoutedEventArgs e) 
         {
             User data;
+            GetTemplateControl<TextBlock>("Error").Foreground = Brushes.Red;
 
             try
             {
@@ -129,11 +130,17 @@ namespace Desktop
                 SubmitRegisterForm(out data);
                 RegisterController.SubmitRegisterForm(data, out error);
 
+                if (error == string.Empty)
+                {
+                    GetTemplateControl<TextBlock>("Error").Foreground = Brushes.White;
+                    GetTemplateControl<TextBlock>("Error").Text = "Verify your email address!";
+                    return;
+                }
+
                 GetTemplateControl<TextBlock>("Error").Text = error;
             }
             catch (Exception error)
             {
-                throw error;
                 GetTemplateControl<TextBlock>("Error").Text = error.Message;
             }
         }

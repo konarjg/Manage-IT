@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "qW+mKfEa9xOFsav+pmPvUtBhbf7jtSrvQ9eoXfA+gHI=",
+  "Hash": "FSKBsGu2hmxnO5X4aaHZiexq3/c2dFRBCTHKQeOL4XU=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
@@ -117,23 +117,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Graphics\\main.jpeg"
-    },
-    {
-      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\zohoverify\\verifyforzoho.html",
-      "SourceId": "Web",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
-      "BasePath": "_content/Web",
-      "RelativePath": "zohoverify/verifyforzoho.html",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\zohoverify\\verifyforzoho.html"
     }
   ]
 }

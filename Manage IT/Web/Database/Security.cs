@@ -6,6 +6,7 @@ using NETCore.Encrypt.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Web;
 using System.IO;
+using System;
 
 public static class Security
 {
@@ -42,7 +43,7 @@ public static class Security
 
         using (var sha512 = SHA512.Create())
         {
-            result = encoding.GetString(sha512.ComputeHash(data));
+            result = Convert.ToBase64String(sha512.ComputeHash(data));
         }
 
         return result;

@@ -15,4 +15,6 @@ public class User
     [ForeignKey("PrefixId")]
     public short PrefixId { get; set; }
     public string PhoneNumber { get; set; }
+    public bool Verified { get; set; }
+    public bool Admin { get; set; }
 }
