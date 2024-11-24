@@ -44,7 +44,7 @@ public class UserManager
     public bool LoginUser(User user)
     {
         List<User> users;
-        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE (Email LIKE '{user.Email}' OR Login LIKE '{user.Login}') AND Password LIKE '{user.Password}'");
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE (Email LIKE '{user.Email}' OR Login LIKE '{user.Login}') AND Password LIKE '{user.Password}' AND Verified = 1");
         bool success = DatabaseAccess.Instance.ExecuteQuery(query, out users);
         success = success && users != null && users.Count != 0;
 
@@ -68,9 +68,16 @@ public class UserManager
     public bool VerifyUser(string email)
     {
         List<User> users;
-        var query = FormattableStringFactory.Create($"UPDATE dbo.Users SET Verified = 1");
-        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out users);
+        var checkVerificationQuery = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE Email LIKE '{email}' AND Verified = 1");
+        bool verified = DatabaseAccess.Instance.ExecuteQuery(checkVerificationQuery, out users) && users != null && users.Count != 0;
 
+        if (verified)
+        {
+            return false;
+        }
+
+        var query = FormattableStringFactory.Create($"UPDATE dbo.Users SET Verified = 1 WHERE Email LIKE '{email}'");
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out users);
         return success;
     }
 

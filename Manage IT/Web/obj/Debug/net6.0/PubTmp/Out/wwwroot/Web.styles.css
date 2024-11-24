@@ -1,0 +1,172 @@
+/* _content/Web/Pages/Index.cshtml.rz.scp.css */
+h1[b-gxtnmvq0np] {
+    font-size: 54px;
+    text-align: center;
+    font-weight: normal;
+    color: #ffffff;
+}
+
+#main[b-gxtnmvq0np] {
+    margin-left: auto;
+    width: 80vw;
+    margin-right: auto;
+    min-height: 50vh;
+}
+
+.container[b-gxtnmvq0np] {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: center;
+    margin: auto;
+}
+
+.buttons[b-gxtnmvq0np] {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+#image[b-gxtnmvq0np] {
+    width: 50vw;
+    height: 50vh;
+}
+
+@media screen and (max-width: 500px) {
+    .container[b-gxtnmvq0np] {
+        flex-direction: column;
+    }
+}
+
+.container a[b-gxtnmvq0np] {
+    text-align: center;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 24px;
+    transition: 0.1s;
+    background-color: #8080ff80;
+    padding: 50px;
+    margin: 20px;
+}
+
+.container a:hover[b-gxtnmvq0np] {
+    background-color: #8080ffff;
+    color: #000080;
+    transition: 0.1s;
+}
+
+.topnav[b-gxtnmvq0np] {
+    width: 100%;
+    overflow: auto;
+}
+
+.topnav a[b-gxtnmvq0np] {
+    float: left;
+    text-align: center;
+    padding: 12px;
+    color: #4040ff;
+    text-decoration: none;
+    font-size: 22px;
+    transition: 0.1s;
+}
+
+/* Navbar links on mouse-over */
+.topnav a:hover[b-gxtnmvq0np] {
+    color: #ffffff;
+    transition: 0.1s;
+}
+
+/* Current/active navbar link */
+.topnav .active[b-gxtnmvq0np] {
+    color: #a0a0ff;
+}
+
+.topnav-right[b-gxtnmvq0np] {
+    float: right;
+}
+
+/* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
+@media screen and (max-width: 500px) {
+    .navbar a[b-gxtnmvq0np] {
+        float: none;
+        display: block;
+    }
+}
+
+.bottomnavbar[b-gxtnmvq0np] {
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+}
+
+.bottomnavbar a[b-gxtnmvq0np] {
+    float: left;
+    display: block;
+    color: #158eea;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 22px;
+    transition: 0.1s;
+}
+
+.bottomnavbar a:hover[b-gxtnmvq0np] {
+    color: white;
+    transition: 0.1s;
+}
+/* _content/Web/Pages/RegisterForm.cshtml.rz.scp.css */
+.container[b-5iyiviodod] {
+    width: 100%;
+    height: 100%;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+    gap: 10px;
+}
+
+.container div[b-5iyiviodod] {
+    align-content: center;
+    justify-content: center;
+    flex-direction: row;
+    display: flex;
+}
+
+.container input[type=number][b-5iyiviodod] {
+    appearance: textfield;
+}
+
+.container input[b-5iyiviodod]::-webkit-outer-spin-button, input[b-5iyiviodod]::-webkit-inner-spin-button {
+    appearance: none;
+    margin: 0;
+}
+
+.container input[b-5iyiviodod] {
+    font-size: 28px;
+}
+
+.container select[b-5iyiviodod] {
+    font-size: 28px;
+    width: 400px;
+}
+
+.title[b-5iyiviodod] {
+    font-size: 32px;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.error[b-5iyiviodod] {
+    font-size: 24px;
+    text-align: center;
+    color: red;
+}
+
+.label[b-5iyiviodod] {
+    font-size: 18px;
+    margin: 0px;
+}

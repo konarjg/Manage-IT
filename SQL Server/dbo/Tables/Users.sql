@@ -7,7 +7,9 @@ CREATE TABLE [Users]
  [Password] Text NOT NULL,
  [Email] Text NOT NULL,
  [PrefixId] Smallint NOT NULL,
- [PhoneNumber] Text NOT NULL
+ [PhoneNumber] Text NOT NULL,
+ [Verified] Bit NOT NULL,
+ [Admin] Bit NOT NULL,
 )
 GO
 ALTER TABLE [Users] ADD CONSTRAINT [Users_Prefixes] FOREIGN KEY ([PrefixId]) REFERENCES [Prefixes] ([PrefixId]) ON UPDATE NO ACTION ON DELETE NO ACTION

@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Web;
 using System.IO;
 using System;
+using System.Net.Http;
+using System.Windows;
 
 public static class Security
 {
@@ -14,26 +16,25 @@ public static class Security
 
     public static void Initialize()
     {
-        var path = System.AppDomain.CurrentDomain.BaseDirectory + "/scr.cfg";
+        var url = "http://manageit.runasp.net/GetSecurityParameters";
+        //var url = "https://localhost:5001/GetSecurityParameters";
 
-        if (File.Exists(path))
+        using (var client = new HttpClient())
         {
-            var lines = File.ReadAllLines(path);
-            
-            for (int i = 0; i < EncryptionKey.Length; i++)
+            var message = new HttpRequestMessage(HttpMethod.Get, url);
+            var response = client.Send(message);
+
+            using (var stream = response.Content.ReadAsStream())
             {
-                EncryptionKey[i] = lines[i];
+                using (var reader = new StreamReader(stream))
+                {
+                    for (int i = 0; i < EncryptionKey.Length; i++)
+                    {
+                        EncryptionKey[i] = reader.ReadLine();
+                    }
+                }
             }
-
-            return;
         }
-
-        var aes = EncryptProvider.CreateAesKey();
-        EncryptionKey[0] = aes.Key;
-        EncryptionKey[1] = aes.IV;
-
-        var content = aes.Key + "\n" + aes.IV;
-        File.WriteAllText(path, content);
     }
 
     public static string HashText(string text, Encoding encoding)

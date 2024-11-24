@@ -1,5 +1,4 @@
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\Web.exe
-C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\web.config
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\appsettings.json
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Release\net6.0\PubTmp\Out\Web.dll

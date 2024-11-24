@@ -119,6 +119,17 @@ namespace Desktop
             SwitchPageTemplate("Main");
         }
 
+
+        public void ForgotPasswordClick(object sender, RoutedEventArgs e)
+        {
+            SwitchPageTemplate("ForgotPassword");
+        }
+
+        public void ForgotPasswordBackClick(object sender, RoutedEventArgs e)
+        {
+            SwitchPageTemplate("Login");
+        }
+
         private void SubmitRegisterFormClick(object sender, RoutedEventArgs e) 
         {
             User data;
@@ -160,6 +171,11 @@ namespace Desktop
             {
                 GetTemplateControl<TextBlock>("Error").Text = error.Message;
             }
+        }
+
+        public void SubmitForgotPasswordFormClick(object sender, RoutedEventArgs e)
+        {
+
         }
 
     }

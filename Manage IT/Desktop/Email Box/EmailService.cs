@@ -18,8 +18,8 @@ namespace Desktop
     
         public static void Initialize()
         {
-            Email = Security.DecryptText("uSFi+2yEKrvoc2lp2bpbbXR1RNkEpl3YLCcy5ergoOE=");
-            Password = Security.DecryptText("WfGp+daEdScr+A1LAoNKQjPvp5Zywd3+9Bd97Sb/GUQ=");
+            Email = Security.DecryptText("0G4yZ9VbqWuQ3hY0bhknXLqNczZS6xQIKJB7mGut8qA=");
+            Password = Security.DecryptText("+j+Os6f3nMUlhVdESQXddMOGjg2HcUGsrew5AG2+okA=");
         }
 
         public static bool SendEmail(string targetEmail, string subject, string body, out string error)

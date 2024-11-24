@@ -16,7 +16,7 @@
                         <GradientStop Color="#000040" Offset="0.75"/>
                     </LinearGradientBrush>
                 </Grid.Background>
-                
+
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -82,7 +82,7 @@
                         <GradientStop Color="#000040" Offset="0.75"/>
                     </LinearGradientBrush>
                 </Grid.Background>
-                
+
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -167,11 +167,12 @@
                 <TextBox x:Name="Credential" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
                 <TextBlock Text="Password" Foreground="White" Grid.Row="5" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
                 <PasswordBox x:Name="Password" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" HorizontalContentAlignment="Left"/>
+                <Button x:Name="ForgotPasswordButton" Click="ForgotPasswordClick" Content="Forgot password?" Grid.Row="8" Grid.Column="1" FontSize="42" Grid.ColumnSpan="4" Background="Transparent" Foreground="#03c9fc" BorderBrush="Transparent" Margin="426,56,426,34" Grid.RowSpan="2"/>
                 <Button x:Name="LoginButton" Click="SubmitLoginFormClick" Content="Login" Grid.Row="7" Grid.Column="2" FontSize="42" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="214,32,214,34" />
             </Grid>
         </ControlTemplate>
 
-        <ControlTemplate x:Key="ProjectManagement">
+        <ControlTemplate x:Key="ForgotPassword">
             <Grid>
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
@@ -202,11 +203,21 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
+
+                <Button x:Name="BackButton" Click="ForgotPasswordBackClick" FontSize="86" Grid.Row="0" Grid.Column="0" Background="Transparent" Content="🔙" BorderThickness="0" Foreground="White" Grid.RowSpan="2"/>
+                <TextBlock x:Name="Header" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="6" Grid.RowSpan="2" FontWeight="Bold" Text="Password Reset" FontSize="58" TextAlignment="Center" Foreground="White"/>
+                <TextBlock Text="Email or username" Foreground="White" Grid.Row="2" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="Credential" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
+                <TextBlock Text="New Password" Foreground="White" Grid.Row="4" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
+                <PasswordBox x:Name="Password" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" HorizontalContentAlignment="Left"/>
+                <TextBlock Text="Confirm New Password" Foreground="White" Grid.Row="6" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
+                <PasswordBox x:Name="ConfirmPassword" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" HorizontalContentAlignment="Left"/>
+                <Button x:Name="ChangePasswordButton" Click="SubmitForgotPasswordFormClick" Content="Change Password" Grid.Row="8" Grid.Column="2" FontSize="42" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="84,32,64,34" />
             </Grid>
         </ControlTemplate>
     </Window.Resources>
 
     <Window.Template>
-        <StaticResource ResourceKey="ProjectManagement"/>
+        <StaticResource ResourceKey="ForgotPassword"/>
     </Window.Template>
 </Window>

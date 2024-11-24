@@ -12,6 +12,18 @@ public static class Security
 {
     private static string[] EncryptionKey = new string[2];
 
+    public static string Parameters
+    {
+        get
+        {
+            var parameters = string.Empty;
+            parameters += EncryptionKey[0] + "\n";
+            parameters += EncryptionKey[1];
+
+            return parameters;
+        }
+    }
+
     public static void Initialize()
     {
         var path = System.AppDomain.CurrentDomain.BaseDirectory + "/scr.cfg";

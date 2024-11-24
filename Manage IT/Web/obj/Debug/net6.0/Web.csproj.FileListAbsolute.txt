@@ -34,7 +34,6 @@ C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Debug\net6.0\Web.csproj.CopyC
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Debug\net6.0\Web.RazorAssemblyInfo.cache
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\obj\Debug\net6.0\Web.RazorAssemblyInfo.cs
-C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Debug\net6.0\web.config
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 C:\Users\konis\Desktop\Manage IT\Manage IT\Web\bin\Debug\net6.0\Microsoft.Identity.Client.dll
