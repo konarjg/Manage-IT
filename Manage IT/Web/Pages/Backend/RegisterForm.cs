@@ -11,33 +11,16 @@ public class RegisterForm : PageModel
 
     private Regex EmailValidation = new Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}");
     private Regex PasswordValidation = new Regex("^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$");
-    private Regex PhoneNumberValidation = new Regex("^{4,15}");
-
-    public string GetFlag(string country)
-    {
-        var regions = CultureInfo.GetCultures(CultureTypes.SpecificCultures).Select(x => new RegionInfo(x.LCID));
-        var englishRegion = regions.FirstOrDefault(region => region.EnglishName.Contains(country));
-        
-        if (englishRegion == null)
-        {
-            return "🏳";
-        }
-
-        var countryAbbrev = englishRegion.TwoLetterISORegionName;
-        return ConvertToFlag(countryAbbrev);
-    }
-    public string ConvertToFlag(string countryCode) => string.Concat(countryCode.ToUpper().Select(x => char.ConvertFromUtf32(x + 0x1F1A5)));
 
     public void OnGet()
     {
         Error = "";
     }
 
-    public void OnPost(string login, string email, string password, string confirmPassword, string country, string phoneNumber)
+    public void OnPost(string login, string email, string password, string confirmPassword)
     {
         if (login == null || email == null || password == null 
-            || confirmPassword == null 
-            || country == null || phoneNumber == null)
+            || confirmPassword == null)
         {
             Error = "You have to fill in all required fields!";
             return;
@@ -55,15 +38,8 @@ public class RegisterForm : PageModel
             return;
         }
 
-        if (!PhoneNumberValidation.IsMatch(phoneNumber))
-        {
-            Error = "Provided phone number is invalid!";
-            return;
-        }
-
         password = Security.HashText(password, Encoding.ASCII);
         confirmPassword = Security.HashText(confirmPassword, Encoding.ASCII);
-        phoneNumber = Security.EncryptText(phoneNumber);
 
         if (password != confirmPassword)
         {
@@ -75,18 +51,6 @@ public class RegisterForm : PageModel
         user.Login = login;
         user.Email = email;
         user.Password = password;
-        user.PhoneNumber = phoneNumber;
-
-        var prefix = PrefixManager.Instance.GetPrefixByCountry(country);
-        
-        if (prefix == null)
-        {
-            user.PrefixId = 0;
-        }
-        else
-        {
-            user.PrefixId = prefix.PrefixId;
-        }
 
         if (UserManager.Instance == null)
         {

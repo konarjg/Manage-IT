@@ -26,18 +26,23 @@ public class UserManager
         }
 
         List<User> users;
-        var query = FormattableStringFactory.Create($"INSERT INTO dbo.Users (Login,Password,Email,PrefixId,PhoneNumber) VALUES ('{user.Login}', '{user.Password}','{user.Email}',{user.PrefixId},'{user.PhoneNumber}')");
+        var query = FormattableStringFactory.Create($"INSERT INTO dbo.Users (Login,Password,Email) VALUES ('{user.Login}', '{user.Password}','{user.Email}')");
 
-        error = "";
         var success = DatabaseAccess.Instance.ExecuteQuery(query, out users);
-        
+
         if (!success)
         {
             error = "There was an unexpected error! Could not create an account.";
             return false;
         }
 
-        EmailService.SendEmail(user.Email, "Manage IT Account Confirmation", "Your account has been created.", out error);
+        var subject = "Manage IT Account Confirmation";
+        var username = user.Login;
+        var url = string.Format("http://manageit.runasp.net/VerifyEmail?email={0}", user.Email);
+        var body = string.Format("Dear {0},<br>Thank You for choosing Manage IT. <br><a href=\"{1}\">Click here to verify your account</a>", username, url);
+
+        EmailService.SendEmail(user.Email, subject, body, out error);
+        error = string.Empty;
         return true;
     }
 
@@ -56,7 +61,7 @@ public class UserManager
             var dateTime = DateTime.Now;
             var successful = success ? "successful" : "failed";
             var subject = "Alert: New Login Attempt On Your Account!";
-            var body = string.Format("Dear {0}, \nWe noticed a {1} login attempt on your account on {2}. \nIf this was you, no further action is needed. \nIf you did not attempt to log in, please secure your account immediately by changing your password.\nSincerely\nManage IT Team.", username, successful, dateTime.ToString());
+            var body = string.Format("Dear {0}, <br>We noticed a {1} login attempt on Your account on {2}. <br>If this was You, no further action is needed. <br>If You did not attempt to log in, please secure Your account immediately by changing Your password.<br>Sincerely<br>Manage IT Team.", username, successful, dateTime.ToString());
             string error;
 
             EmailService.SendEmail(CurrentSessionUser.Email, subject, body, out error);

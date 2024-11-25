@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,12 +16,26 @@ namespace Desktop
         private static readonly string Host = "smtp.gmail.com";
         private static readonly int Port = 587;
         private static string Email;
-        private static string Password; 
-    
+        private static string Password;
+
         public static void Initialize()
         {
-            Email = Security.DecryptText("0G4yZ9VbqWuQ3hY0bhknXLqNczZS6xQIKJB7mGut8qA=");
-            Password = Security.DecryptText("+j+Os6f3nMUlhVdESQXddMOGjg2HcUGsrew5AG2+okA=");
+            var url = "http://manageit.runasp.net/GetSmtpParameters";
+       
+            using (var client = new HttpClient())
+            {
+                var message = new HttpRequestMessage(HttpMethod.Get, url);
+                var response = client.Send(message);
+
+                using (var stream = response.Content.ReadAsStream())
+                {
+                    using (var reader = new StreamReader(stream))
+                    {
+                        Email = Security.DecryptText(reader.ReadLine());
+                        Password = Security.DecryptText(reader.ReadLine());
+                    }
+                }
+            }
         }
 
         public static bool SendEmail(string targetEmail, string subject, string body, out string error)

@@ -9,7 +9,6 @@ namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
 
 public class DatabaseContext : DbContext
 {
-    public DbSet<Prefix> Prefixes { get; set; }
     public DbSet<Project> Projects { get; set; }
     public DbSet<ProjectMembers> ProjectMembers { get; set; }
     public DbSet<Task> Tasks { get; set; }
@@ -30,9 +29,6 @@ public class DatabaseContext : DbContext
     {
         switch (typeof(T))
         {
-            case Type t when t == typeof(Prefix):
-                return Prefixes as DbSet<T>;
-
             case Type t when t == typeof(Project):
                 return Projects as DbSet<T>;
 
@@ -110,7 +106,6 @@ public class Database : IDisposable
         }
         catch (Exception exception)
         {
-
             results = null;
             return false;
         }

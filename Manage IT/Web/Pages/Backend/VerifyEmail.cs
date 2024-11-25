@@ -6,15 +6,14 @@ public class VerifyEmail : PageModel
 {
     public string Message { get; set; }
 
-    public IActionResult OnGet(string emailEncrypted)
+    public IActionResult OnGet(string email)
     {
-        if (emailEncrypted == null || emailEncrypted == string.Empty)
+        if (email == null || email == string.Empty)
         {
             Message = "There was an unexpected error!";
-            return Redirect($"/?message={Message}");
+            return Redirect($"~/?message={Message}");
         }
 
-        var email = Security.DecryptText(emailEncrypted);
         bool success = UserManager.Instance.VerifyUser(email);
 
         string error;
@@ -25,6 +24,6 @@ public class VerifyEmail : PageModel
             EmailService.SendEmail(email, "Manage IT account verification", "Your account has been verified!", out error);
         }
 
-        return Redirect($"/?message={Message}");
+        return Redirect($"~/?message={Message}");
     }
 }

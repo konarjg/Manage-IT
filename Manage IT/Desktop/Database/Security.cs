@@ -17,7 +17,6 @@ public static class Security
     public static void Initialize()
     {
         var url = "http://manageit.runasp.net/GetSecurityParameters";
-        //var url = "https://localhost:5001/GetSecurityParameters";
 
         using (var client = new HttpClient())
         {

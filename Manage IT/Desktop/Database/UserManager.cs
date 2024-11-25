@@ -27,7 +27,7 @@ public class UserManager
         }
 
         List<User> users;
-        var query = FormattableStringFactory.Create($"INSERT INTO dbo.Users (Login,Password,Email,PrefixId,PhoneNumber) VALUES ('{user.Login}', '{user.Password}','{user.Email}',{user.PrefixId},'{user.PhoneNumber}')");
+        var query = FormattableStringFactory.Create($"INSERT INTO dbo.Users (Login,Password,Email) VALUES ('{user.Login}', '{user.Password}','{user.Email}')");
 
         var success = DatabaseAccess.Instance.ExecuteQuery(query, out users);
         
@@ -39,8 +39,7 @@ public class UserManager
 
         var subject = "Manage IT Account Confirmation";
         var username = user.Login;
-        var url = string.Format("http://manageit.runasp.net/VerifyEmail?emailEncrypted={0}", Security.EncryptText(user.Email));
-        //var url = string.Format("https://localhost:5001/VerifyEmail?emailEncrypted={0}", Security.EncryptText(user.Email));
+        var url = string.Format("http://manageit.runasp.net/VerifyEmail?email={0}", user.Email);
         var body = string.Format("Dear {0},<br>Thank You for choosing Manage IT. <br><a href=\"{1}\">Click here to verify your account</a>", username, url);
 
         EmailService.SendEmail(user.Email, subject, body, out error);
@@ -58,8 +57,6 @@ public class UserManager
         if (success)
         {
             CurrentSessionUser = users[0];
-
-            MessageBox.Show(users[0].Email);
 
             var username = CurrentSessionUser.Login;
             var dateTime = DateTime.Now;

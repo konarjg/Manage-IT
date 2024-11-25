@@ -22,7 +22,6 @@ namespace Desktop
     {
         private Regex EmailValidation = new Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}");
         private Regex PasswordValidation = new Regex("^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$");
-        private Regex PhoneNumberValidation = new Regex("^{4,15}");
 
         private void SwitchPageTemplate(string name)
         {
@@ -38,12 +37,10 @@ namespace Desktop
         {
             var email = GetTemplateControl<TextBox>("Email").Text;
             var username = GetTemplateControl<TextBox>("Username").Text;
-            var phoneNumber = GetTemplateControl<TextBox>("PhoneNumber").Text;
             var password = GetTemplateControl<PasswordBox>("Password").Password;
             var confirmPassword = GetTemplateControl<PasswordBox>("ConfirmPassword").Password;
-            short prefixId = 48;
 
-            if (email == string.Empty || username == string.Empty || phoneNumber == string.Empty
+            if (email == string.Empty || username == string.Empty
                 || password == string.Empty || confirmPassword == string.Empty)
             {
                 throw new Exception("You have to fill in every field!");
@@ -64,19 +61,11 @@ namespace Desktop
                 throw new Exception("Password must be at least 8 characters long, contain at least 1 special character, at least 1 uppercase letter and at least 1 number!");
             }
 
-            if (!PhoneNumberValidation.IsMatch(phoneNumber))
-            {
-                throw new Exception("Provided phone number is invalid!");
-            }
-
-            phoneNumber = Security.EncryptText(phoneNumber);
             password = Security.HashText(password, Encoding.UTF8);
 
             data = new();
             data.Email = email;
             data.Login = username;
-            data.PhoneNumber = phoneNumber;
-            data.PrefixId = prefixId;
             data.Password = password;
         }
 

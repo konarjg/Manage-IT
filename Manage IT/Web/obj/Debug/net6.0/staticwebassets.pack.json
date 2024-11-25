@@ -1,10 +1,6 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Web.bundle.scp.css",
-      "PackagePath": "staticwebassets\\Web.bundle.scp.css"
-    },
-    {
       "Id": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\icon.png",
       "PackagePath": "staticwebassets\\Graphics\\icon.png"
     },
@@ -19,6 +15,14 @@
     {
       "Id": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\main.jpeg",
       "PackagePath": "staticwebassets\\Graphics\\main.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Index.css",
+      "PackagePath": "staticwebassets\\Index.css"
+    },
+    {
+      "Id": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\RegisterForm.css",
+      "PackagePath": "staticwebassets\\RegisterForm.css"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.Web.Microsoft.AspNetCore.StaticWebAssets.props",

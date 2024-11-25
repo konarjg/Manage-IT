@@ -9,7 +9,6 @@ var app = builder.Build();
 Security.Initialize();
 EmailService.Initialize();  
 DatabaseAccess.Instantiate();
-PrefixManager.Instantiate();
 UserManager.Instantiate();
 
 app.UseHttpsRedirection();

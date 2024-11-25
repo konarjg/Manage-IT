@@ -1,0 +1,128 @@
+﻿.topnav {
+    width: 100%;
+    overflow: auto;
+}
+
+.topnav a {
+    float: left;
+    text-align: center;
+    padding: 12px;
+    color: #4040ff;
+    text-decoration: none;
+    font-size: 22px;
+    transition: 0.1s;
+}
+
+/* Navbar links on mouse-over */
+.topnav a:hover {
+    color: #ffffff;
+    transition: 0.1s;
+}
+
+/* Current/active navbar link */
+.topnav .active {
+    color: #a0a0ff;
+}
+
+.topnav-right {
+    float: right;
+}
+
+/* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
+@media screen and (max-width: 500px) {
+    .navbar a {
+        float: none;
+        display: block;
+    }
+}
+
+.bottomnavbar {
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+}
+
+.bottomnavbar a {
+    float: left;
+    display: block;
+    color: #158eea;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 22px;
+    transition: 0.1s;
+}
+
+.bottomnavbar a:hover {
+    color: white;
+    transition: 0.1s;
+}
+
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    align-content: top;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+    gap: 10px;
+}
+
+.container div {
+    align-content: center;
+    justify-content: center;
+    flex-direction: row;
+    display: flex;
+}
+
+.container input {
+    font-size: 28px;
+    width: 400px;
+    height: 50px;
+    border-color: white;
+    border-style: solid;
+    color: white;
+    background-color: #00000000;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+#button:hover {
+    background-color: cornflowerblue;
+    font-size: 28px;
+}
+
+.title {
+    font-size: 48px;
+    font-weight: bolder;
+    text-align: center;
+    color: white;
+}
+
+.error {
+    font-size: 36px;
+    text-align: center;
+    color: red;
+}
+
+.label {
+    font-size: 28px;
+    margin: 0px;
+    color: #8080ff;
+}
+
+#button {
+    transition: 0.1s;
+    max-width: 200px;
+    height: 80px;
+    border-radius: 100vh;
+}
+
+#button:hover {
+    background-color: #8080ff;
+    color: #000080;
+    border-color: #000080;
+    transition: 0.1s;
+}

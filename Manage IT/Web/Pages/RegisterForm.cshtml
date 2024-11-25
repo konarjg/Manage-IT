@@ -6,10 +6,36 @@
     <html>
         <head>
             <meta charset="utf-32" />
-            <link rel="stylesheet" href="~/Web.styles.css" type="text/css" />
+            <link rel="stylesheet" href="~/RegisterForm.css" type="text/css" />
+
+            <!--Because Razor adds a scope identifier and a helper tag,
+            body needs to be styled in the style tag as per
+            https://github.com/dotnet/aspnetcore/issues/41580-->
+            <style>
+                body {
+                    width: 100vw;
+                    height: 100vh;
+                    margin: 0px;
+                    background: linear-gradient(#000000, #000040);
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                }
+            </style>
         </head>
 
         <body>
+            <header>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                <div class="topnav">
+                    <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+                    <a href="#"><i class="fa fa-fw fa-download"></i> Downloads</a>
+                    <a href="#"><i class="fa fa-fw fa-question"></i>About</a>
+                    <div class="topnav-right">
+                        <a href=@Href("~/RegisterForm")><i class="fa fa-fw fa-user"></i> Register</a>
+                        <a href=@Href("~/LoginForm")><i class="fa fa-fw fa-user"></i>Log in</a>
+                    </div>
+                </div>
+            </header>
+
             <form method="post">
                 <div class="container">
                     <div><label class="error">@Model.Error</label></div>
@@ -18,27 +44,21 @@
                     <div><input placeholder="youremail123@gmail.com" type="email" name="email"/></div>
                     <div><label class="label">Username</label></div>
                     <div><input placeholder="mike123" type="text" name="login" /></div>
-                    
-                    <div><label class="label">Country Code</label></div>
-                    <div>
-                        <select name="country">
-                            @foreach (var prefix in PrefixManager.Instance.Prefixes)
-                            {
-                                <option value="@prefix.Country">@string.Format("{0} {1}", prefix.ToString(), Model.GetFlag(prefix.Country))</option>
-                            }
-                        </select>
-                    </div>
-                    
-
-                    <div><label class="label">Phone Number</label></div>
-                    <div><input placeholder="123052345" type="number" name="phoneNumber"/></div>
                     <div><label class="label">Password</label></div>
                     <div><input placeholder="!Qwerty123" type="password" name="password"/></div>
                     <div><label class="label">Confirm Password</label></div>
                     <div><input placeholder="!Qwerty123" type="password" name="confirmPassword" /></div>
-                    <div><input value="Register" type="submit" class="submit"/></div>
+                    <div><input id="button" value="Register" type="submit"/></div>
                 </div>
             </form>
+
+            <footer>
+                <div class="bottomnavbar">
+                    <a href="#feedback">Feedback</a>
+                    <a href="#ToS">Terms of Service</a>
+                    <a href="#privacy-policy">Privacy policy</a>
+                </div>
+            </footer>
         </body>
     </html>
 }

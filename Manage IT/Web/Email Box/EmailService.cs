@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NETCore.Encrypt;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -15,11 +16,26 @@ namespace Web
         private static readonly int Port = 587;
         private static string Email;
         private static string Password; 
-    
+
+        public static string Parameters
+        {
+            get
+            {
+                return Security.EncryptText(Email) + "\n" + Security.EncryptText(Password);
+            }
+        }
+
         public static void Initialize()
         {
-            Email = Security.DecryptText("0G4yZ9VbqWuQ3hY0bhknXLqNczZS6xQIKJB7mGut8qA=");
-            Password = Security.DecryptText("+j+Os6f3nMUlhVdESQXddMOGjg2HcUGsrew5AG2+okA=");
+            var path = System.AppDomain.CurrentDomain.BaseDirectory + "/smtp.cfg";
+
+            if (File.Exists(path))
+            {
+                var lines = File.ReadAllLines(path);
+
+                Email = lines[0];
+                Password = lines[1];
+            }
         }
 
         public static bool SendEmail(string targetEmail, string subject, string body, out string error)

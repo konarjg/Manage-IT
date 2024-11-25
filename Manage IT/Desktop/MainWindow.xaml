@@ -118,13 +118,11 @@
                 <TextBox x:Name="Email" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
                 <TextBlock Text="Username" Foreground="White" Grid.Row="5" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
                 <TextBox x:Name="Username" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
-                <TextBlock Text="Phone Number" Foreground="White" Grid.Row="7" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
-                <TextBox x:Name="PhoneNumber" Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
-                <TextBlock Text="Password" Foreground="White" Grid.Row="9" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
-                <PasswordBox x:Name="Password" Grid.Row="10" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" HorizontalContentAlignment="Left"/>
-                <TextBlock Text="Confirm Password" Foreground="White" Grid.Row="11" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
-                <PasswordBox x:Name="ConfirmPassword" Grid.Row="12" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" HorizontalContentAlignment="Left"/>
-                <Button x:Name="RegisterButton" Click="SubmitRegisterFormClick" Content="Register" Grid.Row="13" Grid.Column="2" FontSize="42" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="214,32,214,34" />
+                <TextBlock Text="Password" Foreground="White" Grid.Row="7" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
+                <PasswordBox x:Name="Password" Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" HorizontalContentAlignment="Left"/>
+                <TextBlock Text="Confirm Password" Foreground="White" Grid.Row="9" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
+                <PasswordBox x:Name="ConfirmPassword" Grid.Row="10" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" HorizontalContentAlignment="Left"/>
+                <Button x:Name="RegisterButton" Click="SubmitRegisterFormClick" Content="Register" Grid.Row="11" Grid.Column="2" FontSize="42" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="214,32,214,34" />
             </Grid>
         </ControlTemplate>
 
@@ -218,6 +216,6 @@
     </Window.Resources>
 
     <Window.Template>
-        <StaticResource ResourceKey="ForgotPassword"/>
+        <StaticResource ResourceKey="Register"/>
     </Window.Template>
 </Window>
