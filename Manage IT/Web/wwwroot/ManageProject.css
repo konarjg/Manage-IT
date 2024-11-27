@@ -1,0 +1,227 @@
+﻿main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.topnav {
+    width: 100%;
+    overflow: auto;
+}
+
+.topnav a {
+    float: left;
+    text-align: center;
+    padding: 12px;
+    color: #4040ff;
+    text-decoration: none;
+    font-size: 22px;
+    transition: 0.1s;
+}
+
+/* Navbar links on mouse-over */
+.topnav a:hover {
+    color: #ffffff;
+    transition: 0.1s;
+}
+
+/* Current/active navbar link */
+.topnav .active {
+    color: #a0a0ff;
+}
+
+.topnav-right {
+    float: right;
+}
+
+/* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
+@media screen and (max-width: 500px) {
+    .navbar a {
+        float: none;
+        display: block;
+    }
+}
+
+.bottomnavbar {
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+}
+
+.bottomnavbar a {
+    float: left;
+    display: block;
+    color: #158eea;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 22px;
+    transition: 0.1s;
+}
+
+.bottomnavbar a:hover {
+    color: white;
+    transition: 0.1s;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    align-content: safe center;
+    align-items: safe center;
+    justify-content: safe center;
+}
+
+.projectNav {
+    width: 75vw;
+    height: 10vh;
+    margin-left: 12.5vw;
+    margin-right: auto;
+    gap: 20px;
+    display: inline-flex;
+    flex-direction: row;
+    align-content: safe center;
+    justify-content: safe center;
+    align-items: safe center;
+    border: 5px solid gray;
+}
+
+.project {
+    width: 75vw;
+    height: 50vh;
+    margin-left: 12.5vw;
+    margin-right: auto;
+    gap: 20px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    display: inline-flex;
+    flex-direction: row;
+    align-content: safe center;
+    justify-content: safe center;
+    align-items: safe center;
+    border: 5px solid gray;
+}
+
+.infoBox {
+    width: 75vw;
+    height: 50vh;
+    margin-left: 12.5vw;
+    margin-right: auto;
+    gap: 20px;
+    display: inline-flex;
+    flex-direction: column;
+    align-content: safe center;
+    justify-content: safe center;
+    align-items: safe center;
+    border: 5px solid gray;
+}
+
+.infoField {
+    resize: none;
+    font-size: 28px;
+    border-color: white;
+    border-style: solid;
+    color: white;
+    background-color: #00000000;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.form {
+    width: 75vw;
+    width: 50vh;
+    align-content: safe center;
+    justify-content: safe center;
+    align-items: safe center;
+    flex-direction: column;
+    display: flex;
+    gap: 10px;
+}
+
+.form div {
+    align-content: center;
+    justify-content: center;
+    flex-direction: row;
+    display: flex;
+}
+
+.form input {
+    font-size: 28px;
+    width: 400px;
+    height: 50px;
+    border-color: white;
+    border-style: solid;
+    color: white;
+    background-color: #00000000;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.form textarea {
+    resize: none;
+    width: 400px;
+    height: 100px;
+    font-size: 28px;
+    border-color: white;
+    border-style: solid;
+    color: white;
+    background-color: #00000000;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.title {
+    font-size: 48px;
+    font-weight: bolder;
+    text-align: center;
+    color: white;
+}
+
+.error {
+    font-size: 36px;
+    text-align: center;
+    color: red;
+}
+
+.label {
+    font-size: 28px;
+    margin: 0px;
+    color: #8080ff;
+}
+
+.navItem {
+    font-size: 24px;
+    transition: 0.1s;
+    width: 12vw;
+    height: 8vh;
+    border-radius: 100vh;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+.navItem:hover {
+    background-color: #8080ff;
+    color: #000080;
+    border-color: #000080;
+    transition: 0.1s;
+}
+
+.back {
+    font-size: 24px;
+    transition: 0.1s;
+    width: 5vw;
+    height: 5vh;
+    border-radius: 100vh;
+}
+
+.back:hover {
+    background-color: #8080ff;
+    color: #000080;
+    border-color: #000080;
+    transition: 0.1s;
+}

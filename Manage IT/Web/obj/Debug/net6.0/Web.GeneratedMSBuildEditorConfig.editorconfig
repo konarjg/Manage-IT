@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\konis\Desktop\Manage IT\Manage IT\Web
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/CreateProjectForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JlYXRlUHJvamVjdEZvcm0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/GetSecurityParameters.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR2V0U2VjdXJpdHlQYXJhbWV0ZXJzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -30,6 +34,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/LoginForm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW5Gb3JtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/LogOut.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nT3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/ManageProject.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFuYWdlUHJvamVjdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/ProjectManagement.cshtml]

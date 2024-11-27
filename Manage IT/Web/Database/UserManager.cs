@@ -5,16 +5,23 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Markup;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Http;
+using System.Text.Json;
 
 public class UserManager
 {
     public static User CurrentSessionUser { get; private set; }
-
     public static UserManager Instance { get; private set; }
 
     public static void Instantiate()
     {
         Instance = new UserManager();
+    }
+
+    public void ResetUser()
+    {
+        CurrentSessionUser = null;
     }
 
     public bool RegisterUser(User user, out string error)
@@ -56,7 +63,6 @@ public class UserManager
         if (success)
         {
             CurrentSessionUser = users[0];
-
             var username = CurrentSessionUser.Login;
             var dateTime = DateTime.Now;
             var successful = success ? "successful" : "failed";

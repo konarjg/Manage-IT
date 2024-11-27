@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\LoginForm.css" />
+    <Content Remove="wwwroot\ManageProject.css" />
+    <Content Remove="wwwroot\ProjectManagement.css" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +27,8 @@
     <None Include="wwwroot\Index.css" />
     <None Include="wwwroot\Graphics\logo.png" />
     <None Include="wwwroot\Graphics\main.jpeg" />
+    <None Include="wwwroot\ManageProject.css" />
+    <None Include="wwwroot\ProjectManagement.css" />
     <None Include="wwwroot\LoginForm.css" />
     <None Include="wwwroot\RegisterForm.css" />
   </ItemGroup>

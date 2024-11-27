@@ -1,4 +1,7 @@
 ﻿@page
+@using EFModeling.EntityProperties.DataAnnotations.Annotations;
+@using System.Text.Json;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model ProjectManagement
 @{
     <!DOCTYPE html>
@@ -11,7 +14,7 @@
         <meta name="keywords" content="management, IT, programming, project, www, programmer" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="author" content="Bosnian IT Management Inc." />
-        <link rel="stylesheet" href="~/Web.styles.css" type="text/css" />
+        <link rel="stylesheet" href="~/ProjectManagement.css" type="text/css" />
 
         <!--Because Razor adds a scope identifier and a helper tag,
         body needs to be styled in the style tag as per
@@ -25,99 +28,67 @@
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             }
         </style>
-
-        <script>
-            function openNav() {
-                document.getElementById("mySidebar").style.width = "250px";
-                document.getElementById("main").style.marginLeft = "250px";
-            }
-
-            function closeNav() {
-                document.getElementById("mySidebar").style.width = "0";
-                document.getElementById("main").style.marginLeft = "0";
-            }
-
-            function getWidth() {
-                if (self.innerWidth) {
-                    return self.innerWidth;
-                }
-
-                if (document.documentElement && document.documentElement.clientWidth) {
-                    return document.documentElement.clientWidth;
-                }
-
-                if (document.body) {
-                    return document.body.clientWidth;
-                }
-            }
-
-            function getHeight() {
-                if (self.innerHeight) {
-                    return self.innerHeight;
-                }
-
-                if (document.documentElement && document.documentElement.clientHeight) {
-                    return document.documentElement.clientHeight;
-                }
-
-                if (document.body) {
-                    return document.body.clientHeight;
-                }
-            }
-
-            function updateViewport() {
-                var width = getWidth();
-                var height = getHeight();
-
-                if (height < width) {
-                    return;
-                }
-
-                var responsives = document.getElementsByClassName("responsive");
-                var containers = document.getElementsByClassName("container");
-                var buttonContainers = document.getElementsByClassName("buttons");
-
-                responsives.forEach(responsive => {
-                    responsive.style.text - wrap = "wrap";
-                });
-
-                containers.forEach(container => {
-                    container.style.flex - direction = "column";
-                });
-
-                buttons.forEach(container => {
-                    container.style.flex - direction = "row";
-                });
-            }
-
-            setInterval(updateViewport, 0);
-        </script>
     </head>
 
     <body>
         <header>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <div class="topnav">
-                <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+                <a class="active" href=@Href("~/")><i class="fa fa-fw fa-home"></i> Home</a>
                 <a href="#"><i class="fa fa-fw fa-download"></i> Downloads</a>
                 <a href="#"><i class="fa fa-fw fa-question"></i>About</a>
                 <div class="topnav-right">
-                    <a href=@Href("~/")><i class="fa fa-fw fa-user"></i> Register</a>
-                    <a href="#"><i class="fa fa-fw fa-user"></i> Log in</a>
+                    @if (HttpContext.Session.Get<User>("User").Admin)
+                    {
+                        <a href=@Href("~/AdminPanel")><i class="fa fa-fw fa-cog"></i>Admin Panel</a>
+                    }
+
+                    <a href=@Href("~/AccountManagement")><i class="fa fa-fw fa-user-circle"></i>My Account</a>
+                    <a href=@Href("~/Chat")><i class="fa fa-fw fa-commenting"></i>Chat</a>
+                    <a href=@Href("~/Calendar")><i class="fa fa-fw fa-calendar"></i>Calendar</a>
+                    <a href=@Href("~/LogOut")><i class="fa fa-fw fa-sign-out"></i>Log Out</a>
                 </div>
 
             </div>
         </header>
-        <div id="main">
-            <h1 class="responsive">Welcome to Manage IT<br /></h1>
-            <div class="container">
-                <div class="buttons">
-                    <a href="#online" class="responsive">Manage IT In Browser</a>
-                    <a href="#desktop" class="responsive">Manage IT On Desktop</a>
+
+        
+        @if (!Model.CreatingProject)
+        {
+            <div class="main">
+                <div><p>Your Projects</p></div>
+                <div class="container">
+                    @if (Model.Projects != null)
+                    {
+                        @foreach (var project in Model.Projects)
+                        {
+                            <div>
+                                <a class="project" href=@Href("~/ManageProject?id=" + project.ProjectId)>@project.Name</a>
+                            </div>
+                        }
+                    }
+
+                    <div><a class="project" href=@Href("~/CreateProjectForm")><i class="fa fa-fw fa-plus"></i>Create</a></div>
                 </div>
-                <img src="Graphics/main.jpeg" id="image" />
             </div>
-        </div>
+        }
+        else
+        {
+            <form method="post">
+                <div class="formContainer">
+                    <div class="form">
+                        <div><label class="error">@Model.Error</label></div>
+                        <div><label class="title">Create Project</label></div>
+                        <div><label class="label">Name</label></div>
+                        <div><input type="text" name="name" maxlength="30"/></div>
+                        <div><label class="label">Description</label></div>
+                        <div><textarea name="description" rows="5" cols="60" maxlength="50"></textarea></div>
+                        <div><input value="Create" type="submit" id="button" /></div>
+                    </div>
+                </div>
+            </form>
+        }
+        
         <footer>
             <div class="bottomnavbar">
                 <a href="#feedback">Feedback</a>

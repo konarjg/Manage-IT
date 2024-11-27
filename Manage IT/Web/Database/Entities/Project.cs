@@ -8,9 +8,9 @@ namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
 public class Project
 {
     [Key]
-    public int ProjectId { get; set; }
+    public long ProjectId { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
     [ForeignKey("UserId")]
-    public int ManagerId { get; set; }
+    public long ManagerId { get; set; }
 }

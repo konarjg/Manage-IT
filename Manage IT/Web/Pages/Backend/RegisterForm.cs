@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc;
 
 public class RegisterForm : PageModel
 {
@@ -12,9 +13,15 @@ public class RegisterForm : PageModel
     private Regex EmailValidation = new Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}");
     private Regex PasswordValidation = new Regex("^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$");
 
-    public void OnGet()
+    public IActionResult OnGet()
     {
+        if (HttpContext.Session.Get<User>("User") != null)
+        {
+            return Redirect("~/ProjectManagement");
+        }
+
         Error = "";
+        return null;
     }
 
     public void OnPost(string login, string email, string password, string confirmPassword)

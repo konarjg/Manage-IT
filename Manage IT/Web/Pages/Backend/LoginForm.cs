@@ -7,9 +7,14 @@ public class LoginForm : PageModel
 {
     public string Error { get; set; }
 
-    public void OnGet()
+    public IActionResult OnGet()
     {
-        
+        if (HttpContext.Session.Get<User>("User") != null)
+        {
+            return Redirect("~/ProjectManagement");
+        }
+
+        return null;
     }
 
     public IActionResult OnPost(string credential, string password)

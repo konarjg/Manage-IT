@@ -63,7 +63,7 @@
 .container {
     width: 100vw;
     height: 100vh;
-    align-content: top;
+    align-content: center;
     justify-content: center;
     flex-direction: column;
     display: flex;
