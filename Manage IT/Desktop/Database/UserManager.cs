@@ -71,10 +71,10 @@ public class UserManager
         return success;
     }
 
-    private bool UserExists(User user)
+    private bool UserExists(User data)
     {
         List<User> existingUsers;
-        var queryUserExists = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE Email LIKE '{user.Email}'");
+        var queryUserExists = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE Email LIKE '{data.Email}'");
         bool success = DatabaseAccess.Instance.ExecuteQuery(queryUserExists, out existingUsers);
 
         if (existingUsers == null || !success)
@@ -84,4 +84,21 @@ public class UserManager
 
         return existingUsers.Count != 0;
     }
+
+    public bool UserExists(User data, out User user)
+    {
+        List<User> existingUsers;
+        var queryUserExists = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE Email LIKE '{data.Email}'");
+        bool success = DatabaseAccess.Instance.ExecuteQuery(queryUserExists, out existingUsers);
+
+        if (existingUsers == null || !success)
+        {
+            user = null;
+            return false;
+        }
+
+        user = existingUsers[0];
+        return existingUsers.Count != 0;
+    }
+
 }

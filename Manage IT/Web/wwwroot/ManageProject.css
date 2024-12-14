@@ -77,9 +77,9 @@ main {
 }
 
 .projectNav {
-    width: 75vw;
+    width: 80vw;
     height: 10vh;
-    margin-left: 12.5vw;
+    margin-left: 10vw;
     margin-right: auto;
     gap: 20px;
     display: inline-flex;
@@ -91,9 +91,9 @@ main {
 }
 
 .project {
-    width: 75vw;
+    width: 80vw;
     height: 50vh;
-    margin-left: 12.5vw;
+    margin-left: 10vw;
     margin-right: auto;
     gap: 20px;
     overflow-x: scroll;
@@ -202,6 +202,10 @@ main {
     border-radius: 100vh;
     margin-top: 1vh;
     margin-bottom: 1vh;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
 }
 
 .navItem:hover {

@@ -9,6 +9,7 @@ public enum ProjectAction
     Info,
     Members,
     Update,
+    CreateMeeting,
     Delete
 }
 
@@ -133,6 +134,41 @@ public class ManageProject : PageModel
         return Redirect("~/ProjectManagement");
     }
 
+    public IActionResult OnPostConfirmMeeting(string title, string description, DateTime date)
+    {
+        if (HttpContext.Session.Get<Project>("Project") == null)
+        {
+            return Redirect("~/ProjectManagement");
+        }
+
+        Project = HttpContext.Session.Get<Project>("Project");
+
+        if (title == null || description == null)
+        {
+            Error = "You have to fill in every field!";
+            return null;
+        }
+
+        Meeting data = new();
+        data.ProjectId = Project.ProjectId;
+        data.Title = title;
+        data.Description = description;
+        data.Date = date;
+
+        bool success = MeetingManager.Instance.CreateMeeting(data);
+
+        if (!success)
+        {
+            Error = "Could not create the meeting!";
+            return null;
+        }
+
+        Action = ProjectAction.Manage;
+        HttpContext.Session.Set("Action", Action);
+        HttpContext.Session.Remove("Meetings");
+        return Redirect("~/ManageProject");
+    }
+
     public IActionResult OnPostInfo()
     {
         Action = ProjectAction.Info;
@@ -150,6 +186,13 @@ public class ManageProject : PageModel
     public IActionResult OnPostUpdate()
     {
         Action = ProjectAction.Update;
+        HttpContext.Session.Set("Action", Action);
+        return Redirect("~/ManageProject");
+    }
+
+    public IActionResult OnPostCreateMeeting()
+    {
+        Action = ProjectAction.CreateMeeting;
         HttpContext.Session.Set("Action", Action);
         return Redirect("~/ManageProject");
     }

@@ -216,6 +216,6 @@
     </Window.Resources>
 
     <Window.Template>
-        <StaticResource ResourceKey="Register"/>
+        <StaticResource ResourceKey="ForgotPassword"/>
     </Window.Template>
 </Window>

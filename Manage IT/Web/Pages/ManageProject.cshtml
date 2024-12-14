@@ -71,6 +71,10 @@
                                 <button class="navItem"><i class="fa fa-fw fa-address-book"></i>Members</button>
                             </form>
 
+                            <form asp-page-handler="createMeeting" method="post">
+                                <button class="navItem"><i class="fa fa-fw fa-handshake-o"></i>Meeting</button>
+                            </form>
+
                             <form asp-page-handler="update" method="post">
                                 <button class="navItem"><i class="fa fa-fw fa-pencil-square"></i>Edit</button>
                             </form>
@@ -138,6 +142,29 @@
                                 <label class="label">Enter Project Name To Confirm</label>
                                 <textarea class="infoField" placeholder="@Model.Project.Name" rows="2" cols="60" maxlength="30" name="name"></textarea>
                                 <input type="submit" class="navItem" value="Delete Project" />
+                            </div>
+                        </form>
+                    </div>
+                    break;
+
+                case ProjectAction.CreateMeeting:
+                    <div class="main">
+                        <div class="projectNav">
+                            <form asp-page-handler="back" method="post">
+                                <button class="navItem"><i class="fa fa-fw fa-arrow-left"></i>Back</button>
+                            </form>
+                        </div>
+
+                        <form asp-page-handler="confirmMeeting" method="post">
+                            <div class="infoBox">
+                                <label class="error">@Model.Error</label>
+                                <label class="label">Title</label>
+                                <textarea class="infoField" rows="2" cols="20" maxlength="30" name="title"></textarea>
+                                <label class="label">Description</label>
+                                <textarea class="infoField" rows="30" cols="20" name="description"></textarea>
+                                <label class="label">Date</label>
+                                <input type="date"  class="infoField" name="date"/>
+                                <input type="submit" class="navItem" value="Create Meeting" />
                             </div>
                         </form>
                     </div>

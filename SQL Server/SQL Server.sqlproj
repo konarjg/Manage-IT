@@ -67,5 +67,6 @@
     <Build Include="dbo\Tables\TaskDetails.sql" />
     <Build Include="dbo\Tables\ProjectMembers.sql" />
     <Build Include="dbo\Tables\UserPermissions.sql" />
+    <Build Include="dbo\Tables\Meetings.sql" />
   </ItemGroup>
 </Project>

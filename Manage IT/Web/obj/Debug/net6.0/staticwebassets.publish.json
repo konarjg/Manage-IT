@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rOQpfbUHoDzFPay3FPVBzH4RismLq5zZleRdgl+Hjas=",
+  "Hash": "LGMhQ2OajsOoFOC1h6o9O+Vy/OpFefdY8lzgGxwIbXw=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
@@ -16,6 +16,23 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Calendar.css",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "Calendar.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Calendar.css"
+    },
     {
       "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\icon.png",
       "SourceId": "Web",

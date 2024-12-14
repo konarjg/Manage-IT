@@ -1,0 +1,267 @@
+﻿p {
+    font-size: 54px;
+    text-align: center;
+    font-weight: normal;
+    color: #ffffff;
+}
+
+main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.topnav {
+    width: 100%;
+    overflow: auto;
+}
+
+    .topnav a {
+        float: left;
+        text-align: center;
+        padding: 12px;
+        color: #4040ff;
+        text-decoration: none;
+        font-size: 22px;
+        transition: 0.1s;
+    }
+
+        /* Navbar links on mouse-over */
+        .topnav a:hover {
+            color: #ffffff;
+            transition: 0.1s;
+        }
+
+    /* Current/active navbar link */
+    .topnav .active {
+        color: #a0a0ff;
+    }
+
+.topnav-right {
+    float: right;
+}
+
+/* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
+@media screen and (max-width: 500px) {
+    .navbar a {
+        float: none;
+        display: block;
+    }
+}
+
+.bottomnavbar {
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+}
+
+    .bottomnavbar a {
+        float: left;
+        display: block;
+        color: #158eea;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 22px;
+        transition: 0.1s;
+    }
+
+        .bottomnavbar a:hover {
+            color: white;
+            transition: 0.1s;
+        }
+
+main {
+    width: 100%;
+    height: 100%;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    align-content: safe center;
+    align-items: safe center;
+    justify-content: safe center;
+}
+
+.container {
+    width: 75vw;
+    height: 50vh;
+    margin-left: 12.5vw;
+    margin-right: auto;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    display: inline-flex;
+    flex-direction: row;
+    align-content: safe center;
+    justify-content: safe center;
+    align-items: safe center;
+    border: 5px solid gray;
+}
+
+    .container div {
+        margin-left: 1vw;
+        margin-right: 1vw;
+        align-content: center;
+        justify-content: center;
+        display: inline-block;
+    }
+
+.project {
+    text-align: center;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 72px;
+    transition: 0.1s;
+    background-color: #8080ff80;
+    padding: 100px;
+    border: 5px solid white;
+}
+
+    .project:hover {
+        background-color: #8080ffff;
+        color: #000080;
+        transition: 0.1s;
+    }
+
+.formContainer {
+    width: 100%;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: inline-flex;
+    gap: 10px;
+}
+
+.form {
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    gap: 10px;
+}
+
+    .form div {
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .form input {
+        font-size: 28px;
+        width: 400px;
+        height: 50px;
+        border-color: white;
+        border-style: solid;
+        color: white;
+        background-color: #00000000;
+        border-radius: 8px;
+        padding: 15px;
+    }
+
+    .form textarea {
+        resize: none;
+        width: 400px;
+        height: 100px;
+        font-size: 28px;
+        border-color: white;
+        border-style: solid;
+        color: white;
+        background-color: #00000000;
+        border-radius: 8px;
+        padding: 15px;
+    }
+
+#button:hover {
+    background-color: cornflowerblue;
+    font-size: 28px;
+}
+
+.title {
+    font-size: 48px;
+    font-weight: bolder;
+    text-align: center;
+    color: white;
+}
+
+.error {
+    font-size: 36px;
+    text-align: center;
+    color: red;
+}
+
+.label {
+    font-size: 28px;
+    margin: 0px;
+    color: #8080ff;
+}
+
+#button {
+    transition: 0.1s;
+    max-width: 200px;
+    height: 80px;
+    border-radius: 100vh;
+}
+
+#button:hover {
+    background-color: #8080ff;
+    color: #000080;
+    border-color: #000080;
+    transition: 0.1s;
+}
+
+.calendar {
+    background-color: transparent;
+    border: 5px solid gray;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20vh;
+    border-radius: 20px;
+}
+
+.calendar td {
+    text-align: center;
+}
+
+.navButton {
+    margin-left: 50vw;
+}
+
+.calendar th {
+    font-size: 24px;
+    color: white;
+}
+
+
+.thisMonth {
+    color: white;
+    border: 5px solid gray;
+    width: 10vw;
+    font-size: 36px;
+}
+
+.lastMonth {
+    border: 5px solid #ffffff80;
+    width: 10vw;
+    font-size: 36px;
+    color: #ffffff80;
+}
+
+.lastMonth-meeting {
+    border: 5px solid #ffffff80;
+    background-color: red;
+    color: #eeeeee;
+    width: 10vw;
+    font-size: 36px;
+}
+
+.meeting {
+    border: 5px solid #ffffff80;
+    background-color: red;
+    color: white;
+    width: 10vw;
+    font-size: 36px;
+}

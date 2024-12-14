@@ -21,6 +21,7 @@ EmailService.Initialize();
 DatabaseAccess.Instantiate();
 UserManager.Instantiate();
 ProjectManager.Instantiate();
+MeetingManager.Instantiate();
 
 app.UseHttpsRedirection();
 app.UseHsts();

@@ -16,6 +16,7 @@ public class DatabaseContext : DbContext
     public DbSet<TaskList> TaskLists { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserPermissions> UserPermissions { get; set; }
+    public DbSet<Meeting> Meetings { get; set; } 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -49,6 +50,9 @@ public class DatabaseContext : DbContext
 
             case Type t when t == typeof(UserPermissions):
                 return UserPermissions as DbSet<T>;
+
+            case Type t when t == typeof(Meeting):
+                return Meetings as DbSet<T>;
         }
 
         return null;

@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Calendar.css",
+      "PackagePath": "staticwebassets\\Calendar.css"
+    },
+    {
       "Id": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\icon.png",
       "PackagePath": "staticwebassets\\Graphics\\icon.png"
     },

@@ -9,9 +9,9 @@ namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
 public class Task
 {
     [Key]
-    public int TaskId { get; set; }
+    public long TaskId { get; set; }
     [ForeignKey("TaskListId")]
-    public int TaskListId { get; set; }
+    public long TaskListId { get; set; }
     public DateTime Deadline { get; set; }
     public string Description { get; set; }
 }

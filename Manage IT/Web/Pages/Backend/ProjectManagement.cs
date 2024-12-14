@@ -14,6 +14,7 @@ public class ProjectManagement : PageModel
         if (creating != null && creating != string.Empty)
         {
             CreatingProject = true;
+            Error = HttpContext.Session.GetString("Error");
             return null;
         }
 
@@ -55,6 +56,7 @@ public class ProjectManagement : PageModel
         if (name == null || description == null)
         {
             Error = "You have to fill in every field!";
+            HttpContext.Session.SetString("Error", Error);
             return null;
         }
 
@@ -69,6 +71,7 @@ public class ProjectManagement : PageModel
         if (!success)
         {
             Error = "Could not create the project!";
+            HttpContext.Session.SetString("Error", Error);
             return null;
         }
 
