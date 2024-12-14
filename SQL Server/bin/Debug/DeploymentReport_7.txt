@@ -1,0 +1,25 @@
+﻿** Highlights
+     Tables that will be recreated with data migrated
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       The column [dbo].[Users].[PhoneNumber] is being dropped, data loss could occur.
+       The column [dbo].[Users].[PrefixId] is being dropped, data loss could occur.
+
+** User actions
+     Drop
+       [dbo].[Users].[IX8_Users_Prefixes] (Index)
+       unnamed constraint on [dbo].[Users] (Default Constraint)
+       unnamed constraint on [dbo].[Users] (Default Constraint)
+       [dbo].[Users_Prefixes] (Foreign Key)
+     Alter
+       [dbo].[Users] (Table)
+
+** Supporting actions
+
+The column [dbo].[Users].[PhoneNumber] is being dropped, data loss could occur.
+The column [dbo].[Users].[PrefixId] is being dropped, data loss could occur.
+

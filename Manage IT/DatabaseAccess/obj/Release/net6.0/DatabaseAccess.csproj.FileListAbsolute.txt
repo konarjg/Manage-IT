@@ -1,0 +1,12 @@
+C:\Users\konis\Desktop\Manage IT\Manage IT\DatabaseAccess\bin\Release\net6.0\DatabaseAccess.deps.json
+C:\Users\konis\Desktop\Manage IT\Manage IT\DatabaseAccess\bin\Release\net6.0\DatabaseAccess.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\DatabaseAccess\bin\Release\net6.0\DatabaseAccess.pdb
+C:\Users\konis\Desktop\Manage IT\Manage IT\DatabaseAccess\obj\Release\net6.0\DatabaseAccess.csproj.AssemblyReference.cache
+C:\Users\konis\Desktop\Manage IT\Manage IT\DatabaseAccess\obj\Release\net6.0\DatabaseAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\konis\Desktop\Manage IT\Manage IT\DatabaseAccess\obj\Release\net6.0\DatabaseAccess.AssemblyInfoInputs.cache
+C:\Users\konis\Desktop\Manage IT\Manage IT\DatabaseAccess\obj\Release\net6.0\DatabaseAccess.AssemblyInfo.cs
+C:\Users\konis\Desktop\Manage IT\Manage IT\DatabaseAccess\obj\Release\net6.0\DatabaseAccess.csproj.CoreCompileInputs.cache
+C:\Users\konis\Desktop\Manage IT\Manage IT\DatabaseAccess\obj\Release\net6.0\DatabaseAccess.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\DatabaseAccess\obj\Release\net6.0\refint\DatabaseAccess.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\DatabaseAccess\obj\Release\net6.0\DatabaseAccess.pdb
+C:\Users\konis\Desktop\Manage IT\Manage IT\DatabaseAccess\obj\Release\net6.0\ref\DatabaseAccess.dll

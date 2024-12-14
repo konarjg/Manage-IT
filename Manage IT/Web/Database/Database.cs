@@ -1,12 +1,14 @@
 ﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
 
-internal class DatabaseContext : DbContext
+public class DatabaseContext : DbContext
 {
-    public DbSet<Prefix> Prefixes { get; set; }
     public DbSet<Project> Projects { get; set; }
     public DbSet<ProjectMembers> ProjectMembers { get; set; }
     public DbSet<Task> Tasks { get; set; }
@@ -14,6 +16,7 @@ internal class DatabaseContext : DbContext
     public DbSet<TaskList> TaskLists { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserPermissions> UserPermissions { get; set; }
+    public DbSet<Meeting> Meetings { get; set; } 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -27,9 +30,6 @@ internal class DatabaseContext : DbContext
     {
         switch (typeof(T))
         {
-            case Type t when t == typeof(Prefix):
-                return Prefixes as DbSet<T>;
-
             case Type t when t == typeof(Project):
                 return Projects as DbSet<T>;
 
@@ -50,6 +50,9 @@ internal class DatabaseContext : DbContext
 
             case Type t when t == typeof(UserPermissions):
                 return UserPermissions as DbSet<T>;
+
+            case Type t when t == typeof(Meeting):
+                return Meetings as DbSet<T>;
         }
 
         return null;
@@ -57,7 +60,7 @@ internal class DatabaseContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=sql.bsite.net\\MSSQL2016;Database=manageit_ManageIT;User Id=manageit_ManageIT;Password=ManageIT;");
+        optionsBuilder.UseSqlServer("Server=sql.bsite.net\\MSSQL2016;Database=manageit_ManageIT;User Id=manageit_ManageIT;Password=manageit;");
     }
 }
 

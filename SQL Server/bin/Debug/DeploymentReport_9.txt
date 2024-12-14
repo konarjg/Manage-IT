@@ -1,0 +1,32 @@
+﻿** Highlights
+     Tables that will be recreated with data migrated
+       [dbo].[Users]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Drop
+       unnamed constraint on [dbo].[Users] (Default Constraint)
+       unnamed constraint on [dbo].[Users] (Default Constraint)
+     Recreate table
+       [dbo].[Users] (Table)
+     Create
+       [dbo].[Meetings] (Table)
+       [dbo].[Meetings].[IX_Meetings_Projects] (Index)
+       [dbo].[Meetings_Projects] (Foreign Key)
+
+** Supporting actions
+     Drop
+       [dbo].[Users_ProjectMembers] (Foreign Key)
+       [dbo].[Users_Project(manager?)] (Foreign Key)
+       [dbo].[Users_TaskDetails] (Foreign Key)
+       [dbo].[Users_UserPermissions] (Foreign Key)
+     Create
+       [dbo].[Users_ProjectMembers] (Foreign Key)
+       [dbo].[Users_Project(manager?)] (Foreign Key)
+       [dbo].[Users_TaskDetails] (Foreign Key)
+       [dbo].[Users_UserPermissions] (Foreign Key)

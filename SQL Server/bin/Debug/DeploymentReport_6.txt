@@ -1,0 +1,45 @@
+﻿** Highlights
+     Tables that will be recreated with data migrated
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[Prefixes] (Table)
+       [dbo].[ProjectMembers] (Table)
+       [dbo].[ProjectMembers].[IX_Projects_ProjectMembers] (Index)
+       [dbo].[ProjectMembers].[IX_Users_ProjectMembers] (Index)
+       [dbo].[Projects] (Table)
+       [dbo].[Projects].[IX_Users_Projects(manager?)] (Index)
+       [dbo].[TaskDetails] (Table)
+       [dbo].[TaskDetails].[IX_Users_TaskDetails] (Index)
+       [dbo].[TaskDetails].[IX_Tasks_TaskDetails] (Index)
+       [dbo].[TaskLists] (Table)
+       [dbo].[TaskLists].[IX_Projects_TaskLists] (Index)
+       [dbo].[Tasks] (Table)
+       [dbo].[Tasks].[IX_TaskLists_Tasks] (Index)
+       [dbo].[UserPermissions] (Table)
+       [dbo].[UserPermissions].[IX_Users_UserPermissions] (Index)
+       [dbo].[UserPermissions].[IX_Projects_UserPermissions] (Index)
+       [dbo].[Users] (Table)
+       [dbo].[Users].[IX8_Users_Prefixes] (Index)
+       [dbo].[Users_ProjectMembers] (Foreign Key)
+       [dbo].[Projects_ProjectMembers] (Foreign Key)
+       [dbo].[Users_Project(manager?)] (Foreign Key)
+       [dbo].[Users_TaskDetails] (Foreign Key)
+       [dbo].[Tasks_TaskDetails] (Foreign Key)
+       [dbo].[Projects_TaskLists] (Foreign Key)
+       [dbo].[TaskLists_Tasks] (Foreign Key)
+       [dbo].[Users_UserPermissions] (Foreign Key)
+       [dbo].[Projects_UserPermissions] (Foreign Key)
+       [dbo].[Users_Prefixes] (Foreign Key)
+
+** Supporting actions
+
+The project and target databases have different collation settings. Deployment errors might occur.
+

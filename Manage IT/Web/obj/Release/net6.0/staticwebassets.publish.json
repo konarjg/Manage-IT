@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "OThsWsGVUf4LvPpp39Lzp/uPyFgZSfDG43UqM3hSx5A=",
+  "Hash": "FSKBsGu2hmxnO5X4aaHZiexq3/c2dFRBCTHKQeOL4XU=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "Web\\wwwroot",
       "Source": "Web",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
       "BasePath": "_content/Web",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\obj\\Release\\net6.0\\scopedcss\\bundle\\Web.styles.css",
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\obj\\Release\\net6.0\\scopedcss\\bundle\\Web.styles.css",
       "SourceId": "Web",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\obj\\Release\\net6.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\obj\\Release\\net6.0\\scopedcss\\bundle\\",
       "BasePath": "_content/Web",
       "RelativePath": "Web.styles.css",
       "AssetKind": "All",
@@ -31,13 +31,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\obj\\Release\\net6.0\\scopedcss\\bundle\\Web.styles.css"
+      "OriginalItemSpec": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\obj\\Release\\net6.0\\scopedcss\\bundle\\Web.styles.css"
     },
     {
-      "Identity": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\obj\\Release\\net6.0\\scopedcss\\projectbundle\\Web.bundle.scp.css",
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\obj\\Release\\net6.0\\scopedcss\\projectbundle\\Web.bundle.scp.css",
       "SourceId": "Web",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\obj\\Release\\net6.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\obj\\Release\\net6.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/Web",
       "RelativePath": "Web.bundle.scp.css",
       "AssetKind": "All",
@@ -48,13 +48,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\obj\\Release\\net6.0\\scopedcss\\projectbundle\\Web.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\obj\\Release\\net6.0\\scopedcss\\projectbundle\\Web.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\icon.png",
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\icon.png",
       "SourceId": "Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
       "BasePath": "_content/Web",
       "RelativePath": "Graphics/icon.png",
       "AssetKind": "All",
@@ -68,10 +68,10 @@
       "OriginalItemSpec": "wwwroot\\Graphics\\icon.png"
     },
     {
-      "Identity": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\iconhov.png",
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\iconhov.png",
       "SourceId": "Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
       "BasePath": "_content/Web",
       "RelativePath": "Graphics/iconhov.png",
       "AssetKind": "All",
@@ -85,10 +85,10 @@
       "OriginalItemSpec": "wwwroot\\Graphics\\iconhov.png"
     },
     {
-      "Identity": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\logo.png",
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\logo.png",
       "SourceId": "Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
       "BasePath": "_content/Web",
       "RelativePath": "Graphics/logo.png",
       "AssetKind": "All",
@@ -102,10 +102,10 @@
       "OriginalItemSpec": "wwwroot\\Graphics\\logo.png"
     },
     {
-      "Identity": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\main.jpeg",
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\main.jpeg",
       "SourceId": "Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
       "BasePath": "_content/Web",
       "RelativePath": "Graphics/main.jpeg",
       "AssetKind": "All",

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc;
 
 public class RegisterForm : PageModel
 {
@@ -11,33 +12,22 @@ public class RegisterForm : PageModel
 
     private Regex EmailValidation = new Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}");
     private Regex PasswordValidation = new Regex("^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$");
-    private Regex PhoneNumberValidation = new Regex("^{4,15}");
 
-    public string GetFlag(string country)
+    public IActionResult OnGet()
     {
-        var regions = CultureInfo.GetCultures(CultureTypes.SpecificCultures).Select(x => new RegionInfo(x.LCID));
-        var englishRegion = regions.FirstOrDefault(region => region.EnglishName.Contains(country));
-        
-        if (englishRegion == null)
+        if (HttpContext.Session.Get<User>("User") != null)
         {
-            return "🏳";
+            return Redirect("~/ProjectManagement");
         }
 
-        var countryAbbrev = englishRegion.TwoLetterISORegionName;
-        return ConvertToFlag(countryAbbrev);
-    }
-    public string ConvertToFlag(string countryCode) => string.Concat(countryCode.ToUpper().Select(x => char.ConvertFromUtf32(x + 0x1F1A5)));
-
-    public void OnGet()
-    {
         Error = "";
+        return null;
     }
 
-    public void OnPost(string login, string email, string password, string confirmPassword, string country, string phoneNumber)
+    public void OnPost(string login, string email, string password, string confirmPassword)
     {
         if (login == null || email == null || password == null 
-            || confirmPassword == null 
-            || country == null || phoneNumber == null)
+            || confirmPassword == null)
         {
             Error = "You have to fill in all required fields!";
             return;
@@ -55,15 +45,8 @@ public class RegisterForm : PageModel
             return;
         }
 
-        if (!PhoneNumberValidation.IsMatch(phoneNumber))
-        {
-            Error = "Enter a valid phone number!";
-            return;
-        }
-
         password = Security.HashText(password, Encoding.ASCII);
         confirmPassword = Security.HashText(confirmPassword, Encoding.ASCII);
-        phoneNumber = Security.EncryptText(phoneNumber);
 
         if (password != confirmPassword)
         {
@@ -75,18 +58,6 @@ public class RegisterForm : PageModel
         user.Login = login;
         user.Email = email;
         user.Password = password;
-        user.PhoneNumber = phoneNumber;
-
-        var prefix = PrefixManager.Instance.GetPrefixByCountry(country);
-        
-        if (prefix == null)
-        {
-            user.PrefixId = 0;
-        }
-        else
-        {
-            user.PrefixId = prefix.PrefixId;
-        }
 
         if (UserManager.Instance == null)
         {
@@ -99,7 +70,6 @@ public class RegisterForm : PageModel
         if (UserManager.Instance.RegisterUser(user, out error))
         {
             //TODO Redirect to project management panel
-            Error = Security.DecryptText(phoneNumber);
             return;
         }
 

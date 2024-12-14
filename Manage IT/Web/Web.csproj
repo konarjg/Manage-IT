@@ -7,18 +7,30 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\LoginForm.css" />
+    <Content Remove="wwwroot\ManageProject.css" />
+    <Content Remove="wwwroot\ProjectManagement.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MediaBrowser.Common" Version="4.8.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.35" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.35" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.35" />
     <PackageReference Include="NETCore.Encrypt" Version="2.1.1" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\Graphics\icon.png" />
     <None Include="wwwroot\Graphics\iconhov.png" />
+    <None Include="wwwroot\Index.css" />
     <None Include="wwwroot\Graphics\logo.png" />
     <None Include="wwwroot\Graphics\main.jpeg" />
+    <None Include="wwwroot\ManageProject.css" />
+    <None Include="wwwroot\ProjectManagement.css" />
+    <None Include="wwwroot\LoginForm.css" />
+    <None Include="wwwroot\RegisterForm.css" />
   </ItemGroup>
 
 </Project>
