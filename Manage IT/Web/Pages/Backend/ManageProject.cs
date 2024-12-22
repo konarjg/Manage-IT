@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Text.Json;
+using Task = EFModeling.EntityProperties.DataAnnotations.Annotations.Task;
 
 public enum ProjectAction
 {
@@ -17,6 +18,7 @@ public class ManageProject : PageModel
 {
     public string Error { get; set; }
     public Project Project { get; set; }
+    public List<TaskList> TaskLists { get; set; }
     public ProjectAction Action { get; set; }
 
     public IActionResult OnGet(string id)
@@ -60,8 +62,31 @@ public class ManageProject : PageModel
         }
 
         Project = project;
+        
+        if (HttpContext.Session.Get<List<TaskList>>("TaskLists") == null)
+        {
+            List<TaskList> taskLists;
+            success = TaskListManager.Instance.GetAllTaskLists(projectId, out taskLists);
+
+            if (!success || taskLists == null || taskLists.Count == 0)
+            {
+                TaskLists = new();
+            }
+            else
+            {
+                TaskLists = taskLists;
+            }
+
+            HttpContext.Session.Set("TaskLists", taskLists);
+        }
+        else
+        {
+            TaskLists = HttpContext.Session.Get<List<TaskList>>("TaskLists");
+        }
+        
 
         HttpContext.Session.Set("Project", project);
+
         Action = ProjectAction.Manage;
         HttpContext.Session.Set("Action", Action);
         return null;
@@ -216,5 +241,52 @@ public class ManageProject : PageModel
         HttpContext.Session.Remove("Project");
         HttpContext.Session.Remove("Action");
         return Redirect("~/ProjectManagement");
+    }
+
+    public JsonResult OnPostCreateTaskList(string projectId, string name, string description)
+    {
+        if (name == null || description == null)
+        {
+            return new(new { success = false });
+        }
+
+        TaskList data = new();
+        data.ProjectId = long.Parse(projectId);
+        data.Name = name;
+        data.Description = description;
+
+        bool success = TaskListManager.Instance.CreateTaskList(data);
+
+        if (!success)
+        {
+            return new(new { success = false });
+        }
+
+        HttpContext.Session.Remove("TaskLists");
+        return new(new{ success = true });
+    }
+
+    public JsonResult OnPostCreateTask(string taskListId, string name, string description, string deadline)
+    {
+        if (name == null || description == null)
+        {
+            return new(new { success = false });
+        }
+
+        Task data = new();
+        data.TaskListId = long.Parse(taskListId);
+        data.Name = name;
+        data.Description = description;
+        data.Deadline = DateTime.Parse(deadline);
+
+        bool success = TaskManager.Instance.CreateTask(data);
+
+        if (!success)
+        {
+            return new(new { success = false });
+        }
+
+        HttpContext.Session.Remove("TaskLists");
+        return new(new { success = true });
     }
 }

@@ -155,6 +155,10 @@ namespace Desktop
                 SubmitLoginForm(out data);
                 LoginController.SubmitLoginForm(data, out error);
                 GetTemplateControl<TextBlock>("Error").Text = error;
+                var window = new ProjectManagementWindow();
+                window.Activate();
+                window.Visibility = Visibility.Visible;
+                Close();
             }
             catch (Exception error)
             {

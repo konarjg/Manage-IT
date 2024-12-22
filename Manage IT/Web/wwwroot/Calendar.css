@@ -213,17 +213,68 @@ main {
     transition: 0.1s;
 }
 
+.calendarContent {
+    gap: 1vw;
+    width: 80vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .calendar {
     background-color: transparent;
     border: 5px solid gray;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20vh;
     border-radius: 20px;
+    width: 52vw;
+    height: 82vh;
+}
+
+.dayInfoBox {
+    gap: 1vh;
+    background-color: transparent;
+    border: 5px solid gray;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    height: 80vh;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    padding: 1vw;
+}
+
+.emptyInfoBox {
+    gap: 1vh;
+    background-color: transparent;
+    border: 5px solid gray;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    height: 80vh;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    padding: 1vw;
+}
+
+.emptyInfo {
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: center;
+    font-size: 72px;
+    color: gray;
 }
 
 .calendar td {
+    width: 10vw;
+    height: 10vh;
     text-align: center;
+}
+
+.calendar td span {
+    font-weight: bolder;
 }
 
 .navButton {
@@ -231,37 +282,258 @@ main {
 }
 
 .calendar th {
-    font-size: 24px;
+    width: 10vw;
+    height: 10vh;
+    text-align: center;
+    font-size: 28px;
     color: white;
+    font-weight: bolder;
 }
 
-
-.thisMonth {
-    color: white;
-    border: 5px solid gray;
-    width: 10vw;
-    font-size: 36px;
-}
-
-.lastMonth {
-    border: 5px solid #ffffff80;
-    width: 10vw;
-    font-size: 36px;
+.changeMonth {
     color: #ffffff80;
 }
 
-.lastMonth-meeting {
-    border: 5px solid #ffffff80;
-    background-color: red;
-    color: #eeeeee;
+.changeMonth:visited {
+    color: #ffffff80;
+}
+
+.changeMonth:hover {
+    color: #ffffff;
+}
+
+.thisMonthContent {
+    color: white;
+    font-size: 36px;
+    padding: 20px;
+    vertical-align: middle;
+    line-height: 10vh;
+    border-radius: 100%;
+    border: 5px solid transparent;
+}
+
+.thisMonthContent:hover {
+    background-color: #a0a0ff40;
+}
+
+.lastMonthContent {
+    color: #ffffff80;
+    font-size: 36px;
+    padding: 20px;
+    vertical-align: middle;
+    line-height: 10vh;
+    border-radius: 100%;
+    border: 5px solid transparent;
+}
+
+.lastMonthContent:hover {
+    background-color: #a0a0ff40;
+}
+
+#today {
     width: 10vw;
+    height: 10vh;
+    padding: 20px;
+    background-color: #ffffff40;
+}
+
+#today:hover {
+    background-color: #ffffff60;
+}
+
+.activeDay {
+    width: 10vw;
+    height: 10vh;
+    border: 5px solid white;
+}
+
+.dateInfo {
+    font-size: 48px;
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+}
+
+.meetingInfo {
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 25vw;
+    height: 10vh;
+    color: white;
+    font-size: 48px;
+    white-space: nowrap;
+    text-overflow: clip;
+    text-align: center;
+    border: 5px solid white;
+    border-radius: 15px;
+    justify-content: center;
+    align-content: center;
+}
+
+.meetingEdit {
+    color: white;
+    font-size: 48px;
+}
+
+.meetingEdit:hover {
+    color: blue;
+}
+
+.lastMonthMeetingContent {
+    width: 10vw;
+    height: 10vh;
+    background-color: #a0a0ff80;
+    vertical-align: middle;
+    line-height: 10vh;
+    border-radius: 100%;
+}
+
+.lastMonthMeetingContent:hover {
+    background-color: #a0a0ff;
+}
+
+.thisMonthMeetingContent {
+    width: 10vw;
+    height: 10vh;
+    padding: 20px;
+    vertical-align: middle;
+    line-height: 10vh;
+    border-radius: 100%;
+    background-color: #a0a0ff80;
+    font-size: 36px;
+    color: black;
+}
+
+.thisMonthMeetingContent:hover {
+    background-color: #a0a0ff;
+}
+
+.meetingInfoBox {
+    background-color: transparent;
+    border: 5px solid gray;
+    border-radius: 20px;
+    display: flex;
+    width: 50vw;
+    height: 80vh;
+    padding: 1vw;
+    opacity: 0;
+    display: none;
+    transition: opacity 1s;
+}
+
+.meetingInfoTop {
+    display: inline-flex;
+    height: 10vh;
+    gap: 12vw;
+    flex-direction: row;
+    font-size: 72px;
+    color: white;
+}
+
+.meetingInfoDescription {
+    display: flex;
+    margin-top: 5vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40vw;
+    height: 50vh;
+    font-size: 48px;
+    color: white;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+.meetingEditBox {
+    background-color: transparent;
+    border: 5px solid gray;
+    border-radius: 20px;
+    display: flex;
+    width: 50vw;
+    height: 80vh;
+    padding: 1vw;
+    opacity: 0;
+    display: none;
+    transition: opacity 1s;
+    align-content: center;
+    justify-content: center;
+}
+
+.meetingEditTop {
+    display: inline-flex;
+    height: 10vh;
+    gap: 12vw;
+    flex-direction: row;
+    font-size: 72px;
+    color: white;
+}
+
+.editLabel {
+    font-size: 36px;
+    color: white;
+}
+
+.editInput {
+    width: 40vw;
+    min-height: 10vh;
+    max-height: 40vh;
+    font-size: 48px;
+}
+
+.editButton {
+    background-color: #a0a0ff;
+    color: white;
+    width: 15vw;
+    height: 15vh;
+    font-size: 48px;
+    margin-left: 12.5vw;
+}
+
+.editButton:hover {
+    background-color: #a0a0ff80;
+    font-size: 48px;
+}
+
+.meetingEditDescription {
+    display: flex;
+    margin-top: 5vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40vw;
+    height: 50vh;
+    font-size: 48px;
+    color: white;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+#meetingDescription {
     font-size: 36px;
 }
 
-.meeting {
-    border: 5px solid #ffffff80;
-    background-color: red;
+.meetingButtons {
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+}
+
+.deleteButton {
+    width: 20vw;
+    height: 10vh;
+    background-color: #a0a0ff;
     color: white;
-    width: 10vw;
+    border-radius: 10vh;
+    text-align: center;
     font-size: 36px;
+}
+
+.deleteButton:hover {
+    background-color: #a0a0ff80;
+}
+
+.backButton:hover {
+    color: blue;
 }

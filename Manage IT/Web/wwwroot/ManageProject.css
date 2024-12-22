@@ -76,37 +76,6 @@ main {
     justify-content: safe center;
 }
 
-.projectNav {
-    width: 80vw;
-    height: 10vh;
-    margin-left: 10vw;
-    margin-right: auto;
-    gap: 20px;
-    display: inline-flex;
-    flex-direction: row;
-    align-content: safe center;
-    justify-content: safe center;
-    align-items: safe center;
-    border: 5px solid gray;
-}
-
-.project {
-    width: 80vw;
-    height: 50vh;
-    margin-left: 10vw;
-    margin-right: auto;
-    gap: 20px;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
-    display: inline-flex;
-    flex-direction: row;
-    align-content: safe center;
-    justify-content: safe center;
-    align-items: safe center;
-    border: 5px solid gray;
-}
-
 .infoBox {
     width: 75vw;
     height: 50vh;
@@ -198,13 +167,13 @@ main {
     font-size: 24px;
     transition: 0.1s;
     width: 12vw;
-    height: 8vh;
+    height: 6vh;
     border-radius: 100vh;
     margin-top: 1vh;
     margin-bottom: 1vh;
 }
 
-::-webkit-calendar-picker-indicator {
+input[type=date] ::-webkit-calendar-picker-indicator {
     filter: invert(1);
 }
 
@@ -228,4 +197,272 @@ main {
     color: #000080;
     border-color: #000080;
     transition: 0.1s;
+}
+
+.projectNav {
+    margin-top: 10vh;
+    width: 80vw;
+    height: 10vh;
+    margin-left: 10vw;
+    margin-right: auto;
+    gap: 20px;
+    display: inline-flex;
+    flex-direction: row;
+    align-content: safe center;
+    justify-content: safe center;
+    align-items: safe center;
+    border: 5px solid white;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.project {
+    width: 80vw;
+    height: 60vh;
+    margin-left: 10vw;
+    margin-right: auto;
+    gap: 2vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    white-space: nowrap;
+    display: inline-flex;
+    flex-direction: column;
+    border: 5px solid white;
+    border-radius: 1vh;
+}
+
+/*Task List and Task section*/
+.taskList {
+    margin-top: 1vh;
+    width: 78vw;
+    height: 38vh;
+    margin-left: auto;
+    margin-right: auto;
+    border: 5px solid white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 1vh;
+    gap: 1vh;
+}
+
+.taskListTop {
+    font-size: 36px;
+    width: 74vw;
+    height: 4vh;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    display: inline-flex;
+    flex-direction: row;
+    gap: 64vw;
+}
+
+.taskListTasks {
+    width: 75vw;
+    height: 40vh;
+    margin-top: 1vh;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2vh;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+    border: 5px solid white;
+    border-radius: 1vh;
+    overflow-x: scroll;
+}
+
+.dots {
+    transition: color 0.1s;
+}
+
+.dots:hover {
+    color: blue;
+}
+
+.createTaskList {
+    margin-top: 1vh;
+    width: 78vw;
+    height: 38vh;
+    margin-left: auto;
+    margin-right: auto;
+    border: 5px solid white;
+    display: inline-flex;
+    flex-direction: column;
+    border-radius: 1vh;
+    align-content: center;
+    justify-content: center;
+    gap: 1vh;
+}
+
+.createTaskListLabel {
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    font-size: 24px;
+}
+
+.createTaskListInput {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 48px;
+    width: 50vw;
+    min-height: 5vh;
+    max-height: 10vh;
+}
+
+.createTaskListButton {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1vh;
+    text-align: center;
+    font-size: 36px;
+    width: 20vw;
+    height: 12vh;
+    background-color: #a0a0ff;
+    color: white;
+}
+
+.createTaskListButton:hover {
+    background-color: #a0a0ff80;
+}
+
+.task {
+    margin-top: 1vh;
+    width: 25vw;
+    height: 25vh;
+    margin-left: auto;
+    margin-right: auto;
+    border: 5px solid white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 1vh;
+    gap: 1vh;
+}
+
+.taskTop {
+    display: inline-flex;
+    flex-direction: row;
+    font-size: 36px;
+    color: white;
+    gap: 15vw;
+    width: 23vw;
+    height: 2vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.taskSub {
+    display: inline-flex;
+    flex-direction: row;
+    gap: 15vw;
+    width: 23vw;
+    height: 4vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.taskSubPfp {
+
+}
+
+.taskSubDays {
+    font-size: 36px;
+    color: white;
+}
+
+.taskDescription {
+    font-size: 36px;
+    background-color: transparent;
+    color: white;
+    width: 23vw;
+    height: 16vh;
+    border: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.taskDescription::selection {
+    border: none;
+}
+
+.createTask {
+    margin-top: 1vh;
+    width: 25vw;
+    height: 25vh;
+    margin-left: 1vw;
+    border: 5px solid white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 1vh;
+    gap: 1vh;
+    position: relative;
+}
+
+.createTaskTop {
+    display: inline-flex;
+    flex-direction: row;
+    font-size: 36px;
+    color: white;
+    gap: 1vw;
+    width: 23vw;
+    height: 4vh;
+    margin-top: 1vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.createTaskSub {
+    margin-top: 1vh;
+    display: inline-flex;
+    flex-direction: row;
+    gap: 1vw;
+    width: 23vw;
+    height: 4vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.createTaskLabel {
+    font-size: 24px;
+    color: white;
+    margin-left: 1vw;
+}
+
+.createTaskName {
+    font-size: 20px;
+    max-height: 3vh;
+    width: 10vw;
+}
+
+.createTaskDescription {
+    font-size: 20px;
+    max-height: 6vh;
+    width: 23vw;
+    margin-left: 1vw;
+}
+
+.createTaskDate {
+    font-size: 20px;
+    width: 10vw;
+    max-height: 6vh;
+    margin-right: 1vw;
+}
+
+.createTaskButton {
+    position: absolute;
+    font-size: 20px;
+    width: 6vw;
+    height: 4vh;
+    top: 0;
+    right: 0;
+    margin-right: 0.1vw;
+    margin-top: 0.1vh;
+    background-color: #a0a0ff;
+    color: white;
+}
+
+.createTaskButton:hover {
+    background-color: #a0a0ff80;
 }
