@@ -9,7 +9,7 @@ using System.Windows.Markup;
 
 public class UserManager
 {
-    public static User CurrentSessionUser { get; private set; }
+    public User CurrentSessionUser { get; private set; }
 
     public static UserManager Instance { get; private set; }
 
@@ -27,7 +27,7 @@ public class UserManager
         }
 
         List<User> users;
-        var query = FormattableStringFactory.Create($"INSERT INTO dbo.Users (Login,Password,Email) VALUES ('{user.Login}', '{user.Password}','{user.Email}')");
+        var query = FormattableStringFactory.Create($"INSERT INTO dbo.Users (Login,Password,Email,Admin,Verified) VALUES ('{user.Login}', '{user.Password}','{user.Email}', 0, 0)");
 
         var success = DatabaseAccess.Instance.ExecuteQuery(query, out users);
         
@@ -88,7 +88,7 @@ public class UserManager
     public bool UserExists(User data, out User user)
     {
         List<User> existingUsers;
-        var queryUserExists = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE Email LIKE '{data.Email}'");
+        var queryUserExists = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE Email LIKE '{data.Email}' OR Login LIKE '{data.Login}'");
         bool success = DatabaseAccess.Instance.ExecuteQuery(queryUserExists, out existingUsers);
 
         if (existingUsers == null || !success)

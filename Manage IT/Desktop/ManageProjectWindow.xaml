@@ -1,0 +1,217 @@
+﻿<Window x:Class="Desktop.ManageProjectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Desktop"
+        mc:Ignorable="d"
+        Title="Manage IT" Width="2560" Height="1080" WindowState="Maximized" Loaded="WindowLoaded">
+
+    <Window.Resources>
+        <ControlTemplate x:Key="Main">
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                        <GradientStop Color="#000000" Offset="0.0"/>
+                        <GradientStop Color="#000040" Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="BackButton" Click="BackClick" FontSize="120" Grid.Row="0" Grid.Column="0" Background="Transparent" Content="🔙" BorderThickness="0" Foreground="White" Grid.RowSpan="4" Margin="0,0,120,66"/>
+
+                <Border BorderBrush="White" BorderThickness="4" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,0,10,10" Grid.RowSpan="2">
+                    <ScrollViewer ClipToBounds="True" Margin="50, 0, 50, -15" HorizontalAlignment="Center" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="ProjectName" Text="Project Name" Margin="0, 0, 50, 0" FontSize="72" Foreground="White" />
+                            <Button Click="ProjectInfoClick" Content="Project Info" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200"  />
+                            <Button Click="ProjectMembersClick" Content="Members" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200"  />
+                            <Button Click="MeetingClick" Content="Meeting" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200"  />
+                            <Button Click="EditClick" Content="Edit" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200"  />
+                            <Button Click="DeleteClick" Content="Delete" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200"  />
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+
+                <Border BorderBrush="White" BorderThickness="4" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,0,10,10" Grid.RowSpan="10">
+                    <ScrollViewer ClipToBounds="True" HorizontalAlignment="Center" Margin="50, 0, 60, 0" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+                        <StackPanel x:Name="TaskLists" Orientation="Horizontal" Margin="50">
+
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ProjectInfo">
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                        <GradientStop Color="#000000" Offset="0.0"/>
+                        <GradientStop Color="#000040" Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="BackButton" Click="PanelBackClick" FontSize="120" Grid.Row="0" Grid.Column="0" Background="Transparent" Content="🔙" BorderThickness="0" Foreground="White" Grid.RowSpan="4" Margin="0,0,120,66"/>
+                <TextBlock Text="Name" Foreground="White" Grid.Row="3" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="ProjectName" Background="LightGray" IsReadOnly="True" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
+                <TextBlock Text="Description" Foreground="White" Grid.Row="5" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="6" Grid.RowSpan="6" Grid.Column="2" Grid.ColumnSpan="2">
+                    <TextBox x:Name="Description" Background="LightGray" IsReadOnly="True" FontSize="48" MaxLines="30" AcceptsReturn="True" TextWrapping="Wrap"/>
+                </ScrollViewer>
+            </Grid>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="Edit">
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                        <GradientStop Color="#000000" Offset="0.0"/>
+                        <GradientStop Color="#000040" Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="BackButton" Click="PanelBackClick" FontSize="120" Grid.Row="0" Grid.Column="0" Background="Transparent" Content="🔙" BorderThickness="0" Foreground="White" Grid.RowSpan="4" Margin="0,0,120,66"/>
+                <TextBlock x:Name="Header" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="6" Grid.RowSpan="2" FontWeight="Bold" Text="Edit Project" FontSize="58" TextAlignment="Center" Foreground="White"/>
+                <TextBlock x:Name="Error" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
+                <TextBlock Text="Name" Foreground="White" Grid.Row="3" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="ProjectName" Background="LightGray" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
+                <TextBlock Text="Description" Foreground="White" Grid.Row="5" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="6" Grid.RowSpan="6" Grid.Column="2" Grid.ColumnSpan="2">
+                    <TextBox x:Name="Description" Background="LightGray" FontSize="48" MaxLines="30" AcceptsReturn="True" TextWrapping="Wrap"/>
+                </ScrollViewer>
+                <Button x:Name="SaveButton" Click="SubmitEditFormClick" Content="Save" Grid.Row="12" Grid.Column="2" FontSize="42" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="214,32,214,34" />
+            </Grid>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="Delete">
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                        <GradientStop Color="#000000" Offset="0.0"/>
+                        <GradientStop Color="#000040" Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="BackButton" Click="PanelBackClick" FontSize="120" Grid.Row="0" Grid.Column="0" Background="Transparent" Content="🔙" BorderThickness="0" Foreground="White" Grid.RowSpan="4" Margin="0,0,120,66"/>
+                <TextBlock x:Name="Header" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="4" Grid.ColumnSpan="6" Grid.RowSpan="2" FontWeight="Bold" Text="Delete Project" FontSize="58" TextAlignment="Center" Foreground="White"/>
+                <TextBlock x:Name="Error" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="5" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
+                <TextBlock Text="Confirm project name" Foreground="White" Grid.Row="6" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="ProjectName" TextChanged="DeleteProjectNameTextChanged" Background="LightGray" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
+                <TextBlock x:Name="ProjectNamePlaceholder" Text="Project Name" IsHitTestVisible="False" Foreground="Gray" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
+                <Button x:Name="ConfirmDeleteButton" Click="SubmitDeleteFormClick" Content="Confirm" Grid.Row="8" Grid.Column="2" FontSize="42" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="214,32,214,34" />
+            </Grid>
+        </ControlTemplate>
+    </Window.Resources>
+
+    <Window.Template>
+        <StaticResource ResourceKey="Delete" />
+    </Window.Template>
+</Window>

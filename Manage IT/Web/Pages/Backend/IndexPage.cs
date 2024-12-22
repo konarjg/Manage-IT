@@ -11,6 +11,11 @@ public class IndexPage : PageModel
 
     public IActionResult OnGet(string message)
     {
+        if (HttpContext.Session.Get<User>("User") != null)
+        {
+            return Redirect("/ProjectManagement");
+        }
+
         if (message == null || message == string.Empty)
         {
             Header = string.Empty + Header;

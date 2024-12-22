@@ -10,6 +10,7 @@ public class Task
 {
     [Key]
     public long TaskId { get; set; }
+    public string Name { get; set; }
     [ForeignKey("TaskListId")]
     public long TaskListId { get; set; }
     public DateTime Deadline { get; set; }

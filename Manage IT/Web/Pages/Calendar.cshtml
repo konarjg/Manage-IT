@@ -2,6 +2,7 @@
 @using EFModeling.EntityProperties.DataAnnotations.Annotations;
 @using System.Text.Json;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@Html.AntiForgeryToken()  
 @model Calendar
 @{
     <!DOCTYPE html>
@@ -15,6 +16,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="author" content="Bosnian IT Management Inc." />
         <link rel="stylesheet" href="~/Calendar.css" type="text/css" />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <!--Because Razor adds a scope identifier and a helper tag,
         body needs to be styled in the style tag as per
@@ -30,17 +32,242 @@
         </style>
 
         <script>
-            function mouseClick(element, event) 
+            function mouseClick(element, event, date) 
             {
-                if (event.type == 'contextmenu')
+                if (event.type == 'click')
                 {
                     event.preventDefault();
-                    var idDate = element.id;
+                                        
+                    if (!element.classList.contains("activeDay"))
+                    {
+                        var active = document.getElementsByClassName("activeDay");
+                        
+                        for (var i = 0; i < active.length; i++)
+                        {
+                            active[i].classList.remove("activeDay");
+                        }
 
-                    window.location.replace("/Calendar?action=deleteMeeting&idDate=" + idDate);
+                        element.classList.add("activeDay");
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/Calendar?handler=SetActiveDate",
+                            data: { date: date },
+                            beforeSend: function (xhr) {  
+                                xhr.setRequestHeader("XSRF-TOKEN",  
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());  
+                            },  
+                            success: function(response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function() {
+                                alert("error");
+                            }
+                        });
+                    }
+                    else
+                    {
+                        element.classList.remove("activeDay");
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/Calendar?handler=UnsetActiveDate",
+                            beforeSend: function (xhr) {  
+                                xhr.setRequestHeader("XSRF-TOKEN",  
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());  
+                            },  
+                            success: function(response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function() {
+                                alert("error");
+                            }
+                        });
+                    }
                 }
             }
+
+            function showCalendar()
+            {
+                document.getElementsByClassName("calendar")[0].style.display = 'table';
+                document.getElementsByClassName("meetingEditBox")[0].style.display = 'none';
+                document.getElementsByClassName("meetingInfoBox")[0].style.display = 'none';
+                document.getElementsByClassName("calendar")[0].style.opacity = 1;
+            }
+
+            function showEditMenu()
+            {
+                document.getElementsByClassName("calendar")[0].style.display = 'none';
+                document.getElementsByClassName("meetingEditBox")[0].style.display = 'none';
+                document.getElementsByClassName("meetingInfoBox")[0].style.display = 'block';
+                document.getElementsByClassName("meetingInfoBox")[0].style.opacity = 1;
+            }
+
+            function showUpdateMenu()
+            {
+                document.getElementsByClassName("calendar")[0].style.display = 'none';
+                document.getElementsByClassName("meetingInfoBox")[0].style.display = 'none';
+                document.getElementsByClassName("meetingEditBox")[0].style.display = 'flex';
+                document.getElementsByClassName("meetingEditBox")[0].style.opacity = 1;
+            }
+
+            function editMeeting(meetingId)
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "/Calendar?handler=SetEditedMeetingId",
+                    data: { id: meetingId },
+                    beforeSend: function (xhr) {  
+                        xhr.setRequestHeader("XSRF-TOKEN",  
+                            $('input:hidden[name="__RequestVerificationToken"]').val());  
+                    },  
+                    success: function(response) {
+                        if (response.success) {
+                            window.location.reload();
+                        }
+                    },
+                    error: function() {
+                        alert("error");
+                    }
+                });
+            }
+
+            function back() {
+                $.ajax({
+                    type: "POST",
+                    url: "/Calendar?handler=UnsetEditedMeetingId",
+                    beforeSend: function (xhr) {  
+                        xhr.setRequestHeader("XSRF-TOKEN",  
+                            $('input:hidden[name="__RequestVerificationToken"]').val());  
+                    },  
+                    success: function(response) {
+                        if (response.success) {
+                            window.location.reload();
+                        }
+                    },
+                    error: function() {
+                        alert("error");
+                    }
+                });
+            }
+
+            function editBack() {
+                $.ajax({
+                    type: "POST",
+                    url: "/Calendar?handler=EditBack",
+                    beforeSend: function (xhr) {  
+                        xhr.setRequestHeader("XSRF-TOKEN",  
+                            $('input:hidden[name="__RequestVerificationToken"]').val());  
+                    },  
+                    success: function(response) {
+                        if (response.success) {
+                            window.location.reload();
+                        }
+                    },
+                    error: function() {
+                        alert("error");
+                    }
+                });
+            }
+
+            function deleteMeeting(meetingId) {
+                var result = confirm("Do you really want to delete this meeting?");
+
+                if (result) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Calendar?handler=DeleteMeeting",
+                        data: { id: meetingId },
+                        beforeSend: function (xhr) {  
+                            xhr.setRequestHeader("XSRF-TOKEN",  
+                                $('input:hidden[name="__RequestVerificationToken"]').val());  
+                        },  
+                        success: function(response) {
+                            if (response.success) {
+                                window.location.reload();
+                            }
+                        },
+                        error: function() {
+                            alert("error");
+                        }
+                    });
+                } 
+            }
+
+             function edit(meetingId) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Calendar?handler=EditMeeting",
+                    data: { id: meetingId },
+                    beforeSend: function (xhr) {  
+                        xhr.setRequestHeader("XSRF-TOKEN",  
+                            $('input:hidden[name="__RequestVerificationToken"]').val());  
+                    },  
+                    success: function(response) {
+                        if (response.success) {
+                            window.location.reload();
+                        }
+                    },
+                    error: function() {
+                        alert("error");
+                    }
+                });
+            }
+
+            function save(meetingId, projectId, date, name, description) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Calendar?handler=UpdateMeeting",
+                    data: { meetingId: meetingId, projectId: projectId, date: date, name: name, description: description },
+                    beforeSend: function (xhr) {  
+                        xhr.setRequestHeader("XSRF-TOKEN",  
+                            $('input:hidden[name="__RequestVerificationToken"]').val());  
+                    },  
+                    success: function(response) {
+                        if (response.success) {
+                            window.location.reload();
+                        } else {
+                            alert("Could not edit the meeting!");
+                        }
+                    },
+                    error: function() {
+                        alert("error");
+                    }
+                });
+            }
         </script>
+
+        @if (HttpContext.Session.Keys.Contains("EditedMeetingId"))
+        {
+            if (HttpContext.Session.Keys.Contains("EditId"))
+            {
+                <script>
+                    window.onload = function() { 
+                        showUpdateMenu();
+                    }
+                </script>
+            }
+            else
+            {
+                <script>
+                    window.onload = function() { 
+                        showEditMenu();
+                    }
+                </script>
+            }
+        }
+        else
+        {
+            <script>
+                window.onload = function() { 
+                    showCalendar();
+                }
+            </script>
+        }
     </head>
 
     <body>
@@ -66,7 +293,6 @@
         </header>
 
         @{
-            // responsible for getting the first and last days of the month
             var getDate = Model.Date;
 
             var firstDayOfTheMonth = new DateTime(getDate.Year, getDate.Month, 1);
@@ -75,40 +301,176 @@
             var numberOfDays = Convert.ToInt16(lastDayOfTheMonth.ToString("dd"));
         }
 
-        <table class="calendar">
-            <thead>
-                <tr class="row">
-                    <th></th>
-                    <th></th>
-                    <th><a href=@Href("~/Calendar?action=previous")><i class="fa fa-fw fa-arrow-left"></i></a></th>
-                    <th>@Model.GetMonthName(getDate.Month) @getDate.Year</th>
-                    <th><a href=@Href("~/Calendar?action=next")><i class="fa fa-fw fa-arrow-right"></i></a></th>
-                </tr>
-                <tr>
-                    <th>Monday</th>
-                    <th>Tuesday</th>
-                    <th>Wednesday</th>
-                    <th>Thursday</th>
-                    <th>Friday</th>
-                    <th>Saturday</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    @{
-                        var startDate = firstDayOfTheMonth.AddDays(-(int)firstDayOfTheMonth.DayOfWeek);
-                    }
+        <div class="calendarContent">
+            <table class="calendar">
+                <thead>
+                    <tr class="row">
+                        <th></th>
+                        <th></th>
+                        <th><a href=@Href("~/Calendar?action=previous") class="changeMonth"><i class="fa fa-fw fa-arrow-left"></i></a></th>
+                        <th>@Model.GetMonthName(getDate.Month) @getDate.Year</th>
+                        <th><a href=@Href("~/Calendar?action=next") class="changeMonth"><i class="fa fa-fw fa-arrow-right"></i></a></th>
+                    </tr>
+                    <tr>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                        <th>Sun</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @{
 
-                    @for (int i = 0; i < 42; i++)
-                    {
-                        DateTime date = startDate.AddDays(i);
-                        if (i % 7 == 0 && i > 0)
-                        {
-                            @:</tr><tr>
+                            var startDate = firstDayOfTheMonth.AddDays((int)DayOfWeek.Monday - (int)firstDayOfTheMonth.DayOfWeek); 
+                            if (startDate > firstDayOfTheMonth) 
+                            { 
+                                startDate = startDate.AddDays(-7); 
+                            } 
+
+                            for (int i = 0; i < 42; i++) 
+                            { 
+                                DateTime date = startDate.AddDays(i);
+                                DateTime activeDate = HttpContext.Session.Get<DateTime>("ActiveDate");
+                                string active = "activeDay";
+
+                                if (activeDate == DateTime.MinValue || activeDate.Year != date.Year
+                                    || activeDate.Month != date.Month || activeDate.Day != date.Day)
+                                {
+                                    active = "";
+                                }
+
+                                if (i % 7 == 0 && i > 0) 
+                                {
+                                    @:</tr><tr> 
+                                }
+
+                                int meetingCount = 0;
+                                int taskCount = 0;
+                                string id = "";
+
+                                if (date.Year == DateTime.Now.Year && date.Month == DateTime.Now.Month 
+                                    && date.Day == DateTime.Now.Day)
+                                {
+                                    id = "today";
+                                }
+
+                                foreach (var meeting in Model.Meetings)
+                                {
+                                    if (meeting.Date.Year != date.Year || meeting.Date.Month != date.Month || meeting.Date.Day != date.Day)
+                                    {
+                                        continue;
+                                    }
+
+                                    meetingCount++;
+                                }
+
+                                string day = $"{date.Day}";
+
+                                if (day.Length == 1)
+                                {
+                                    day = "0" + day;    
+                                }
+
+                                var content = Html.Raw(day);
+
+                                if (date.Month != getDate.Month)
+                                {
+                                    if (meetingCount != 0 || taskCount != 0)
+                                    {
+                                        <td>
+                                            <span class="lastMonthMeetingContent @active" onclick="mouseClick(this, event, '@date.ToString()')">@content</span><br>
+                                        </td>
+                                        continue;
+                                    }
+
+                                    <td>
+                                        <span id="@id" class="lastMonthContent @active" onclick="mouseClick(this, event, '@date.ToString()')">@content</span>
+                                    </td>
+                                }
+                                else
+                                {
+                                    if (meetingCount != 0 || taskCount != 0)
+                                    {
+                                        <td>
+                                            <span class="thisMonthMeetingContent @active" onclick="mouseClick(this, event, '@date.ToString()')">@content</span>
+                                        </td>
+
+                                        continue;
+                                    }
+
+                                    <td>
+                                        <span id="@id" class="thisMonthContent @active" onclick="mouseClick(this, event, '@date.ToString()')">@content</span><br>
+                                    </td>
+                                }
+                            }
                         }
+                    </tr>
+                </tbody>
+            </table>
 
-                        string meetingName = string.Empty;
-                        long projectId = -1;
+            <div class="meetingEditBox">
+                @if (HttpContext.Session.Keys.Contains("EditId"))
+                {
+                    var id = HttpContext.Session.Get<long>("EditId");
+                    var meeting = Model.Meetings.Where(m => m.MeetingId == id).First();
+                    
+
+                    <div class="meetingEditTop">
+                        <span class="backButton" onclick="editBack()"><i class="fa fa-fw fa-arrow-left"></i></span>
+                    </div>
+
+                    <div class="meetingEditDescription">
+                        <label class="editLabel">Name</label>
+                        <textarea id="editNameField" style="resize:none;" rows="1" cols="60" class="editInput">@meeting.Title</textarea>
+                        <label class="editLabel">Description</label>
+                        <textarea id="editDescriptionField" style="resize:none;" rows="30" cols="60" class="editInput">@meeting.Description</textarea>
+                        <button class="editButton" onclick="save('@id', '@meeting.ProjectId', '@meeting.Date.ToString()', document.getElementById('editNameField').value, document.getElementById('editDescriptionField').value)">Save</button>
+                    </div>
+                }
+            </div>
+
+            <div class="meetingInfoBox">
+                @if (HttpContext.Session.Keys.Contains("EditedMeetingId"))
+                {
+                    var id = HttpContext.Session.Get<long>("EditedMeetingId");
+                    var meeting = Model.Meetings.Where(m => m.MeetingId == id).First();
+                    Project project = new();
+                    @ProjectManager.Instance.GetProject(meeting.ProjectId, out project);
+
+                    <div class="meetingInfoTop">
+                        <span class="backButton" onclick="back()"><i class="fa fa-fw fa-arrow-left"></i></span>
+                        <span><i>@meeting.Title</i></span>
+                    </div>
+
+                    <div class="meetingButtons">
+                        <button class="deleteButton" onclick="edit('@id.ToString()')">Edit</button>
+                        <button class="deleteButton" onclick="deleteMeeting('@id.ToString()')">Delete</button>
+                    </div>
+
+                    <div class="meetingInfoDescription">            
+                        <span>Project: @project.Name</span>
+                        <span>Description:</span>
+                        <span id="meetingDescription">@meeting.Description</span>
+                    </div>
+                }
+            </div>
+
+            <div class="dayInfoBox">
+                @{
+                    {
+                        var date = HttpContext.Session.Get<DateTime>("ActiveDate");
+                        var year = date.Year.ToString();
+                        var month = Model.GetMonthName(date.Month);
+                        var day = date.Day;
+
+                        var title = $"{month} {day} {year}";
+
+                        <div class="dateInfo">@title</div>
+                        int count = 0;
 
                         foreach (var meeting in Model.Meetings)
                         {
@@ -117,34 +479,19 @@
                                 continue;
                             }
 
-                            meetingName = meeting.Title;
-                            projectId = meeting.ProjectId;
+                            <div class="meetingInfo">Meeting: @meeting.Title <span class="meetingEdit" onclick="editMeeting('@meeting.MeetingId.ToString()')"><i class="fa fa-fw fa-ellipsis-v"></i></span></div>
+                            count++;
                         }
 
-                        if (date.Month != getDate.Month)
+                        if (count == 0)
                         {
-                            if (meetingName != string.Empty)
-                            {
-                                <td class=lastMonth-meeting oncontextmenu="mouseClick(this, event)" id="@projectId!@date.ToString("yyyy-MM-dd")">@date.Day @meetingName</td>
-                                continue;
-                            }
-
-                            <td class="lastMonth ">@date.Day</td>
-                        }
-                        else
-                        {
-                            if (meetingName != string.Empty)
-                            {
-                                <td class=meeting oncontextmenu="mouseClick(this, event)" id="@projectId!@date.ToString("yyyy-MM-dd")">@date.Day @meetingName</td>
-                                continue;
-                            }
-
-                            <td class="thisMonth">@date.Day</td>
+                             <p class="emptyInfo">Empty</p>   
                         }
                     }
-                </tr>
-            </tbody>
-        </table>
+                }
+            
+            </div>
+        </div>
 
         <footer>
             <div class="bottomnavbar">

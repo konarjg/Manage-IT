@@ -53,3 +53,9 @@ C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\runt
 C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\Desktop.dll.config
 C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\NETCore.Encrypt.dll
 C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\Newtonsoft.Json.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\obj\Debug\net6.0-windows\CreateProjectWindow.g.cs
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\obj\Debug\net6.0-windows\ProjectManagementWIndow.g.cs
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\obj\Debug\net6.0-windows\CreateProjectWindow.baml
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\obj\Debug\net6.0-windows\ProjectManagementWIndow.baml
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\obj\Debug\net6.0-windows\ManageProjectWindow.g.cs
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\obj\Debug\net6.0-windows\ManageProjectWindow.baml

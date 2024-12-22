@@ -21,6 +21,7 @@ namespace Desktop
             EmailService.Initialize();
             DatabaseAccess.Instantiate();
             UserManager.Instantiate();
+            ProjectManager.Instantiate();
         }
     }
 }

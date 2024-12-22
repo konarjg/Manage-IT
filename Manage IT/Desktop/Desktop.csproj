@@ -27,4 +27,10 @@
     <Resource Include="Graphics\main.jpeg" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="ManageProjectWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>
