@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\obj\Debug\net6.0-windows\
+D:\ManageIT\Manage IT\Desktop\obj\Debug\net6.0-windows\
 Desktop
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\App.xaml
-41978782971
+D:\ManageIT\Manage IT\Desktop\App.xaml
+51891385147
 
-301754497033
-216-1601392321
-CreateProjectWindow.xaml;MainWindow.xaml;ManageProjectWindow.xaml;ProjectManagementWIndow.xaml;
+31512926114
+216851612269
+CalendarWindow.xaml;CreateProjectWindow.xaml;MainWindow.xaml;ManageProjectWindow.xaml;ProjectManagementWIndow.xaml;
 
-False
+True
 
