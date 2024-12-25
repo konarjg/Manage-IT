@@ -1,0 +1,805 @@
+﻿<Window x:Class="Desktop.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Desktop"
+        mc:Ignorable="d"
+        Title="Manage IT" Width="2560" Height="1080" WindowState="Maximized">
+    <Window.Resources>
+        <ControlTemplate x:Key="Account">
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                        <GradientStop Color="#000000" Offset="0.0"/>
+                        <GradientStop Color="#000040" Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
+                    <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="User settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                </Grid>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="Account" Grid.Row="0" Grid.RowSpan="1" Click="AccountClick" Content="Account" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Projects" Grid.Row="1" Grid.RowSpan="1" Click="ProjectsClick" Content="Projects" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Privacy" Grid.Row="2" Grid.RowSpan="1" Click="PrivacyClick" Content="Privacy" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Devices" Grid.Row="3" Grid.RowSpan="1" Click="DevicesClick" Content="Devices" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Appearance" Grid.Row="4" Grid.RowSpan="1" Click="AppearanceClick" Content="Appearance" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="AdditionalSettings" Grid.Row="5" Grid.RowSpan="1" Click="AdditionalSettingsClick" Content="Additional Settings" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Support" Grid.Row="6" Grid.RowSpan="1" Click="SupportClick" Content="Support" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="LogOut" Grid.Row="8" Grid.RowSpan="1" Click="LogOutClick" Content="Log out" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#ff0000" BorderBrush="#ff0000" BorderThickness="3"/>
+                    </Grid>
+                </Border>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="0" Grid.RowSpan="16" Grid.Column="2" Grid.ColumnSpan="4" CornerRadius="18" Margin="24">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="AccountHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Account" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                        <TextBlock x:Name="ChangeUserNameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="1" Grid.RowSpan="1" Text="Change Username" FontSize="48" Foreground="White"/>
+                        <TextBox x:Name="ChangeUserNameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="EmailText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="2" Grid.RowSpan="1" Text="Email" FontSize="48" Foreground="White"/>
+                        <Button x:Name="EmailButton" Grid.Row="2" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="ChangeEmail" Content="Change Email" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <TextBlock x:Name="NewPasswordText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="3" Grid.RowSpan="1" Text="New Password" FontSize="48" Foreground="White"/>
+                        <PasswordBox x:Name="NewPassword" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="SendSecurityAlertsEmailText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="4" Grid.RowSpan="1" Text="Send security alerts via email" FontSize="48" Foreground="White"/>
+                        <ToggleButton x:Name="SendSecurityAlertsEmail" HorizontalAlignment="Right" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="4" Grid.RowSpan="1" Margin="24" Width="200" IsThreeState="False" Background="white"/>
+                        <TextBlock x:Name="ConfirmPasswordText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="5" Grid.RowSpan="1" Text="Confirm Password" FontSize="48" Foreground="White"/>
+                        <PasswordBox x:Name="ConfirmPassword" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <Button x:Name="DeleteAccountButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="DeleteAccountSeq" Content="Delete Account" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffa0a0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
+                        <Button x:Name="DisableAccountButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="DisableAccountSeq" Content="Disable Account" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="SettingsResetButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="SettingsWindowReset" Content="Reject Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
+                        <Button x:Name="SettingsConfirmButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="SettingsWindowConfirm" Content="Confirm Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
+                        </Grid>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="Projects">
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                        <GradientStop Color="#000000" Offset="0.0"/>
+                        <GradientStop Color="#000040" Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
+                    <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="User settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                </Grid>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="Account" Grid.Row="0" Grid.RowSpan="1" Click="AccountClick" Content="Account" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Projects" Grid.Row="1" Grid.RowSpan="1" Click="ProjectsClick" Content="Projects" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Privacy" Grid.Row="2" Grid.RowSpan="1" Click="PrivacyClick" Content="Privacy" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Devices" Grid.Row="3" Grid.RowSpan="1" Click="DevicesClick" Content="Devices" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Appearance" Grid.Row="4" Grid.RowSpan="1" Click="AppearanceClick" Content="Appearance" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="AdditionalSettings" Grid.Row="5" Grid.RowSpan="1" Click="AdditionalSettingsClick" Content="Additional Settings" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Support" Grid.Row="6" Grid.RowSpan="1" Click="SupportClick" Content="Support" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="LogOut" Grid.Row="8" Grid.RowSpan="1" Click="LogOutClick" Content="Log out" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#ff0000" BorderBrush="#ff0000" BorderThickness="3"/>
+                    </Grid>
+                </Border>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="0" Grid.RowSpan="16" Grid.Column="2" Grid.ColumnSpan="4" CornerRadius="18" Margin="24">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="ProjectsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Projects" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                        <Button x:Name="SettingsResetButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="SettingsWindowReset" Content="Reject Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
+                        <Button x:Name="SettingsConfirmButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="SettingsWindowConfirm" Content="Confirm Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="Privacy">
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                        <GradientStop Color="#000000" Offset="0.0"/>
+                        <GradientStop Color="#000040" Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
+                    <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="User settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                </Grid>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="Account" Grid.Row="0" Grid.RowSpan="1" Click="AccountClick" Content="Account" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Projects" Grid.Row="1" Grid.RowSpan="1" Click="ProjectsClick" Content="Projects" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Privacy" Grid.Row="2" Grid.RowSpan="1" Click="PrivacyClick" Content="Privacy" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Devices" Grid.Row="3" Grid.RowSpan="1" Click="DevicesClick" Content="Devices" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Appearance" Grid.Row="4" Grid.RowSpan="1" Click="AppearanceClick" Content="Appearance" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="AdditionalSettings" Grid.Row="5" Grid.RowSpan="1" Click="AdditionalSettingsClick" Content="Additional Settings" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Support" Grid.Row="6" Grid.RowSpan="1" Click="SupportClick" Content="Support" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="LogOut" Grid.Row="8" Grid.RowSpan="1" Click="LogOutClick" Content="Log out" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#ff0000" BorderBrush="#ff0000" BorderThickness="3"/>
+                    </Grid>
+                </Border>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="0" Grid.RowSpan="16" Grid.Column="2" Grid.ColumnSpan="4" CornerRadius="18" Margin="24">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="PrivacyHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Privacy" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                        <Button x:Name="SettingsResetButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="SettingsWindowReset" Content="Reject Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
+                        <Button x:Name="SettingsConfirmButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="SettingsWindowConfirm" Content="Confirm Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="Devices">
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                        <GradientStop Color="#000000" Offset="0.0"/>
+                        <GradientStop Color="#000040" Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
+                    <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="User settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                </Grid>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="Account" Grid.Row="0" Grid.RowSpan="1" Click="AccountClick" Content="Account" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Projects" Grid.Row="1" Grid.RowSpan="1" Click="ProjectsClick" Content="Projects" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Privacy" Grid.Row="2" Grid.RowSpan="1" Click="PrivacyClick" Content="Privacy" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Devices" Grid.Row="3" Grid.RowSpan="1" Click="DevicesClick" Content="Devices" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Appearance" Grid.Row="4" Grid.RowSpan="1" Click="AppearanceClick" Content="Appearance" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="AdditionalSettings" Grid.Row="5" Grid.RowSpan="1" Click="AdditionalSettingsClick" Content="Additional Settings" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Support" Grid.Row="6" Grid.RowSpan="1" Click="SupportClick" Content="Support" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="LogOut" Grid.Row="8" Grid.RowSpan="1" Click="LogOutClick" Content="Log out" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#ff0000" BorderBrush="#ff0000" BorderThickness="3"/>
+                    </Grid>
+                </Border>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="0" Grid.RowSpan="16" Grid.Column="2" Grid.ColumnSpan="4" CornerRadius="18" Margin="24">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="DevicesHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Devices" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                        <Button x:Name="SettingsResetButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="SettingsWindowReset" Content="Reject Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
+                        <Button x:Name="SettingsConfirmButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="SettingsWindowConfirm" Content="Confirm Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="Appearance">
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                        <GradientStop Color="#000000" Offset="0.0"/>
+                        <GradientStop Color="#000040" Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
+                    <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="User settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                </Grid>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="Account" Grid.Row="0" Grid.RowSpan="1" Click="AccountClick" Content="Account" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Projects" Grid.Row="1" Grid.RowSpan="1" Click="ProjectsClick" Content="Projects" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Privacy" Grid.Row="2" Grid.RowSpan="1" Click="PrivacyClick" Content="Privacy" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Devices" Grid.Row="3" Grid.RowSpan="1" Click="DevicesClick" Content="Devices" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Appearance" Grid.Row="4" Grid.RowSpan="1" Click="AppearanceClick" Content="Appearance" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="AdditionalSettings" Grid.Row="5" Grid.RowSpan="1" Click="AdditionalSettingsClick" Content="Additional Settings" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Support" Grid.Row="6" Grid.RowSpan="1" Click="SupportClick" Content="Support" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="LogOut" Grid.Row="8" Grid.RowSpan="1" Click="LogOutClick" Content="Log out" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#ff0000" BorderBrush="#ff0000" BorderThickness="3"/>
+                    </Grid>
+                </Border>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="0" Grid.RowSpan="16" Grid.Column="2" Grid.ColumnSpan="4" CornerRadius="18" Margin="24">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="AppearanceHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Appearance" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                        <Button x:Name="SettingsResetButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="SettingsWindowReset" Content="Reject Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
+                        <Button x:Name="SettingsConfirmButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="SettingsWindowConfirm" Content="Confirm Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="AdditionalSettings">
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                        <GradientStop Color="#000000" Offset="0.0"/>
+                        <GradientStop Color="#000040" Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
+                    <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="User settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                </Grid>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="Account" Grid.Row="0" Grid.RowSpan="1" Click="AccountClick" Content="Account" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Projects" Grid.Row="1" Grid.RowSpan="1" Click="ProjectsClick" Content="Projects" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Privacy" Grid.Row="2" Grid.RowSpan="1" Click="PrivacyClick" Content="Privacy" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Devices" Grid.Row="3" Grid.RowSpan="1" Click="DevicesClick" Content="Devices" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Appearance" Grid.Row="4" Grid.RowSpan="1" Click="AppearanceClick" Content="Appearance" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="AdditionalSettings" Grid.Row="5" Grid.RowSpan="1" Click="AdditionalSettingsClick" Content="Additional Settings" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Support" Grid.Row="6" Grid.RowSpan="1" Click="SupportClick" Content="Support" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="LogOut" Grid.Row="8" Grid.RowSpan="1" Click="LogOutClick" Content="Log out" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#ff0000" BorderBrush="#ff0000" BorderThickness="3"/>
+                    </Grid>
+                </Border>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="0" Grid.RowSpan="16" Grid.Column="2" Grid.ColumnSpan="4" CornerRadius="18" Margin="24">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="AdditionalSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Additional settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                        <Button x:Name="SettingsResetButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="SettingsWindowReset" Content="Reject Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
+                        <Button x:Name="SettingsConfirmButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="SettingsWindowConfirm" Content="Confirm Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="Support">
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                        <GradientStop Color="#000000" Offset="0.0"/>
+                        <GradientStop Color="#000040" Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
+                    <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="User settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                </Grid>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="Account" Grid.Row="0" Grid.RowSpan="1" Click="AccountClick" Content="Account" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Projects" Grid.Row="1" Grid.RowSpan="1" Click="ProjectsClick" Content="Projects" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Privacy" Grid.Row="2" Grid.RowSpan="1" Click="PrivacyClick" Content="Privacy" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Devices" Grid.Row="3" Grid.RowSpan="1" Click="DevicesClick" Content="Devices" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Appearance" Grid.Row="4" Grid.RowSpan="1" Click="AppearanceClick" Content="Appearance" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="AdditionalSettings" Grid.Row="5" Grid.RowSpan="1" Click="AdditionalSettingsClick" Content="Additional Settings" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Support" Grid.Row="6" Grid.RowSpan="1" Click="SupportClick" Content="Support" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="LogOut" Grid.Row="8" Grid.RowSpan="1" Click="LogOutClick" Content="Log out" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#ff0000" BorderBrush="#ff0000" BorderThickness="3"/>
+                    </Grid>
+                </Border>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="0" Grid.RowSpan="16" Grid.Column="2" Grid.ColumnSpan="4" CornerRadius="18" Margin="24">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="SupportHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Support" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                        <Button x:Name="SettingsResetButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="SettingsWindowReset" Content="Reject Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
+                        <Button x:Name="SettingsConfirmButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="SettingsWindowConfirm" Content="Confirm Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="LogOut">
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                        <GradientStop Color="#000000" Offset="0.0"/>
+                        <GradientStop Color="#000040" Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
+                    <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="User settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                </Grid>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="Account" Grid.Row="0" Grid.RowSpan="1" Click="AccountClick" Content="Account" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Projects" Grid.Row="1" Grid.RowSpan="1" Click="ProjectsClick" Content="Projects" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Privacy" Grid.Row="2" Grid.RowSpan="1" Click="PrivacyClick" Content="Privacy" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Devices" Grid.Row="3" Grid.RowSpan="1" Click="DevicesClick" Content="Devices" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Appearance" Grid.Row="4" Grid.RowSpan="1" Click="AppearanceClick" Content="Appearance" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="AdditionalSettings" Grid.Row="5" Grid.RowSpan="1" Click="AdditionalSettingsClick" Content="Additional Settings" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Support" Grid.Row="6" Grid.RowSpan="1" Click="SupportClick" Content="Support" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000"  BorderThickness="3"/>
+                        <Button x:Name="LogOut" Grid.Row="8" Grid.RowSpan="1" Click="LogOutClick" Content="Log out" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffa0a0" Foreground="#a00000" BorderBrush="#a00000" BorderThickness="3"/>
+                    </Grid>
+                </Border>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="0" Grid.RowSpan="16" Grid.Column="2" Grid.ColumnSpan="4" CornerRadius="18" Margin="24">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="LogOutHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Log out" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                        <TextBlock x:Name="LogOutText1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="1" Text="Are you sure you want to log out from your account?" FontSize="48" TextAlignment="Center" Foreground="White"/>
+                        <TextBlock x:Name="LogOutText2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Grid.RowSpan="1" Text="Any unsaved changes will be lost." FontSize="36" TextAlignment="Center" Foreground="White"/>
+                        <TextBlock x:Name="LogOutText3" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="1" Text="You will need to log in again in order to access your account." FontSize="36" TextAlignment="Center" Foreground="White"/>
+                        <Button x:Name="ConfirmLogoutButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="SettingsWindowReset" Content="Log Out" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffa0a0" Foreground="#a00000" BorderBrush="#a00000" BorderThickness="3"/>
+                        <Button x:Name="DenyLogoutButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="SettingsWindowConfirm" Content="Cancel" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+    </Window.Resources>
+    <Window.Template>
+        <StaticResource ResourceKey="LogOut"/>
+    </Window.Template>
+</Window>

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 D:\ManageIT\Manage IT\Desktop\App.xaml
-51891385147
+7143909360
 
-31512926114
+33-716087666
 216851612269
-CalendarWindow.xaml;CreateProjectWindow.xaml;MainWindow.xaml;ManageProjectWindow.xaml;ProjectManagementWIndow.xaml;
+AdminPanelWindow.xaml;CalendarWindow.xaml;CreateProjectWindow.xaml;MainWindow.xaml;ManageProjectWindow.xaml;ProjectManagementWIndow.xaml;SettingsWindow.xaml;
 
-True
+False
 
