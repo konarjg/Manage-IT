@@ -1198,15 +1198,15 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="TasksHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Tasks" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                        <Button x:Name="TasksNewTaskListButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksNewTaskList" Content="New task list" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="TasksNewTaskButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Click="TasksNewTask" Content="New task" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <TextBlock x:Name="SearchByTaskNameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by task name" FontSize="48" Foreground="White"/>
-                        <TextBox x:Name="SearchByTaskNameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <Button x:Name="TasksNewTaskListButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksNewTaskListClick" Content="New task list" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="TasksNewTaskButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Click="TasksNewTaskClick" Content="New task" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <TextBlock x:Name="TasksSearchByTaskNameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by task name" FontSize="48" Foreground="White"/>
+                        <TextBox x:Name="TasksSearchByTaskNameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
                     </Grid>
                 </Border>
             </Grid>
         </ControlTemplate>
-        <ControlTemplate x:Key="TaskAddTaskList">
+        <ControlTemplate x:Key="TasksAddTaskList">
             <Grid>
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
@@ -1305,21 +1305,21 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock x:Name="TaskAddTaskListHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Add task list" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                        <Button x:Name="TaskAddTaskListConfirmButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TaskAddTaskListConfirm" Content="Confirm" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
-                        <Button x:Name="TaskAddTaskListCancelButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Click="TaskAddTaskListCancel" Content="Cancel" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
-                        <TextBlock x:Name="TaskAddTaskListNameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Name" FontSize="48" Foreground="White"/>
-                        <TextBox x:Name="TaskAddTaskListNameTextBox" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
-                        <TextBlock x:Name="TaskAddTaskListDescriptionText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="1" Text="Description" FontSize="48" Foreground="White"/>
-                        <TextBox x:Name="TaskAddTaskListDescriptionTextBox" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="3" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
-                        <TextBlock x:Name="TaskAddTaskListDeadlineText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="1" Text="Due in: (time)" FontSize="48" Foreground="White"/>
-                        <TextBlock x:Name="TaskAddTaskListLeaderText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" Grid.RowSpan="1" Text="Tasklist leader: (leader)" FontSize="48" Foreground="White"/>
-                        <Button x:Name="TaskAddTaskListLeaderButton" Grid.Row="5" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="GoToTaskAddTaskListLeaderPage" Content="Add/Change" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <TextBlock x:Name="TasksAddTaskListHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Add task list" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                        <Button x:Name="TasksAddTaskListConfirmButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksAddTaskListConfirmClick" Content="Confirm" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
+                        <Button x:Name="TasksAddTaskListCancelButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Click="TasksAddTaskListCancelClick" Content="Cancel" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
+                        <TextBlock x:Name="TasksAddTaskListNameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Name" FontSize="48" Foreground="White"/>
+                        <TextBox x:Name="TasksAddTaskListNameTextBox" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="TasksAddTaskListDescriptionText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="1" Text="Description" FontSize="48" Foreground="White"/>
+                        <TextBox x:Name="TasksAddTaskListDescriptionTextBox" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="3" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="TasksAddTaskListDeadlineText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="1" Text="Due in: (time)" FontSize="48" Foreground="White"/>
+                        <TextBlock x:Name="TasksAddTaskListLeaderText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" Grid.RowSpan="1" Text="Tasklist leader: (leader)" FontSize="48" Foreground="White"/>
+                        <Button x:Name="TasksAddTaskListLeaderButton" Grid.Row="5" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksAddTaskListLeaderClick" Content="Add/Change" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                     </Grid>
                 </Border>
             </Grid>
         </ControlTemplate>
-        <ControlTemplate x:Key="TaskAddTaskListAssignLeader">
+        <ControlTemplate x:Key="TasksAddTaskListAssignLeader">
             <Grid>
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
@@ -1418,16 +1418,16 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock x:Name="TaskAddTaskListAssignLeaderHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Assign task list leader" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                        <Button x:Name="TaskAddTaskListAssignLeaderConfirmButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TaskAddTaskListAssignLeaderConfirm" Content="Confirm" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
-                        <Button x:Name="TaskAddTaskListAssignLeaderCancelButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Click="TaskAddTaskListAssignLeaderCancel" Content="Cancel" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
-                        <TextBlock x:Name="SearchByUsernameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by username" FontSize="48" Foreground="White"/>
-                        <TextBox x:Name="SearchByUsernameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="TasksAddTaskListAssignLeaderHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Assign task list leader" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                        <Button x:Name="TasksAddTaskListAssignLeaderConfirmButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksAddTaskListAssignLeaderConfirmClick" Content="Confirm" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
+                        <Button x:Name="TasksAddTaskListAssignLeaderCancelButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Click="TasksAddTaskListAssignLeaderCancelClick" Content="Cancel" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
+                        <TextBlock x:Name="TasksAddTaskListAssignLeaderSearchByUsernameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by username" FontSize="48" Foreground="White"/>
+                        <TextBox x:Name="TasksAddTaskListAssignLeaderSearchByUsernameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
                     </Grid>
                 </Border>
             </Grid>
         </ControlTemplate>
-        <ControlTemplate x:Key="TaskEditTaskList">
+        <ControlTemplate x:Key="TasksEditTaskList">
             <Grid>
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
@@ -1526,23 +1526,23 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock x:Name="TaskEditTaskListHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Edit task list (tasklist)" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                        <Button x:Name="TaskEditTaskListConfirmButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TaskEditTaskListConfirm" Content="Confirm" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
-                        <Button x:Name="TaskEditTaskListCancelButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Click="TaskEditTaskListCancel" Content="Cancel" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
-                        <TextBlock x:Name="TaskEditTaskListNameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Name" FontSize="48" Foreground="White"/>
-                        <TextBox x:Name="TaskEditTaskListNameTextBox" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
-                        <TextBlock x:Name="TaskEditTaskListDescriptionText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="1" Text="Description" FontSize="48" Foreground="White"/>
-                        <TextBox x:Name="TaskEditTaskListDescriptionTextBox" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="3" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
-                        <TextBlock x:Name="TaskEditTaskListDeadlineText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="1" Text="Due in: (time)" FontSize="48" Foreground="White"/>
-                        <TextBlock x:Name="TaskEditTaskListLeaderText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" Grid.RowSpan="1" Text="Tasklist leader: (leader)" FontSize="48" Foreground="White"/>
-                        <Button x:Name="TaskEditTaskListLeaderButton" Grid.Row="5" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="GoToTaskAddTaskListLeaderPage" Content="Change" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="TaskEditTaskListUserListButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="2" Click="GoToTaskAddTaskListLeaderPage" Content="Manage Users" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="TaskEditTaskListDeleteButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="2" Click="GoToTaskAddTaskListLeaderPage" Content="Delete task list" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffa0a0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
+                        <TextBlock x:Name="TasksEditTaskListHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Edit task list (tasklist)" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                        <Button x:Name="TasksEditTaskListConfirmButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksEditTaskListConfirmClick" Content="Confirm" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
+                        <Button x:Name="TasksEditTaskListCancelButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Click="TasksEditTaskListCancelClick" Content="Cancel" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
+                        <TextBlock x:Name="TasksEditTaskListNameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Name" FontSize="48" Foreground="White"/>
+                        <TextBox x:Name="TasksEditTaskListNameTextBox" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="TasksEditTaskListDescriptionText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="1" Text="Description" FontSize="48" Foreground="White"/>
+                        <TextBox x:Name="TasksEditTaskListDescriptionTextBox" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="3" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="TasksEditTaskListDeadlineText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="1" Text="Due in: (time)" FontSize="48" Foreground="White"/>
+                        <TextBlock x:Name="TasksEditTaskListLeaderText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" Grid.RowSpan="1" Text="Tasklist leader: (leader)" FontSize="48" Foreground="White"/>
+                        <Button x:Name="TasksEditTaskListLeaderButton" Grid.Row="5" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksEditTaskListLeaderClick" Content="Change" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="TasksEditTaskListUserListButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="2" Click="TasksEditTaskListUserListClick" Content="Manage Users" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="TasksEditTaskListDeleteButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="2" Click="TasksEditTaskListDeleteClick" Content="Delete task list" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffa0a0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                     </Grid>
                 </Border>
             </Grid>
         </ControlTemplate>
-        <ControlTemplate x:Key="TaskEditTaskListChangeLeader">
+        <ControlTemplate x:Key="TasksEditTaskListChangeLeader">
             <Grid>
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
@@ -2350,6 +2350,6 @@
         </ControlTemplate>
     </Window.Resources>
     <Window.Template>
-        <StaticResource ResourceKey="UserEditPermissionsTasks"/>
+        <StaticResource ResourceKey="TasksEditTaskList"/>
     </Window.Template>
 </Window>
