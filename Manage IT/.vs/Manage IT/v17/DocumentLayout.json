@@ -3,60 +3,16 @@
   "WorkspaceRootPath": "D:\\ManageIT\\Manage IT\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|d:\\manageit\\manage it\\desktop\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|solutionrelative:desktop\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|d:\\manageit\\manage it\\desktop\\settingswindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|solutionrelative:desktop\\settingswindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|d:\\manageit\\manage it\\desktop\\adminpanelwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|solutionrelative:desktop\\adminpanelwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|d:\\manageit\\manage it\\desktop\\calendarwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|solutionrelative:desktop\\calendarwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|d:\\manageit\\manage it\\desktop\\projectmanagementwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|solutionrelative:desktop\\projectmanagementwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|d:\\manageit\\manage it\\desktop\\manageprojectwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|solutionrelative:desktop\\manageprojectwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|d:\\manageit\\manage it\\desktop\\settingswindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|solutionrelative:desktop\\settingswindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|d:\\manageit\\manage it\\desktop\\createprojectwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|solutionrelative:desktop\\createprojectwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|d:\\manageit\\manage it\\desktop\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|solutionrelative:desktop\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|d:\\manageit\\manage it\\desktop\\adminpanelwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|solutionrelative:desktop\\adminpanelwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|d:\\manageit\\manage it\\desktop\\adminpanelwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|solutionrelative:desktop\\adminpanelwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|d:\\manageit\\manage it\\desktop\\desktop.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|solutionrelative:desktop\\desktop.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|d:\\manageit\\manage it\\desktop\\logo.ico||{177559E0-D141-11D0-92DF-00A0C9138C45}",
-      "RelativeMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|solutionrelative:desktop\\logo.ico||{177559E0-D141-11D0-92DF-00A0C9138C45}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|d:\\manageit\\manage it\\desktop\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|solutionrelative:desktop\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|d:\\manageit\\manage it\\desktop\\projectmanagementwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|solutionrelative:desktop\\projectmanagementwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|d:\\manageit\\manage it\\desktop\\settingswindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|solutionrelative:desktop\\settingswindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -66,34 +22,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CalendarWindow.xaml",
-              "DocumentMoniker": "D:\\ManageIT\\Manage IT\\Desktop\\CalendarWindow.xaml",
-              "RelativeDocumentMoniker": "Desktop\\CalendarWindow.xaml",
-              "ToolTip": "D:\\ManageIT\\Manage IT\\Desktop\\CalendarWindow.xaml",
-              "RelativeToolTip": "Desktop\\CalendarWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-23T14:10:14.459Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "SettingsWindow.xaml.cs",
-              "DocumentMoniker": "D:\\ManageIT\\Manage IT\\Desktop\\SettingsWindow.xaml.cs",
-              "RelativeDocumentMoniker": "Desktop\\SettingsWindow.xaml.cs",
-              "ToolTip": "D:\\ManageIT\\Manage IT\\Desktop\\SettingsWindow.xaml.cs",
-              "RelativeToolTip": "Desktop\\SettingsWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-25T01:29:22.717Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
@@ -104,93 +34,31 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "SettingsWindow.xaml",
               "DocumentMoniker": "D:\\ManageIT\\Manage IT\\Desktop\\SettingsWindow.xaml",
               "RelativeDocumentMoniker": "Desktop\\SettingsWindow.xaml",
               "ToolTip": "D:\\ManageIT\\Manage IT\\Desktop\\SettingsWindow.xaml",
               "RelativeToolTip": "Desktop\\SettingsWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-24T22:52:03.978Z",
+              "WhenOpened": "2024-12-27T13:55:24.769Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CalendarWindow.xaml",
+              "DocumentMoniker": "D:\\ManageIT\\Manage IT\\Desktop\\CalendarWindow.xaml",
+              "RelativeDocumentMoniker": "Desktop\\CalendarWindow.xaml",
+              "ToolTip": "D:\\ManageIT\\Manage IT\\Desktop\\CalendarWindow.xaml",
+              "RelativeToolTip": "Desktop\\CalendarWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-12-27T13:54:25.707Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "D:\\ManageIT\\Manage IT\\Desktop\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "Desktop\\MainWindow.xaml",
-              "ToolTip": "D:\\ManageIT\\Manage IT\\Desktop\\MainWindow.xaml",
-              "RelativeToolTip": "Desktop\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-22T22:11:29.671Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ManageProjectWindow.xaml",
-              "DocumentMoniker": "D:\\ManageIT\\Manage IT\\Desktop\\ManageProjectWindow.xaml",
-              "RelativeDocumentMoniker": "Desktop\\ManageProjectWindow.xaml",
-              "ToolTip": "D:\\ManageIT\\Manage IT\\Desktop\\ManageProjectWindow.xaml",
-              "RelativeToolTip": "Desktop\\ManageProjectWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-22T22:11:47.575Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ProjectManagementWIndow.xaml",
-              "DocumentMoniker": "D:\\ManageIT\\Manage IT\\Desktop\\ProjectManagementWIndow.xaml",
-              "RelativeDocumentMoniker": "Desktop\\ProjectManagementWIndow.xaml",
-              "ToolTip": "D:\\ManageIT\\Manage IT\\Desktop\\ProjectManagementWIndow.xaml",
-              "RelativeToolTip": "Desktop\\ProjectManagementWIndow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-22T22:11:50.531Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CreateProjectWindow.xaml",
-              "DocumentMoniker": "D:\\ManageIT\\Manage IT\\Desktop\\CreateProjectWindow.xaml",
-              "RelativeDocumentMoniker": "Desktop\\CreateProjectWindow.xaml",
-              "ToolTip": "D:\\ManageIT\\Manage IT\\Desktop\\CreateProjectWindow.xaml",
-              "RelativeToolTip": "Desktop\\CreateProjectWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-22T22:12:14.832Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "App.config",
-              "DocumentMoniker": "D:\\ManageIT\\Manage IT\\Desktop\\App.config",
-              "RelativeDocumentMoniker": "Desktop\\App.config",
-              "ToolTip": "D:\\ManageIT\\Manage IT\\Desktop\\App.config",
-              "RelativeToolTip": "Desktop\\App.config",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2024-12-24T23:43:38.877Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "AdminPanelWindow.xaml.cs",
-              "DocumentMoniker": "D:\\ManageIT\\Manage IT\\Desktop\\AdminPanelWindow.xaml.cs",
-              "RelativeDocumentMoniker": "Desktop\\AdminPanelWindow.xaml.cs",
-              "ToolTip": "D:\\ManageIT\\Manage IT\\Desktop\\AdminPanelWindow.xaml.cs",
-              "RelativeToolTip": "Desktop\\AdminPanelWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-24T23:43:37.935Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
               "Title": "AdminPanelWindow.xaml",
               "DocumentMoniker": "D:\\ManageIT\\Manage IT\\Desktop\\AdminPanelWindow.xaml",
               "RelativeDocumentMoniker": "Desktop\\AdminPanelWindow.xaml",
@@ -199,55 +67,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2024-12-23T23:29:55.243Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "logo.ico - Icon [256x256, 32 bit, PNG]",
-              "DocumentMoniker": "D:\\ManageIT\\Manage IT\\Desktop\\logo.ico",
-              "RelativeDocumentMoniker": "Desktop\\logo.ico",
-              "ToolTip": "D:\\ManageIT\\Manage IT\\Desktop\\logo.ico - Icon [256x256, 32 bit, PNG]",
-              "RelativeToolTip": "Desktop\\logo.ico - Icon [256x256, 32 bit, PNG]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001525|",
-              "WhenOpened": "2024-12-24T22:51:33.599Z",
-              "EditorCaption": " - Icon [256x256, 32 bit, PNG]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Desktop.csproj",
-              "DocumentMoniker": "D:\\ManageIT\\Manage IT\\Desktop\\Desktop.csproj",
-              "RelativeDocumentMoniker": "Desktop\\Desktop.csproj",
-              "ToolTip": "D:\\ManageIT\\Manage IT\\Desktop\\Desktop.csproj",
-              "RelativeToolTip": "Desktop\\Desktop.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-12-22T21:36:13.784Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "App.xaml",
-              "DocumentMoniker": "D:\\ManageIT\\Manage IT\\Desktop\\App.xaml",
-              "RelativeDocumentMoniker": "Desktop\\App.xaml",
-              "ToolTip": "D:\\ManageIT\\Manage IT\\Desktop\\App.xaml",
-              "RelativeToolTip": "Desktop\\App.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-22T22:12:18.163Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "ProjectManagementWIndow.xaml.cs",
-              "DocumentMoniker": "D:\\ManageIT\\Manage IT\\Desktop\\ProjectManagementWIndow.xaml.cs",
-              "RelativeDocumentMoniker": "Desktop\\ProjectManagementWIndow.xaml.cs",
-              "ToolTip": "D:\\ManageIT\\Manage IT\\Desktop\\ProjectManagementWIndow.xaml.cs",
-              "RelativeToolTip": "Desktop\\ProjectManagementWIndow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-22T22:13:01.943Z"
             }
           ]
         }
