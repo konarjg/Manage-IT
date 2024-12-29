@@ -45,11 +45,11 @@
         <TextBlock x:Name="Header" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="6" Grid.RowSpan="2" FontWeight="Bold" Text="Create Project" FontSize="58" TextAlignment="Center" Foreground="White"/>
         <TextBlock x:Name="Error" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
         <TextBlock Text="Name" Foreground="White" Grid.Row="3" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="ProjectName" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
+        <TextBox x:Name="ProjectName" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
         <TextBlock Text="Description" Foreground="White" Grid.Row="5" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="6" Grid.RowSpan="6" Grid.Column="2" Grid.ColumnSpan="2">
-            <TextBox x:Name="Description" FontSize="48" MaxLines="30" AcceptsReturn="True" TextWrapping="Wrap"/>
+            <TextBox x:Name="Description" FontSize="48" MaxLines="30" AcceptsReturn="True" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5" TextWrapping="Wrap"/>
         </ScrollViewer>
-        <Button x:Name="CreateButton" Click="SubmitCreateProjectFormClick" Content="Create" Grid.Row="12" Grid.Column="2" FontSize="42" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="214,32,214,34" />
+        <Button x:Name="CreateButton" Click="SubmitCreateProjectFormClick" Content="Create" Grid.Row="12" Grid.Column="2" FontSize="42" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="214,32,214,34" Foreground="Black" Background="White" BorderBrush="Black" BorderThickness="5"/>
     </Grid>
 </Window>

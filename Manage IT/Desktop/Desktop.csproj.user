@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="AdminPanelWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="CreateProjectWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -16,8 +19,17 @@
     <Compile Update="ProjectManagementWIndow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="CalendarWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="SettingsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="AdminPanelWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="CreateProjectWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -28,6 +40,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="ProjectManagementWIndow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="CalendarWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="SettingsWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

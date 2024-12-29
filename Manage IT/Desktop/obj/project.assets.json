@@ -1989,23 +1989,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\konis\\.nuget\\packages\\": {},
+    "C:\\Users\\artco\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Desktop\\Desktop.csproj",
+      "projectUniqueName": "D:\\ManageIT\\Manage IT\\Desktop\\Desktop.csproj",
       "projectName": "Desktop",
-      "projectPath": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Desktop\\Desktop.csproj",
-      "packagesPath": "C:\\Users\\konis\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Desktop\\obj\\",
+      "projectPath": "D:\\ManageIT\\Manage IT\\Desktop\\Desktop.csproj",
+      "packagesPath": "C:\\Users\\artco\\.nuget\\packages\\",
+      "outputPath": "D:\\ManageIT\\Manage IT\\Desktop\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\konis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\artco\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2027,7 +2027,13 @@
         "warnAsError": [
           "NU1605"
         ]
-      }
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net6.0-windows7.0": {
@@ -2069,7 +2075,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
