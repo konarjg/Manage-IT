@@ -6,52 +6,34 @@
         xmlns:local="clr-namespace:Desktop"
         mc:Ignorable="d"
         Title="Manage IT" Width="2560" Height="1080" WindowState="Maximized">
-    <Grid>
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
-                <GradientStop Color="#000000" Offset="0.0"/>
-                <GradientStop Color="#000040" Offset="0.75"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Border BorderBrush="White" BorderThickness="5" Grid.Row="1" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="3" CornerRadius="36" Margin="48">
+    <Window.Resources>
+        <ControlTemplate x:Key="Main">
             <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                        <GradientStop Color="#000000" Offset="0.0"/>
+                        <GradientStop Color="#000040" Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -59,71 +41,240 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="0" Grid.RowSpan="2" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
+                <TextBlock x:Name="CalendarHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="2" FontWeight="Bold" Text="Calendar" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                <TextBlock x:Name="CalendarActiveDateHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6"  Grid.Row="0" Grid.RowSpan="2" FontWeight="Bold" Text="CalendarActiveDate" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="3" CornerRadius="36" Margin="24">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="PrevMonth" Click="PrevMonthClick" FontWeight="Bold" Content="Prev" Grid.Row="0" Grid.Column="1" FontSize="36" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <TextBlock Text="Month Year" Foreground="White" FontWeight="Bold" Grid.Row="0" Grid.Column="2" FontSize="36" Grid.RowSpan="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Button x:Name="NextMonth" Click="NextMonthClick" FontWeight="Bold" Content="Next" Grid.Row="0" Grid.Column="5" FontSize="36" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+
+                        <TextBlock Text="Mon" Foreground="White" Grid.Row="1" Grid.Column="0" FontSize="36" Grid.RowSpan="1" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="Tue" Foreground="White" Grid.Row="1" Grid.Column="1" FontSize="36" Grid.RowSpan="1" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="Wed" Foreground="White" Grid.Row="1" Grid.Column="2" FontSize="36" Grid.RowSpan="1" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="Thu" Foreground="White" Grid.Row="1" Grid.Column="3" FontSize="36" Grid.RowSpan="1" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="Fri" Foreground="White" Grid.Row="1" Grid.Column="4" FontSize="36" Grid.RowSpan="1" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="Sat" Foreground="White" Grid.Row="1" Grid.Column="5" FontSize="36" Grid.RowSpan="1" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="Sun" Foreground="White" Grid.Row="1" Grid.Column="6" FontSize="36" Grid.RowSpan="1" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                        <Button x:Name="Mon1" Click="CalendarDayClick" Content="1" Grid.Row="2" Grid.Column="0" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Tue1" Click="CalendarDayClick" Content="2" Grid.Row="2" Grid.Column="1" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Wed1" Click="CalendarDayClick" Content="3" Grid.Row="2" Grid.Column="2" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Thu1" Click="CalendarDayClick" Content="4" Grid.Row="2" Grid.Column="3" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Fri1" Click="CalendarDayClick" Content="5" Grid.Row="2" Grid.Column="4" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Sat1" Click="CalendarDayClick" Content="6" Grid.Row="2" Grid.Column="5" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Sun1" Click="CalendarDayClick" Content="7" Grid.Row="2" Grid.Column="6" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+
+                        <Button x:Name="Mon2" Click="CalendarDayClick" Content="8" Grid.Row="3" Grid.Column="0" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Tue2" Click="CalendarDayClick" Content="9" Grid.Row="3" Grid.Column="1" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Wed2" Click="CalendarDayClick" Content="10" Grid.Row="3" Grid.Column="2" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Thu2" Click="CalendarDayClick" Content="11" Grid.Row="3" Grid.Column="3" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Fri2" Click="CalendarDayClick" Content="12" Grid.Row="3" Grid.Column="4" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Sat2" Click="CalendarDayClick" Content="13" Grid.Row="3" Grid.Column="5" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Sun2" Click="CalendarDayClick" Content="14" Grid.Row="3" Grid.Column="6" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+
+                        <Button x:Name="Mon3" Click="CalendarDayClick" Content="15" Grid.Row="4" Grid.Column="0" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Tue3" Click="CalendarDayClick" Content="16" Grid.Row="4" Grid.Column="1" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Wed3" Click="CalendarDayClick" Content="17" Grid.Row="4" Grid.Column="2" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Thu3" Click="CalendarDayClick" Content="18" Grid.Row="4" Grid.Column="3" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Fri3" Click="CalendarDayClick" Content="19" Grid.Row="4" Grid.Column="4" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Sat3" Click="CalendarDayClick" Content="20" Grid.Row="4" Grid.Column="5" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Sun3" Click="CalendarDayClick" Content="21" Grid.Row="4" Grid.Column="6" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+
+                        <Button x:Name="Mon4" Click="CalendarDayClick" Content="22" Grid.Row="5" Grid.Column="0" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Tue4" Click="CalendarDayClick" Content="23" Grid.Row="5" Grid.Column="1" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Wed4" Click="CalendarDayClick" Content="24" Grid.Row="5" Grid.Column="2" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Thu4" Click="CalendarDayClick" Content="25" Grid.Row="5" Grid.Column="3" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Fri4" Click="CalendarDayClick" Content="26" Grid.Row="5" Grid.Column="4" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Sat4" Click="CalendarDayClick" Content="27" Grid.Row="5" Grid.Column="5" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Sun4" Click="CalendarDayClick" Content="28" Grid.Row="5" Grid.Column="6" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+
+                        <Button x:Name="Mon5" Click="CalendarDayClick" Content="29" Grid.Row="6" Grid.Column="0" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Tue5" Click="CalendarDayClick" Content="30" Grid.Row="6" Grid.Column="1" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Wed5" Click="CalendarDayClick" Content="31" Grid.Row="6" Grid.Column="2" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Thu5" Click="CalendarDayClick" Content="32" Grid.Row="6" Grid.Column="3" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Fri5" Click="CalendarDayClick" Content="33" Grid.Row="6" Grid.Column="4" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Sat5" Click="CalendarDayClick" Content="34" Grid.Row="6" Grid.Column="5" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Sun5" Click="CalendarDayClick" Content="35" Grid.Row="6" Grid.Column="6" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+
+                        <Button x:Name="Mon6" Click="CalendarDayClick" Content="36" Grid.Row="7" Grid.Column="0" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Tue6" Click="CalendarDayClick" Content="37" Grid.Row="7" Grid.Column="1" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Wed6" Click="CalendarDayClick" Content="38" Grid.Row="7" Grid.Column="2" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Thu6" Click="CalendarDayClick" Content="39" Grid.Row="7" Grid.Column="3" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Fri6" Click="CalendarDayClick" Content="40" Grid.Row="7" Grid.Column="4" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Sat6" Click="CalendarDayClick" Content="41" Grid.Row="7" Grid.Column="5" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                        <Button x:Name="Sun6" Click="CalendarDayClick" Content="42" Grid.Row="7" Grid.Column="6" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                    </Grid>
+                </Border>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="3" Grid.ColumnSpan="3" CornerRadius="36" Margin="24">
+                </Border>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="Meeting">
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                        <GradientStop Color="#000000" Offset="0.0"/>
+                        <GradientStop Color="#000040" Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                
-                <Button x:Name="PrevMonth" Click="PrevMonthClick" Content="Prev" Grid.Row="0" Grid.Column="1" FontSize="36" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <TextBlock Text="Month Year" Foreground="White" Grid.Row="0" Grid.Column="2" FontSize="36" Grid.RowSpan="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <Button x:Name="NextMonth" Click="NextMonthClick" Content="Next" Grid.Row="0" Grid.Column="5" FontSize="36" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-
-                <TextBlock Text="Mon" Foreground="White" Grid.Row="1" Grid.Column="0" FontSize="36" Grid.RowSpan="1" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBlock Text="Tue" Foreground="White" Grid.Row="1" Grid.Column="1" FontSize="36" Grid.RowSpan="1" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBlock Text="Wed" Foreground="White" Grid.Row="1" Grid.Column="2" FontSize="36" Grid.RowSpan="1" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBlock Text="Thu" Foreground="White" Grid.Row="1" Grid.Column="3" FontSize="36" Grid.RowSpan="1" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBlock Text="Fri" Foreground="White" Grid.Row="1" Grid.Column="4" FontSize="36" Grid.RowSpan="1" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBlock Text="Sat" Foreground="White" Grid.Row="1" Grid.Column="5" FontSize="36" Grid.RowSpan="1" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBlock Text="Sun" Foreground="White" Grid.Row="1" Grid.Column="6" FontSize="36" Grid.RowSpan="1" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                <Button x:Name="Mon1" Click="Mon1Click" Content="1" Grid.Row="2" Grid.Column="0" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Tue1" Click="Tue1Click" Content="2" Grid.Row="2" Grid.Column="1" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Wed1" Click="Wed1Click" Content="3" Grid.Row="2" Grid.Column="2" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Thu1" Click="Thu1Click" Content="4" Grid.Row="2" Grid.Column="3" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Fri1" Click="Fri1Click" Content="5" Grid.Row="2" Grid.Column="4" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Sat1" Click="Sat1Click" Content="6" Grid.Row="2" Grid.Column="5" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Sun1" Click="Sun1Click" Content="7" Grid.Row="2" Grid.Column="6" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-
-                <Button x:Name="Mon2" Click="Mon2Click" Content="8" Grid.Row="3" Grid.Column="0" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Tue2" Click="Tue2Click" Content="9" Grid.Row="3" Grid.Column="1" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Wed2" Click="Wed2Click" Content="10" Grid.Row="3" Grid.Column="2" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Thu2" Click="Thu2Click" Content="11" Grid.Row="3" Grid.Column="3" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Fri2" Click="Fri2Click" Content="12" Grid.Row="3" Grid.Column="4" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Sat2" Click="Sat2Click" Content="13" Grid.Row="3" Grid.Column="5" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Sun2" Click="Sun2Click" Content="14" Grid.Row="3" Grid.Column="6" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-
-                <Button x:Name="Mon3" Click="Mon3Click" Content="15" Grid.Row="4" Grid.Column="0" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Tue3" Click="Tue3Click" Content="16" Grid.Row="4" Grid.Column="1" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Wed3" Click="Wed3Click" Content="17" Grid.Row="4" Grid.Column="2" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Thu3" Click="Thu3Click" Content="18" Grid.Row="4" Grid.Column="3" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Fri3" Click="Fri3Click" Content="19" Grid.Row="4" Grid.Column="4" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Sat3" Click="Sat3Click" Content="20" Grid.Row="4" Grid.Column="5" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Sun3" Click="Sun3Click" Content="21" Grid.Row="4" Grid.Column="6" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-
-                <Button x:Name="Mon4" Click="Mon4Click" Content="22" Grid.Row="5" Grid.Column="0" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Tue4" Click="Tue4Click" Content="23" Grid.Row="5" Grid.Column="1" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Wed4" Click="Wed4Click" Content="24" Grid.Row="5" Grid.Column="2" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Thu4" Click="Thu4Click" Content="25" Grid.Row="5" Grid.Column="3" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Fri4" Click="Fri4Click" Content="26" Grid.Row="5" Grid.Column="4" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Sat4" Click="Sat4Click" Content="27" Grid.Row="5" Grid.Column="5" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Sun4" Click="Sun4Click" Content="28" Grid.Row="5" Grid.Column="6" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-
-                <Button x:Name="Mon5" Click="Mon5Click" Content="29" Grid.Row="6" Grid.Column="0" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Tue5" Click="Tue5Click" Content="30" Grid.Row="6" Grid.Column="1" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Wed5" Click="Wed5Click" Content="31" Grid.Row="6" Grid.Column="2" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Thu5" Click="Thu5Click" Content="32" Grid.Row="6" Grid.Column="3" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Fri5" Click="Fri5Click" Content="33" Grid.Row="6" Grid.Column="4" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Sat5" Click="Sat5Click" Content="34" Grid.Row="6" Grid.Column="5" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Sun5" Click="Sun5Click" Content="35" Grid.Row="6" Grid.Column="6" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-
-                <Button x:Name="Mon6" Click="Mon6Click" Content="36" Grid.Row="7" Grid.Column="0" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Tue6" Click="Tue6Click" Content="37" Grid.Row="7" Grid.Column="1" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Wed6" Click="Wed6Click" Content="38" Grid.Row="7" Grid.Column="2" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Thu6" Click="Thu6Click" Content="39" Grid.Row="7" Grid.Column="3" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Fri6" Click="Fri6Click" Content="40" Grid.Row="7" Grid.Column="4" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Sat6" Click="Sat6Click" Content="41" Grid.Row="7" Grid.Column="5" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-                <Button x:Name="Sun6" Click="Sun6Click" Content="42" Grid.Row="7" Grid.Column="6" FontSize="42" Margin="22" Background="Transparent" Foreground="White" BorderBrush="Transparent" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="0" Grid.RowSpan="2" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
+                <TextBlock x:Name="CalendarHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="2" FontWeight="Bold" Text="Calendar" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                <TextBlock x:Name="CalendarActiveDateHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6"  Grid.Row="0" Grid.RowSpan="2" FontWeight="Bold" Text="CalendarActiveDate" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="3" CornerRadius="36" Margin="24">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="MeetingBack" Click="TaskBackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="0" Grid.RowSpan="1" FontSize="28" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
+                        <TextBlock x:Name="Meetingtitle" Text="(MeetingTitle)" FontWeight="Bold" Foreground="White" Grid.Row="0" Grid.Column="1" FontSize="48" Grid.RowSpan="1" Grid.ColumnSpan="6" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="MeetingTimeLeft" Text="In: (X days, YY hours)" Foreground="White" Grid.Row="1" Grid.Column="0" FontSize="48" Grid.RowSpan="1" Grid.ColumnSpan="4" HorizontalAlignment="Left" Margin="36,0,36,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Description:" FontWeight="Bold" Foreground="White" Grid.Row="2" Grid.Column="0" FontSize="48" Grid.RowSpan="1" Grid.ColumnSpan="4" HorizontalAlignment="Left" Margin="36,0,36,0" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="DescriptionContent" TextWrapping="Wrap" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas, purus id sagittis aliquam, mi diam dignissim diam, eget placerat diam turpis dignissim tellus. Pellentesque vel diam vestibulum, pharetra lorem vitae, luctus ante. Donec tristique quam nibh, sed tincidunt sapien dignissim in. Nulla porta, arcu in sagittis scelerisque, ex felis ultricies enim, vel dapibus neque felis eu lectus." Foreground="White" Grid.Row="3" Grid.Column="0" FontSize="48" Grid.RowSpan="5" Grid.ColumnSpan="7" HorizontalAlignment="Left" Margin="36,0,36,0" VerticalAlignment="Top"/>
+                    </Grid>
+                </Border>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="3" Grid.ColumnSpan="3" CornerRadius="36" Margin="24">
+                </Border>
             </Grid>
-        </Border>
-        <Border BorderBrush="White" BorderThickness="5" Grid.Row="1" Grid.RowSpan="14" Grid.Column="3" Grid.ColumnSpan="3" CornerRadius="36" Margin="48">
-        </Border>
-    </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="Task">
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                        <GradientStop Color="#000000" Offset="0.0"/>
+                        <GradientStop Color="#000040" Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="0" Grid.RowSpan="2" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
+                <TextBlock x:Name="CalendarHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="2" FontWeight="Bold" Text="Calendar" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                <TextBlock x:Name="CalendarActiveDateHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6"  Grid.Row="0" Grid.RowSpan="2" FontWeight="Bold" Text="CalendarActiveDate" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="3" CornerRadius="36" Margin="24">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="TaskBack" Click="TaskBackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="0" Grid.RowSpan="1" FontSize="28" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
+                        <TextBlock x:Name="TaskTitle" Text="(TaskTitle)" FontWeight="Bold" Foreground="White" Grid.Row="0" Grid.Column="1" FontSize="48" Grid.RowSpan="1" Grid.ColumnSpan="6" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="TaskTimeLeft" Text="In: (X days, YY hours)" Foreground="White" Grid.Row="1" Grid.Column="0" FontSize="48" Grid.RowSpan="1" Grid.ColumnSpan="4" HorizontalAlignment="Left" Margin="36,0,36,0" VerticalAlignment="Center"/>
+                        <Button x:Name="TaskFinish" Click="TaskBackClick" Content="Hand in" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" FontSize="28" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
+                        <TextBlock Text="Description:" FontWeight="Bold" Foreground="White" Grid.Row="2" Grid.Column="0" FontSize="48" Grid.RowSpan="1" Grid.ColumnSpan="4" HorizontalAlignment="Left" Margin="36,0,36,0" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="TaskDescriptionContent" TextWrapping="Wrap" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas, purus id sagittis aliquam, mi diam dignissim diam, eget placerat diam turpis dignissim tellus. Pellentesque vel diam vestibulum, pharetra lorem vitae, luctus ante. Donec tristique quam nibh, sed tincidunt sapien dignissim in. Nulla porta, arcu in sagittis scelerisque, ex felis ultricies enim, vel dapibus neque felis eu lectus." Foreground="White" Grid.Row="3" Grid.Column="0" FontSize="48" Grid.RowSpan="5" Grid.ColumnSpan="7" HorizontalAlignment="Left" Margin="36,0,36,0" VerticalAlignment="Top"/>
+                    </Grid>
+                </Border>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="3" Grid.ColumnSpan="3" CornerRadius="36" Margin="24">
+                </Border>
+            </Grid>
+        </ControlTemplate>
+    </Window.Resources>
+    <Window.Template>
+        <StaticResource ResourceKey="Task"/>
+    </Window.Template>
 </Window>
