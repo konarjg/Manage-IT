@@ -1,14 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "2fc0DnZ9nlQ=",
+  "dgSpecHash": "hbowf7QVwK35/09W7mp3av8Zd2od+Vq8AmJQbwolkISk9XFr6F9MR0kftgPrlWA/APTFsnzp+MeNLbnHEPf/0Q==",
   "success": false,
-  "projectFilePath": "D:\\ManageIT\\Manage IT\\DesktopTests\\DesktopTests.csproj",
+  "projectFilePath": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\DesktopTests\\DesktopTests.csproj",
   "expectedPackageFiles": [],
   "logs": [
     {
       "code": "NU1201",
       "level": "Error",
-      "message": "Project Desktop is not compatible with net6.0 (.NETCoreApp,Version=v6.0). Project Desktop supports: net6.0-windows7.0 (.NETCoreApp,Version=v6.0)",
+      "message": "Projekt Desktop nie jest zgodny z elementem net6.0 (.NETCoreApp,Version=v6.0). Projekt Desktop obsługuje: net6.0-windows7.0 (.NETCoreApp,Version=v6.0)",
       "libraryId": "Desktop",
       "targetGraphs": [
         "net6.0"
