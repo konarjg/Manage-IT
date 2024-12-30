@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\App.xaml
-41978782971
+7-111686000
 
-28-845040517
+31-310494624
 216-1601392321
-CreateProjectWindow.xaml;MainWindow.xaml;ManageProjectWindow.xaml;ProjectManagementWIndow.xaml;
+AdminPanelWindow.xaml;CalendarWindow.xaml;CreateProjectWindow.xaml;MainWindow.xaml;ManageProjectWindow.xaml;ProjectManagementWindow.xaml;SettingsWindow.xaml;
 
 False
 

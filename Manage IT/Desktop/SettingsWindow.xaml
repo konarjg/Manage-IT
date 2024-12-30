@@ -1,4 +1,4 @@
-﻿<Window x:Class="Desktop.SettingsWindow"
+﻿<Window x:Class="Desktop.UserSettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -42,7 +42,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                <Grid x:Name="Inner" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
@@ -55,7 +55,7 @@
                     <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="User settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
-                    <Grid>
+                    <Grid x:Name="Inner2">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -81,7 +81,7 @@
                     </Grid>
                 </Border>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="0" Grid.RowSpan="16" Grid.Column="2" Grid.ColumnSpan="4" CornerRadius="18" Margin="24">
-                    <Grid>
+                    <Grid x:Name="Inner3">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -99,25 +99,25 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="AccountHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Account" FontSize="64" TextAlignment="Center" Foreground="White"/>
                         <TextBlock x:Name="ChangeUserNameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="1" Grid.RowSpan="1" Text="Change Username" FontSize="48" Foreground="White"/>
-                        <TextBox x:Name="ChangeUserNameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBox CaretBrush="White" x:Name="ChangeUserNameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
                         <TextBlock x:Name="EmailText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="2" Grid.RowSpan="1" Text="Email" FontSize="48" Foreground="White"/>
                         <Button x:Name="EmailButton" Grid.Row="2" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="ChangeEmail" Content="Change Email" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <TextBlock x:Name="NewPasswordText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="3" Grid.RowSpan="1" Text="New Password" FontSize="48" Foreground="White"/>
-                        <PasswordBox x:Name="NewPassword" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
-                        <TextBlock x:Name="SendSecurityAlertsEmailText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="4" Grid.RowSpan="1" Text="Send security alerts via email" FontSize="48" Foreground="White"/>
+                        <PasswordBox CaretBrush="White" x:Name="NewPassword" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="SendSecurityAlertsEmailText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="4" Grid.RowSpan="1" Text="Send security alerts via email" FontSize="44" Foreground="White"/>
                         <ToggleButton x:Name="SendSecurityAlertsEmail" HorizontalAlignment="Right" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="4" Grid.RowSpan="1" Margin="24" Width="200" IsThreeState="False" Background="white"/>
                         <TextBlock x:Name="ConfirmPasswordText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="5" Grid.RowSpan="1" Text="Confirm Password" FontSize="48" Foreground="White"/>
-                        <PasswordBox x:Name="ConfirmPassword" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <PasswordBox CaretBrush="White" x:Name="ConfirmPassword" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
                         <Button x:Name="DeleteAccountButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="DeleteAccountSeq" Content="Delete Account" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffa0a0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <Button x:Name="DisableAccountButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="DisableAccountSeq" Content="Disable Account" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="SettingsResetButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="SettingsWindowReset" Content="Reject Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <Button x:Name="SettingsConfirmButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="SettingsWindowConfirm" Content="Confirm Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
-                        </Grid>
+                    </Grid>
                 </Border>
             </Grid>
         </ControlTemplate>
         <ControlTemplate x:Key="Projects">
-            <Grid>
+            <Grid x:Name="Inner">
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
                         <GradientStop Color="#000000" Offset="0.0"/>
@@ -151,7 +151,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                <Grid x:Name="Inner2" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
@@ -164,7 +164,7 @@
                     <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="User settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
-                    <Grid>
+                    <Grid x:Name="Inner3">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -214,7 +214,7 @@
             </Grid>
         </ControlTemplate>
         <ControlTemplate x:Key="Privacy">
-            <Grid>
+            <Grid x:Name="Inner">
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
                         <GradientStop Color="#000000" Offset="0.0"/>
@@ -248,7 +248,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                <Grid x:Name="Inner2" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
@@ -261,7 +261,7 @@
                     <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="User settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
-                    <Grid>
+                    <Grid x:Name="Inner3">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -311,7 +311,7 @@
             </Grid>
         </ControlTemplate>
         <ControlTemplate x:Key="Devices">
-            <Grid>
+            <Grid x:Name="Inner">
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
                         <GradientStop Color="#000000" Offset="0.0"/>
@@ -345,7 +345,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                <Grid x:Name="Inner2" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
@@ -358,7 +358,7 @@
                     <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="User settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
-                    <Grid>
+                    <Grid x:Name="Inner3">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -408,7 +408,7 @@
             </Grid>
         </ControlTemplate>
         <ControlTemplate x:Key="Appearance">
-            <Grid>
+            <Grid x:Name="Inner">
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
                         <GradientStop Color="#000000" Offset="0.0"/>
@@ -442,7 +442,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                <Grid x:Name="Inner2" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
@@ -455,7 +455,7 @@
                     <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="User settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
-                    <Grid>
+                    <Grid x:Name="Inner3">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -505,7 +505,7 @@
             </Grid>
         </ControlTemplate>
         <ControlTemplate x:Key="AdditionalSettings">
-            <Grid>
+            <Grid x:Name="Inner">
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
                         <GradientStop Color="#000000" Offset="0.0"/>
@@ -539,7 +539,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                <Grid x:Name="Inner2" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
@@ -552,7 +552,7 @@
                     <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="User settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
-                    <Grid>
+                    <Grid x:Name="Inner3">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -602,7 +602,7 @@
             </Grid>
         </ControlTemplate>
         <ControlTemplate x:Key="Support">
-            <Grid>
+            <Grid x:Name="Inner">
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
                         <GradientStop Color="#000000" Offset="0.0"/>
@@ -636,7 +636,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                <Grid x:Name="Inner2" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
@@ -649,7 +649,7 @@
                     <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="User settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
-                    <Grid>
+                    <Grid x:Name="Inner3">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -699,7 +699,7 @@
             </Grid>
         </ControlTemplate>
         <ControlTemplate x:Key="LogOut">
-            <Grid>
+            <Grid x:Name="Inner">
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
                         <GradientStop Color="#000000" Offset="0.0"/>
@@ -733,7 +733,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                <Grid x:Name="Inner2" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
@@ -746,7 +746,7 @@
                     <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="User settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
-                    <Grid>
+                    <Grid x:Name="Inner3">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -800,6 +800,6 @@
         </ControlTemplate>
     </Window.Resources>
     <Window.Template>
-        <StaticResource ResourceKey="LogOut"/>
+        <StaticResource ResourceKey="Account"/>
     </Window.Template>
 </Window>

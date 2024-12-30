@@ -17,11 +17,36 @@ namespace Desktop
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class CalendarWindow : Window
     {
-        public Window1()
+        public CalendarWindow()
         {
             InitializeComponent();
+        }
+
+        public void BackClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public void PrevMonthClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public void NextMonthClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public void CalendarDayClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public void TaskBackClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

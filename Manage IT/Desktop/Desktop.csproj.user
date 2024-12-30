@@ -16,7 +16,7 @@
     <Compile Update="MainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="ProjectManagementWIndow.xaml.cs">
+    <Compile Update="ProjectManagementWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="CalendarWindow.xaml.cs">
@@ -39,7 +39,7 @@
     <Page Update="ManageProjectWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="ProjectManagementWIndow.xaml">
+    <Page Update="ProjectManagementWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="CalendarWindow.xaml">
