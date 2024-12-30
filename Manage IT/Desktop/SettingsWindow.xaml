@@ -207,6 +207,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="ProjectsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Projects" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                        <TextBlock x:Name="SendProjectAlertsToEmailHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Grid.RowSpan="1" Grid.ColumnSpan="1" Text="Send project alerts to email" Foreground="White" FontSize="50"/>
                         <Button x:Name="SettingsResetButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="SettingsWindowReset" Content="Reject Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <Button x:Name="SettingsConfirmButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="SettingsWindowConfirm" Content="Confirm Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
                     </Grid>
@@ -800,6 +801,6 @@
         </ControlTemplate>
     </Window.Resources>
     <Window.Template>
-        <StaticResource ResourceKey="Account"/>
+        <StaticResource ResourceKey="Projects"/>
     </Window.Template>
 </Window>
