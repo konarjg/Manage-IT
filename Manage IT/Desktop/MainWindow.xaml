@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Desktop"
         mc:Ignorable="d"
-        Title="Manage IT" Width="2560" Height="1080" WindowState="Maximized">
+        Title="Manage IT" Width="2560" Height="1080" WindowState="Maximized"
+        Loaded="MainWindowLoaded">
 
     <Window.Resources>
         <ControlTemplate x:Key="Main">
@@ -115,14 +116,14 @@
                 <TextBlock x:Name="Header" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="6" Grid.RowSpan="2" FontWeight="Bold" Text="Register" FontSize="58" TextAlignment="Center" Foreground="White"/>
                 <TextBlock x:Name="Error" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                 <TextBlock Text="Email" Foreground="White" Grid.Row="3" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
-                <TextBox x:Name="Email" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
+                <TextBox x:Name="Email" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5" CaretBrush="White"/>
                 <TextBlock Text="Username" Foreground="White" Grid.Row="5" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
-                <TextBox x:Name="Username" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
+                <TextBox x:Name="Username" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5" CaretBrush="White"/>
                 <TextBlock Text="Password" Foreground="White" Grid.Row="7" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
-                <PasswordBox x:Name="Password" Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" HorizontalContentAlignment="Left"/>
+                <PasswordBox x:Name="Password" Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" HorizontalContentAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5" CaretBrush="White"/>
                 <TextBlock Text="Confirm Password" Foreground="White" Grid.Row="9" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
-                <PasswordBox x:Name="ConfirmPassword" Grid.Row="10" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" HorizontalContentAlignment="Left"/>
-                <Button x:Name="RegisterButton" Click="SubmitRegisterFormClick" Content="Register" Grid.Row="11" Grid.Column="2" FontSize="42" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="214,32,214,34" />
+                <PasswordBox x:Name="ConfirmPassword" Grid.Row="10" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" HorizontalContentAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5" CaretBrush="White"/>
+                <Button x:Name="RegisterButton" Click="SubmitRegisterFormClick" Content="Register" Grid.Row="11" Grid.Column="2" FontSize="42" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="214,32,214,34" Background="White" />
             </Grid>
         </ControlTemplate>
 
@@ -162,11 +163,11 @@
                 <TextBlock x:Name="Header" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="6" Grid.RowSpan="2" FontWeight="Bold" Text="Login" FontSize="58" TextAlignment="Center" Foreground="White"/>
                 <TextBlock x:Name="Error" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                 <TextBlock Text="Email or username" Foreground="White" Grid.Row="3" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
-                <TextBox x:Name="Credential" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
+                <TextBox x:Name="Credential" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5" CaretBrush="White"/>
                 <TextBlock Text="Password" Foreground="White" Grid.Row="5" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
-                <PasswordBox x:Name="Password" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" HorizontalContentAlignment="Left"/>
+                <PasswordBox x:Name="Password" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" HorizontalContentAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5" CaretBrush="White"/>
                 <Button x:Name="ForgotPasswordButton" Click="ForgotPasswordClick" Content="Forgot password?" Grid.Row="8" Grid.Column="1" FontSize="42" Grid.ColumnSpan="4" Background="Transparent" Foreground="#03c9fc" BorderBrush="Transparent" Margin="426,56,426,34" Grid.RowSpan="2"/>
-                <Button x:Name="LoginButton" Click="SubmitLoginFormClick" Content="Login" Grid.Row="7" Grid.Column="2" FontSize="42" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="214,32,214,34" />
+                <Button x:Name="LoginButton" Click="SubmitLoginFormClick" Content="Login" Grid.Row="7" Grid.Column="2" FontSize="42" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="214,32,214,34" Background="White"/>
             </Grid>
         </ControlTemplate>
 
@@ -205,17 +206,61 @@
                 <Button x:Name="BackButton" Click="ForgotPasswordBackClick" FontSize="86" Grid.Row="0" Grid.Column="0" Background="Transparent" Content="🔙" BorderThickness="0" Foreground="White" Grid.RowSpan="2"/>
                 <TextBlock x:Name="Header" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="6" Grid.RowSpan="2" FontWeight="Bold" Text="Password Reset" FontSize="58" TextAlignment="Center" Foreground="White"/>
                 <TextBlock Text="Email or username" Foreground="White" Grid.Row="2" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
-                <TextBox x:Name="Credential" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
+                <TextBox x:Name="Credential" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5" CaretBrush="White"/>
                 <TextBlock Text="New Password" Foreground="White" Grid.Row="4" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
-                <PasswordBox x:Name="Password" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" HorizontalContentAlignment="Left"/>
+                <PasswordBox x:Name="Password" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" HorizontalContentAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5" CaretBrush="White"/>
                 <TextBlock Text="Confirm New Password" Foreground="White" Grid.Row="6" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
-                <PasswordBox x:Name="ConfirmPassword" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" HorizontalContentAlignment="Left"/>
+                <PasswordBox x:Name="ConfirmPassword" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" HorizontalContentAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5" CaretBrush="White"/>
                 <Button x:Name="ChangePasswordButton" Click="SubmitForgotPasswordFormClick" Content="Change Password" Grid.Row="8" Grid.Column="2" FontSize="42" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="84,32,64,34" />
+            </Grid>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ConfirmLogin">
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                        <GradientStop Color="#000000" Offset="0.0"/>
+                        <GradientStop Color="#000040" Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="BackButton" Click="ConfirmLoginBackClick" FontSize="86" Grid.Row="0" Grid.Column="0" Background="Transparent" Content="🔙" BorderThickness="0" Foreground="White" Grid.RowSpan="2"/>
+                <TextBlock x:Name="Error" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="6" Grid.RowSpan="2" FontSize="48" TextAlignment="Center" Foreground="Red"/>
+                <TextBlock x:Name="Header" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="6" Grid.RowSpan="2" FontWeight="Bold" Text="Confirm Login" FontSize="58" TextAlignment="Center" Foreground="White"/>
+                <TextBlock x:Name="VerificationCode" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Text="Verification Code" Foreground="White" FontSize="48" TextAlignment="Center"/>
+                <TextBox x:Name="Digit1" Grid.Row="4" Grid.Column="2" Width="100" HorizontalAlignment="Right" MaxLength="1" Margin="0,0,110,0" PreviewTextInput="ForceDigit" TextChanged="DigitFilled" FontSize="64" TextAlignment="Center" Background="Transparent" Foreground="White" CaretBrush="White" BorderBrush="White" BorderThickness="5"/>
+                <TextBox x:Name="Digit2" Grid.Row="4" Grid.Column="2" Width="100" HorizontalAlignment="Right" MaxLength="1" Margin="0,0,0,0" PreviewTextInput="ForceDigit" TextChanged="DigitFilled" FontSize="64" TextAlignment="Center" Background="Transparent" Foreground="White" CaretBrush="White" BorderBrush="White" BorderThickness="5"/>
+                <TextBox x:Name="Digit3" Grid.Row="4" Grid.Column="3" Width="100" HorizontalAlignment="Left" MaxLength="1" Margin="10,0,0,0" PreviewTextInput="ForceDigit" TextChanged="DigitFilled" FontSize="64" TextAlignment="Center" Background="Transparent" Foreground="White" CaretBrush="White" BorderBrush="White" BorderThickness="5"/>
+                <TextBox x:Name="Digit4" Grid.Row="4" Grid.Column="3" Width="100" HorizontalAlignment="Left" MaxLength="1" Margin="120,0,0,0" PreviewTextInput="ForceDigit" FontSize="64" TextAlignment="Center" Background="Transparent" Foreground="White" CaretBrush="White" BorderBrush="White" BorderThickness="5"/>
+                <Button x:Name="ChangePasswordButton" Click="ConfirmLoginClick" Content="Confirm login" Grid.Row="5" Grid.Column="2" FontSize="42" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="300" Height="100" Background="White"/>
             </Grid>
         </ControlTemplate>
     </Window.Resources>
 
     <Window.Template>
-        <StaticResource ResourceKey="ForgotPassword"/>
+        <StaticResource ResourceKey="Main"/>
     </Window.Template>
 </Window>

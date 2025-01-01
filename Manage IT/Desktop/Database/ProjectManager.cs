@@ -1,7 +1,9 @@
-﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
+﻿using Desktop;
+using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Windows.Documents;
+using System.Windows.Markup;
 
 public class ProjectManager
 {
@@ -48,6 +50,15 @@ public class ProjectManager
 
         bool success = DatabaseAccess.Instance.ExecuteQuery(query, out projects);
 
+        if (success && App.Instance.UserSettings.SendProjectAlerts)
+        {
+            var subject = "Manage IT notification: New project has been successfully created on Your account!";
+            var body = $"Dear {UserManager.Instance.CurrentSessionUser.Login}, <br/>A project named {data.Name} has been created and can now be managed in Your project panel!<br/>Happy Managing IT!";
+            string error;
+
+            EmailService.SendEmail(UserManager.Instance.CurrentSessionUser.Email, subject, body, out error);
+        }
+
         return success;
     }
 
@@ -57,6 +68,15 @@ public class ProjectManager
         var query = FormattableStringFactory.Create($"UPDATE dbo.Projects SET ManagerId = {data.ManagerId}, Name = '{data.Name}', Description = '{data.Description}' WHERE ProjectId = {data.ProjectId}");
 
         bool success = DatabaseAccess.Instance.ExecuteQuery(query, out projects);
+
+        if (success && App.Instance.UserSettings.SendProjectAlerts)
+        {
+            var subject = "Manage IT notification: Project has been edited!";
+            var body = $"Dear {UserManager.Instance.CurrentSessionUser.Login}, <br/>A project named {data.Name} has been edited, You can view the changes in the project panel!<br/>Happy Managing IT!";
+            string error;
+
+            EmailService.SendEmail(UserManager.Instance.CurrentSessionUser.Email, subject, body, out error);
+        }
 
         return success;
     }
@@ -68,10 +88,21 @@ public class ProjectManager
         var query = FormattableStringFactory.Create($"DELETE FROM dbo.Meetings WHERE ProjectId = {projectId}");
         var query1 = FormattableStringFactory.Create($"DELETE FROM dbo.Projects WHERE ProjectId = {projectId}");
 
-        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out meetings);
-        bool success1 = DatabaseAccess.Instance.ExecuteQuery(query1, out projects);
+        Project data;
+        bool success = GetProject(projectId, out data);
+        bool success1 = DatabaseAccess.Instance.ExecuteQuery(query, out meetings);
+        bool success2 = DatabaseAccess.Instance.ExecuteQuery(query1, out projects);
 
-        return success && success1;
+        if (success && success1 && success2 && App.Instance.UserSettings.SendProjectAlerts)
+        {
+            var subject = "Manage IT notification: Project has been deleted!";
+            var body = $"Dear {UserManager.Instance.CurrentSessionUser.Login}, <br/>A project named {data.Name} has been deleted, IT should now disappear from Your project panel.";
+            string error;
+
+            EmailService.SendEmail(UserManager.Instance.CurrentSessionUser.Email, subject, body, out error);
+        }
+
+        return success && success1 && success2;
     }
 
     private bool ProjectExists(string name)
