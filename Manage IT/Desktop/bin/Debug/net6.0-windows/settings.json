@@ -1,0 +1,27 @@
+{
+  "UserSettings": [
+    {
+      "UserData": null,
+      "DisplayProjects": "All",
+      "SendSecurityAlerts": true,
+      "SendProjectAlerts": true,
+      "RememberMe": false,
+      "Enable2FA": false
+    },
+    {
+      "UserData": {
+        "UserId": 10033,
+        "Login": "konis",
+        "Password": "4hNxFSY6MW78fC4plQr2wFXh6Jfit6YWZ3HdTcpCIdRQpQi8NKelcodB5NgEDSIfo4dCQk5K2KpZT\u002BCUptyr9g==",
+        "Email": "konarskikrzysztof1@gmail.com",
+        "Verified": true,
+        "Admin": false
+      },
+      "DisplayProjects": "All",
+      "SendSecurityAlerts": false,
+      "SendProjectAlerts": false,
+      "RememberMe": false,
+      "Enable2FA": false
+    }
+  ]
+}

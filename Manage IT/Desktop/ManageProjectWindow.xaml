@@ -50,11 +50,11 @@
                     <ScrollViewer ClipToBounds="True" Margin="50, 0, 50, -15" HorizontalAlignment="Center" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock x:Name="ProjectName" Text="Project Name" Margin="0, 0, 50, 0" FontSize="72" Foreground="White" />
-                            <Button Click="ProjectInfoClick" Content="Project Info" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200"  />
-                            <Button Click="ProjectMembersClick" Content="Members" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200"  />
-                            <Button Click="MeetingClick" Content="Meeting" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200"  />
-                            <Button Click="EditClick" Content="Edit" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200"  />
-                            <Button Click="DeleteClick" Content="Delete" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200"  />
+                            <Button Click="ProjectInfoClick" Content="Project Info" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200" Background="White"  />
+                            <Button Click="ProjectMembersClick" Content="Members" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200" Background="White"  />
+                            <Button Click="MeetingClick" Content="Meeting" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200" Background="White"  />
+                            <Button Click="EditClick" Content="Edit" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200" Background="White"  />
+                            <Button Click="DeleteClick" Content="Delete" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200" Background="White"  />
                         </StackPanel>
                     </ScrollViewer>
                 </Border>
@@ -107,10 +107,10 @@
 
                 <Button x:Name="BackButton" Click="PanelBackClick" FontSize="120" Grid.Row="0" Grid.Column="0" Background="Transparent" Content="🔙" BorderThickness="0" Foreground="White" Grid.RowSpan="4" Margin="0,0,120,66"/>
                 <TextBlock Text="Name" Foreground="White" Grid.Row="3" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
-                <TextBox x:Name="ProjectName" Background="LightGray" IsReadOnly="True" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
+                <TextBox x:Name="ProjectName" IsReadOnly="True" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left" Background="Transparent" Foreground="White" CaretBrush="White" BorderBrush="White" BorderThickness="5"/>
                 <TextBlock Text="Description" Foreground="White" Grid.Row="5" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="6" Grid.RowSpan="6" Grid.Column="2" Grid.ColumnSpan="2">
-                    <TextBox x:Name="Description" Background="LightGray" IsReadOnly="True" FontSize="48" MaxLines="30" AcceptsReturn="True" TextWrapping="Wrap"/>
+                    <TextBox x:Name="Description" Background="Transparent" CaretBrush="White" Foreground="White" BorderBrush="White" BorderThickness="5" IsReadOnly="True" FontSize="48" MaxLines="30" AcceptsReturn="True" TextWrapping="Wrap"/>
                 </ScrollViewer>
             </Grid>
         </ControlTemplate>
@@ -155,12 +155,12 @@
                 <TextBlock x:Name="Header" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="6" Grid.RowSpan="2" FontWeight="Bold" Text="Edit Project" FontSize="58" TextAlignment="Center" Foreground="White"/>
                 <TextBlock x:Name="Error" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                 <TextBlock Text="Name" Foreground="White" Grid.Row="3" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
-                <TextBox x:Name="ProjectName" Background="LightGray" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
+                <TextBox x:Name="ProjectName" Background="Transparent" Foreground="White" CaretBrush="White" BorderBrush="White" BorderThickness="5" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
                 <TextBlock Text="Description" Foreground="White" Grid.Row="5" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="6" Grid.RowSpan="6" Grid.Column="2" Grid.ColumnSpan="2">
-                    <TextBox x:Name="Description" Background="LightGray" FontSize="48" MaxLines="30" AcceptsReturn="True" TextWrapping="Wrap"/>
+                    <TextBox x:Name="Description" Background="Transparent" Foreground="White" CaretBrush="White" BorderBrush="White" BorderThickness="5" FontSize="48" MaxLines="30" AcceptsReturn="True" TextWrapping="Wrap"/>
                 </ScrollViewer>
-                <Button x:Name="SaveButton" Click="SubmitEditFormClick" Content="Save" Grid.Row="12" Grid.Column="2" FontSize="42" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="214,32,214,34" />
+                <Button x:Name="SaveButton" Click="SubmitEditFormClick" Background="White" Content="Save" Grid.Row="12" Grid.Column="2" FontSize="42" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="214,32,214,34" />
             </Grid>
         </ControlTemplate>
 
@@ -204,14 +204,14 @@
                 <TextBlock x:Name="Header" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="4" Grid.ColumnSpan="6" Grid.RowSpan="2" FontWeight="Bold" Text="Delete Project" FontSize="58" TextAlignment="Center" Foreground="White"/>
                 <TextBlock x:Name="Error" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="5" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                 <TextBlock Text="Confirm project name" Foreground="White" Grid.Row="6" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
-                <TextBox x:Name="ProjectName" TextChanged="DeleteProjectNameTextChanged" Background="LightGray" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
-                <TextBlock x:Name="ProjectNamePlaceholder" Text="Project Name" IsHitTestVisible="False" Foreground="Gray" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
-                <Button x:Name="ConfirmDeleteButton" Click="SubmitDeleteFormClick" Content="Confirm" Grid.Row="8" Grid.Column="2" FontSize="42" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="214,32,214,34" />
+                <TextBox x:Name="ProjectName" TextChanged="DeleteProjectNameTextChanged" Background="Transparent" Foreground="White" CaretBrush="White" BorderBrush="White" BorderThickness="5" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
+                <TextBlock x:Name="ProjectNamePlaceholder" Text="Project Name" IsHitTestVisible="False" Foreground="LightGray" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left"/>
+                <Button x:Name="ConfirmDeleteButton" Click="SubmitDeleteFormClick" Content="Confirm" Grid.Row="8" Grid.Column="2" FontSize="42" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="214,32,214,34" Background="White" />
             </Grid>
         </ControlTemplate>
     </Window.Resources>
 
     <Window.Template>
-        <StaticResource ResourceKey="Delete" />
+        <StaticResource ResourceKey="Main" />
     </Window.Template>
 </Window>
