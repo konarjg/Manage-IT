@@ -1,12 +1,14 @@
-﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
+using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -25,27 +27,63 @@ namespace Desktop
     /// </summary>
     public partial class AdminPanelWindow : Window
     {
-        int switches = 0;
-        string currentTemplate = "Overview";
-        string previousTemplate = "";
+        private Stack<ControlTemplate> templateHistory;
+
+
+
+
         private void SwitchPageTemplate(string name)
         {
-            switches++;
-            previousTemplate = currentTemplate;
-            currentTemplate = name;
-            Template = Resources[name] as ControlTemplate;
+            if (Template != null)
+            {
+                templateHistory.Push(Template); // Zapamiętaj aktualny szablon
+            }
+
+            var newTemplate = Resources[name] as ControlTemplate;
+            if (newTemplate != null)
+            {
+                Template = newTemplate;
+            }
+            else
+            {
+                MessageBox.Show($"Template '{name}' not found in resources.");
+            }
         }
-        private void RevertToPreviousTemplate()
+
+        private void SwitchBackToPreviousTemplate()
         {
-            switches++;
-            Template = Resources[previousTemplate] as ControlTemplate;
-            currentTemplate = previousTemplate;
+            if (templateHistory.Count > 0)
+            {
+                Template = templateHistory.Pop(); // Przywróć poprzedni szablon
+            }
+            else
+            {
+                MessageBox.Show("No previous template to switch back to.");
+            }
         }
+
+
+        private void ResetTextInputs() {
+            var allTextBoxes = FindVisualChildren<TextBox>(this);
+            var allPasswordBoxes = FindVisualChildren<PasswordBox>(this);
+            foreach (var textBox in allTextBoxes) {
+                textBox.Text = string.Empty;
+            }
+            foreach (var passwordBox in allPasswordBoxes)
+            {
+                passwordBox.Clear();
+            }
+        }
+        private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject { if (depObj != null) { for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++) { DependencyObject child = VisualTreeHelper.GetChild(depObj, i); if (child != null && child is T) { yield return (T)child; } foreach (T childOfChild in FindVisualChildren<T>(child)) { yield return childOfChild; } } } }
+
+
         public AdminPanelWindow()
         {
             InitializeComponent();
+            templateHistory = new Stack<ControlTemplate>();
         }
-
+      
+            
         public void BackClick(object sender, RoutedEventArgs e)
         {
             //prolly if in main adm panel window then do this.close()
@@ -65,6 +103,10 @@ namespace Desktop
         public void SupportClick(object sender, RoutedEventArgs e)
         {
             SwitchPageTemplate("Support");
+        }
+        public void TasksClick(object sender, RoutedEventArgs e)
+        {
+            SwitchPageTemplate("Tasks");
         }
 
         public void SecurityClick(object sender, RoutedEventArgs e)
@@ -90,14 +132,15 @@ namespace Desktop
         public void DeleteProjectClick(object sender, RoutedEventArgs e)
         {
             string error;
-            //bool success = ProjectManager.DeleteProject(4);
+            SwitchPageTemplate("DeleteProject");
 
         }
 
         public void OverviewCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
-           
+            ResetTextInputs();
+            SwitchPageTemplate("Overview");
+
         }
 
         public void OverviewConfirmClick(object sender, RoutedEventArgs e)
@@ -107,7 +150,17 @@ namespace Desktop
 
         public void UsersAddUserClick(object sender, RoutedEventArgs e)
         {
+            SwitchPageTemplate("UsersAddUser");
+        }
+        public void UserDeleteConfirmCancelClick(object sender, RoutedEventArgs e)
+        {
+            SwitchBackToPreviousTemplate();
+        }
 
+
+        public void DeleteUserFromProjectClick(object sender, RoutedEventArgs e)
+        {
+            SwitchPageTemplate("UserDeleteConfirm");
         }
 
         public void UsersAddUserConfirmClick(object sender, RoutedEventArgs e)
@@ -121,7 +174,7 @@ namespace Desktop
 
         public void UsersAddUserCancelClick(object sender, RoutedEventArgs e)
         {
-            SwitchPageTemplate("Overview");
+            SwitchBackToPreviousTemplate();
         }
 
         public void UserPageAddNewTaskToUserClick(object sender, RoutedEventArgs e)
@@ -145,14 +198,10 @@ namespace Desktop
 
         }
 
-        public void DeleteUserFromProjectClick(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         public void UserPageCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            SwitchBackToPreviousTemplate();
         }
 
         public void UserPageConfirmClick(object sender, RoutedEventArgs e)
@@ -160,10 +209,7 @@ namespace Desktop
 
         }
 
-        public void UserDeleteConfirmCancelClick(object sender, RoutedEventArgs e)
-        {
-            RevertToPreviousTemplate();
-        }
+
 
         public void UserDeleteConfirmConfirmClick(object sender, RoutedEventArgs e)
         {
@@ -172,7 +218,7 @@ namespace Desktop
 
         public void UserNewTaskCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            SwitchBackToPreviousTemplate();
         }
 
         public void UserNewTaskConfirmClick(object sender, RoutedEventArgs e)
@@ -197,7 +243,7 @@ namespace Desktop
 
         public void UserNewTaskAddAnotherUserCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            SwitchBackToPreviousTemplate();
         }
 
         public void UserNewTaskAddAnotherUserConfirmClick(object sender, RoutedEventArgs e)
@@ -212,7 +258,8 @@ namespace Desktop
 
         public void UserNewTaskNewTaskListCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            ResetTextInputs();
+            SwitchBackToPreviousTemplate();
         }
 
         public void UserNewTaskNewTaskListLeaderClick(object sender, RoutedEventArgs e)
@@ -222,7 +269,8 @@ namespace Desktop
 
         public void UserNewTaskExistingTaskListCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            ResetTextInputs();
+            SwitchBackToPreviousTemplate();
         }
 
         public void UserNewTaskExistingTaskListConfirmClick(object sender, RoutedEventArgs e)
@@ -232,7 +280,8 @@ namespace Desktop
 
         public void UserAssignExistingTaskCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            ResetTextInputs();
+            SwitchBackToPreviousTemplate();
         }
 
         public void UserAssignExistingTaskConfirmClick(object sender, RoutedEventArgs e)
@@ -242,47 +291,52 @@ namespace Desktop
 
         public void UserEditPermissionsManagementLevelClick(object sender, RoutedEventArgs e)
         {
-
+            //TU
+            SwitchPageTemplate("UserEditPermissionsManagementLevel");
         }
 
         public void UserEditPermissionsEditManageRightsClick(object sender, RoutedEventArgs e)
         {
-
+            //TU
+            SwitchPageTemplate("UserEditPermissions");
         }
 
         public void UserEditPermissionsTransferProjectCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            ResetTextInputs();
+            SwitchPageTemplate("Overview");
         }
 
         public void UserEditPermissionsTransferProjectConfirmClick(object sender, RoutedEventArgs e)
         {
-
+            
+            SwitchPageTemplate("UserEditPermissionsTransferProject");
         }
 
         public void UserEditPermissionsManagementLevelManagerClick(object sender, RoutedEventArgs e)
         {
-
+            //MANAGER
         }
 
         public void UserEditPermissionsManagementLevelTasklistLeaderClick(object sender, RoutedEventArgs e)
         {
-
+            //TL LEADER
         }
 
         public void UserEditPermissionsManagementLevelTasklLeaderClick(object sender, RoutedEventArgs e)
         {
-
+            //TASK LEADER
         }
 
         public void UserEditPermissionsManagementLevelTransferProjectRightsClick(object sender, RoutedEventArgs e)
         {
-
+            SwitchPageTemplate("UserEditPermissionsTransferProject");
         }
 
         public void UserEditPermissionsManagementLevelCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            ResetTextInputs();
+            SwitchBackToPreviousTemplate();
         }
 
         public void UserEditPermissionsManagementLevelConfirmClick(object sender, RoutedEventArgs e)
@@ -297,7 +351,7 @@ namespace Desktop
 
         public void UserEditPermissionsTasksCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            
         }
 
         public void UserTasksRemoveTaskClick(object sender, RoutedEventArgs e)
@@ -317,17 +371,19 @@ namespace Desktop
 
         public void UserTasksRemoveTasksCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            SwitchBackToPreviousTemplate();
+
+
         }
 
         public void TasksNewTaskListClick(object sender, RoutedEventArgs e)
         {
-
+            SwitchPageTemplate("TasksAddTaskList");
         }
 
         public void TasksNewTaskClick(object sender, RoutedEventArgs e)
         {
-
+            SwitchPageTemplate("TasksAddTask");
         }
 
         public void TasksAddTaskListConfirmClick(object sender, RoutedEventArgs e)
@@ -337,7 +393,8 @@ namespace Desktop
 
         public void TasksAddTaskListCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            ResetTextInputs();
+            SwitchBackToPreviousTemplate();
         }
 
         public void TasksAddTaskListLeaderClick(object sender, RoutedEventArgs e)
@@ -352,7 +409,8 @@ namespace Desktop
 
         public void TasksAddTaskListAssignLeaderCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            ResetTextInputs();
+            SwitchBackToPreviousTemplate();
         }
 
         public void TasksEditTaskListConfirmClick(object sender, RoutedEventArgs e)
@@ -362,17 +420,17 @@ namespace Desktop
 
         public void TasksEditTaskListCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            ResetTextInputs();
         }
 
         public void TasksEditTaskListLeaderClick(object sender, RoutedEventArgs e)
         {
-
+            SwitchPageTemplate("TasksEditTaskViewUsers");
         }
 
         public void TasksEditTaskListUserListClick(object sender, RoutedEventArgs e)
         {
-
+            SwitchPageTemplate("TasksEditTaskViewUsers");
         }
 
         public void TasksEditTaskListDeleteClick(object sender, RoutedEventArgs e)
@@ -387,7 +445,7 @@ namespace Desktop
 
         public void TasksEditTaskListChangeLeaderCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            ResetTextInputs();
         }
 
         public void TasksViewTaskListUsersAddUserClick(object sender, RoutedEventArgs e)
@@ -402,32 +460,18 @@ namespace Desktop
 
         public void TasksAddTaskCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            ResetTextInputs();
+            SwitchBackToPreviousTemplate();
         }
 
         public void TasksAddTaskAssignTaskListNewClick(object sender, RoutedEventArgs e)
         {
-
+            SwitchPageTemplate("TasksAddTaskList");
         }
 
         public void TasksAddTaskAssignTaskListExistingClick(object sender, RoutedEventArgs e)
         {
-            // Przykładowa logika dodawania zadania do istniejącej listy
-            string taskName = "Nowe zadanie"; // Możesz to zamienić na dynamicznie pobierane dane
-            DateTime taskDueDate = DateTime.Now.AddDays(7); // Przykładowa data wykonania
-
-            // Tworzenie nowego zadania
-            /*Task newTask = new Task
-            {
-                Name = taskName,
-                DueDate = taskDueDate
-            };
-
-            // Dodanie zadania do listy
-            ExistingTaskList.Add(newTask);
-
-            // Wyświetlenie komunikatu informacyjnego
-            MessageBox.Show($"Zadanie '{taskName}' zostało dodane do listy.", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);*/
+            //TasksAddTaskAssignTaskListExisting
         }
 
 
@@ -443,7 +487,9 @@ namespace Desktop
 
         public void TasksAddTaskNewTaskListAssignLeaderCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            ResetTextInputs();
+            SwitchBackToPreviousTemplate();
+
         }
 
         public void TasksAddTaskAddUsersConfirmClick(object sender, RoutedEventArgs e)
@@ -453,7 +499,7 @@ namespace Desktop
 
         public void TasksAddTaskAddUsersCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            SwitchBackToPreviousTemplate();
         }
 
         public void TasksAddTaskAssignLeaderConfirmClick(object sender, RoutedEventArgs e)
@@ -463,7 +509,7 @@ namespace Desktop
 
         public void TasksAddTaskAssignLeaderCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            SwitchBackToPreviousTemplate();
         }
 
         public void TasksEditTaskConfirmClick(object sender, RoutedEventArgs e)
@@ -473,7 +519,7 @@ namespace Desktop
 
         public void TasksEditTaskCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            SwitchBackToPreviousTemplate();
         }
 
         public void TasksEditTaskDeleteTaskClick(object sender, RoutedEventArgs e)
@@ -498,7 +544,7 @@ namespace Desktop
 
         public void TasksEditTaskAddUsersCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            SwitchBackToPreviousTemplate();
         }
 
         public void TasksEditTaskDeleteUsersAddClick(object sender, RoutedEventArgs e)
@@ -518,12 +564,13 @@ namespace Desktop
 
         public void TasksEditTaskAssignLeaderCancelClick(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            SwitchBackToPreviousTemplate();
         }
 
         public void SettingsWindowReset(object sender, RoutedEventArgs e)
         {
-
+            SwitchPageTemplate("Overview");
+            //ResetTextInputs(); imo there should be logic to remember basic settings but I guess we will just port it with each template load
         }
 
         public void SettingsWindowConfirm(object sender, RoutedEventArgs e)
@@ -536,7 +583,7 @@ namespace Desktop
         }
         public void TaskAddTaskListAssignLeaderCancel(object sender, RoutedEventArgs e)
         {
-            RevertToPreviousTemplate();
+            SwitchBackToPreviousTemplate();
         }
         public void AccountClick(object sender, RoutedEventArgs e)
         {
@@ -556,15 +603,7 @@ namespace Desktop
         }
         public void LogOutClick(object sender, RoutedEventArgs e)
         {
-            /*data = new();
-            data.Email = null;
-            data.Login = null;
-            data.Password = null;*/
-            this.Close();
+            SwitchPageTemplate("LogOut");
         }
-        /*public void LogOutClick(object sender, RoutedEventArgs e)
-        {
-
-        }*/
     }
 }
