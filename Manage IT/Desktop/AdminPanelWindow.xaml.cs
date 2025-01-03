@@ -315,18 +315,21 @@ namespace Desktop
 
         public void UserEditPermissionsManagementLevelManagerClick(object sender, RoutedEventArgs e)
         {
-            //MANAGER
+             //MANAGER
+             SwitchPageTemplate("UserEditPermissionsManagementLevelManager");
         }
 
         public void UserEditPermissionsManagementLevelTasklistLeaderClick(object sender, RoutedEventArgs e)
         {
-            //TL LEADER
+         //TL LEADER
+         SwitchPageTemplate("UserEditPermissionsManagementLevelTasklistLeader");
         }
 
-        public void UserEditPermissionsManagementLevelTasklLeaderClick(object sender, RoutedEventArgs e)
-        {
-            //TASK LEADER
-        }
+         public void UserEditPermissionsManagementLevelTasklLeaderClick(object sender, RoutedEventArgs e)
+         {        
+             //TASK LEADER
+             SwitchPageTemplate("UserEditPermissionsManagementLevelTaskLeader");
+         }
 
         public void UserEditPermissionsManagementLevelTransferProjectRightsClick(object sender, RoutedEventArgs e)
         {
