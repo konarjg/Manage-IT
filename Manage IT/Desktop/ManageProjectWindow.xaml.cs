@@ -1,6 +1,8 @@
 ﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,8 +16,31 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
+using Task = EFModeling.EntityProperties.DataAnnotations.Annotations.Task;
+
 namespace Desktop
 {
+    public static class VisualTreeTraversal
+    {
+        public static DependencyObject FindName(DependencyObject parent, string controlName)
+        {
+            int count = VisualTreeHelper.GetChildrenCount(parent);
+
+            for (int i = 0; i < count; i++)
+            {
+                var MyChild = VisualTreeHelper.GetChild(parent, i);
+                if (MyChild is FrameworkElement && ((FrameworkElement)MyChild).Name == controlName)
+                    return MyChild;
+
+                var FindResult = FindName(MyChild, controlName);
+                if (FindResult != null)
+                    return FindResult;
+            }
+
+            return null;
+        }
+    }
+
     public partial class ManageProjectWindow : Window
     {
         public Project Project { get; private set; }
@@ -24,6 +49,23 @@ namespace Desktop
         private User CurrentKickedUser { get; set; }
 
         private DispatcherTimer Timer;
+
+        public ObservableCollection<TaskList> TaskLists { get; set; } = new()
+        {
+            new()
+            {
+                Name="BRO"
+            }
+        };
+
+        public ObservableCollection<Task> Tasks { get; set; } = new()
+        {
+            new()
+            {
+                Name="BRO"
+            }
+        };
+
 
         private void SwitchPageTemplate(string name)
         {
@@ -165,6 +207,31 @@ namespace Desktop
             switch (TemplateKey)
             {
                 case "Main":
+                    var taskListsPanel = GetTemplateControl<StackPanel>("TaskLists");
+
+                    var taskList = new ContentControl()
+                    {
+                        ContentTemplate = Resources["TaskList"] as DataTemplate,
+                        Content = TaskLists[0],
+                        DataContext = TaskLists[0]
+                    };
+
+                    taskList.Loaded += (s, e) =>
+                    {
+                        var tasksPanel = VisualTreeTraversal.FindName(taskList, "Tasks") as StackPanel;
+
+                        var task = new ContentControl()
+                        {
+                            ContentTemplate = Resources["Task"] as DataTemplate,
+                            Content = Tasks[0],
+                            DataContext = Tasks[0]
+                        };
+
+                        tasksPanel.Children.Add(task);
+                    };
+
+                    taskListsPanel.Children.Add(taskList);
+
                     UpdateMainContent();
                     break;
 

@@ -20,8 +20,8 @@
       "DisplayProjects": "All",
       "SendSecurityAlerts": true,
       "SendProjectAlerts": false,
-      "RememberMe": false,
-      "Enable2FA": true
+      "RememberMe": true,
+      "Enable2FA": false
     }
   ]
 }
