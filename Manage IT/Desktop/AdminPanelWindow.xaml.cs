@@ -497,7 +497,7 @@ namespace Desktop
 
         public void TasksAddTaskAddUsersConfirmClick(object sender, RoutedEventArgs e)
         {
-
+            SwitchPageTemplate("TasksAddTaskAddUsers");
         }
 
         public void TasksAddTaskAddUsersCancelClick(object sender, RoutedEventArgs e)
