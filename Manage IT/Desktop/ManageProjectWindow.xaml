@@ -69,6 +69,150 @@
             </Grid>
         </ControlTemplate>
 
+        <DataTemplate x:Key="MemberListItem">
+            <StackPanel Orientation="Horizontal" Width="1600">
+                <TextBlock Text="{Binding Login}" Foreground="White" Width="150" Height="50" FontSize="36" TextTrimming="CharacterEllipsis"/>
+                <TextBlock Text="{Binding Email}" Foreground="White" Width="600" FontSize="36" Margin="50,0,0,0" TextTrimming="CharacterEllipsis"/>
+                <Button Width="100" Height="50" Click="ManageClick" Content="Manage" Background="White" FontSize="22" FontWeight="Bold" Margin="50,0,0,0">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                
+                <Button Tag="{Binding UserId}" Width="100" Height="50" Click="KickClick" Content="Kick" Background="White" FontSize="22" FontWeight="Bold" Margin="30,0,0,0">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </DataTemplate>
+
+        <ControlTemplate x:Key="ProjectMembers">
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                        <GradientStop Color="#000000" Offset="0.0"/>
+                        <GradientStop Color="#000040" Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="BackButton" Click="PanelBackClick" FontSize="120" Grid.Row="0" Grid.Column="0" Background="Transparent" Content="🔙" BorderThickness="0" Foreground="White" Grid.RowSpan="4" Margin="0,0,120,66"/>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="12" Grid.Column="1" Grid.ColumnSpan="4">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border BorderBrush="White" BorderThickness="0,0,0,5" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="6">
+                            <StackPanel Orientation="Horizontal" Width="1200" Height="80">
+                                <TextBlock x:Name="Error" Foreground="Red" Width="400" Height="50" FontSize="36" TextAlignment="Center"></TextBlock>
+                                <StackPanel Orientation="Horizontal" Width="600" Height="80" Margin="20,0,0,0">
+                                    <Grid x:Name="SearchBox" Width="400" Height="60">
+                                        <TextBox x:Name="SearchBoxText" Width="400" Height="60" Foreground="White" CaretBrush="White" Background="Transparent" BorderBrush="White" BorderThickness="5" FontSize="36" TextChanged="SearchBoxTextChanged" MaxLength="60" />
+                                        <TextBlock x:Name="SearchBoxPlaceholder" Width="400" Height="60" Margin="5,0,0,0" Foreground="LightGray" IsHitTestVisible="False" Background="Transparent" Text="Email or username" FontSize="36"  />
+                                    </Grid>
+                                    <Button x:Name="Invite" Width="150" Height="60" Background="White" Content="Invite" Margin="15,0,0,0" FontSize="36" FontWeight="Bold" Click="InviteClick">
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="15"/>
+                                            </Style>
+                                        </Button.Resources>
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <TextBlock x:Name="Header" Text="Members" Foreground="White" Grid.Row="2" Grid.Column="0" FontSize="36" TextAlignment="Center"/>
+
+                        <Border BorderBrush="White" BorderThickness="5,5,5,5" Grid.Row="3" Grid.RowSpan="13" Grid.Column="0" Grid.ColumnSpan="6" Margin="20,10,20,20">
+                            <ListBox x:Name="MembersList" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Setter Property="Focusable" Value="False"/>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                            </ListBox>
+                        </Border>
+
+
+                        <Border x:Name="KickPanel" BorderBrush="White" BorderThickness="5,5,5,5" Grid.Row="5" Grid.RowSpan="5" Grid.Column="2" Grid.ColumnSpan="2" Visibility="Collapsed">
+                            <StackPanel>
+                                <StackPanel.Background>
+                                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                        <GradientStop Color="#000000" Offset="0.0"/>
+                                        <GradientStop Color="#000040" Offset="0.75"/>
+                                    </LinearGradientBrush>
+                                </StackPanel.Background>
+                                
+                                <TextBlock x:Name="Title" Text="Do you really wish to kick this member?" Foreground="White" FontSize="32" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="320" Margin="0,30,0,0">
+                                    <Button x:Name="Cancel" Click="CancelKickClick" HorizontalAlignment="Center" Content="Cancel" Margin="0,0,5,0" Width="150" Height="60" FontSize="36" FontWeight="Bold" BorderBrush="Black" Background="White" BorderThickness="2"></Button>
+                                    <Button x:Name="Confirm" Click="ConfirmKickClick" HorizontalAlignment="Center" Content="Kick" Width="150" Margin="5,0,0,0" Height="60" FontSize="36" FontWeight="Bold" BorderBrush="Red" Foreground="Red" Background="#ffb3b2" BorderThickness="2"></Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        
+                    </Grid>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+
         <ControlTemplate x:Key="ProjectInfo">
             <Grid>
                 <Grid.Background>
@@ -212,6 +356,6 @@
     </Window.Resources>
 
     <Window.Template>
-        <StaticResource ResourceKey="Main" />
+        <StaticResource ResourceKey="ProjectMembers" />
     </Window.Template>
 </Window>

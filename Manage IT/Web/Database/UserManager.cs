@@ -24,6 +24,22 @@ public class UserManager
         CurrentSessionUser = null;
     }
 
+    public bool GetUser(long userId, out User user)
+    {
+        List<User> users;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE UserId = {userId}");
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out users) && users != null && users.Count != 0;
+
+        if (!success)
+        {
+            user = null;
+            return false;
+        }
+
+        user = users[0];
+        return true;
+    }
+
     public bool RegisterUser(User user, out string error)
     {
         if (UserExists(user))

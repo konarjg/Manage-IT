@@ -11,4 +11,5 @@ public class ProjectMembers
     public int UserId { get; set; }
     [ForeignKey("ProjectId")]
     public int ProjectId { get; set; }
+    public bool InviteAccepted { get; set; }
 }

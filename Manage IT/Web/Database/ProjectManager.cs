@@ -82,4 +82,12 @@ public class ProjectManager
 
         return success;
     }
+
+    public bool AcceptInvite(long projectId, long userId)
+    {
+        List<ProjectMembers> members;
+        var query = FormattableStringFactory.Create($"UPDATE ProjectMembers SET InviteAccepted = 1 WHERE ProjectId = {projectId} AND UserId = {userId}");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out members);
+    }
 }
