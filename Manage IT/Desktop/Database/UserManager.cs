@@ -113,9 +113,9 @@ public class UserManager
     {
         List<User> existingUsers;
         var queryUserExists = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE Email LIKE '{data.Email}' OR Login LIKE '{data.Login}'");
-        bool success = DatabaseAccess.Instance.ExecuteQuery(queryUserExists, out existingUsers);
+        bool success = DatabaseAccess.Instance.ExecuteQuery(queryUserExists, out existingUsers) && existingUsers != null && existingUsers.Count != 0;
 
-        if (existingUsers == null || !success)
+        if (!success)
         {
             user = null;
             return false;
@@ -184,6 +184,36 @@ public class UserManager
         }
 
         return true;
+    }
+
+    public bool SendProjectInvite(User user, Project project)
+    {
+        User data;
+
+        if (!UserExists(user, out data))
+        {
+            return false;
+        }
+
+        if (data.UserId == project.ManagerId)
+        {
+            return false;
+        }
+
+        bool success = ProjectManager.Instance.AddProjectMember(project.ProjectId, data.UserId);
+
+        if (!success)
+        {
+            return false;
+        }
+
+        var url = $"http://manageit.runasp.net/AcceptInvite?userId={data.UserId}&projectId={project.ProjectId}";
+        var subject = "Manage IT Notification: You have been invited to collaborate on a project";
+        var body = $"Dear {user.Login},<br/>You have been invited to collaborate on a project named {project.Name}.<br/>Project description:<br/>{project.Description}<br/>If You wish to accept the invite, click the following link<br/><a href='{url}'>Click here to accept the invite</a><br/>Happy collaborating on IT!";
+        string error;
+
+
+        return EmailService.SendEmail(data.Email, subject, body, out error);
     }
 
 }
