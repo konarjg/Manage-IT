@@ -18,9 +18,9 @@
         "Admin": false
       },
       "DisplayProjects": "All",
-      "SendSecurityAlerts": false,
+      "SendSecurityAlerts": true,
       "SendProjectAlerts": false,
-      "RememberMe": false,
+      "RememberMe": true,
       "Enable2FA": false
     }
   ]
