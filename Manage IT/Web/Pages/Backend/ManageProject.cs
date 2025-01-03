@@ -18,6 +18,50 @@ public class ManageProject : PageModel
 {
     public string Error { get; set; }
     public Project Project { get; set; }
+    public List<User> Members { get; set; } = new()
+    {
+        new()
+        {
+            Email = "konarskikrzysztof1@gmail.com",
+            Login = "konis"
+        },
+        new()
+        {
+            Email = "272844@student.pwr.edu.pl",
+            Login = "konar"
+        },
+        new()
+        {
+            Email = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@gmail.com",
+            Login = "konis"
+        },
+        new()
+        {
+            Email = "272844@student.pwr.edu.pl",
+            Login = "konar"
+        },
+        new()
+        {
+            Email = "konarskikrzysztof1@gmail.com",
+            Login = "konis"
+        },
+        new()
+        {
+            Email = "272844@student.pwr.edu.pl",
+            Login = "konar"
+        },
+        new()
+        {
+            Email = "konarskikrzysztof1@gmail.com",
+            Login = "konis"
+        },
+        new()
+        {
+            Email = "272844@student.pwr.edu.pl",
+            Login = "konar"
+        }
+    };
+
     public List<TaskList> TaskLists { get; set; }
     public ProjectAction Action { get; set; }
 
