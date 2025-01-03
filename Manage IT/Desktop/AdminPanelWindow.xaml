@@ -4459,6 +4459,10 @@
         </ControlTemplate>
     </Window.Resources>
     <Window.Template>
+<<<<<<< Updated upstream
         <StaticResource ResourceKey="Tasks"/>
+=======
+        <StaticResource ResourceKey="Invites"/>
+>>>>>>> Stashed changes
     </Window.Template>
 </Window>
