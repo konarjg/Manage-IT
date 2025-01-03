@@ -143,10 +143,33 @@ namespace Desktop
 
         }
 
-        public void OverviewConfirmClick(object sender, RoutedEventArgs e)
-        {
-            SwitchPageTemplate("OverviewConfirm");
-        }
+       public void OverviewConfirmClick(object sender, RoutedEventArgs e)
+       {
+           OverviewConfirm();
+       }
+
+       private void OverviewConfirm()
+       {
+           User data;
+           var newProjName = GetTemplateControl<TextBox>("OverviewChangeProjectNameTextBox").Text;
+           var password = GetTemplateControl<PasswordBox>("OverviewConfirmPassword").Password;
+           TextBlock overviewError = GetTemplateControl<TextBlock>("OverviewError");
+           data = new();
+           data.Login = UserManager.CurrentSessionUser.Login;
+           data.Password = password;
+          
+           
+           
+
+           bool success = UserManager.Instance.LoginUser(data);
+           if (success == false)
+               overviewError.Text = "Password is invalid";
+           else
+           {
+               overviewError.Foreground = Brushes.White;
+               overviewError.Text = "Project's name has been changed";
+           }
+       }
 
         public void UsersAddUserClick(object sender, RoutedEventArgs e)
         {
