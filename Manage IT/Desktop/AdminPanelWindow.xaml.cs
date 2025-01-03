@@ -190,7 +190,7 @@ namespace Desktop
 
         public void EditUserPermsClick(object sender, RoutedEventArgs e)
         {
-
+            SwitchPageTemplate("UserEditPermissions");
         }
 
         public void EditUserTasksClick(object sender, RoutedEventArgs e)
@@ -315,21 +315,21 @@ namespace Desktop
 
         public void UserEditPermissionsManagementLevelManagerClick(object sender, RoutedEventArgs e)
         {
-             //MANAGER
-             SwitchPageTemplate("UserEditPermissionsManagementLevelManager");
+            //MANAGER
+            SwitchPageTemplate("UserEditPermissionsManagementLevelManager");
         }
 
         public void UserEditPermissionsManagementLevelTasklistLeaderClick(object sender, RoutedEventArgs e)
         {
-         //TL LEADER
-         SwitchPageTemplate("UserEditPermissionsManagementLevelTasklistLeader");
+            //TL LEADER
+            SwitchPageTemplate("UserEditPermissionsManagementLevelTasklistLeader");
         }
 
-         public void UserEditPermissionsManagementLevelTasklLeaderClick(object sender, RoutedEventArgs e)
-         {        
-             //TASK LEADER
-             SwitchPageTemplate("UserEditPermissionsManagementLevelTaskLeader");
-         }
+        public void UserEditPermissionsManagementLevelTasklLeaderClick(object sender, RoutedEventArgs e)
+        {
+            //TASK LEADER
+            SwitchPageTemplate("UserEditPermissionsManagementLevelTaskLeader");
+        }
 
         public void UserEditPermissionsManagementLevelTransferProjectRightsClick(object sender, RoutedEventArgs e)
         {
@@ -359,12 +359,12 @@ namespace Desktop
 
         public void UserTasksRemoveTaskClick(object sender, RoutedEventArgs e)
         {
-
+            SwitchPageTemplate("UserTasksRemoveTasks");
         }
 
         public void UserTasksNewTaskClick(object sender, RoutedEventArgs e)
         {
-
+            SwitchPageTemplate("UserNewTask");
         }
 
         public void UserTasksRemoveTasksConfirmClick(object sender, RoutedEventArgs e)
@@ -474,7 +474,7 @@ namespace Desktop
 
         public void TasksAddTaskAssignTaskListExistingClick(object sender, RoutedEventArgs e)
         {
-            //TasksAddTaskAssignTaskListExisting
+            SwitchPageTemplate("TasksAddTaskAssignTaskListExisting");
         }
 
 
@@ -507,7 +507,7 @@ namespace Desktop
 
         public void TasksAddTaskAssignLeaderConfirmClick(object sender, RoutedEventArgs e)
         {
-
+            SwitchPageTemplate("TasksEditTaskChangeLeader");
         }
 
         public void TasksAddTaskAssignLeaderCancelClick(object sender, RoutedEventArgs e)
