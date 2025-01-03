@@ -213,7 +213,8 @@ namespace Desktop
                     {
                         ContentTemplate = Resources["TaskList"] as DataTemplate,
                         Content = TaskLists[0],
-                        DataContext = TaskLists[0]
+                        DataContext = TaskLists[0],
+                        Height = 350
                     };
 
                     taskList.Loaded += (s, e) =>
@@ -230,7 +231,7 @@ namespace Desktop
                         tasksPanel.Children.Add(task);
                     };
 
-                    taskListsPanel.Children.Add(taskList);
+                    taskListsPanel.Children.Insert(0, taskList);
 
                     UpdateMainContent();
                     break;
@@ -438,6 +439,50 @@ namespace Desktop
             await LoadMembersList();
             UpdateMembersContent();
             panel.Visibility = Visibility.Collapsed;
+        }
+
+        public void ClearCreateTaskListClick(object sender, RoutedEventArgs e)
+        {
+            var name = GetTemplateControl<TextBox>("CreateTaskListName");
+            var description = GetTemplateControl<TextBox>("CreateTaskListDescription");
+
+            name.Text = string.Empty;
+            description.Text = string.Empty;
+        }
+
+        public void CreateTaskListClick(object sender, RoutedEventArgs e)
+        {
+            var name = GetTemplateControl<TextBox>("CreateTaskListName").Text;
+            var description = GetTemplateControl<TextBox>("CreateTaskListDescription").Text;
+            var errorPopup = GetTemplateControl<Border>("TaskListErrorPopup");
+            var errorText = GetTemplateControl<TextBlock>("TaskListError");
+
+            if (name == string.Empty || description == string.Empty)
+            {
+                errorText.Text = "You have to fill in every field!";
+                errorPopup.Visibility = Visibility.Visible;
+                return;
+            }
+
+            TaskList data = new();
+            data.Name = name;
+            data.Description = description;
+
+            bool success = TaskListManager.Instance.CreateTaskList(data);
+
+            if (success)
+            {
+                return;
+            }
+
+            errorText.Text = "There was an unexpected error!";
+            errorPopup.Visibility = Visibility.Visible;
+        }
+
+        public void CloseTaskListErrorPopup(object sender, RoutedEventArgs e)
+        {
+            var errorPopup = GetTemplateControl<Border>("TaskListErrorPopup");
+            errorPopup.Visibility = Visibility.Collapsed;
         }
     }
 }

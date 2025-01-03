@@ -1,42 +1,70 @@
 ﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Task = EFModeling.EntityProperties.DataAnnotations.Annotations.Task;
 
 public class TaskManager
 {
-    //Singleton instance
     public static TaskManager Instance { get; private set; } 
 
-    //Create new instance and store it in Instance
     public static void Instantiate()
     {
-
+        Instance = new TaskManager();
     }
 
-    //Add a task to task list and also the database
-    //(you must also insert a new record to TaskDetails table)
-    public bool AddTaskToTaskList(TaskList list, Task task)
+    public bool GetTaskId(long taskListId, string name, out long taskId)
     {
+        List<Task> tasks;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Tasks WHERE TaskListId = {taskListId} AND Name LIKE '{name}'");
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out tasks);
+
+        if (!success || tasks == null || tasks.Count == 0)
+        {
+            taskId = -1;
+            return false;
+        }
+
+        taskId = tasks[0].TaskId;
         return true;
     }
 
-    //Select all tasks for given TaskList
-    public bool GetTasksForTaskList(TaskList list, out List<Task> tasks)
+    public bool GetAllTasks(long taskListId, out List<Task> tasks, out List<TaskDetails> taskDetails)
     {
-        tasks = null;
+        var queryTasks = FormattableStringFactory.Create($"SELECT * FROM dbo.Tasks WHERE TaskListId = {taskListId}");
+
+        bool success = DatabaseAccess.Instance.ExecuteQuery(queryTasks, out tasks);
+
+        if (!success)
+        {
+            taskDetails = null;
+            return false;
+        }
+
+        taskDetails = new();
+
+        foreach (var task in tasks)
+        {
+            List<TaskDetails> details;
+            var queryDetails = FormattableStringFactory.Create($"SELECT * FROM dbo.TaskDetails WHERE TaskId = {task.TaskId}");
+            success = DatabaseAccess.Instance.ExecuteQuery(queryDetails, out details);
+
+            if (!success || details == null || details.Count == 0)
+            {
+                return false;
+            }
+
+            taskDetails.Add(details[0]);
+        }
+
         return true;
     }
 
-    //Update task info with new values
-    public bool UpdateTask(Task task)
+    public bool CreateTask(Task data)
     {
-        return true;
-    }
+        List<Task> tasks;
+        var queryTasks = FormattableStringFactory.Create($"INSERT INTO dbo.Tasks (Name, TaskListId, Description, Deadline) VALUES ('{data.Name}', {data.TaskListId}, '{data.Description}', '{data.Deadline.ToString("yyyy-MM-dd")}')");
 
-    //Delete task from its list and from database
-    //(you must delete it from TaskDetails table too)
-    public bool DeleteTask(Task task)
-    {
-        return true;
+        return DatabaseAccess.Instance.ExecuteQuery(queryTasks, out tasks);
     }
 }
