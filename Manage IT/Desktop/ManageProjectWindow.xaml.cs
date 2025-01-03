@@ -12,13 +12,18 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Desktop
 {
     public partial class ManageProjectWindow : Window
     {
         public Project Project { get; private set; }
+        public List<User> Members { get; private set; }
         private string TemplateKey { get; set; }
+        private User CurrentKickedUser { get; set; }
+
+        private DispatcherTimer Timer;
 
         private void SwitchPageTemplate(string name)
         {
@@ -42,7 +47,30 @@ namespace Desktop
                 return;
             }
 
+            Timer = new()
+            {
+                Interval = TimeSpan.FromSeconds(1),
+            };
+            Timer.Tick += UpdateMembersTick;
+
+            LoadMembersList();
             SwitchPageTemplate("Main");
+        }
+
+        private System.Threading.Tasks.Task LoadMembersList()
+        {
+            return System.Threading.Tasks.Task.Run(() =>
+            {
+                List<User> members;
+                bool success = ProjectManager.Instance.GetProjectMembers(Project.ProjectId, out members);
+
+                Members = members;
+
+                if (Members == null)
+                {
+                    MessageBox.Show("Unexpected error occured!");
+                }
+            });
         }
 
         private void UpdateMainContent()
@@ -97,9 +125,42 @@ namespace Desktop
             placeholder.Text = Project.Name;
         }
 
+        private void UpdateMembersContent()
+        {
+            var list = GetTemplateControl<ListBox>("MembersList");
+
+            if (list == null)
+            {
+                return;
+            }
+
+            list.Items.Clear();
+
+            foreach (var member in Members)
+            {
+                var item = new ListBoxItem()
+                {
+                    ContentTemplate = Resources["MemberListItem"] as DataTemplate,
+                    Name = $"Member_{member.UserId}",
+                    DataContext = member,
+                    Content = member,
+                    Margin = new(30, 0, 0, 0)
+                };
+
+                list.Items.Add(item);
+            }
+        }
+
+        private async void UpdateMembersTick(object sender, EventArgs e)
+        {
+            await LoadMembersList();
+            Dispatcher.Invoke(() => UpdateMembersContent());
+        }
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+            Timer.Stop();
 
             switch (TemplateKey)
             {
@@ -109,6 +170,11 @@ namespace Desktop
 
                 case "ProjectInfo":
                     UpdateProjectInfoContent();
+                    break;
+
+                case "ProjectMembers":
+                    UpdateMembersContent();
+                    Timer.Start();
                     break;
 
                 case "Edit":
@@ -229,6 +295,82 @@ namespace Desktop
             {
                 placeholder.Visibility = Visibility.Collapsed;
             }
+        }
+
+        public void SearchBoxTextChanged(object sender, TextChangedEventArgs e)
+        {
+            var searchText = GetTemplateControl<TextBox>("SearchBoxText");
+            var placeholder = GetTemplateControl<TextBlock>("SearchBoxPlaceholder");
+
+            if (searchText.Text == "")
+            {
+                placeholder.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                placeholder.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        public void InviteClick(object sender, RoutedEventArgs e)
+        {
+            var searchBox = GetTemplateControl<TextBox>("SearchBoxText").Text;
+            var error = GetTemplateControl<TextBlock>("Error");
+
+            if (searchBox == string.Empty)
+            {
+                error.Text = "Enter a valid email or username!";
+                return;
+            }
+
+            User data = new()
+            {
+                Email = searchBox,
+                Login = searchBox
+            };
+
+            bool success = UserManager.Instance.SendProjectInvite(data, Project);
+
+            if (!success)
+            {
+                error.Text = "Could not send an invite!";
+                return;
+            }
+
+            error.Foreground = Brushes.White;
+            error.Text = "An invite has been sent!";
+        }
+
+        public void ManageClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public void KickClick(object sender, RoutedEventArgs e)
+        {
+            var panel = GetTemplateControl<Border>("KickPanel");
+            var button = sender as Button;
+            var userId = long.Parse(button.Tag.ToString());
+            CurrentKickedUser = Members.Where(x => x.UserId == userId).FirstOrDefault();
+
+            panel.Visibility = Visibility.Visible;
+        }
+
+        public void CancelKickClick(object sender, RoutedEventArgs e)
+        {
+            var panel = GetTemplateControl<Border>("KickPanel");
+            panel.Visibility = Visibility.Collapsed;
+        }
+
+        public async void ConfirmKickClick(object sender, RoutedEventArgs e)
+        {
+            var panel = GetTemplateControl<Border>("KickPanel");
+
+            ProjectManager.Instance.RemoveProjectMember(Project, CurrentKickedUser);
+            CurrentKickedUser = null;
+            await LoadMembersList();
+            UpdateMembersContent();
+            panel.Visibility = Visibility.Collapsed;
         }
     }
 }

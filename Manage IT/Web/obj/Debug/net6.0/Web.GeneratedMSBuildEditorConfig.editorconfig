@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\konis\Desktop\Manage IT\Manage IT\Web
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/AcceptInvite.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjZXB0SW52aXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/Calendar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FsZW5kYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

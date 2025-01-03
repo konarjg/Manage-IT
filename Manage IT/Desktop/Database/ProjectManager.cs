@@ -1,7 +1,9 @@
 ﻿using Desktop;
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Markup;
 
@@ -115,4 +117,55 @@ public class ProjectManager
 
         return success;
     }
-}
+
+    public bool GetProjectMembers(long projectId, out List<User> members)
+    {
+        members = new();
+
+        List<ProjectMembers> data;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.ProjectMembers WHERE ProjectId = {projectId}");
+
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out data) && data != null && data.Count != 0;
+
+        foreach (var entry in data)
+        {
+            List<User> result;
+            var queryUser = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE UserId = {entry.UserId}");
+            bool successUser = DatabaseAccess.Instance.ExecuteQuery(queryUser, out result) && result != null && result.Count != 0;
+            
+            if (successUser && result.FirstOrDefault() != null)
+            {
+                members.Add(result.FirstOrDefault());
+            }
+        }
+
+        return success;
+    }
+
+    public bool AddProjectMember(long projectId, long userId)
+    {
+        List<ProjectMembers> data;
+        var query = FormattableStringFactory.Create($"INSERT INTO dbo.ProjectMembers (ProjectId, UserId, InviteAccepted) VALUES ({projectId}, {userId}, 0)");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out data);
+    }
+
+    public bool RemoveProjectMember(Project project, User user)
+    {
+        List<ProjectMembers> data;
+        var query = FormattableStringFactory.Create($"DELETE FROM dbo.ProjectMembers WHERE ProjectId = {project.ProjectId} AND UserId = {user.UserId}");
+
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out data);
+
+        if (!success)
+        {
+            return false;
+        }
+
+        var subject = "Manage IT Notification: You have been kicked from a project";
+        var body = $"Dear {user.Login},<br/>Unfortunately You have been kicked from a project named {project.Name}. If You don't agree with this decision, contact the manager or an administrator!";
+        string error;
+
+        return EmailService.SendEmail(user.Email, subject, body, out error);
+    }
+} 
