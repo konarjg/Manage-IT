@@ -18,10 +18,10 @@
         "Admin": false
       },
       "DisplayProjects": "All",
-      "SendSecurityAlerts": false,
+      "SendSecurityAlerts": true,
       "SendProjectAlerts": false,
       "RememberMe": false,
-      "Enable2FA": false
+      "Enable2FA": true
     }
   ]
 }
