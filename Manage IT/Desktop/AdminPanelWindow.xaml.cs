@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using System.Reflection.PortableExecutable;
 
 
 
@@ -28,9 +29,12 @@ namespace Desktop
     public partial class AdminPanelWindow : Window
     {
         private Stack<ControlTemplate> templateHistory;
-
-
-
+        Project project;
+        
+        private T GetTemplateControl<T>(string name) where T : class
+        {
+            return Template.FindName(name, this as FrameworkElement) as T;
+        }
 
         private void SwitchPageTemplate(string name)
         {
@@ -43,23 +47,35 @@ namespace Desktop
             if (newTemplate != null)
             {
                 Template = newTemplate;
+               
             }
             else
             {
                 MessageBox.Show($"Template '{name}' not found in resources.");
             }
+            
         }
-
+        private void ProjectNameHeaderDispName(object sender, RoutedEventArgs e)
+        {
+            TextBlock header = GetTemplateControl<TextBlock>("ProjectNameHeader");
+            //header.Text = project.Name;
+            header.Text = "Project's name";
+        }
         private void SwitchBackToPreviousTemplate()
         {
+
             if (templateHistory.Count > 0)
             {
                 Template = templateHistory.Pop(); // Przywróć poprzedni szablon
+                TextBlock header = GetTemplateControl<TextBlock>("ProjectNameHeader");
+                if (header != null)
+                    header.Text = "Project name";
             }
             else
             {
                 MessageBox.Show("No previous template to switch back to.");
             }
+            
         }
 
 
@@ -80,6 +96,7 @@ namespace Desktop
         public AdminPanelWindow()
         {
             InitializeComponent();
+            //add logic to lead picked project name
             templateHistory = new Stack<ControlTemplate>();
         }
       
@@ -87,7 +104,7 @@ namespace Desktop
         public void BackClick(object sender, RoutedEventArgs e)
         {
             //prolly if in main adm panel window then do this.close()
-            SwitchPageTemplate("Overview");
+            SwitchBackToPreviousTemplate();
         }
 
         public void OverviewClick(object sender, RoutedEventArgs e)
@@ -143,33 +160,33 @@ namespace Desktop
 
         }
 
-       public void OverviewConfirmClick(object sender, RoutedEventArgs e)
-       {
-           OverviewConfirm();
-       }
+        public void OverviewConfirmClick(object sender, RoutedEventArgs e)
+        {
+            OverviewConfirm();
+        }
 
-       private void OverviewConfirm()
-       {
-           User data;
-           var newProjName = GetTemplateControl<TextBox>("OverviewChangeProjectNameTextBox").Text;
-           var password = GetTemplateControl<PasswordBox>("OverviewConfirmPassword").Password;
-           TextBlock overviewError = GetTemplateControl<TextBlock>("OverviewError");
-           data = new();
-           data.Login = UserManager.CurrentSessionUser.Login;
-           data.Password = password;
-          
+        private void OverviewConfirm()
+        {
+            User data;
+            var newProjName = GetTemplateControl<TextBox>("OverviewChangeProjectNameTextBox").Text;
+            var password = GetTemplateControl<PasswordBox>("OverviewConfirmPassword").Password;
+            TextBlock overviewError = GetTemplateControl<TextBlock>("OverviewError");
+            data = new();
+            data.Login = "test";
+            data.Password = password;
            
-           
+            
+            
 
-           bool success = UserManager.Instance.LoginUser(data);
-           if (success == false)
-               overviewError.Text = "Password is invalid";
-           else
-           {
-               overviewError.Foreground = Brushes.White;
-               overviewError.Text = "Project's name has been changed";
-           }
-       }
+            bool success = UserManager.Instance.LoginUser(data);
+            if (success == false)
+                overviewError.Text = "Password is invalid";
+            else
+            {
+                overviewError.Foreground = Brushes.White;
+                overviewError.Text = "Project's name has been changed";
+            }
+        }
 
         public void UsersAddUserClick(object sender, RoutedEventArgs e)
         {
@@ -188,7 +205,22 @@ namespace Desktop
 
         public void UsersAddUserConfirmClick(object sender, RoutedEventArgs e)
         {
-            SwitchPageTemplate("UsersAddUserConfirm");
+            var credential = GetTemplateControl<TextBox>("UsersAddUserSearchByUsernameTextBox").Text;
+            User data = new();
+            data.Login = credential;
+            data.Email = credential;
+            bool successUE = UserManager.Instance.UserExists(data, out User user);
+            if (successUE)
+            {
+                //basically initializing AP with project edition
+                ProjectManager.Instance.AddProjectMember(project.ProjectId, user.UserId);
+            }
+            //SwitchPageTemplate("UsersAddUserConfirm");
+            SwitchBackToPreviousTemplate();
+
+
+
+
         }
         public void AppearanceClick(object sender, RoutedEventArgs e)
         {
@@ -601,7 +633,7 @@ namespace Desktop
 
         public void SettingsWindowConfirm(object sender, RoutedEventArgs e)
         {
-
+            //imo there should be logic that saves the settings into settings.json
         }
         public void TaskAddTaskListAssignLeaderConfirm(object sender, RoutedEventArgs e)
         {
