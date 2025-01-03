@@ -17,10 +17,26 @@
         </DataTemplate>
 
         <DataTemplate x:Key="TaskList">
-            <Border BorderBrush="Red" BorderThickness="5">
-                <StackPanel x:Name="Tasks">
-                    <TextBlock Text="Bro" Foreground="Red" FontSize="48"></TextBlock>
-                </StackPanel>
+            <Border BorderBrush="White" BorderThickness="5" CornerRadius="15">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="{Binding Name}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Foreground="White" FontSize="28" Margin="18" Height="50"/>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" x:Name="Tasks" Margin="18">
+                        
+                    </StackPanel>
+                </Grid>
             </Border>
         </DataTemplate>
 
@@ -76,13 +92,89 @@
                 </Border>
 
                 <Border BorderBrush="White" BorderThickness="4" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="10">
-                    <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" Margin="10,10,10,10">
+                    <ScrollViewer ClipToBounds="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
                         <Border BorderBrush="White" BorderThickness="5">
-                            <StackPanel x:Name="TaskLists" Orientation="Horizontal">
-                                
+                            <StackPanel x:Name="TaskLists" Orientation="Vertical" Margin="10">
+                                <StackPanel.Resources>
+                                    <Style TargetType="ContentControl">
+                                        <Setter Property="Margin" Value="0,20,0,0"/>
+                                    </Style>
+                                </StackPanel.Resources>
+
+                                <ContentControl ContentTemplate="{StaticResource TaskList}" Height="350"></ContentControl>
+                                <ContentControl x:Name="CreateTaskList" Height="350">
+                                    <Border BorderBrush="White" BorderThickness="5" CornerRadius="15">
+                                        <Grid Margin="36,18,36,18">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Text="Name" Foreground="White" FontSize="36" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Margin="36,10,36,10"/>
+                                            <TextBox x:Name="CreateTaskListName" VerticalAlignment="Center" Background="Transparent" Foreground="White" BorderBrush="White" CaretBrush="White" BorderThickness="5" Grid.Row="0" Grid.Column="1" Grid.RowSpan="1" Grid.ColumnSpan="2" FontSize="24"/>
+                                            <TextBlock Text="Description" Foreground="White" FontSize="36" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Margin="36,10,36,10"/>
+                                            <TextBox x:Name="CreateTaskListDescription" Background="Transparent" Foreground="White" BorderBrush="White" CaretBrush="White" BorderThickness="5" Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Grid.ColumnSpan="2" FontSize="24"/>
+                                            <Grid Grid.Row="2" Grid.RowSpan="2" Margin="15">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Button Click="ClearCreateTaskListClick" Content="❌" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3" FontSize="36">
+                                                    <Button.Resources>
+                                                        <Style TargetType="Border">
+                                                            <Setter Property="CornerRadius" Value="15"></Setter>
+                                                        </Style>
+                                                    </Button.Resources>
+                                                </Button>
+                                                <Button Click="CreateTaskListClick" Content="➕" Margin="18" Grid.Column="1" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3" FontSize="36">
+                                                    <Button.Resources>
+                                                        <Style TargetType="Border">
+                                                            <Setter Property="CornerRadius" Value="15"></Setter>
+                                                        </Style>
+                                                    </Button.Resources>
+                                                </Button>
+                                            </Grid>
+                                        </Grid>
+                                        
+                                    </Border>
+                                </ContentControl>
                             </StackPanel>
                         </Border>
                     </ScrollViewer>
+                </Border>
+
+                <Border x:Name="TaskListErrorPopup" BorderBrush="White" BorderThickness="5" Grid.Row="5" Grid.Column="2" Grid.RowSpan="5" Grid.ColumnSpan="2" Visibility="Collapsed" >
+                    <StackPanel>
+                        <StackPanel.Background>
+                            <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                <GradientStop Color="#000000" Offset="0.0"/>
+                                <GradientStop Color="#000040" Offset="0.75"/>
+                            </LinearGradientBrush>
+                        </StackPanel.Background>
+
+                        <TextBlock x:Name="TaskListError" Foreground="#ffa0a0" FontSize="48" FontWeight="Bold" HorizontalAlignment="Center" Margin="30"></TextBlock>
+                        <Button Click="CloseTaskListErrorPopup" Content="Ok" Width="200" Height="100" FontSize="48" FontWeight="Bold" Background="White">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="15"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                    </StackPanel>
                 </Border>
             </Grid>
         </ControlTemplate>

@@ -118,6 +118,8 @@ namespace Desktop
             DatabaseAccess.Instantiate();
             UserManager.Instantiate();
             ProjectManager.Instantiate();
+            TaskListManager.Instantiate();
+            TaskManager.Instantiate();
             Instance = this;
             LoadAllSettings();
         }
