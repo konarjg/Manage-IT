@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
+      "DateTimePickerCustomNet6/3.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0-windows7.0/DateTimePickerCustomNet6.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/DateTimePickerCustomNet6.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
       "Microsoft.CSharp/4.5.0": {
         "type": "package",
         "compile": {
@@ -766,6 +778,21 @@
     }
   },
   "libraries": {
+    "DateTimePickerCustomNet6/3.0.0": {
+      "sha512": "cbhI13jaUOlr3p6SWByqmUp1sg8hbp+kV4C4Rj6Tc4fnSXksjTMTiIMa6DwBNtXlkDvSpKSDqgXfaCSzDT5gwQ==",
+      "type": "package",
+      "path": "datetimepickercustomnet6/3.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.md",
+        "datetimepickercustomnet6.3.0.0.nupkg.sha512",
+        "datetimepickercustomnet6.nuspec",
+        "icon.png",
+        "lib/net6.0-windows7.0/DateTimePickerCustomNet6.dll"
+      ]
+    },
     "Microsoft.CSharp/4.5.0": {
       "sha512": "kaj6Wb4qoMuH3HySFJhxwQfe8R/sJsNJnANrvv8WdFPMoNbKY5htfNscv+LHCu5ipz+49m2e+WQXpLXr9XYemQ==",
       "type": "package",
@@ -1982,6 +2009,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
+      "DateTimePickerCustomNet6 >= 3.0.0",
       "Microsoft.EntityFrameworkCore >= 6.0.35",
       "Microsoft.EntityFrameworkCore.Relational >= 6.0.35",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.35",
@@ -2033,6 +2061,10 @@
       "net6.0-windows7.0": {
         "targetAlias": "net6.0-windows",
         "dependencies": {
+          "DateTimePickerCustomNet6": {
+            "target": "Package",
+            "version": "[3.0.0, )"
+          },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[6.0.35, )"

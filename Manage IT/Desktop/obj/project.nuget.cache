@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "6+iTRzQOguwC8Yhe7jvsvriLGf1R6m4T4j4XbbubMDa0rbQu6X/xOhpbbQ/LZR4gA4Kbk7iQdPNaHB1EgagSOQ==",
+  "dgSpecHash": "rN9O8i68dZjnFN7vO3mOAA3O8CsWeNGJ9BiNsVRon/F4rFgO4vfkpaFwLWNZGHTCiBAL+DKrbDlppjGAGwZbbw==",
   "success": true,
   "projectFilePath": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Desktop\\Desktop.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\fuksa\\.nuget\\packages\\datetimepickercustomnet6\\3.0.0\\datetimepickercustomnet6.3.0.0.nupkg.sha512",
     "C:\\Users\\fuksa\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\fuksa\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.7\\microsoft.data.sqlclient.2.1.7.nupkg.sha512",
     "C:\\Users\\fuksa\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
