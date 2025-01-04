@@ -8,18 +8,6 @@
           "build/netstandard1.0/coverlet.collector.targets": {}
         }
       },
-      "DateTimePickerCustomNet6/3.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0-windows7.0/DateTimePickerCustomNet6.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0-windows7.0/DateTimePickerCustomNet6.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.WindowsDesktop.App.WPF"
-        ]
-      },
       "Extended.Wpf.Toolkit/4.6.1": {
         "type": "package",
         "compile": {
@@ -1409,7 +1397,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "DateTimePickerCustomNet6": "3.0.0",
+          "Extended.Wpf.Toolkit": "4.6.1",
           "Microsoft.EntityFrameworkCore": "6.0.35",
           "Microsoft.EntityFrameworkCore.Relational": "6.0.35",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.35",
@@ -1479,21 +1467,6 @@
         "coverlet-icon.png",
         "coverlet.collector.3.2.0.nupkg.sha512",
         "coverlet.collector.nuspec"
-      ]
-    },
-    "DateTimePickerCustomNet6/3.0.0": {
-      "sha512": "cbhI13jaUOlr3p6SWByqmUp1sg8hbp+kV4C4Rj6Tc4fnSXksjTMTiIMa6DwBNtXlkDvSpKSDqgXfaCSzDT5gwQ==",
-      "type": "package",
-      "path": "datetimepickercustomnet6/3.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.txt",
-        "README.md",
-        "datetimepickercustomnet6.3.0.0.nupkg.sha512",
-        "datetimepickercustomnet6.nuspec",
-        "icon.png",
-        "lib/net6.0-windows7.0/DateTimePickerCustomNet6.dll"
       ]
     },
     "Extended.Wpf.Toolkit/4.6.1": {
@@ -4364,23 +4337,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\fuksa\\.nuget\\packages\\": {},
+    "C:\\Users\\konis\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\DesktopTests\\DesktopTests.csproj",
+      "projectUniqueName": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\DesktopTests\\DesktopTests.csproj",
       "projectName": "DesktopTests",
-      "projectPath": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\DesktopTests\\DesktopTests.csproj",
-      "packagesPath": "C:\\Users\\fuksa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\DesktopTests\\obj\\",
+      "projectPath": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\DesktopTests\\DesktopTests.csproj",
+      "packagesPath": "C:\\Users\\konis\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\DesktopTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\fuksa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\konis\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4396,8 +4369,8 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows7.0",
           "projectReferences": {
-            "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Desktop\\Desktop.csproj": {
-              "projectPath": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Desktop\\Desktop.csproj"
+            "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Desktop\\Desktop.csproj": {
+              "projectPath": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Desktop\\Desktop.csproj"
             }
           }
         }
@@ -4465,7 +4438,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }
