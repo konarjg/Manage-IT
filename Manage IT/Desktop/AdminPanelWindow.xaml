@@ -1,4 +1,4 @@
-﻿<Window x:Class="Desktop.AdminPanelWindow"
+<Window x:Class="Desktop.AdminPanelWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -59,7 +59,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -79,7 +79,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -106,11 +106,12 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="OverviewHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Overview" FontSize="64" TextAlignment="Center" Foreground="White"/>
                         <TextBlock x:Name="OverviewChangeProjectNameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="1" Grid.RowSpan="1" Text="Change project name" FontSize="48" Foreground="White"/>
-                        <TextBox x:Name="OverviewChangeUserNameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBox x:Name="OverviewChangeProjectNameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
                         <TextBlock x:Name="OverviewConfirmPasswordText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="2" Grid.RowSpan="1" Text="Confirm Password" FontSize="48" Foreground="White"/>
                         <PasswordBox x:Name="OverviewConfirmPassword" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
                         <Button x:Name="OverviewResetButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="OverviewCancelClick" Content="Reject Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <Button x:Name="OverviewConfirmButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="OverviewConfirmClick" Content="Confirm Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -167,7 +168,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -187,7 +188,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -218,6 +219,7 @@
                         <Button x:Name="UsersAddUserButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="UsersAddUserClick" Content="Add user" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <TextBlock x:Name="UsersSearchByUsernameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by username" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="UsersSearchByUsernameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -274,7 +276,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -294,7 +296,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -326,6 +328,7 @@
                         <Button x:Name="UsersAddUserCancelButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Click="UsersAddUserCancelClick" Content="Cancel" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <TextBlock x:Name="UsersAddUserSearchByUsernameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by username" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="UsersAddUserSearchByUsernameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -382,7 +385,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -402,7 +405,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -437,6 +440,7 @@
                         <Button x:Name="UserPageDeleteUserFromProjectButton" Grid.Row="4" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="DeleteUserFromProjectClick" Content="Delete user from project" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffa0a0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <Button x:Name="UserPageCancelButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="UserPageCancelClick" Content="Reject Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <Button x:Name="UserPageConfirmButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="UserPageConfirmClick" Content="Confirm Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -493,7 +497,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -513,7 +517,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -542,6 +546,7 @@
                         <TextBlock x:Name="UserDeleteConfirmText" TextWrapping="Wrap" HorizontalAlignment="Center" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" Text="Are you sure you want to remove (username) from the project? The user will be erased from all tasks and task lists and will have to be invited again. (username)'s tasks and privileges will be reset." FontSize="48" Foreground="White"/>
                         <Button x:Name="UserDeleteConfirmCancelButton" Grid.Row="4" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="UserDeleteConfirmCancelClick" Content="Cancel" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="UserDeleteConfirmConfirmButton" Grid.Row="4" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="UserDeleteConfirmConfirmClick" Content="Remove from project" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffa0a0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -598,7 +603,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -618,7 +623,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -657,6 +662,7 @@
                         <Button x:Name="UserNewTaskAssignToExistingTaskListButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="2" Click="UserNewTaskAssignToExistingTaskListClick" Content="Assign user(s) to existing task list" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <TextBlock x:Name="UserNewTaskTaskListText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" Grid.RowSpan="1" Text="Assigned to task list: New task list" FontSize="48" Foreground="White"/>
                         <Button x:Name="UserNewTaskAssignToNewTaskListButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="2" Click="UserNewTaskAssignToNewTaskListClick" Content="Creare new task list for user(s)" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -713,7 +719,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -733,7 +739,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -765,6 +771,7 @@
                         <Button x:Name="UserNewTaskAddAnotherUserConfirmButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="UserNewTaskAddAnotherUserConfirmClick" Content="Confirm" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
                         <TextBlock x:Name="UserNewTaskAddAnotherUserSearchByUsernameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by username" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="UserNewTaskAddAnotherUserSearchByUsernameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -821,7 +828,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -841,7 +848,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -878,6 +885,7 @@
                         <TextBlock x:Name="UserNewTaskNewTaskListDeadlineText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="1" Text="Due in: (time)" FontSize="48" Foreground="White"/>
                         <TextBlock x:Name="UserNewTaskNewTaskListLeaderText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" Grid.RowSpan="1" Text="Tasklist leader: (leader)" FontSize="48" Foreground="White"/>
                         <Button x:Name="UserNewTaskNewTaskListLeaderButton" Grid.Row="5" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="UserNewTaskNewTaskListLeaderClick" Content="Add/Change" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -934,7 +942,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -954,7 +962,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -986,6 +994,7 @@
                         <Button x:Name="UserNewTaskExistingTaskListConfirmButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="UserNewTaskExistingTaskListConfirmClick" Content="Confirm" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
                         <TextBlock x:Name="UserNewTaskExistingTaskListSearchByTaskListNameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by task list name" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="UserNewTaskExistingTaskListSearchByTaskListNameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -1042,7 +1051,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -1062,7 +1071,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -1094,6 +1103,7 @@
                         <Button x:Name="UserAssignExistingTaskConfirmButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="UserAssignExistingTaskConfirmClick" Content="Confirm" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
                         <TextBlock x:Name="UserAssignExistingTaskSearchByTaskNameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by task name" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="UserAssignExistingTaskSearchByTaskNameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -1150,7 +1160,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -1170,7 +1180,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -1202,6 +1212,7 @@
                         <TextBlock x:Name="UserEditPermissionsTaskListLeadText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="1" Text="Tasklist leadership count:" FontSize="48" Foreground="White"/>
                         <TextBlock x:Name="UserEditPermissionsTaskLeadText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Grid.RowSpan="1" Text="Task leadership count:" FontSize="48" Foreground="White"/>
                         <Button x:Name="UserEditPermissionsEditManageRightsButton" Grid.Row="4" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="3" Click="UserEditPermissionsEditManageRightsClick" Content="Edit task management privileges" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -1258,7 +1269,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -1278,7 +1289,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -1308,7 +1319,8 @@
                         <TextBlock x:Name="UserEditPermissionsTransferProjectConfirmPasswordText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="1" Text="Confirm password: " FontSize="48" Foreground="White"/>
                         <PasswordBox x:Name="UserEditPermissionsTransferProjectConfirmPasswordPasswordBox" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="1" Padding="48,0,48,0" FontSize="48" Margin="18" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
                         <Button x:Name="UserEditPermissionsTransferProjectCancelButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="UserEditPermissionsTransferProjectCancelClick" Content="Cancel" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="UserEditPermissionsTransferProjectConfirmButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="UserEditPermissionsTransferProjectConfirmClick" Content="Remove from project" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffa0a0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
+                        <Button x:Name="UserEditPermissionsTransferProjectConfirmButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="UserEditPermissionsTransferProjectConfirmClick" Content="Transfer project rights" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffa0a0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -1365,7 +1377,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -1385,7 +1397,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -1422,6 +1434,7 @@
                         <Button x:Name="UserEditPermissionsManagementLevelTransferProjectRightsButton" Grid.Row="5" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="3" Click="UserEditPermissionsManagementLevelTransferProjectRightsClick" Content="Transfer administrator rights to user" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffa0a0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <Button x:Name="UserEditPermissionsManagementLevelCancelButton" Grid.Row="7" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="UserEditPermissionsManagementLevelCancelClick" Content="Reject Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <Button x:Name="UserEditPermissionsManagementLevelConfirmButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="2" Click="UserEditPermissionsManagementLevelConfirmClick" Content="Confirm Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -1478,7 +1491,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -1498,7 +1511,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -1530,6 +1543,7 @@
                         <Button x:Name="UserEditPermissionsTasksCancelButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Click="UserEditPermissionsTasksCancelClick" Content="Cancel" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <TextBlock x:Name="UserEditPermissionsTasksSearchByTaskNameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by task name" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="UserEditPermissionsTasksSearchByTaskNameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -1586,7 +1600,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -1606,7 +1620,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -1638,6 +1652,7 @@
                         <Button x:Name="UserTasksNewTaskButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Click="UserTasksNewTaskClick" Content="New task" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <TextBlock x:Name="UserTasksSearchByTaskNameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by task name" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="UserTasksSearchByTaskNameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -1694,7 +1709,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -1714,7 +1729,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -1746,6 +1761,7 @@
                         <Button x:Name="UserTasksRemoveTasksCancelButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Click="UserTasksRemoveTasksCancelClick" Content="Cancel" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <TextBlock x:Name="UserTasksRemoveTasksSearchByTaskNameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by task name" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="UserTasksRemoveTasksSearchByTaskNameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -1802,7 +1818,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -1822,7 +1838,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -1854,6 +1870,8 @@
                         <Button x:Name="TasksNewTaskButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Click="TasksNewTaskClick" Content="New task" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <TextBlock x:Name="TasksSearchByTaskNameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by task name" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="TasksSearchByTaskNameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
+
                     </Grid>
                 </Border>
             </Grid>
@@ -1910,7 +1928,8 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -1930,7 +1949,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -1967,6 +1986,7 @@
                         <TextBlock x:Name="TasksAddTaskListDeadlineText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="1" Text="Due in: (time)" FontSize="48" Foreground="White"/>
                         <TextBlock x:Name="TasksAddTaskListLeaderText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" Grid.RowSpan="1" Text="Tasklist leader: (leader)" FontSize="48" Foreground="White"/>
                         <Button x:Name="TasksAddTaskListLeaderButton" Grid.Row="5" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksAddTaskListLeaderClick" Content="Add/Change" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -2023,7 +2043,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -2043,7 +2063,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -2075,6 +2095,7 @@
                         <Button x:Name="TasksAddTaskListAssignLeaderCancelButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Click="TasksAddTaskListAssignLeaderCancelClick" Content="Cancel" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <TextBlock x:Name="TasksAddTaskListAssignLeaderSearchByUsernameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by username" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="TasksAddTaskListAssignLeaderSearchByUsernameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -2131,7 +2152,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -2151,7 +2172,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -2190,6 +2211,7 @@
                         <Button x:Name="TasksEditTaskListLeaderButton" Grid.Row="5" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksEditTaskListLeaderClick" Content="Change" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="TasksEditTaskListUserListButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="2" Click="TasksEditTaskListUserListClick" Content="Manage Users" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="TasksEditTaskListDeleteButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="2" Click="TasksEditTaskListDeleteClick" Content="Delete task list" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffa0a0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -2246,7 +2268,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -2266,7 +2288,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -2298,6 +2320,7 @@
                         <Button x:Name="TasksEditTaskListChangeLeaderCancelButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Click="TasksEditTaskListChangeLeaderCancelClick" Content="Cancel" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <TextBlock x:Name="TasksEditTaskListChangeLeaderSearchByUsernameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by username" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="TasksEditTaskListChangeLeaderSearchByUsernameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -2354,7 +2377,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -2374,7 +2397,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -2405,6 +2428,7 @@
                         <Button x:Name="TasksViewTaskListUsersAddUserButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksViewTaskListUsersAddUserClick" Content="Add user" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <TextBlock x:Name="TasksViewTaskListUsersAddUserSearchByUsernameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="1" Grid.RowSpan="1" Text="Search by username" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="TasksViewTaskListUsersAddUserSearchByUsernameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -2461,7 +2485,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -2481,7 +2505,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -2512,6 +2536,7 @@
                         <Button x:Name="TasksViewTaskListUsersAddUserButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksViewTaskListUsersAddUserClick" Content="Add user" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <TextBlock x:Name="TasksViewTaskListUsersAddUserSearchByUsernameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="1" Grid.RowSpan="1" Text="Search by username" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="TasksViewTaskListUsersAddUserSearchByUsernameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -2568,7 +2593,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -2588,7 +2613,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -2616,6 +2641,7 @@
                         <TextBlock x:Name="TasksHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Tasks" FontSize="64" TextAlignment="Center" Foreground="White"/>
                         <TextBlock x:Name="SearchByTaskNameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by task name" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="SearchByTaskNameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -2672,7 +2698,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -2692,7 +2718,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -2730,9 +2756,9 @@
                         <Button x:Name="TasksAddTaskAssignTaskListNewButton" Grid.Row="4" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Click="TasksAddTaskAssignTaskListNewClick" Content="New task list" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="TasksAddTaskAssignTaskListExistingButton" Grid.Row="4" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksAddTaskAssignTaskListExistingClick" Content="Existing task list" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <TextBlock x:Name="TasksAddTaskLeaderText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" Grid.RowSpan="1" Text="Task leader: (leader)" FontSize="48" Foreground="White"/>
-                        <Button x:Name="TasksAddTaskLeaderButton" Grid.Row="5" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksAddTaskListLeaderClick" Content="Add/Change" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="TasksAddTaskLeaderButton" Grid.Row="5" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksAddTaskAssignLeaderConfirmClick" Content="Add/Change" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <TextBlock x:Name="TasksAddTaskUsersAssignedToTaskText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6" Grid.RowSpan="1" Text="Users assigned: (user.count)" FontSize="48" Foreground="White"/>
-                        <Button x:Name="TasksAddTaskAssignUsersToTaskButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksAddTaskListLeaderClick" Content="Assign users" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="TasksAddTaskAssignUsersToTaskButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksAddTaskAddUsersConfirmClick" Content="Assign users" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -2789,7 +2815,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -2809,7 +2835,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -2846,6 +2872,7 @@
                         <TextBlock x:Name="TasksAddTaskNewTaskListDeadlineText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="1" Text="Due in: (time)" FontSize="48" Foreground="White"/>
                         <TextBlock x:Name="TasksAddTaskNewTaskListLeaderText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" Grid.RowSpan="1" Text="Task list leader: (leader)" FontSize="48" Foreground="White"/>
                         <Button x:Name="TasksAddTaskNewTaskListLeaderButton" Grid.Row="5" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksAddTaskListLeaderClick" Content="Add/Change" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="1" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -2902,7 +2929,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -2922,7 +2949,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -2954,6 +2981,7 @@
                         <Button x:Name="TasksAddTaskNewTaskListAssignLeaderCancelButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Click="TasksAddTaskNewTaskListAssignLeaderCancelClick" Content="Cancel" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <TextBlock x:Name="TasksAddTaskNewTaskListAssignLeaderSearchByUsernameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by username" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="TasksAddTaskNewTaskListAssignLeaderSearchByUsernameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -3010,7 +3038,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -3030,7 +3058,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -3062,6 +3090,7 @@
                         <Button x:Name="UserNewTaskExistingTaskListConfirmButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="UserNewTaskExistingTaskListConfirmClick" Content="Confirm" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
                         <TextBlock x:Name="UserNewTaskExistingTaskListSearchByTaskListNameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by task list name" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="UserNewTaskExistingTaskListSearchByTaskListNameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -3118,7 +3147,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -3138,7 +3167,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -3170,6 +3199,7 @@
                         <Button x:Name="TasksAddTaskAddUsersCancelButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Click="TasksAddTaskAddUsersCancelClick" Content="Cancel" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <TextBlock x:Name="TasksAddTaskAddUsersSearchByUsernameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by username" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="TasksAddTaskAddUsersSearchByUsernameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -3226,7 +3256,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -3246,7 +3276,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -3278,6 +3308,7 @@
                         <Button x:Name="TasksAddTaskAssignLeaderCancelButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Click="TasksAddTaskAssignLeaderCancelClick" Content="Cancel" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <TextBlock x:Name="TasksAddTaskAssignLeaderSearchByUsernameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by username" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="TasksAddTaskAssignLeaderSearchByUsernameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -3334,7 +3365,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -3354,7 +3385,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -3390,7 +3421,7 @@
                         <TextBox x:Name="TasksEditTaskDescriptionTextBox" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="3" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
                         <TextBlock x:Name="TasksEditTaskAssignedToTaskListText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="4" Grid.RowSpan="1" Text="Tasklist: (tasklist.name)" FontSize="48" Foreground="White"/>
                         <TextBlock x:Name="TasksEditTaskLeaderText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" Grid.RowSpan="1" Text="Task leader: (leader)" FontSize="48" Foreground="White"/>
-                        <Button x:Name="TasksEditTaskLeaderButton" Grid.Row="5" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksEditTaskListLeaderClick" Content="Add/Change" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="TasksEditTaskLeaderButton" Grid.Row="5" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksAddTaskAssignLeaderConfirmClick" Content="Add/Change" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <TextBlock x:Name="TasksEditTaskUsersAssignedToTaskText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6" Grid.RowSpan="1" Text="Users assigned: (user.count)" FontSize="48" Foreground="White"/>
                         <Button x:Name="TasksEditTaskAssignUsersToTaskButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksEditTaskListLeaderClick" Content="Edit users" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="TasksEditTaskDeleteTaskButton" Grid.Row="7" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="2" Click="TasksEditTaskDeleteTaskClick" Content="Delete task" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffa0a0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
@@ -3450,7 +3481,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -3470,7 +3501,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -3502,6 +3533,8 @@
                         <Button x:Name="TasksEditTaskViewUsersRemoveButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksEditTaskViewUsersRemoveClick" Content="Remove" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffa0a0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <TextBlock x:Name="TasksEditTaskViewUsersSearchByUsernameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by username" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="TasksEditTaskViewUsersSearchByUsernameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
+                        
                     </Grid>
                 </Border>
             </Grid>
@@ -3558,7 +3591,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -3578,7 +3611,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -3610,6 +3643,7 @@
                         <Button x:Name="TasksEditTaskAddUsersCancelButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Click="TasksEditTaskAddUsersCancelClick" Content="Cancel" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <TextBlock x:Name="TasksEditTaskAddUsersSearchByUsernameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by username" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="TasksEditTaskAddUsersSearchByUsernameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -3666,7 +3700,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -3686,7 +3720,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -3718,6 +3752,7 @@
                         <Button x:Name="TasksEditTaskDeleteUsersConfirmButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksEditTaskDeleteUsersRemoveClick" Content="Remove" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffa0a0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <TextBlock x:Name="TasksEditTaskDeleteUsersSearchByUsernameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by username" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="TasksEditTaskDeleteUsersSearchByUsernameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -3774,7 +3809,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="ProjectSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -3794,7 +3829,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18"  Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -3821,11 +3856,12 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock x:Name="TasksEditTaskAssignLeaderHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Reassign leader" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                        <TextBlock x:Name="TasksEditTaskAssignLeaderHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Assign leader" FontSize="64" TextAlignment="Center" Foreground="White"/>
                         <Button x:Name="TasksEditTaskAssignLeaderConfirmButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1" Click="TasksEditTaskAssignLeaderConfirmClick" Content="Confirm" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
                         <Button x:Name="TasksEditTaskAssignLeaderCancelButton" Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1" Click="TasksEditTaskAssignLeaderCancelClick" Content="Cancel" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <TextBlock x:Name="TasksEditTaskAssignLeaderSearchByUsernameText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1" Text="Search by username" FontSize="48" Foreground="White"/>
                         <TextBox x:Name="TasksEditTaskAssignLeaderSearchByUsernameTextBox" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Padding="48,0,48,0" FontSize="48" Margin="18" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -3882,7 +3918,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -3902,7 +3938,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -3930,6 +3966,7 @@
                         <TextBlock x:Name="SecurityHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Security" FontSize="64" TextAlignment="Center" Foreground="White"/>
                         <Button x:Name="SettingsResetButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="SettingsWindowReset" Content="Reject Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <Button x:Name="SettingsConfirmButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="SettingsWindowConfirm" Content="Confirm Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -3986,7 +4023,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -4006,7 +4043,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -4034,6 +4071,7 @@
                         <TextBlock x:Name="AuditLogHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Audit log" FontSize="64" TextAlignment="Center" Foreground="White"/>
                         <Button x:Name="SettingsResetButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="SettingsWindowReset" Content="Reject Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <Button x:Name="SettingsConfirmButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="SettingsWindowConfirm" Content="Confirm Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -4090,7 +4128,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -4110,7 +4148,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#c0c0ff" Foreground="#0000a0" BorderBrush="#0000a0" BorderThickness="3"/>
@@ -4138,6 +4176,7 @@
                         <TextBlock x:Name="InvitesHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Invites" FontSize="64" TextAlignment="Center" Foreground="White"/>
                         <Button x:Name="SettingsResetButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="SettingsWindowReset" Content="Reject Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <Button x:Name="SettingsConfirmButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="SettingsWindowConfirm" Content="Confirm Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -4194,7 +4233,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -4214,7 +4253,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -4242,6 +4281,7 @@
                         <TextBlock x:Name="AdditionalSettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Additional settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
                         <Button x:Name="SettingsResetButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="SettingsWindowReset" Content="Reject Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <Button x:Name="SettingsConfirmButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="SettingsWindowConfirm" Content="Confirm Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -4298,7 +4338,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -4318,7 +4358,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -4346,6 +4386,7 @@
                         <TextBlock x:Name="SupportHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="1" FontWeight="Bold" Text="Support" FontSize="64" TextAlignment="Center" Foreground="White"/>
                         <Button x:Name="SettingsResetButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="SettingsWindowReset" Content="Reject Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
                         <Button x:Name="SettingsConfirmButton" Grid.Row="8" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="SettingsWindowConfirm" Content="Confirm Changes" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -4402,7 +4443,7 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Back" Click="BackClick" Content="Back" Grid.Column="0" Grid.ColumnSpan="1" FontSize="36" Margin="24" Background="White" FontWeight="Bold" Foreground="Black" BorderBrush="Black"/>
                     <TextBlock x:Name="SettingsHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Text="Project settings" FontSize="64" TextAlignment="Center" Foreground="White"/>
-                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" FontSize="64" TextAlignment="Center" Foreground="White"/>
+                    <TextBlock x:Name="ProjectNameHeader" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="6" FontWeight="Bold" Text="ProjectName" Loaded="ProjectNameHeaderDispName" FontSize="64" TextAlignment="Center" Foreground="White"/>
                 </Grid>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="18" Margin="24">
                     <Grid>
@@ -4422,7 +4463,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Overview" Grid.Row="0" Grid.RowSpan="1" Click="OverviewClick" Content="Overview" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Users" Grid.Row="1" Grid.RowSpan="1" Click="UsersClick" Content="Users" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="SupportClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
+                        <Button x:Name="Tasks" Grid.Row="2" Grid.RowSpan="1" Click="TasksClick" Content="Tasks" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Security" Grid.Row="3" Grid.RowSpan="1" Click="SecurityClick" Content="Security" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="AuditLog" Grid.Row="4" Grid.RowSpan="1" Click="AuditLogClick" Content="Audit Log" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
                         <Button x:Name="Invites" Grid.Row="5" Grid.RowSpan="1" Click="InvitesClick" Content="Invites" HorizontalContentAlignment="Left" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
@@ -4452,17 +4493,14 @@
                         <TextBlock x:Name="DeleteProjectConfirmPasswordText" HorizontalAlignment="Left" Padding="64,0,64,0" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="1" Text="Confirm password: " FontSize="48" Foreground="White"/>
                         <PasswordBox x:Name="DeleteProjectConfirmPasswordPasswordBox" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="1" Padding="48,0,48,0" FontSize="48" Margin="18" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5"/>
                         <Button x:Name="DeleteProjectCancelButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" Click="UserEditPermissionsTransferProjectCancelClick" Content="Cancel" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3"/>
-                        <Button x:Name="DeleteProjectConfirmButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="UserEditPermissionsTransferProjectConfirmClick" Content="Remove from project" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffa0a0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
+                        <Button x:Name="DeleteProjectConfirmButton" Grid.Row="6" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="1" Click="DeleteProjectConfirmClick" Content="Delete project" HorizontalContentAlignment="Center" Padding="48,0,48,0" FontSize="32" Margin="18" Background="#ffa0a0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3"/>
+                        <TextBlock x:Name="Error" HorizontalAlignment="Center" Text=""  VerticalAlignment="Top" Grid.Row="7" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                     </Grid>
                 </Border>
             </Grid>
         </ControlTemplate>
     </Window.Resources>
     <Window.Template>
-<<<<<<< Updated upstream
-        <StaticResource ResourceKey="Tasks"/>
-=======
-        <StaticResource ResourceKey="Invites"/>
->>>>>>> Stashed changes
+        <StaticResource ResourceKey="Overview"/>
     </Window.Template>
 </Window>
