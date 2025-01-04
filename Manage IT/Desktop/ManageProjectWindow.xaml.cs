@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,7 +16,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-
+using Xceed.Wpf.AvalonDock.Controls;
+using Xceed.Wpf.Toolkit;
+using Xceed.Wpf.Toolkit.PropertyGrid;
+using MessageBox = System.Windows.MessageBox;
 using Task = EFModeling.EntityProperties.DataAnnotations.Annotations.Task;
 
 namespace Desktop
@@ -454,8 +458,8 @@ namespace Desktop
         {
             var name = GetTemplateControl<TextBox>("CreateTaskListName").Text;
             var description = GetTemplateControl<TextBox>("CreateTaskListDescription").Text;
-            var errorPopup = GetTemplateControl<Border>("TaskListErrorPopup");
-            var errorText = GetTemplateControl<TextBlock>("TaskListError");
+            var errorPopup = GetTemplateControl<Border>("ErrorPopup");
+            var errorText = GetTemplateControl<TextBlock>("Error");
 
             if (name == string.Empty || description == string.Empty)
             {
@@ -479,20 +483,110 @@ namespace Desktop
             errorPopup.Visibility = Visibility.Visible;
         }
 
-        public void CloseTaskListErrorPopup(object sender, RoutedEventArgs e)
+        public void CloseErrorPopup(object sender, RoutedEventArgs e)
         {
-            var errorPopup = GetTemplateControl<Border>("TaskListErrorPopup");
+            var errorPopup = GetTemplateControl<Border>("ErrorPopup");
             errorPopup.Visibility = Visibility.Collapsed;
         }
 
         public void CreateTaskNameTextChanged(object sender, TextChangedEventArgs e)
         {
+            var name = sender as TextBox;
+            var placeholder = name.Parent.FindVisualChildren<TextBlock>().ToList()[0];
 
+            if (name.Text != "")
+            {
+                placeholder.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                placeholder.Visibility = Visibility.Visible;
+            }
         }
 
         public void CreateTaskDescriptionTextChanged(object sender, TextChangedEventArgs e)
         {
+            var description = sender as TextBox;
+            var placeholder = description.Parent.FindVisualChildren<TextBlock>().ToList()[0];
 
+            if (description.Text != "")
+            {
+                placeholder.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                placeholder.Visibility = Visibility.Visible;
+            }
         }
+
+        public void CreateTaskDeadlineTextChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            var deadline = sender as DateTimePicker;
+            var placeholder = deadline.Parent.FindVisualChildren<TextBlock>().ToList()[0];
+
+            if (e.NewValue != null)
+            {
+                placeholder.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                placeholder.Visibility = Visibility.Visible;
+            }
+        }
+
+        public void ClearCreateTaskClick(object sender, RoutedEventArgs e)
+        {
+            var buttonGrid = (sender as Button).Parent as Grid;
+            var mainGrid = buttonGrid.Parent as Grid;
+
+            var innerGrids = mainGrid.FindVisualChildren<Grid>().ToList();
+
+            var name = innerGrids.Where(x => x.Name == "NameGrid").FirstOrDefault().FindVisualChildren<TextBox>().ToList()[0];
+            var description = innerGrids.Where(x => x.Name == "DescriptionGrid").FirstOrDefault().FindVisualChildren<TextBox>().ToList()[0];
+            var deadline = innerGrids.Where(x => x.Name == "DeadlineGrid").FirstOrDefault().FindVisualChildren<DateTimePicker>().ToList()[0];
+
+            name.Text = string.Empty;
+            description.Text = string.Empty;
+            deadline.Value = null;
+        }
+
+        public void CreateTaskClick(object sender, RoutedEventArgs e)
+        {
+            var buttonGrid = (sender as Button).Parent as Grid;
+            var mainGrid = buttonGrid.Parent as Grid;
+
+            var innerGrids = mainGrid.FindVisualChildren<Grid>().ToList();
+
+            var name = innerGrids.Where(x => x.Name == "NameGrid").FirstOrDefault().FindVisualChildren<TextBox>().ToList()[0].Text;
+            var description = innerGrids.Where(x => x.Name == "DescriptionGrid").FirstOrDefault().FindVisualChildren<TextBox>().ToList()[0].Text;
+            var deadline = innerGrids.Where(x => x.Name == "DeadlineGrid").FirstOrDefault().FindVisualChildren<DateTimePicker>().ToList()[0].Value;
+            var errorPopup = GetTemplateControl<Border>("ErrorPopup");
+            var errorText = GetTemplateControl<TextBlock>("Error");
+
+            if (name == string.Empty || description == string.Empty || deadline == null)
+            {
+                errorPopup.Visibility = Visibility.Visible;
+                errorText.Text = "You have to fill in every field!";
+                return;
+            }
+
+            Task data = new()
+            {
+                Name = name,
+                Description = description,
+                Deadline = (DateTime)deadline
+            };
+
+            bool success = TaskManager.Instance.CreateTask(data);
+
+            if (success)
+            {
+                return;
+            }
+
+            errorPopup.Visibility = Visibility.Visible;
+            errorText.Text = "There was an unexpected error!";
+        }
+        
     }
 }

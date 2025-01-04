@@ -133,5 +133,25 @@ C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Desktop\obj\Debug\net6.0-wind
 C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Desktop\obj\Debug\net6.0-windows\Desktop.genruntimeconfig.cache
 C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Desktop\obj\Debug\net6.0-windows\ref\Desktop.dll
 C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\DateTimePickerCustomNet6.dll
+<<<<<<< HEAD
 C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Desktop\obj\Debug\net6.0-windows\ChatWindow.g.cs
 C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Desktop\obj\Debug\net6.0-windows\ChatWindow.baml
+=======
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\Xceed.Wpf.AvalonDock.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\Xceed.Wpf.Toolkit.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\cs-CZ\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\de\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\es\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\fr\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\hu\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\it\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\ja-JP\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\pt-BR\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\ro\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\ru\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\sv\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\bin\Debug\net6.0-windows\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+>>>>>>> ed9acbd6e7cca30bfb4c5a33bd0d06b3b97a0148
