@@ -92,5 +92,14 @@ namespace Desktop
 
             Close();
         }
+
+        public void ChatClick(object sender, RoutedEventArgs e)
+        {
+            var window = new ChatWindow();
+            window.Activate();
+            window.Visibility = Visibility.Visible;
+
+            Close();
+        }
     }
 }
