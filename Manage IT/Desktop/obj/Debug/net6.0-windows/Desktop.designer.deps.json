@@ -6,6 +6,14 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
+      "DateTimePickerCustomNet6/3.0.0": {
+        "runtime": {
+          "lib/net6.0-windows7.0/DateTimePickerCustomNet6.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.0.0.0"
+          }
+        }
+      },
       "Microsoft.CSharp/4.5.0": {},
       "Microsoft.Data.SqlClient/2.1.7": {
         "dependencies": {
@@ -573,6 +581,13 @@
     }
   },
   "libraries": {
+    "DateTimePickerCustomNet6/3.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cbhI13jaUOlr3p6SWByqmUp1sg8hbp+kV4C4Rj6Tc4fnSXksjTMTiIMa6DwBNtXlkDvSpKSDqgXfaCSzDT5gwQ==",
+      "path": "datetimepickercustomnet6/3.0.0",
+      "hashPath": "datetimepickercustomnet6.3.0.0.nupkg.sha512"
+    },
     "Microsoft.CSharp/4.5.0": {
       "type": "package",
       "serviceable": true,

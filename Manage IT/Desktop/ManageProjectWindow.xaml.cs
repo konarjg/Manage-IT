@@ -484,5 +484,15 @@ namespace Desktop
             var errorPopup = GetTemplateControl<Border>("TaskListErrorPopup");
             errorPopup.Visibility = Visibility.Collapsed;
         }
+
+        public void CreateTaskNameTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        public void CreateTaskDescriptionTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
