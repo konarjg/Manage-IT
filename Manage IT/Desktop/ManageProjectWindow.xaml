@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:custom="clr-namespace:DateTimePickerCustomNet6;assembly=DateTimePickerCustomNet6"
         xmlns:local="clr-namespace:Desktop"
+        xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         mc:Ignorable="d"
         Title="Manage IT" Width="2560" Height="1080" WindowState="Maximized" Loaded="WindowLoaded">
 
@@ -32,51 +32,66 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="{Binding Name}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Foreground="White" FontSize="28" Margin="18" Height="50"/>
+                    <TextBlock Text="{Binding Name}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Foreground="White" FontSize="28" Margin="18,18,18,0" Height="50"/>
 
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" x:Name="Tasks" Margin="18">
-                        <ContentControl x:Name="CreateTask" Width="350">
-                            <Border BorderBrush="White" BorderThickness="3">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
+                    <ScrollViewer Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="18,0,18,18" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+                        <StackPanel Orientation="Horizontal" x:Name="Tasks">
+                            <StackPanel.Resources>
+                                <Style TargetType="ContentControl">
+                                    <Setter Property="Margin" Value="5,0,5,5"></Setter>
+                                </Style>
+                            </StackPanel.Resources>
+                            
+                            <ContentControl x:Name="CreateTask" Width="450" Height="200">
+                                <Border BorderBrush="White" BorderThickness="3">
+                                    <Grid x:Name="MainGrid">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
 
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
 
-                                    <Grid Grid.Row="0">
-                                        <TextBox x:Name="CreateTaskName" Foreground="White" CaretBrush="White" BorderBrush="White" BorderThickness="3" Background="Transparent" FontSize="24" Margin="5" TextChanged="CreateTaskNameTextChanged"/>
-                                        <TextBlock x:Name="CreateTaskNamePlaceholder" Foreground="LightGray" Text="Name" Margin="10,4,10,4" FontSize="14" IsHitTestVisible="False" />
-                                    </Grid>
+                                        <Grid x:Name="NameGrid" Grid.Row="0">
+                                            <TextBox x:Name="CreateTaskName" Foreground="White" CaretBrush="White" BorderBrush="White" BorderThickness="3" Background="Transparent" FontSize="24" Margin="5" TextChanged="CreateTaskNameTextChanged"/>
+                                            <TextBlock x:Name="CreateTaskNamePlaceholder" Foreground="LightGray" Text="Name" Margin="10,4,10,4" FontSize="24" IsHitTestVisible="False" />
+                                        </Grid>
                                     
-                                    <Grid Grid.Row="1" Grid.RowSpan="2">
-                                        <TextBox x:Name="CreateTaskDescription" Foreground="White" CaretBrush="White" BorderBrush="White" BorderThickness="3" Background="Transparent" FontSize="24" Margin="5" TextChanged="CreateTaskDescriptionTextChanged" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible"/>
-                                        <TextBlock x:Name="CreateTaskDescriptionPlaceholder" Foreground="LightGray" Text="Description" Margin="10,4,10,4" FontSize="14" IsHitTestVisible="False" />
+                                        <Grid x:Name="DescriptionGrid" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="50,0,50,0">
+                                            <TextBox x:Name="CreateTaskDescription" Foreground="White" CaretBrush="White" BorderBrush="White" BorderThickness="3" Background="Transparent" FontSize="24" Margin="5" TextChanged="CreateTaskDescriptionTextChanged" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible"/>
+                                            <TextBlock x:Name="CreateTaskDescriptionPlaceholder" Foreground="LightGray" Text="Description" Margin="10,4,10,4" FontSize="24" IsHitTestVisible="False" />
+                                        </Grid>
+
+                                        <Grid x:Name="DeadlineGrid" Grid.Column="1">
+                                            <wpfTool:DateTimePicker x:Name="CreateTaskDeadline" Background="Transparent" BorderBrush="White" BorderThickness="3" FontSize="20" Foreground="White" Format="Custom" FormatString="dd:MM:yyyy HH:mm" Margin="5" ValueChanged="CreateTaskDeadlineTextChanged"/>
+                                            <TextBlock x:Name="CreateTaskDeadlinePlaceholder" Foreground="LightGray" Text="Deadline" Margin="10,4,10,4" FontSize="20" IsHitTestVisible="False"></TextBlock>
+                                        </Grid>
+
+                                        <Grid x:Name="ButtonGrid" Grid.Row="3" Grid.ColumnSpan="2">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Button Click="ClearCreateTaskClick" Content="❌" FontSize="24" Margin="2" Grid.Column="3" Background="#ffe0e0" BorderBrush="#800000" BorderThickness="2" Foreground="#800000"/>
+                                            <Button Click="CreateTaskClick" Content="➕" FontSize="24" Margin="2" Grid.Column="4" Background="#e0ffe0" BorderBrush="#008000" BorderThickness="2" Foreground="#008000"/>
+                                        </Grid>
                                     </Grid>
-
-                                    <custom:PopupDateTimePicker Grid.Column="1" Foreground="White" Background="Transparent" HorizontalAlignment="Left">
-                                         
-                                    </custom:PopupDateTimePicker>  
-
-                                    <DatePicker Visibility="Collapsed" Foreground="White" Grid.Column="1" Margin="5" SelectedDate="1.1.1987" FontSize="22">
-                                        <DatePicker.Resources>
-                                            <Style TargetType="DatePickerTextBox">
-                                                <Setter Property="Background" Value="Transparent"/>
-                                                <Setter Property="VerticalAlignment" Value="Center"/>
-                                                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                                            </Style>
-                                        </DatePicker.Resources>
-                                    </DatePicker>
-                                </Grid>
-                            </Border>
-                        </ContentControl>
-                    </StackPanel>
+                                </Border>
+                            </ContentControl>
+                        </StackPanel>
+                    </ScrollViewer>
                 </Grid>
             </Border>
         </DataTemplate>
@@ -198,7 +213,7 @@
                     </ScrollViewer>
                 </Border>
 
-                <Border x:Name="TaskListErrorPopup" BorderBrush="White" BorderThickness="5" Grid.Row="5" Grid.Column="2" Grid.RowSpan="5" Grid.ColumnSpan="2" Visibility="Collapsed" >
+                <Border x:Name="ErrorPopup" BorderBrush="White" BorderThickness="5" Grid.Row="5" Grid.Column="2" Grid.RowSpan="5" Grid.ColumnSpan="2" Visibility="Collapsed" >
                     <StackPanel>
                         <StackPanel.Background>
                             <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
@@ -207,8 +222,8 @@
                             </LinearGradientBrush>
                         </StackPanel.Background>
 
-                        <TextBlock x:Name="TaskListError" Foreground="#ffa0a0" FontSize="48" FontWeight="Bold" HorizontalAlignment="Center" Margin="30"></TextBlock>
-                        <Button Click="CloseTaskListErrorPopup" Content="Ok" Width="200" Height="100" FontSize="48" FontWeight="Bold" Background="White">
+                        <TextBlock x:Name="Error" Foreground="#ffa0a0" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="30"></TextBlock>
+                        <Button Click="CloseErrorPopup" Content="Ok" Width="200" Height="100" FontSize="48" FontWeight="Bold" Background="White">
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="15"/>
