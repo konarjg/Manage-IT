@@ -10,6 +10,9 @@
     <Compile Update="AdminPanelWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="ChatWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="CreateProjectWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,6 +31,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="AdminPanelWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ChatWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="CreateProjectWindow.xaml">

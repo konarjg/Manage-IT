@@ -4,17 +4,30 @@
 winexe
 C#
 .cs
+<<<<<<< HEAD
+C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Desktop\obj\Debug\net6.0-windows\
+=======
 C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\obj\Debug\net6.0-windows\
+>>>>>>> ed9acbd6e7cca30bfb4c5a33bd0d06b3b97a0148
 Desktop
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
+<<<<<<< HEAD
+C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Desktop\App.xaml
+8976823936
+
+34-1986865087
+217-1630196227
+AdminPanelWindow.xaml;CalendarWindow.xaml;ChatWindow.xaml;CreateProjectWindow.xaml;MainWindow.xaml;ManageProjectWindow.xaml;ProjectManagementWIndow.xaml;SettingsWindow.xaml;
+=======
 C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\App.xaml
 7143909360
 
 33-716087666
 2211179753863
 AdminPanelWindow.xaml;CalendarWindow.xaml;CreateProjectWindow.xaml;MainWindow.xaml;ManageProjectWindow.xaml;ProjectManagementWIndow.xaml;SettingsWindow.xaml;
+>>>>>>> ed9acbd6e7cca30bfb4c5a33bd0d06b3b97a0148
 
 True
 
