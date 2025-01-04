@@ -18,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 using System.Reflection.PortableExecutable;
+using System.Diagnostics.Eventing.Reader;
 
 
 
@@ -30,6 +31,7 @@ namespace Desktop
     {
         private Stack<ControlTemplate> templateHistory;
         Project project;
+        User pickedUser; //we will use it for editing specific user or tranferring rights to it.
         
         private T GetTemplateControl<T>(string name) where T : class
         {
@@ -149,6 +151,7 @@ namespace Desktop
         {
             string error;
             var password = GetTemplateControl<PasswordBox>("DeleteProjectConfirmPasswordPasswordBox").Password;
+            password = Security.HashText(password, Encoding.UTF8);
             if (password == UserManager.Instance.CurrentSessionUser.Password)
             { //delete project and close the window since I hv panelwindow with set project edit
                 ProjectManager.Instance.DeleteProject(project.ProjectId);
@@ -156,7 +159,7 @@ namespace Desktop
             }
             else
             {
-                TextBlock Error = GetTemplateControl<TextBlock>("DeleteProjectError");
+                TextBlock Error = GetTemplateControl<TextBlock>("Error");
                 Error.Text = "Password is incorrect";
             }
         }
@@ -183,7 +186,8 @@ namespace Desktop
             User data;
             var newProjName = GetTemplateControl<TextBox>("OverviewChangeProjectNameTextBox").Text;
             var password = GetTemplateControl<PasswordBox>("OverviewConfirmPassword").Password;
-            TextBlock overviewError = GetTemplateControl<TextBlock>("OverviewError");
+            password = Security.HashText(password, Encoding.UTF8);
+            TextBlock overviewError = GetTemplateControl<TextBlock>("Error");
             data = new();
             data.Login = UserManager.Instance.CurrentSessionUser.Login;
             data.Password = password;
@@ -207,7 +211,7 @@ namespace Desktop
         }
         public void UserDeleteConfirmCancelClick(object sender, RoutedEventArgs e)
         {
-             TextBlock overviewError = GetTemplateControl<TextBlock>("OverviewError");
+             TextBlock overviewError = GetTemplateControl<TextBlock>("Error");
             SwitchBackToPreviousTemplate();
         }
 
@@ -232,7 +236,7 @@ namespace Desktop
             //SwitchPageTemplate("UsersAddUserConfirm");
 
             SwitchBackToPreviousTemplate();
-            TextBlock Error = GetTemplateControl<TextBlock>("UsersAddUserError");
+            TextBlock Error = GetTemplateControl<TextBlock>("Error");
             if (Error != null && successUE) { 
                 Error.Text = "User has been added successfully";
                 Error.Foreground = Brushes.White;
@@ -341,10 +345,10 @@ namespace Desktop
             SwitchBackToPreviousTemplate();
         }
 
-        public void UserNewTaskNewTaskListLeaderClick(object sender, RoutedEventArgs e)
+        /*public void UserNewTaskNewTaskListLeaderClick(object sender, RoutedEventArgs e)
         {
 
-        }
+        }*/
 
         public void UserNewTaskExistingTaskListCancelClick(object sender, RoutedEventArgs e)
         {
@@ -365,6 +369,8 @@ namespace Desktop
 
         public void UserAssignExistingTaskConfirmClick(object sender, RoutedEventArgs e)
         {
+            EFModeling.EntityProperties.DataAnnotations.Annotations.Task data = new EFModeling.EntityProperties.DataAnnotations.Annotations.Task();
+
 
         }
 
@@ -388,8 +394,37 @@ namespace Desktop
 
         public void UserEditPermissionsTransferProjectConfirmClick(object sender, RoutedEventArgs e)
         {
+            var credential = GetTemplateControl<TextBox>("DeleteProjectConfirmPasswordText").Text;
+            User current = UserManager.Instance.CurrentSessionUser;
+            credential = Security.HashText(credential, Encoding.UTF8);
+            TextBlock error = GetTemplateControl<TextBlock>("UserEditPermissionsTransferProject");
+            if (credential == current.Password)
+            {
+                if (error == null)
+                {
+                    bool success = UserManager.Instance.GetUserById(project.ManagerId,out User manager);
+                    if (success)
+                    {
+
+                    
+                        if(UserManager.Instance.CurrentSessionUser.Admin != false)
+    
+
+                        error.Text = "Rights transferred";
+                    }
+                    else
+                    {
+                        error.Text = "An error has occured";
+                    }
+                }
+            }
+            else
+            {
+                error.Text = "Password is incorrect";
+            }
             
-            SwitchPageTemplate("UserEditPermissionsTransferProject");
+            //SwitchPageTemplate("UserEditPermissionsTransferProject");
+
         }
 
         public void UserEditPermissionsManagementLevelManagerClick(object sender, RoutedEventArgs e)
@@ -433,7 +468,8 @@ namespace Desktop
 
         public void UserEditPermissionsTasksCancelClick(object sender, RoutedEventArgs e)
         {
-            
+            ResetTextInputs();
+            SwitchBackToPreviousTemplate();
         }
 
         public void UserTasksRemoveTaskClick(object sender, RoutedEventArgs e)
@@ -473,11 +509,24 @@ namespace Desktop
             TaskList data = new TaskList();
             var taskListName = GetTemplateControl<TextBox>("TasksAddTaskListNameTextBox").Text;
             var taskListDesc = GetTemplateControl<TextBox>("TasksAddTaskListDescriptionTextBox").Text;
-            TaskListManager.Instance.CreateTaskList(data);
-            SwitchBackToPreviousTemplate();
-            TextBox taskListErr = GetTemplateControl<TextBox>("TasksAddTaskListError");
-            taskListErr.Foreground = Brushes.White;
-            taskListErr.Text = "Task list has been created";
+            TextBox taskListErr = GetTemplateControl<TextBox>("Error");
+            if (taskListName != String.Empty)
+            {
+                
+                TaskListManager.Instance.CreateTaskList(data);
+                SwitchBackToPreviousTemplate();
+                
+                taskListErr.Foreground = Brushes.White;
+                taskListErr.Text = "Task list has been created";
+            }
+            else if (taskListName == String.Empty)
+            {
+                taskListErr.Text = "Insert project's name";
+            }
+            else
+            {
+                taskListErr.Text = "An error has occured";
+            }
         }
 
         public void TasksAddTaskListCancelClick(object sender, RoutedEventArgs e)
@@ -491,16 +540,16 @@ namespace Desktop
             SwitchPageTemplate("TasksAddTaskListAssignLeader");
         }
 
-        public void TasksAddTaskListAssignLeaderConfirmClick(object sender, RoutedEventArgs e)
+        /*public void TasksAddTaskListAssignLeaderConfirmClick(object sender, RoutedEventArgs e)
         {
 
-        }
+        }*/
 
-        public void TasksAddTaskListAssignLeaderCancelClick(object sender, RoutedEventArgs e)
+        /*public void TasksAddTaskListAssignLeaderCancelClick(object sender, RoutedEventArgs e)
         {
             ResetTextInputs();
             SwitchBackToPreviousTemplate();
-        }
+        }*/
 
         public void TasksEditTaskListConfirmClick(object sender, RoutedEventArgs e)
         {
@@ -512,10 +561,10 @@ namespace Desktop
             ResetTextInputs();
         }
 
-        public void TasksEditTaskListLeaderClick(object sender, RoutedEventArgs e)
+        /*public void TasksEditTaskListLeaderClick(object sender, RoutedEventArgs e)
         {
             SwitchPageTemplate("TasksEditTaskViewUsers");
-        }
+        }*/
 
         public void TasksEditTaskListUserListClick(object sender, RoutedEventArgs e)
         {
@@ -527,7 +576,7 @@ namespace Desktop
 
         }
 
-        public void TasksEditTaskListChangeLeaderConfirmClick(object sender, RoutedEventArgs e)
+        /*public void TasksEditTaskListChangeLeaderConfirmClick(object sender, RoutedEventArgs e)
         {
             SwitchPageTemplate("TasksAddTaskListChangeLeader");
         }
@@ -535,7 +584,7 @@ namespace Desktop
         public void TasksEditTaskListChangeLeaderCancelClick(object sender, RoutedEventArgs e)
         {
             ResetTextInputs();
-        }
+        }*/
 
         public void TasksViewTaskListUsersAddUserClick(object sender, RoutedEventArgs e)
         {
@@ -547,22 +596,34 @@ namespace Desktop
             EFModeling.EntityProperties.DataAnnotations.Annotations.Task data = new EFModeling.EntityProperties.DataAnnotations.Annotations.Task();
             var taskName = GetTemplateControl<TextBox>("TasksAddTaskNameTextBox").Text;
             var taskDesc = GetTemplateControl<TextBox>("TasksAddTaskDescriptionTextBox").Text;
-            data = new();
-            data.Name = taskName;
-            data.Description = taskDesc;
-            TaskManager.Instance.CreateTask(data);
-           
-            //SwitchPageTemplate("UsersAddUserConfirm");
+            var taskDeadline = GetTemplateControl<TextBox>("TasksAddTaskDeadlineTextBox").Text;
+            TextBlock Error = GetTemplateControl<TextBlock>("Error");
+            bool isDeadlineValid = DateTime.TryParse(taskDeadline, out DateTime deadline);
+            if (isDeadlineValid && taskName!="")
+            {
+                data = new();
+                data.Name = taskName;
+                data.Description = taskDesc;
+                data.Deadline = deadline;
+                TaskManager.Instance.CreateTask(data);
 
-            SwitchBackToPreviousTemplate();
-            TextBlock Error = GetTemplateControl<TextBlock>("UsersAddUserError");
+                //SwitchPageTemplate("UsersAddUserConfirm");
+
+                SwitchBackToPreviousTemplate();
+               
                 Error.Text = "Task has been created successfully";
                 Error.Foreground = Brushes.White;
-            
-            /*else
+            }
+            else if(taskName==String.Empty)
+            {
+                Error.Text = "Insert task's name";
+            }
+            else
             {
                 Error.Text = "An error has occured";
-            }*/
+            }
+
+           
         }
 
         public void TasksAddTaskCancelClick(object sender, RoutedEventArgs e)
@@ -584,7 +645,28 @@ namespace Desktop
 
         public void TasksAddTaskNewTaskListConfirmClick(object sender, RoutedEventArgs e)
         {
+            TaskList data = new TaskList();
+            var taskListName = GetTemplateControl<TextBox>("TasksAddTaskListNameTextBox").Text;
+            var taskListDesc = GetTemplateControl<TextBox>("TasksAddTaskListDescriptionTextBox").Text;
+            TextBlock Error = GetTemplateControl<TextBlock>("Error");
+            if (taskListName != String.Empty)
+            {
+                data = new();
+                data.Name = taskListName;
+                data.Description = taskListDesc;
+                TaskListManager.Instance.CreateTaskList(data);
 
+                //SwitchPageTemplate("UsersAddUserConfirm");
+
+                SwitchBackToPreviousTemplate();
+               
+                Error.Text = "Task has been created successfully";
+                Error.Foreground = Brushes.White;
+            }
+            else
+            {
+                Error.Text = "Insert task list's name";
+            }
         }
 
         public void TasksAddTaskNewTaskListAssignLeaderConfirmClick(object sender, RoutedEventArgs e)
