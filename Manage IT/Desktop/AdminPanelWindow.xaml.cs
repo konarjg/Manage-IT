@@ -145,10 +145,23 @@ namespace Desktop
         {
             SwitchPageTemplate("AdditionalSettings");
         }
-
-        public void DeleteProjectClick(object sender, RoutedEventArgs e)
+        public void DeleteProjectConfirmClick(object sender, RoutedEventArgs e)
         {
             string error;
+            var password = GetTemplateControl<PasswordBox>("DeleteProjectConfirmPasswordPasswordBox").Password;
+            if (password == UserManager.Instance.CurrentSessionUser.Password)
+            { //delete project and close the window since I hv panelwindow with set project edit
+                ProjectManager.Instance.DeleteProject(project.ProjectId);
+                this.Close();
+            }
+            else
+            {
+                TextBlock Error = GetTemplateControl<TextBlock>("DeleteProjectError");
+                Error.Text = "Password is incorrect";
+            }
+        }
+        public void DeleteProjectClick(object sender, RoutedEventArgs e)
+        {
             SwitchPageTemplate("DeleteProject");
 
         }
@@ -172,7 +185,7 @@ namespace Desktop
             var password = GetTemplateControl<PasswordBox>("OverviewConfirmPassword").Password;
             TextBlock overviewError = GetTemplateControl<TextBlock>("OverviewError");
             data = new();
-            data.Login = "test";
+            data.Login = UserManager.Instance.CurrentSessionUser.Login;
             data.Password = password;
            
             
@@ -194,6 +207,7 @@ namespace Desktop
         }
         public void UserDeleteConfirmCancelClick(object sender, RoutedEventArgs e)
         {
+             TextBlock overviewError = GetTemplateControl<TextBlock>("OverviewError");
             SwitchBackToPreviousTemplate();
         }
 
@@ -216,7 +230,17 @@ namespace Desktop
                 ProjectManager.Instance.AddProjectMember(project.ProjectId, user.UserId);
             }
             //SwitchPageTemplate("UsersAddUserConfirm");
+
             SwitchBackToPreviousTemplate();
+            TextBlock Error = GetTemplateControl<TextBlock>("UsersAddUserError");
+            if (Error != null && successUE) { 
+                Error.Text = "User has been added successfully";
+                Error.Foreground = Brushes.White;
+            }
+            else
+            {
+                Error.Text = "An error has occured";
+            }
 
 
 
@@ -446,7 +470,14 @@ namespace Desktop
 
         public void TasksAddTaskListConfirmClick(object sender, RoutedEventArgs e)
         {
-
+            TaskList data = new TaskList();
+            var taskListName = GetTemplateControl<TextBox>("TasksAddTaskListNameTextBox").Text;
+            var taskListDesc = GetTemplateControl<TextBox>("TasksAddTaskListDescriptionTextBox").Text;
+            TaskListManager.Instance.CreateTaskList(data);
+            SwitchBackToPreviousTemplate();
+            TextBox taskListErr = GetTemplateControl<TextBox>("TasksAddTaskListError");
+            taskListErr.Foreground = Brushes.White;
+            taskListErr.Text = "Task list has been created";
         }
 
         public void TasksAddTaskListCancelClick(object sender, RoutedEventArgs e)
@@ -513,7 +544,25 @@ namespace Desktop
 
         public void TasksAddTaskConfirmClick(object sender, RoutedEventArgs e)
         {
+            EFModeling.EntityProperties.DataAnnotations.Annotations.Task data = new EFModeling.EntityProperties.DataAnnotations.Annotations.Task();
+            var taskName = GetTemplateControl<TextBox>("TasksAddTaskNameTextBox").Text;
+            var taskDesc = GetTemplateControl<TextBox>("TasksAddTaskDescriptionTextBox").Text;
+            data = new();
+            data.Name = taskName;
+            data.Description = taskDesc;
+            TaskManager.Instance.CreateTask(data);
+           
+            //SwitchPageTemplate("UsersAddUserConfirm");
 
+            SwitchBackToPreviousTemplate();
+            TextBlock Error = GetTemplateControl<TextBlock>("UsersAddUserError");
+                Error.Text = "Task has been created successfully";
+                Error.Foreground = Brushes.White;
+            
+            /*else
+            {
+                Error.Text = "An error has occured";
+            }*/
         }
 
         public void TasksAddTaskCancelClick(object sender, RoutedEventArgs e)
