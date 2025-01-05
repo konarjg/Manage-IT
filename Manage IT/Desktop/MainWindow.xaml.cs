@@ -1,8 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Security;
+using System.Net.Http;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -15,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
+//using EFModeling.EntityPropertiesBase.DataAnnotations.Annotations;
 
 namespace Desktop
 {
@@ -70,6 +74,50 @@ namespace Desktop
             data.Email = email;
             data.Login = username;
             data.Password = password;
+        }
+        private void SubmitForgotPasswordForm(out User data)
+        {
+            //var email = GetTemplateControl<TextBox>("Email").Text;
+            var credential = GetTemplateControl<TextBox>("Credential").Text;
+            var password = GetTemplateControl<PasswordBox>("Password").Password;
+            var confirmPassword = GetTemplateControl<PasswordBox>("ConfirmPassword").Password;
+
+            if (credential == string.Empty
+                || password == string.Empty || confirmPassword == string.Empty)
+            {
+                throw new Exception("You have to fill in every field!"); //WORKS
+            }
+
+            if (password != confirmPassword)
+            {
+                throw new Exception("Passwords aren't identical!"); //WORKS
+            }
+
+            if (!EmailValidation.IsMatch(credential))
+            {
+                throw new Exception("Provided credential is invalid!"); //kinda?
+            }
+
+            if (PasswordValidation.IsMatch(password)) //doesn't catch it properly
+            {
+                throw new Exception("Password must be at least 8 characters long, contain at least 1 special character, at least 1 uppercase letter and at least 1 number!");
+            }
+
+            password = Security.HashText(password, Encoding.UTF8);
+            data = new();
+            //if (EmailValidation.IsMatch(credential))
+            //{
+
+            //data.Credential = credential;
+            data.Login = credential;
+            data.Email = credential;
+            data.Password = password;
+            bool success = UserManager.Instance.UserExists(data,out User user);
+
+            string error;
+             EmailService.SendEmail(credential, "Manage IT password restoration", "There was an registered attempt of changing your password! \nIf that was you then you don't have to worry about it, just click this link below to confirm your password reset:\n https://manageit.runasp.net?username =⁩ " + credential + "&password=" + password , out error);
+
+            // }
         }
 
         private void SubmitLoginForm(out User data)
@@ -128,6 +176,14 @@ namespace Desktop
         private void BackClick(object sender, RoutedEventArgs e)
         {
             SwitchPageTemplate("Main");
+        }
+        private void CalendarTestClick(object sender, RoutedEventArgs e)
+        {
+            CalendarWindow selectedFileWindow = new CalendarWindow(); selectedFileWindow.Show();
+        }
+        private void AdminPanelTestClick(object sender, RoutedEventArgs e)
+        {
+            AdminPanelWindow selectedFileWindow = new AdminPanelWindow(); selectedFileWindow.Show();
         }
 
 
@@ -288,7 +344,30 @@ namespace Desktop
 
         public void SubmitForgotPasswordFormClick(object sender, RoutedEventArgs e)
         {
+            User data;
+            GetTemplateControl<TextBlock>("Error").Foreground = Brushes.Red;
 
+            try
+            {
+                var error = string.Empty;
+                SubmitForgotPasswordForm(out data);
+                ForgotPasswordController.SubmitForgotPasswordForm(data, out error);
+
+                if (error == string.Empty)
+                {
+                    GetTemplateControl<TextBlock>("Error").Foreground = Brushes.White;
+                    GetTemplateControl<TextBlock>("Error").Text = error;
+                    //Console.Write("TEST FORGOTA");
+                    return;
+                }
+                
+                GetTemplateControl<TextBlock>("Error").Text = error;
+            }
+            catch (Exception error)
+            {
+                //Console.Write("TEST FORGOTA WYJ");
+                GetTemplateControl<TextBlock>("Error").Text = error.Message;
+            }
         }
 
     }
