@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Manage IT" Width="2560" Height="1080" WindowState="Maximized">
     <Window.Resources>
+        <!-- -->
         <ControlTemplate x:Key="Overview">
             <Grid>
                 <Grid.Background>
