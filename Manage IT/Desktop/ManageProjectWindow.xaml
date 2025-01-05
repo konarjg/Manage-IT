@@ -10,10 +10,35 @@
 
     <Window.Resources>
         <DataTemplate x:Key="Task">
-            <Border BorderBrush="Green" BorderThickness="5">
-                <StackPanel>
-                    <TextBlock Text="{Binding Name}" Foreground="White" FontSize="24"></TextBlock>
-                </StackPanel>
+            <Border BorderBrush="White" BorderThickness="3">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Row="0" Grid.Column="1">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Click="ManageTask" Grid.Column="4" Background="Transparent" BorderBrush="Transparent" Content="⋮" Foreground="White" FontSize="36" FontWeight="UltraBold"/>
+                        <TextBlock Text="{Binding DaysLeft}" Grid.Column="0" Grid.ColumnSpan="3" Foreground="#a0a0ff" FontSize="24" Margin="0,5,0,0"/>
+                    </Grid>
+                    <TextBlock Text="{Binding Name}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Foreground="White" FontSize="24" Margin="5,5,5,0"/>
+                    <TextBox Text="{Binding Description}" Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2" Margin="5"  Background="Transparent" Foreground="White" IsReadOnly="True" IsReadOnlyCaretVisible="False" FontSize="20" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" BorderThickness="0" />
+                </Grid>
             </Border>
         </DataTemplate>
 
@@ -33,6 +58,21 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="{Binding Name}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="1" Foreground="White" FontSize="28" Margin="18,18,18,0" Height="50"/>
+                    <Grid Grid.Row="0" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Click="ManageTaskList" Grid.Column="7" Background="Transparent" BorderBrush="Transparent" Content="⋮" Foreground="White" FontSize="72" FontWeight="UltraBold"/>
+                    </Grid>
+                    
 
                     <ScrollViewer Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="18,0,18,18" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
                         <StackPanel Orientation="Horizontal" x:Name="Tasks">
@@ -41,8 +81,8 @@
                                     <Setter Property="Margin" Value="5,0,5,5"></Setter>
                                 </Style>
                             </StackPanel.Resources>
-                            
-                            <ContentControl x:Name="CreateTask" Width="450" Height="200">
+
+                            <ContentControl Tag="{Binding TaskListId}" Width="450" Height="200">
                                 <Border BorderBrush="White" BorderThickness="3">
                                     <Grid x:Name="MainGrid">
                                         <Grid.RowDefinitions>
@@ -68,7 +108,7 @@
                                         </Grid>
 
                                         <Grid x:Name="DeadlineGrid" Grid.Column="1">
-                                            <wpfTool:DateTimePicker x:Name="CreateTaskDeadline" Background="Transparent" BorderBrush="White" BorderThickness="3" FontSize="20" Foreground="White" Format="Custom" FormatString="dd:MM:yyyy HH:mm" Margin="5" ValueChanged="CreateTaskDeadlineTextChanged"/>
+                                            <wpfTool:DateTimePicker x:Name="CreateTaskDeadline" Background="Transparent" BorderBrush="White" BorderThickness="3" FontSize="20" Foreground="White" Format="Custom" FormatString="dd:MM:yyyy HH:mm" Margin="5" ValueChanged="CreateTaskDeadlineTextChanged" IsReadOnly="True"/>
                                             <TextBlock x:Name="CreateTaskDeadlinePlaceholder" Foreground="LightGray" Text="Deadline" Margin="10,4,10,4" FontSize="20" IsHitTestVisible="False"></TextBlock>
                                         </Grid>
 
@@ -140,9 +180,9 @@
                             <TextBlock x:Name="ProjectName" Text="Project Name" Margin="0, 0, 50, 0" FontSize="72" Foreground="White" />
                             <Button Click="ProjectInfoClick" Content="Project Info" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200" Background="White"  />
                             <Button Click="ProjectMembersClick" Content="Members" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200" Background="White"  />
-                            <Button Click="MeetingClick" Content="Meeting" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200" Background="White"  />
-                            <Button Click="EditClick" Content="Edit" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200" Background="White"  />
-                            <Button Click="DeleteClick" Content="Delete" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200" Background="White"  />
+                            <Button x:Name="Meeting" Click="MeetingClick" Content="Meeting" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200" Background="White"  />
+                            <Button x:Name="Edit" Click="EditClick" Content="Edit" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200" Background="White"  />
+                            <Button x:Name="Delete" Click="DeleteClick" Content="Delete" MaxHeight="80" Margin="0, 0, 30, 0"  FontSize="36" Foreground="Black" Width="200" Background="White"  />
                         </StackPanel>
                     </ScrollViewer>
                 </Border>
@@ -239,7 +279,7 @@
             <StackPanel Orientation="Horizontal" Width="1600">
                 <TextBlock Text="{Binding Login}" Foreground="White" Width="150" Height="50" FontSize="36" TextTrimming="CharacterEllipsis"/>
                 <TextBlock Text="{Binding Email}" Foreground="White" Width="600" FontSize="36" Margin="50,0,0,0" TextTrimming="CharacterEllipsis"/>
-                <Button Width="100" Height="50" Click="ManageClick" Content="Manage" Background="White" FontSize="22" FontWeight="Bold" Margin="50,0,0,0">
+                <Button x:Name="Manage" Width="100" Height="50" Click="ManageClick" Content="Manage" Background="White" FontSize="22" FontWeight="Bold" Margin="50,0,0,0">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -247,7 +287,7 @@
                     </Button.Resources>
                 </Button>
                 
-                <Button Tag="{Binding UserId}" Width="100" Height="50" Click="KickClick" Content="Kick" Background="White" FontSize="22" FontWeight="Bold" Margin="30,0,0,0">
+                <Button x:Name="Kick" Tag="{Binding UserId}" Width="100" Height="50" Click="KickClick" Content="Kick" Background="White" FontSize="22" FontWeight="Bold" Margin="30,0,0,0">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="15"/>

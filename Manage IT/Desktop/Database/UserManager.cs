@@ -2,6 +2,7 @@ using Desktop;
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
@@ -44,6 +45,26 @@ public class UserManager
 
         EmailService.SendEmail(user.Email, subject, body, out error);
         error = string.Empty;
+        return true;
+    }
+
+    public bool GetCurrentUserPermissions(long projectId, out UserPermissions permissions)
+    {
+        var userId = CurrentSessionUser.UserId;
+
+        List<UserPermissions> records;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.UserPermissions WHERE UserId = {userId} AND ProjectId = {projectId}");
+        
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out records);
+
+        if (!success)
+        {
+            permissions = null;
+            return false;
+        }
+
+        permissions = records.FirstOrDefault();
+
         return true;
     }
 

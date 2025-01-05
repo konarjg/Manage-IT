@@ -21,7 +21,7 @@ public class TaskListManager
     public bool CreateTaskList(TaskList data)
     {
         List<TaskList> taskLists;
-        var query = FormattableStringFactory.Create($"INSERT INTO dbo.TaskLists (Name, Description, ProjectId) VALUES ('{data.Name}', '{data.Description}', '{data.ProjectId}')");
+        var query = FormattableStringFactory.Create($"INSERT INTO dbo.TaskLists (Name, Description, ProjectId) VALUES ('{data.Name}', '{data.Description}', {data.ProjectId})");
         return DatabaseAccess.Instance.ExecuteQuery(query, out taskLists);
     }
 
@@ -35,10 +35,9 @@ public class TaskListManager
     public bool DeleteTaskList(long taskListId)
     {
         List<Task> tasks;
-        List<TaskDetails> details;
-        bool success = TaskManager.Instance.GetAllTasks(taskListId, out tasks, out details);
+        bool success = TaskManager.Instance.GetAllTasks(taskListId, out tasks);
 
-        if (tasks != null && tasks.Count != 0 && details != null && details.Count != 0)
+        if (tasks != null && tasks.Count != 0)
         {
             foreach (var task in tasks)
             {

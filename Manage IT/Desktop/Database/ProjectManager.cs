@@ -1,6 +1,7 @@
 ﻿using Desktop;
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -16,12 +17,39 @@ public class ProjectManager
         Instance = new ProjectManager();
     }
 
-    public bool GetAllProjects(long managerId, out List<Project> projects)
+    public bool GetAllProjects(long userId, out List<Project> projects)
+    {
+        projects = new();
+        List<Project> owned = null;
+        List<Project> shared = null;
+
+        bool success = GetOwnedProjects(userId, out owned) && GetSharedProjects(userId, out shared);
+
+        if (!success)
+        {
+            return false;
+        }
+
+        projects.AddRange(owned);
+        projects.AddRange(shared);
+
+        return true;
+    }
+
+    public bool GetOwnedProjects(long managerId, out List<Project> projects)
     {
         var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects WHERE ManagerId = {managerId}");
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out projects);
     }
+
+    public bool GetSharedProjects(long userId, out List<Project> projects)
+    { 
+        var query = FormattableStringFactory.Create($"SELECT p.* FROM dbo.Projects p JOIN dbo.ProjectMembers pm ON p.ProjectId = pm.ProjectId WHERE pm.UserId = {userId}");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out projects);
+    }
+
 
     public bool GetProject(long projectId, out Project project)
     {
@@ -145,17 +173,21 @@ public class ProjectManager
     public bool AddProjectMember(long projectId, long userId)
     {
         List<ProjectMembers> data;
+        List<UserPermissions> temp;
         var query = FormattableStringFactory.Create($"INSERT INTO dbo.ProjectMembers (ProjectId, UserId, InviteAccepted) VALUES ({projectId}, {userId}, 0)");
+        var query1 = FormattableStringFactory.Create($"INSERT INTO dbo.UserPermissions (ProjectId, UserId, Editing, InvitingMembers, KickingMembers) VALUES ({projectId}, {userId}, 0, 0, 0)");
 
-        return DatabaseAccess.Instance.ExecuteQuery(query, out data);
+        return DatabaseAccess.Instance.ExecuteQuery(query, out data) && DatabaseAccess.Instance.ExecuteQuery(query1, out temp);
     }
 
     public bool RemoveProjectMember(Project project, User user)
     {
         List<ProjectMembers> data;
-        var query = FormattableStringFactory.Create($"DELETE FROM dbo.ProjectMembers WHERE ProjectId = {project.ProjectId} AND UserId = {user.UserId}");
+        List<UserPermissions> temp;
+        var query = FormattableStringFactory.Create($"DELETE FROM dbo.UserPermissions WHERE ProjectId = {project.ProjectId} AND UserId = {user.UserId}");
+        var query1 = FormattableStringFactory.Create($"DELETE FROM dbo.ProjectMembers WHERE ProjectId = {project.ProjectId} AND UserId = {user.UserId}");
 
-        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out data);
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out temp) && DatabaseAccess.Instance.ExecuteQuery(query1, out data);
 
         if (!success)
         {

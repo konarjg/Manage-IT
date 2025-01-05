@@ -8,9 +8,9 @@ namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
 public class UserPermissions
 {
     [ForeignKey("UserId")]
-    public int UserId { get; set; }
+    public long UserId { get; set; }
     [ForeignKey("ProjectId")]
-    public int ProjectId { get; set; }
+    public long ProjectId { get; set; }
     public bool Editing { get; set; }
     public bool InvitingMembers { get; set; }
     public bool KickingMembers { get; set; }

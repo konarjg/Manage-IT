@@ -29,35 +29,11 @@ public class TaskManager
         return true;
     }
 
-    public bool GetAllTasks(long taskListId, out List<Task> tasks, out List<TaskDetails> taskDetails)
+    public bool GetAllTasks(long taskListId, out List<Task> tasks)
     {
         var queryTasks = FormattableStringFactory.Create($"SELECT * FROM dbo.Tasks WHERE TaskListId = {taskListId}");
 
-        bool success = DatabaseAccess.Instance.ExecuteQuery(queryTasks, out tasks);
-
-        if (!success)
-        {
-            taskDetails = null;
-            return false;
-        }
-
-        taskDetails = new();
-
-        foreach (var task in tasks)
-        {
-            List<TaskDetails> details;
-            var queryDetails = FormattableStringFactory.Create($"SELECT * FROM dbo.TaskDetails WHERE TaskId = {task.TaskId}");
-            success = DatabaseAccess.Instance.ExecuteQuery(queryDetails, out details);
-
-            if (!success || details == null || details.Count == 0)
-            {
-                return false;
-            }
-
-            taskDetails.Add(details[0]);
-        }
-
-        return true;
+        return DatabaseAccess.Instance.ExecuteQuery(queryTasks, out tasks);
     }
 
     public bool CreateTask(Task data)
