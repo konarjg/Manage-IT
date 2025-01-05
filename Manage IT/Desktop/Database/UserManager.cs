@@ -2,7 +2,6 @@ using Desktop;
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
@@ -11,6 +10,7 @@ using System.Windows.Markup;
 public class UserManager
 {
     public User CurrentSessionUser { get; set; }
+
 
     public static UserManager Instance { get; private set; }
 
@@ -31,7 +31,7 @@ public class UserManager
         var query = FormattableStringFactory.Create($"INSERT INTO dbo.Users (Login,Password,Email,Admin,Verified) VALUES ('{user.Login}', '{user.Password}','{user.Email}', 0, 0)");
 
         var success = DatabaseAccess.Instance.ExecuteQuery(query, out users);
-        
+
         if (!success)
         {
             error = "There was an unexpected error! Could not create an account.";
@@ -45,44 +45,6 @@ public class UserManager
 
         EmailService.SendEmail(user.Email, subject, body, out error);
         error = string.Empty;
-        return true;
-    }
-
-    public bool GetCurrentUserPermissions(long projectId, out UserPermissions permissions)
-    {
-        var userId = CurrentSessionUser.UserId;
-
-        List<UserPermissions> records;
-        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.UserPermissions WHERE UserId = {userId} AND ProjectId = {projectId}");
-        
-        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out records);
-
-        if (!success)
-        {
-            permissions = null;
-            return false;
-        }
-
-        permissions = records.FirstOrDefault();
-
-        return true;
-    }
-
-    public bool GetUserPermissions(long userId, long projectId, out UserPermissions permissions)
-    {
-        List<UserPermissions> records;
-        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.UserPermissions WHERE UserId = {userId} AND ProjectId = {projectId}");
-
-        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out records);
-
-        if (!success)
-        {
-            permissions = null;
-            return false;
-        }
-
-        permissions = records.FirstOrDefault();
-
         return true;
     }
 
@@ -254,29 +216,16 @@ public class UserManager
 
         return EmailService.SendEmail(data.Email, subject, body, out error);
     }
-
-    public void CreatePermissionsForCurrentUser(string name)
+    public bool GetUserById(long id, out User user)
     {
-        List<UserPermissions> temp;
-        FormattableString query = FormattableStringFactory.Create($"INSERT INTO dbo.UserPermissions (ProjectId, UserId, Editing, InvitingMembers, KickingMembers) SELECT ProjectId, {CurrentSessionUser.UserId}, 1, 1, 1 FROM dbo.Projects WHERE Name LIKE '{name}'");
+        List<User> users;
+        var query = FormattableStringFactory.Create($"SELECT * FROM users WHERE UserID = " + id + " LIMIT 1");
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out users);
+        user = users[0];
+        
 
-        DatabaseAccess.Instance.ExecuteQuery(query, out temp);
+        return success;
     }
 
-    public bool DeleteAllPermissions(long projectId)
-    {
-        List<UserPermissions> permissions;
-        var query = FormattableStringFactory.Create($"DELETE FROM dbo.UserPermissions WHERE ProjectId = {projectId}");
-
-        return DatabaseAccess.Instance.ExecuteQuery(query, out permissions);
-    }
-
-    public bool UpdateUserPermissions(UserPermissions data)
-    {
-        List<UserPermissions> permissions;
-        var query = FormattableStringFactory.Create($"UPDATE dbo.UserPermissions SET Editing = {(data.Editing ? 1 : 0)}, InvitingMembers = {(data.InvitingMembers ? 1 : 0)}, KickingMembers = {(data.KickingMembers ? 1 : 0)} WHERE UserId = {data.UserId} AND ProjectId = {data.ProjectId}");
-
-        return DatabaseAccess.Instance.ExecuteQuery(query, out permissions);
-    }
 
 }
