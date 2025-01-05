@@ -98,6 +98,7 @@ public class Database : IDisposable
         catch (Exception exception)
         {
             results = null;
+            throw exception;
             return false;
         }
     }

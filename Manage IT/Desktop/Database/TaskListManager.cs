@@ -56,4 +56,14 @@ public class TaskListManager
         var query = FormattableStringFactory.Create($"DELETE FROM dbo.TaskLists WHERE TaskListId = {taskListId}");
         return DatabaseAccess.Instance.ExecuteQuery(query, out taskLists);
     }
+
+    public bool DeleteAllTaskLists(long projectId)
+    {
+        TaskManager.Instance.DeleteAllTasks(projectId);
+
+        List<TaskList> temp;
+        var query = FormattableStringFactory.Create($"DELETE FROM dbo.TaskLists WHERE ProjectId = {projectId}");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out temp);
+    }
 }

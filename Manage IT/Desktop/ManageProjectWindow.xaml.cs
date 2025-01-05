@@ -11,6 +11,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -56,6 +57,7 @@ namespace Desktop
 
         private string TemplateKey { get; set; }
         private User CurrentKickedUser { get; set; }
+        private UserPermissions CurrentManagedPermissions { get; set; }
 
         private DispatcherTimer TimerMembers;
 
@@ -90,8 +92,6 @@ namespace Desktop
             }
 
             Permissions = permissions;
-
-            MessageBox.Show(JsonSerializer.Serialize(Permissions));
 
             TimerMembers = new()
             {
@@ -406,7 +406,8 @@ namespace Desktop
 
         public void MeetingClick(object sender, RoutedEventArgs e)
         {
-            SwitchPageTemplate("Meeting");
+            var panel = GetTemplateControl<Border>("CreateMeetingPopup");
+            panel.Visibility = Visibility.Visible;
         }
 
         public void EditClick(object sender, RoutedEventArgs e)
@@ -541,7 +542,36 @@ namespace Desktop
 
         public void ManageClick(object sender, RoutedEventArgs e)
         {
+            var panel = GetTemplateControl<Border>("ManageMemberPopup");
+            var error = GetTemplateControl<TextBlock>("ManageMemberPopupError");
 
+            var username = GetTemplateControl<TextBlock>("Username");
+            var email = GetTemplateControl<TextBlock>("Email");
+            var editing = GetTemplateControl<ToggleButton>("Editing");
+            var inviting = GetTemplateControl<ToggleButton>("Inviting");
+            var kicking = GetTemplateControl<ToggleButton>("Kicking");
+            
+
+            var userId = long.Parse((sender as Button).Tag.ToString());
+            var user = Members.Where(x => x.UserId == userId).FirstOrDefault();
+            UserPermissions permissions;
+
+            bool success = UserManager.Instance.GetUserPermissions(userId, Project.ProjectId, out permissions);
+
+            if (!success)
+            {
+                error.Text = "There was an unexpected error!";
+                return;
+            }
+
+            username.Text = user.Login;
+            email.Text = user.Email;
+            editing.IsChecked = permissions.Editing;
+            inviting.IsChecked = permissions.InvitingMembers;
+            kicking.IsChecked = permissions.KickingMembers;
+            CurrentManagedPermissions = permissions;
+
+            panel.Visibility = Visibility.Visible;
         }
 
         public void KickClick(object sender, RoutedEventArgs e)
@@ -733,6 +763,85 @@ namespace Desktop
         {
 
         }
+
+        public void CloseManageMember(object sender, RoutedEventArgs e)
+        {
+            var panel = GetTemplateControl<Border>("ManageMemberPopup");
+            panel.Visibility = Visibility.Collapsed;
+        }
         
+        public void CancelMemberChanges(object sender, RoutedEventArgs e)
+        {
+            var editing = GetTemplateControl<ToggleButton>("Editing");
+            var inviting = GetTemplateControl<ToggleButton>("Inviting");
+            var kicking = GetTemplateControl<ToggleButton>("Kicking");
+
+            editing.IsChecked = CurrentManagedPermissions.Editing;
+            inviting.IsChecked = CurrentManagedPermissions.InvitingMembers;
+            kicking.IsChecked = CurrentManagedPermissions.KickingMembers;
+        }
+
+        public void ConfirmMemberChanges(object sender, RoutedEventArgs e)
+        {
+            var editing = GetTemplateControl<ToggleButton>("Editing");
+            var inviting = GetTemplateControl<ToggleButton>("Inviting");
+            var kicking = GetTemplateControl<ToggleButton>("Kicking");
+            var error = GetTemplateControl<TextBlock>("ManageMemberPopupError");
+
+            CurrentManagedPermissions.Editing = editing.IsChecked != null ? (bool)editing.IsChecked : false;
+            CurrentManagedPermissions.InvitingMembers = inviting.IsChecked != null ? (bool)inviting.IsChecked : false;
+            CurrentManagedPermissions.KickingMembers = kicking.IsChecked != null ? (bool)kicking.IsChecked : false;
+
+            bool success = UserManager.Instance.UpdateUserPermissions(CurrentManagedPermissions);
+
+            if (!success)
+            {
+                error.Text = "Could not change permissions!";
+                return;
+            }
+
+            error.Foreground = Brushes.White;
+            error.Text = "Permissions changed!";
+        }
+
+        public void CloseMeeting(object sender, RoutedEventArgs e)
+        {
+            var panel = GetTemplateControl<Border>("CreateMeetingPopup");
+            panel.Visibility = Visibility.Collapsed;
+        }
+
+        public void CreateMeeting(object sender, RoutedEventArgs e)
+        {
+            var panel = GetTemplateControl<Border>("CreateMeetingPopup");
+            var error = GetTemplateControl<TextBlock>("MeetingError");
+            var title = GetTemplateControl<TextBox>("MeetingTitle").Text;
+            var description = GetTemplateControl<TextBox>("MeetingDescription").Text;
+            var date = GetTemplateControl<DateTimePicker>("MeetingDate").Value;
+
+            if (title == "" || description == "" || date == null)
+            {
+                error.Text = "You have to fill in every field!";
+                return;
+            }
+
+            var data = new Meeting()
+            {
+                Title = title,
+                Description = description,
+                Date = (DateTime)date,
+                ProjectId = Project.ProjectId
+            };
+
+            bool success = MeetingManager.Instance.CreateMeeting(data);
+
+            if (!success)
+            {
+                error.Text = "You have to fill in every field!";
+                return;
+            }
+
+            panel.Visibility = Visibility.Collapsed;
+        }
+
     }
 }

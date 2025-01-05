@@ -120,6 +120,7 @@ namespace Desktop
             ProjectManager.Instantiate();
             TaskListManager.Instantiate();
             TaskManager.Instantiate();
+            MeetingManager.Instantiate();
             Instance = this;
             LoadAllSettings();
         }
