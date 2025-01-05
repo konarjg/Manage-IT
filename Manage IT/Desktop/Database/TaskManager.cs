@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Task = EFModeling.EntityProperties.DataAnnotations.Annotations.Task;
 
 public class TaskManager
@@ -39,8 +40,33 @@ public class TaskManager
     public bool CreateTask(Task data)
     {
         List<Task> tasks;
-        var queryTasks = FormattableStringFactory.Create($"INSERT INTO dbo.Tasks (Name, TaskListId, Description, Deadline) VALUES ('{data.Name}', {data.TaskListId}, '{data.Description}', '{data.Deadline.ToString("yyyy-MM-dd")}')");
+        var queryTasks = FormattableStringFactory.Create($"INSERT INTO dbo.Tasks (Name, TaskListId, Description, Deadline) VALUES ('{data.Name}', {data.TaskListId}, '{data.Description}', '{data.Deadline.ToString("yyyy-MM-dd HH:mm:ss")}')");
 
         return DatabaseAccess.Instance.ExecuteQuery(queryTasks, out tasks);
+    }
+
+    public bool DeleteTask(long taskId)
+    {
+        List<Task> tasks;
+        var query = FormattableStringFactory.Create($"DELETE FROM dbo.Tasks WHERE TaskId = {taskId}");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out tasks);
+    }
+
+    public bool UpdateTask(Task data)
+    {
+        List<Task> tasks;
+        var query = FormattableStringFactory.Create($"UPDATE dbo.Tasks SET Name = '{data.Name}', Description = '{data.Description}', Deadline = '{data.Deadline.ToString("yyyy-MM-dd HH:mm:ss")}'");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out tasks);
+    }
+
+    public bool DeleteAllTasks(long projectId)
+    {
+        List<Task> tasks;
+        var query = FormattableStringFactory.Create($"WITH TaskIdsToDelete AS ( SELECT t.TaskId FROM dbo.Tasks t JOIN dbo.TaskLists tl ON t.TaskListId = tl.TaskListId ) DELETE FROM dbo.TaskDetails WHERE TaskId IN (SELECT TaskId FROM TaskIdsToDelete)"); 
+        var query1 = FormattableStringFactory.Create($"WITH ProjectIdsToDelete AS (SELECT tl.TaskListId FROM dbo.TaskLists tl WHERE tl.ProjectId = {projectId}) DELETE FROM dbo.Tasks WHERE TaskListId IN (SELECT TaskListId FROM ProjectIdsToDelete)");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out tasks) && DatabaseAccess.Instance.ExecuteQuery(query1, out tasks);
     }
 }

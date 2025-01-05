@@ -17,6 +17,19 @@ public class ProjectManager
         Instance = new ProjectManager();
     }
 
+    public Project GetProjectByName(string name)
+    {
+        List<Project> results;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects WHERE Name = {name}");
+
+        if (!DatabaseAccess.Instance.ExecuteQuery(query, out results) || results == null || results.Count == 0)
+        {
+            return null;
+        }
+
+        return results.FirstOrDefault();
+    }
+
     public bool GetAllProjects(long userId, out List<Project> projects)
     {
         projects = new();
@@ -80,6 +93,11 @@ public class ProjectManager
 
         bool success = DatabaseAccess.Instance.ExecuteQuery(query, out projects);
 
+        if (success)
+        {
+            UserManager.Instance.CreatePermissionsForCurrentUser(data.Name);
+        }
+
         if (success && App.Instance.UserSettings.SendProjectAlerts)
         {
             var subject = "Manage IT notification: New project has been successfully created on Your account!";
@@ -115,15 +133,18 @@ public class ProjectManager
     {
         List<Meeting> meetings;
         List<Project> projects;
-        var query = FormattableStringFactory.Create($"DELETE FROM dbo.Meetings WHERE ProjectId = {projectId}");
-        var query1 = FormattableStringFactory.Create($"DELETE FROM dbo.Projects WHERE ProjectId = {projectId}");
+        
+        TaskListManager.Instance.DeleteAllTaskLists(projectId);
+        UserManager.Instance.DeleteAllPermissions(projectId);
+        DeleteAllMembers(projectId);
+
+        var query = FormattableStringFactory.Create($"DELETE FROM dbo.Projects WHERE ProjectId = {projectId}");
 
         Project data;
         bool success = GetProject(projectId, out data);
-        bool success1 = DatabaseAccess.Instance.ExecuteQuery(query, out meetings);
-        bool success2 = DatabaseAccess.Instance.ExecuteQuery(query1, out projects);
+        bool success1 = DatabaseAccess.Instance.ExecuteQuery(query, out projects);
 
-        if (success && success1 && success2 && App.Instance.UserSettings.SendProjectAlerts)
+        if (success && success1 && App.Instance.UserSettings.SendProjectAlerts)
         {
             var subject = "Manage IT notification: Project has been deleted!";
             var body = $"Dear {UserManager.Instance.CurrentSessionUser.Login}, <br/>A project named {data.Name} has been deleted, IT should now disappear from Your project panel.";
@@ -132,7 +153,7 @@ public class ProjectManager
             EmailService.SendEmail(UserManager.Instance.CurrentSessionUser.Email, subject, body, out error);
         }
 
-        return success && success1 && success2;
+        return success && success1;
     }
 
     private bool ProjectExists(string name)
@@ -199,5 +220,13 @@ public class ProjectManager
         string error;
 
         return EmailService.SendEmail(user.Email, subject, body, out error);
+    }
+
+    private void DeleteAllMembers(long projectId)
+    {
+        List<ProjectMembers> data;
+        var query = FormattableStringFactory.Create($"DELETE FROM dbo.ProjectMembers WHERE ProjectId = {projectId}");
+
+        DatabaseAccess.Instance.ExecuteQuery(query, out data);
     }
 } 
