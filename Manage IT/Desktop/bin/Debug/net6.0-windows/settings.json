@@ -15,13 +15,13 @@
         "Password": "4hNxFSY6MW78fC4plQr2wFXh6Jfit6YWZ3HdTcpCIdRQpQi8NKelcodB5NgEDSIfo4dCQk5K2KpZT\u002BCUptyr9g==",
         "Email": "konarskikrzysztof1@gmail.com",
         "Verified": true,
-        "Admin": false
+        "Admin": true
       },
       "DisplayProjects": "All",
       "SendSecurityAlerts": true,
       "SendProjectAlerts": false,
       "RememberMe": false,
-      "Enable2FA": false
+      "Enable2FA": true
     },
     {
       "UserData": {
