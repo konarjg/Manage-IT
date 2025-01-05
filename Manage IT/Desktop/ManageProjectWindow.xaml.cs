@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -49,27 +51,13 @@ namespace Desktop
     {
         public Project Project { get; private set; }
         public List<User> Members { get; private set; }
+        public List<TaskList> TaskLists { get; private set; }
+        public UserPermissions Permissions { get; private set; }
+
         private string TemplateKey { get; set; }
         private User CurrentKickedUser { get; set; }
 
-        private DispatcherTimer Timer;
-
-        public ObservableCollection<TaskList> TaskLists { get; set; } = new()
-        {
-            new()
-            {
-                Name="BRO"
-            }
-        };
-
-        public ObservableCollection<Task> Tasks { get; set; } = new()
-        {
-            new()
-            {
-                Name="BRO"
-            }
-        };
-
+        private DispatcherTimer TimerMembers;
 
         private void SwitchPageTemplate(string name)
         {
@@ -93,13 +81,27 @@ namespace Desktop
                 return;
             }
 
-            Timer = new()
+            UserPermissions permissions;
+
+            if (!UserManager.Instance.GetCurrentUserPermissions(Project.ProjectId, out permissions))
             {
-                Interval = TimeSpan.FromSeconds(1),
+                MessageBox.Show("Unexpected error occured!");
+                return;
+            }
+
+            Permissions = permissions;
+
+            MessageBox.Show(JsonSerializer.Serialize(Permissions));
+
+            TimerMembers = new()
+            {
+                Interval = TimeSpan.FromSeconds(1)
             };
-            Timer.Tick += UpdateMembersTick;
+
+            TimerMembers.Tick += UpdateMembersTick;
 
             LoadMembersList();
+            LoadTaskLists();
             SwitchPageTemplate("Main");
         }
 
@@ -117,6 +119,40 @@ namespace Desktop
                     MessageBox.Show("Unexpected error occured!");
                 }
             });
+        }
+
+        private void LoadTaskLists()
+        {
+            List<TaskList> taskLists;
+            bool success = TaskListManager.Instance.GetAllTaskLists(Project.ProjectId, out taskLists);
+
+            TaskLists = taskLists;
+
+            if (TaskLists == null)
+            {
+                MessageBox.Show("Unexpected error occured!");
+            }
+        }
+
+        private void UpdateTopNavContent()
+        {
+            var edit = GetTemplateControl<Button>("Edit");
+            var meeting = GetTemplateControl<Button>("Meeting");
+            var delete = GetTemplateControl<Button>("Delete");
+
+            if (edit == null || meeting == null || delete == null)
+            {
+                return;
+            }
+
+            if (Permissions.Editing)
+            {
+                return;
+            }
+
+            edit.Visibility = Visibility.Collapsed;
+            meeting.Visibility = Visibility.Collapsed;
+            delete.Visibility = Visibility.Collapsed;
         }
 
         private void UpdateMainContent()
@@ -174,10 +210,18 @@ namespace Desktop
         private void UpdateMembersContent()
         {
             var list = GetTemplateControl<ListBox>("MembersList");
+            var searchBox = GetTemplateControl<Grid>("SearchBox");
+            var invite = GetTemplateControl<Button>("Invite");
 
-            if (list == null)
+            if (list == null || searchBox == null || invite == null)
             {
                 return;
+            }
+
+            if (!Permissions.InvitingMembers)
+            {
+                searchBox.Visibility = Visibility.Collapsed;
+                invite.Visibility = Visibility.Collapsed;
             }
 
             list.Items.Clear();
@@ -193,51 +237,133 @@ namespace Desktop
                     Margin = new(30, 0, 0, 0)
                 };
 
+                item.Loaded += (s, e) =>
+                {
+                    var panel = item.FindVisualChildren<StackPanel>().FirstOrDefault();
+
+                    if (panel == null)
+                    {
+                        return;
+
+                    }
+                    var buttons = panel.FindVisualChildren<Button>();
+
+                    if (buttons == null)
+                    {
+                        return;
+                    }
+
+                    var kick = buttons.Where(x => x.Name == "Kick").FirstOrDefault();
+                    var manage = buttons.Where(x => x.Name == "Manage").FirstOrDefault();
+
+                    if (kick == null || manage == null)
+                    {
+                        return;
+                    }
+
+                    if (!Permissions.Editing)
+                    {
+                        manage.Visibility = Visibility.Collapsed;
+                    }
+
+                    if (!Permissions.KickingMembers)
+                    {
+                        kick.Visibility = Visibility.Collapsed;
+                    }
+                };
+
                 list.Items.Add(item);
             }
+        }
+
+        private void UpdateTaskListsContent()
+        {
+            var taskLists = GetTemplateControl<StackPanel>("TaskLists");
+            var createTaskList = GetTemplateControl<ContentControl>("CreateTaskList");
+            taskLists.Children.Clear();
+
+            if (taskLists == null || TaskLists == null)
+            {
+                return;
+            }
+
+            if (!Permissions.Editing)
+            {
+                createTaskList.Visibility = Visibility.Collapsed;
+            }
+
+            foreach (var taskList in TaskLists)
+            {
+                var item = new ContentControl()
+                {
+                    Height = 350,
+                    ContentTemplate = Resources["TaskList"] as DataTemplate,
+                    DataContext = taskList,
+                    Content = taskList
+                };
+
+                item.Loaded += (s, e) =>
+                {
+                    List<Task> tasks;
+
+                    bool success = TaskManager.Instance.GetAllTasks(taskList.TaskListId, out tasks);
+
+                    if (!success)
+                    {
+                        return;
+                    }
+
+                    var taskPanel = VisualTreeTraversal.FindName(item, "Tasks") as StackPanel;
+                    var createTask = taskPanel.Children[0];
+
+                    if (!Permissions.Editing)
+                    {
+                        createTask.Visibility = Visibility.Collapsed;
+                    }
+
+                    taskPanel.Children.Clear();
+
+                    foreach (var task in tasks)
+                    {
+                        var taskItem = new ContentControl()
+                        {
+                            Width = 450,
+                            Height = 200,
+                            ContentTemplate = Resources["Task"] as DataTemplate,
+                            DataContext = task,
+                            Content = task
+                        };
+
+                        taskPanel.Children.Add(taskItem);
+                    }
+
+                    taskPanel.Children.Add(createTask);
+                };
+
+                taskLists.Children.Add(item);
+            }
+
+            taskLists.Children.Add(createTaskList);
         }
 
         private async void UpdateMembersTick(object sender, EventArgs e)
         {
             await LoadMembersList();
-            Dispatcher.Invoke(() => UpdateMembersContent());
+            await Dispatcher.InvokeAsync(() => UpdateMembersContent());
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            Timer.Stop();
+            TimerMembers.Stop();
+            UpdateTopNavContent();
 
             switch (TemplateKey)
             {
                 case "Main":
-                    var taskListsPanel = GetTemplateControl<StackPanel>("TaskLists");
-
-                    var taskList = new ContentControl()
-                    {
-                        ContentTemplate = Resources["TaskList"] as DataTemplate,
-                        Content = TaskLists[0],
-                        DataContext = TaskLists[0],
-                        Height = 350
-                    };
-
-                    taskList.Loaded += (s, e) =>
-                    {
-                        var tasksPanel = VisualTreeTraversal.FindName(taskList, "Tasks") as StackPanel;
-
-                        var task = new ContentControl()
-                        {
-                            ContentTemplate = Resources["Task"] as DataTemplate,
-                            Content = Tasks[0],
-                            DataContext = Tasks[0]
-                        };
-
-                        tasksPanel.Children.Add(task);
-                    };
-
-                    taskListsPanel.Children.Insert(0, taskList);
-
+                    LoadTaskLists();
                     UpdateMainContent();
+                    UpdateTaskListsContent();
                     break;
 
                 case "ProjectInfo":
@@ -246,7 +372,7 @@ namespace Desktop
 
                 case "ProjectMembers":
                     UpdateMembersContent();
-                    Timer.Start();
+                    TimerMembers.Start();
                     break;
 
                 case "Edit":
@@ -471,11 +597,14 @@ namespace Desktop
             TaskList data = new();
             data.Name = name;
             data.Description = description;
+            data.ProjectId = Project.ProjectId;
 
             bool success = TaskListManager.Instance.CreateTaskList(data);
 
             if (success)
             {
+                LoadTaskLists();
+                UpdateTaskListsContent();
                 return;
             }
 
@@ -555,6 +684,10 @@ namespace Desktop
             var buttonGrid = (sender as Button).Parent as Grid;
             var mainGrid = buttonGrid.Parent as Grid;
 
+            var border = mainGrid.Parent as Border;
+            var taskList = border.Parent as ContentControl;
+            var taskListId = long.Parse(taskList.Tag.ToString());
+
             var innerGrids = mainGrid.FindVisualChildren<Grid>().ToList();
 
             var name = innerGrids.Where(x => x.Name == "NameGrid").FirstOrDefault().FindVisualChildren<TextBox>().ToList()[0].Text;
@@ -574,18 +707,31 @@ namespace Desktop
             {
                 Name = name,
                 Description = description,
-                Deadline = (DateTime)deadline
+                Deadline = (DateTime)deadline,
+                TaskListId = taskListId
             };
 
             bool success = TaskManager.Instance.CreateTask(data);
 
             if (success)
             {
+                LoadTaskLists();
+                UpdateTaskListsContent();
                 return;
             }
 
             errorPopup.Visibility = Visibility.Visible;
             errorText.Text = "There was an unexpected error!";
+        }
+
+        public void ManageTaskList(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public void ManageTask(object sender, RoutedEventArgs e)
+        {
+
         }
         
     }

@@ -32,7 +32,7 @@ namespace Desktop
             }
 
             string error;
-            ProjectManagementController.FetchProjectList(UserManager.Instance.CurrentSessionUser.UserId, ref Projects, out error);
+            ProjectManagementController.FetchProjectList(UserManager.Instance.CurrentSessionUser.UserId, ref Projects, App.Instance.UserSettings.DisplayProjects, out error);
 
             if (error != "")
             {
@@ -43,10 +43,19 @@ namespace Desktop
             foreach (var project in Projects)
             {
                 Button button = new();
-                button.Style = (Style)FindResource("ProjectButton");
                 button.Content = project.Name;
                 button.Name = $"Project{project.ProjectId}";
                 button.Click += ProjectClick;
+
+                if (project.ManagerId == UserManager.Instance.CurrentSessionUser.UserId)
+                {
+                    button.Style = (Style)FindResource("ProjectButton");
+                }
+                else
+                {
+                    button.Style = (Style)FindResource("SharedProjectButton");
+                }
+
                 ProjectList.Children.Insert(0, button);
             }
         }

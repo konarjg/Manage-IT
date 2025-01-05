@@ -20,7 +20,22 @@
       "DisplayProjects": "All",
       "SendSecurityAlerts": true,
       "SendProjectAlerts": false,
-      "RememberMe": true,
+      "RememberMe": false,
+      "Enable2FA": false
+    },
+    {
+      "UserData": {
+        "UserId": 10037,
+        "Login": "konar",
+        "Password": "4hNxFSY6MW78fC4plQr2wFXh6Jfit6YWZ3HdTcpCIdRQpQi8NKelcodB5NgEDSIfo4dCQk5K2KpZT\u002BCUptyr9g==",
+        "Email": "272844@student.pwr.edu.pl",
+        "Verified": true,
+        "Admin": false
+      },
+      "DisplayProjects": "All",
+      "SendSecurityAlerts": true,
+      "SendProjectAlerts": true,
+      "RememberMe": false,
       "Enable2FA": false
     }
   ]
