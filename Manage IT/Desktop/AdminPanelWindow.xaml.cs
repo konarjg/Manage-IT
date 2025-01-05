@@ -141,7 +141,120 @@ namespace Desktop
         public void InvitesClick(object sender, RoutedEventArgs e)
         {
             SwitchPageTemplate("Invites");
+            List<ProjectMembers> unacceptedInvites = ProjectManager.Instance.GetUnacceptedInvites(project);
+
+            // Assuming you have a Grid named "InvitesGrid" in your XAML to add these controls
+            Grid invitesGrid = this.FindName("InvitesGrid") as Grid;
+            invitesGrid.Children.Clear();
+            invitesGrid.RowDefinitions.Clear(); // Clear existing row definitions
+
+            int row = 1;
+            foreach (var invite in unacceptedInvites)
+            {
+                // Add a new RowDefinition for each new row
+                invitesGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+
+                User user;
+                UserManager.Instance.GetUserById(invite.UserId, out user);
+                TextBlock userNameBlock = new TextBlock
+                {
+                    Name = "UserName" + row,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    FontWeight = FontWeights.Bold,
+                    Text = user.Login, // Assuming ProjectMembers has a UserName property
+                    FontSize = 36,
+                    TextAlignment = TextAlignment.Center,
+                    Foreground = Brushes.White
+                };
+                Grid.SetRow(userNameBlock, row);
+                Grid.SetColumn(userNameBlock, 0);
+                invitesGrid.Children.Add(userNameBlock);
+
+                Button declineButton = new Button
+                {
+                    Name = "DeclineButton" + row,
+                    Content = "Decline",
+                    HorizontalContentAlignment = HorizontalAlignment.Center,
+                    Padding = new Thickness(48, 0, 48, 0),
+                    FontSize = 32,
+                    Margin = new Thickness(18, 18, 413, 18),
+                    Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ffe0e0")),
+                    Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#800000")),
+                    BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#800000")),
+                    BorderThickness = new Thickness(3),
+                    Tag = user.UserId // Store the user ID in the Tag property
+                };
+                declineButton.Click += DeclineInviteClick;
+                Grid.SetRow(declineButton, row);
+                Grid.SetColumn(declineButton, 1);
+                invitesGrid.Children.Add(declineButton);
+
+                Button acceptButton = new Button
+                {
+                    Name = "AcceptButton" + row,
+                    Content = "Accept",
+                    HorizontalContentAlignment = HorizontalAlignment.Center,
+                    Padding = new Thickness(48, 0, 48, 0),
+                    FontSize = 32,
+                    Margin = new Thickness(412, 18, 20, 18),
+                    Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#e0ffe0")),
+                    Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#008000")),
+                    BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#008000")),
+                    BorderThickness = new Thickness(3),
+                    Tag = user.UserId // Store the user ID in the Tag property
+                };
+                acceptButton.Click += AcceptInviteClick;
+                Grid.SetRow(acceptButton, row);
+                Grid.SetColumn(acceptButton, 2);
+                invitesGrid.Children.Add(acceptButton);
+
+                row++;
+            }
         }
+
+        // Example methods for click events
+        private void DeclineInviteClick(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            int userId = (int)button.Tag;
+            User user;
+            UserManager.Instance.GetUserById(userId, out user);
+            ProjectManager.Instance.RemoveProjectMember(project,user);
+            
+    
+            SwitchPageTemplate("Invites");
+            TextBlock Error = GetTemplateControl<TextBlock>("Error");
+            Error.Foreground = Brushes.Red;
+            Error.Text = "Invite has been declined";
+
+            // Your decline logic here, using the userId
+        }
+
+        private void AcceptInviteClick(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            int userId = (int)button.Tag;
+            User user;
+            UserManager.Instance.GetUserById(userId, out user);
+            bool success = ProjectManager.Instance.AcceptInvite(project, user);
+            if (success)
+            {
+                SwitchPageTemplate("Invites");
+                TextBlock Error = GetTemplateControl<TextBlock>("Error");
+                Error.Foreground = Brushes.White;
+                Error.Text = "Invite has been accepted";
+            }
+            else
+            {
+                TextBlock Error = GetTemplateControl<TextBlock>("Error");
+                Error.Foreground = Brushes.Red;
+                Error.Text = "An error has occured";
+            }
+            // Your accept logic here, using the userId
+        }
+
+
 
         public void AdditionalSettingsClick(object sender, RoutedEventArgs e)
         {
@@ -427,6 +540,7 @@ namespace Desktop
 
         }
 
+        //THESE WILL BE USED LATER (after handing in desktop)
         public void UserEditPermissionsManagementLevelManagerClick(object sender, RoutedEventArgs e)
         {
             //MANAGER
@@ -539,10 +653,11 @@ namespace Desktop
         {
             SwitchPageTemplate("TasksAddTaskListAssignLeader");
         }
+       
 
         /*public void TasksAddTaskListAssignLeaderConfirmClick(object sender, RoutedEventArgs e)
         {
-
+            //TASK LEADERSHIP ISN'T MENTIONED IN BASE FUNCTIONAL REQUIREMENTS SO FOR NOW IT'S COMMENTED
         }*/
 
         /*public void TasksAddTaskListAssignLeaderCancelClick(object sender, RoutedEventArgs e)
@@ -553,6 +668,8 @@ namespace Desktop
 
         public void TasksEditTaskListConfirmClick(object sender, RoutedEventArgs e)
         {
+            TaskList tasklist = new TaskList();
+            TaskListManager.Instance.UpdateTaskList(tasklist);
 
         }
 
@@ -561,13 +678,13 @@ namespace Desktop
             ResetTextInputs();
         }
 
-        /*public void TasksEditTaskListLeaderClick(object sender, RoutedEventArgs e)
+        public void TasksEditTaskAssignUsersToTaskClick(object sender, RoutedEventArgs e)
         {
             SwitchPageTemplate("TasksEditTaskViewUsers");
-        }*/
+        }
 
         public void TasksEditTaskListUserListClick(object sender, RoutedEventArgs e)
-         {
+        {
             SwitchPageTemplate("TasksEditTaskViewUsers");
         }
 
@@ -669,6 +786,7 @@ namespace Desktop
             }
         }
 
+        /*
         public void TasksAddTaskNewTaskListAssignLeaderConfirmClick(object sender, RoutedEventArgs e)
         {
 
@@ -679,7 +797,7 @@ namespace Desktop
             ResetTextInputs();
             SwitchBackToPreviousTemplate();
 
-        }
+        }*/
 
         public void TasksAddTaskAddUsersConfirmClick(object sender, RoutedEventArgs e)
         {
@@ -691,7 +809,7 @@ namespace Desktop
             SwitchBackToPreviousTemplate();
         }
 
-        public void TasksAddTaskAssignLeaderConfirmClick(object sender, RoutedEventArgs e)
+        /*public void TasksAddTaskAssignLeaderConfirmClick(object sender, RoutedEventArgs e)
         {
             SwitchPageTemplate("TasksEditTaskChangeLeader");
         }
@@ -699,7 +817,7 @@ namespace Desktop
         public void TasksAddTaskAssignLeaderCancelClick(object sender, RoutedEventArgs e)
         {
             SwitchBackToPreviousTemplate();
-        }
+        }*/
 
         public void TasksEditTaskConfirmClick(object sender, RoutedEventArgs e)
         {
@@ -746,15 +864,16 @@ namespace Desktop
 
         }
 
-        public void TasksEditTaskAssignLeaderConfirmClick(object sender, RoutedEventArgs e)
+        /*public void TasksEditTaskAssignLeaderConfirmClick(object sender, RoutedEventArgs e)
         {
-
+            //TASK LEADERSHIP ISN'T MENTIONED IN BASE FUNCTIONAL REQUIREMENTS SO FOR NOW IT'S COMMENTED
         }
 
         public void TasksEditTaskAssignLeaderCancelClick(object sender, RoutedEventArgs e)
         {
+        //TASK LEADERSHIP ISN'T MENTIONED IN BASE FUNCTIONAL REQUIREMENTS SO FOR NOW IT'S COMMENTED
             SwitchBackToPreviousTemplate();
-        }
+        }*/
 
         public void SettingsWindowReset(object sender, RoutedEventArgs e)
         {
@@ -766,14 +885,15 @@ namespace Desktop
         {
             //imo there should be logic that saves the settings into settings.json
         }
-        public void TaskAddTaskListAssignLeaderConfirm(object sender, RoutedEventArgs e)
+        /*public void TaskAddTaskListAssignLeaderConfirm(object sender, RoutedEventArgs e)
         {
-
+            //TASK LEADERSHIP ISN'T MENTIONED IN BASE FUNCTIONAL REQUIREMENTS SO FOR NOW IT'S COMMENTED
         }
         public void TaskAddTaskListAssignLeaderCancel(object sender, RoutedEventArgs e)
         {
+            //TASK LEADERSHIP ISN'T MENTIONED IN BASE FUNCTIONAL REQUIREMENTS SO FOR NOW IT'S COMMENTED
             SwitchBackToPreviousTemplate();
-        }
+        }*/
         public void AccountClick(object sender, RoutedEventArgs e)
         {
             SwitchPageTemplate("Account");
@@ -793,494 +913,6 @@ namespace Desktop
         public void LogOutClick(object sender, RoutedEventArgs e)
         {
             SwitchPageTemplate("LogOut");
-        }
-    }
-}
-
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-
-namespace Desktop
-{
-    /// <summary>
-    /// Interaction logic for AdminPanelWindow.xaml
-    /// </summary>
-    public partial class AdminPanelWindow : Window
-    {
-        public AdminPanelWindow()
-        {
-            InitializeComponent();
-        }
-
-        public void BackClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void OverviewClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UsersClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void SupportClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void SecurityClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void AuditLogClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void InvitesClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void AdditionalSettingsClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void DeleteProjectClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void OverviewCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void OverviewConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UsersAddUserClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UsersAddUserConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UsersAddUserCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserPageAddNewTaskToUserClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserPageAddExistingTaskToUserClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void EditUserPermsClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void EditUserTasksClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void DeleteUserFromProjectClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserPageCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserPageConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserDeleteConfirmCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserDeleteConfirmConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserNewTaskCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserNewTaskConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserNewTaskAssignMoreUsersClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserNewTaskAssignToExistingTaskListClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserNewTaskAssignToNewTaskListClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserNewTaskAddAnotherUserCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserNewTaskAddAnotherUserConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserNewTaskNewTaskListConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserNewTaskNewTaskListCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserNewTaskNewTaskListLeaderClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserNewTaskExistingTaskListCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserNewTaskExistingTaskListConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserAssignExistingTaskCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserAssignExistingTaskConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserEditPermissionsManagementLevelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserEditPermissionsEditManageRightsClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserEditPermissionsTransferProjectCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserEditPermissionsTransferProjectConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserEditPermissionsManagementLevelManagerClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserEditPermissionsManagementLevelTasklistLeaderClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserEditPermissionsManagementLevelTasklLeaderClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserEditPermissionsManagementLevelTransferProjectRightsClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserEditPermissionsManagementLevelCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserEditPermissionsManagementLevelConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserEditPermissionsTasksConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserEditPermissionsTasksCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserTasksRemoveTaskClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserTasksNewTaskClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserTasksRemoveTasksConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void UserTasksRemoveTasksCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksNewTaskListClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksNewTaskClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksAddTaskListConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksAddTaskListCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksAddTaskListLeaderClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksAddTaskListAssignLeaderConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksAddTaskListAssignLeaderCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksEditTaskListConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksEditTaskListCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksEditTaskListLeaderClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksEditTaskListUserListClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksEditTaskListDeleteClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksEditTaskListChangeLeaderConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksEditTaskListChangeLeaderCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksViewTaskListUsersAddUserClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksAddTaskConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksAddTaskCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksAddTaskAssignTaskListNewClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksAddTaskAssignTaskListExistingClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksAddTaskNewTaskListConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksAddTaskNewTaskListAssignLeaderConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksAddTaskNewTaskListAssignLeaderCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksAddTaskAddUsersConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksAddTaskAddUsersCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksAddTaskAssignLeaderConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksAddTaskAssignLeaderCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksEditTaskConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksEditTaskCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksEditTaskDeleteTaskClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksEditTaskViewUsersAddClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksEditTaskViewUsersRemoveClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksEditTaskAddUsersConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksEditTaskAddUsersCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksEditTaskDeleteUsersAddClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksEditTaskDeleteUsersRemoveClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksEditTaskAssignLeaderConfirmClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void TasksEditTaskAssignLeaderCancelClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void SettingsWindowReset(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void SettingsWindowConfirm(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
