@@ -10,6 +10,14 @@ public class MeetingManager
         Instance = new MeetingManager();
     }
 
+    public bool UpdateMeeting(Meeting data)
+    {
+        List<Meeting> meetings;
+        var query = FormattableStringFactory.Create($"UPDATE dbo.Meetings SET ProjectId = {data.ProjectId}, Date = '{data.Date.ToString("yyyy-MM-dd")}', Title = '{data.Title}', Description = '{data.Description}' WHERE MeetingId = {data.MeetingId}");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out meetings);
+    }
+
     public bool CreateMeeting(Meeting data)
     {
         List<Meeting> meetings;
@@ -48,10 +56,10 @@ public class MeetingManager
         return true;
     }
 
-    public bool DeleteMeeting(long projectId, DateTime date)
+    public bool DeleteMeeting(long meetingId)
     {
         List<Meeting> meetings;
-        var query = FormattableStringFactory.Create($"DELETE FROM dbo.Meetings WHERE ProjectId = {projectId} AND Date = '{date.ToString("yyyy-MM-dd")}'");
+        var query = FormattableStringFactory.Create($"DELETE FROM dbo.Meetings WHERE MeetingId = {meetingId}");
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out meetings);
     }

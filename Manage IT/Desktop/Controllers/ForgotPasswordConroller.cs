@@ -32,5 +32,11 @@ namespace Desktop
                 error = $"An error occurred: {ex.Message}";
             }
         }
+
+            error = "";
+            return;
+        }
+
+        error = "";
     }
 }

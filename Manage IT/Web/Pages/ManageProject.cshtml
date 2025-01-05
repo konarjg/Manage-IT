@@ -1,5 +1,6 @@
 ﻿@page
 @using EFModeling.EntityProperties.DataAnnotations.Annotations;
+@using Task = EFModeling.EntityProperties.DataAnnotations.Annotations.Task;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model ManageProject
 @{
@@ -27,6 +28,58 @@
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             }
         </style>
+
+        <script src="https://cdn.jsdelivr.net/npm/@@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script>
+            function createTaskList(projectId, name, description)
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "/ManageProject?handler=CreateTaskList",
+                    data: { projectId: projectId, name: name, description: description },
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("XSRF-TOKEN",
+                            $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.reload();
+                        } else {
+                            alert("Could not create the task list!");
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            }
+
+            function createTask(taskListId, name, description, deadline)
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "/ManageProject?handler=CreateTask",
+                    data: { taskListId: taskListId, name: name, description: description, deadline: deadline },
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("XSRF-TOKEN",
+                            $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.reload();
+                        } else {
+                            alert("Could not create the task list!");
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            }
+        </script>
     </head>
 
     <body>
@@ -85,9 +138,114 @@
                         </div>
 
                         <div class="project">
+                            @foreach (var taskList in Model.TaskLists)
+                            {
+                                <div class="taskList">
+                                    <div class="taskListTop">
+                                        <span>@taskList.Name</span>
+                                        <span class="dots"><i class="fa fa-fw fa-ellipsis-v"></i></span>
+                                    </div>
 
+                                    <div class="taskListTasks">
+                                        @{
+                                            List<Task> tasks;
+                                            List<TaskDetails> taskDetails;
+
+                                            bool success = TaskManager.Instance.GetAllTasks(taskList.TaskListId, out tasks, out taskDetails);
+
+                                            foreach (var task in tasks)
+                                            {
+                                                var now = DateTime.Now;
+                                                var deadline = task.Deadline;
+
+                                                var daysLeft = (deadline - now).TotalDays;
+                                                var daysLeftText = $"{(int)daysLeft}d left";
+
+                                                <div class="task">
+                                                    <div class="taskTop">
+                                                        <span>@task.Name</span>
+                                                        <span class="dots"><i class="fa fa-fw fa-ellipsis-v"></i></span>
+                                                    </div>
+
+                                                    <div class="taskSub">
+                                                        <div class="taskSubPfp">
+                                                        </div>
+
+                                                        <span class="taskSubDays">@daysLeftText</span>
+                                                    </div>
+
+                                                    <textarea readonly="readonly" class="taskDescription" style="resize: none;" rows="30" cols="60">This is a test task!</textarea>
+                                                </div>
+                                            }
+
+                                            <div class="createTask">
+                                                <button onclick="createTask('@taskList.TaskListId.ToString()', document.getElementById('createTaskName').value, document.getElementById('createTaskDescription').value, document.getElementById('createTaskDeadline').value)" class="createTaskButton"><i class="fa fa-fw fa-plus"></i>Create</button>
+
+                                                <div class="createTaskTop">
+                                                    <span class="createTaskLabel">Name</span>
+                                                    <textarea id="createTaskName" style="resize:none;" class="createTaskName" rows="1" cols="30" maxlength="30"></textarea>
+                                                </div>
+
+                                                <div class="createTaskSub">
+                                                    <span class="createTaskLabel">Deadline</span>
+                                                    <form>
+                                                        <input id="createTaskDeadline" type="datetime-local" class="createTaskDate"/>
+                                                    </form>
+                                                </div>
+
+                                                
+                                                <span class="createTaskLabel">Description</span>
+                                                <textarea class="createTaskDescription" id="createTaskDescription" style="resize: none;" rows="30" cols="60"></textarea>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="createTaskList">
+                                <span class="createTaskListLabel">Name</span>
+                                <textarea class="createTaskListInput" id="taskListNameField" rows="1" cols="30" maxlength="30" style="resize:none;"></textarea>
+                                <span class="createTaskListLabel">Description</span>
+                                <textarea class="createTaskListInput" id="taskListDescriptionField" rows="30" cols="60" style="resize:none;"></textarea>
+                                <button class="createTaskListButton" onclick="createTaskList('@Model.Project.ProjectId.ToString()', document.getElementById('taskListNameField').value, document.getElementById('taskListDescriptionField').value)"><i class="fa fa-fw fa-plus"></i>Create Task List</button>
+                            </div>
                         </div>
                     </div>
+                    break;
+
+                case ProjectAction.Members:
+                    <div class="main">
+                        <div class="projectNav">
+                            <form asp-page-handler="back" method="post">
+                                <button class="navItem"><i class="fa fa-fw fa-arrow-left"></i>Back</button>
+                            </form>
+                        </div>
+                        <div class="membersBox">
+                            <div class="searchBox">
+                                <textarea class="search" id="search" maxlength="60" placeholder="Email or username" style="resize:none;"></textarea>
+                                <button class="inviteButton" onclick="invite('@Model.Project.ProjectId', document.getElementById('search').value)">Invite</button>
+                            </div>
+                            <div class="memberHeaderBox">
+                                <label class="memberHeader">Members</label>
+                            </div>
+
+                            <div class="membersListBox">
+                                <ol class="membersList">
+                                    @foreach (var member in Model.Members)
+                                    {
+                                        <li class="membersListItem">
+                                            <div class="loginBox">@member.Login</div>
+                                            <div class="emailBox">@member.Email</div>
+                                            <button class="memberButton">Manage</button>
+                                            <button class="memberButton">Kick</button>
+                                        </li>
+
+                                    }
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
                     break;
 
                 case ProjectAction.Info:

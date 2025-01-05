@@ -8,7 +8,7 @@ public class Calendar : PageModel
     public DateTime Date { get; set; }
     public List<Meeting> Meetings { get; set; }
 
-    public IActionResult OnGet(string action, string idDate)
+    public IActionResult OnGet(string action)
     {
         if (HttpContext.Session.Get<User>("User") == null)
         {
@@ -60,27 +60,90 @@ public class Calendar : PageModel
                 Date = Date.AddMonths(-1);
                 HttpContext.Session.Set("Date", Date);
                 break;
-
-            case "deleteMeeting":
-                if (idDate == null || idDate == "")
-                {
-                    return null;
-                }
-
-                long id = long.Parse(idDate.Split('!')[0]);
-                string date = idDate.Split('!')[1];
-                var dateTime = DateTime.Parse(date);
-
-                if (!MeetingManager.Instance.DeleteMeeting(id, dateTime))
-                {
-                    return null;
-                }
-
-                HttpContext.Session.Remove("Meetings");
-                break;
         }
 
         return Redirect("~/Calendar");
+    }
+
+    public JsonResult OnPostSetActiveDate(string date)
+    {
+        HttpContext.Session.Set("ActiveDate", DateTime.Parse(date));
+        return new(new { success = true });
+    }
+
+    public JsonResult OnPostUnsetActiveDate()
+    {
+        HttpContext.Session.Remove("ActiveDate");
+        return new(new { success = true });
+    }
+
+    public JsonResult OnPostSetEditedMeetingId(string id)
+    {
+        HttpContext.Session.Set<long>("EditedMeetingId", long.Parse(id));
+        return new(new { success = true });
+    }
+
+    public JsonResult OnPostUnsetEditedMeetingId()
+    {
+        HttpContext.Session.Remove("EditedMeetingId");
+        return new(new { success = true });
+    }
+
+    public JsonResult OnPostEditMeeting(string id)
+    {
+        HttpContext.Session.Set<long>("EditId", long.Parse(id));
+        return new(new { success = true });
+    }
+
+    public JsonResult OnPostEditBack()
+    {
+        HttpContext.Session.Remove("EditId");
+        return new(new { success = true });
+    }
+
+    public JsonResult OnPostDeleteMeeting(string id)
+    {
+        HttpContext.Session.Remove("EditedMeetingId");
+        HttpContext.Session.Remove("ActiveDate");
+        HttpContext.Session.Remove("Meetings");
+        HttpContext.Session.Remove("Date");
+
+        bool success = MeetingManager.Instance.DeleteMeeting(long.Parse(id));
+
+        if (!success)
+        {
+            return new(new { success = false });
+        }
+
+        return new(new { success = true });
+    }
+
+    public JsonResult OnPostUpdateMeeting(string meetingId, string projectId, string date, string name, string description)
+    {
+        if (name == null || description == null)
+        {
+            return new(new { success = false });
+        }
+
+        Meeting data = new();
+        data.MeetingId = long.Parse(meetingId);
+        data.ProjectId = long.Parse(projectId);
+        data.Date = DateTime.Parse(date);
+        data.Title = name;
+        data.Description = description;
+
+        bool success = MeetingManager.Instance.UpdateMeeting(data);
+
+        if (!success)
+        {
+            return new(new { success = false });
+        }
+
+        HttpContext.Session.Remove("EditId");
+        HttpContext.Session.Remove("Meetings");
+        HttpContext.Session.Remove("Date");
+
+        return new(new { success = true });
     }
 
     public string GetMonthName(int month)

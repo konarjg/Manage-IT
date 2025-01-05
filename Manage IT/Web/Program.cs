@@ -14,6 +14,7 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<DatabaseContext>();
+builder.Services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
 var app = builder.Build();
 
 Security.Initialize();
@@ -22,6 +23,8 @@ DatabaseAccess.Instantiate();
 UserManager.Instantiate();
 ProjectManager.Instantiate();
 MeetingManager.Instantiate();
+TaskListManager.Instantiate();
+TaskManager.Instantiate();
 
 app.UseHttpsRedirection();
 app.UseHsts();

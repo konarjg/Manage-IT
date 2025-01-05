@@ -23,7 +23,7 @@ public class ProjectManager
         var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects WHERE ProjectId = {projectId}");
 
         bool success = DatabaseAccess.Instance.ExecuteQuery(query, out projects);
-    
+
         if (!success || projects == null || projects.Count == 0)
         {
             project = null;
@@ -61,12 +61,15 @@ public class ProjectManager
 
     public bool DeleteProject(long projectId)
     {
+        List<Meeting> meetings;
         List<Project> projects;
-        var query = FormattableStringFactory.Create($"DELETE FROM dbo.Projects WHERE ProjectId = {projectId}");
+        var query = FormattableStringFactory.Create($"DELETE FROM dbo.Meetings WHERE ProjectId = {projectId}");
+        var query1 = FormattableStringFactory.Create($"DELETE FROM dbo.Projects WHERE ProjectId = {projectId}");
 
-        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out projects);
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out meetings);
+        bool success1 = DatabaseAccess.Instance.ExecuteQuery(query1, out projects);
 
-        return success;
+        return success && success1;
     }
 
     private bool ProjectExists(string name)
@@ -74,9 +77,17 @@ public class ProjectManager
         List<Project> projects;
         var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects WHERE Name = '{name}'");
 
-        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out projects) 
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out projects)
             && projects != null && projects.Count != 0;
 
         return success;
+    }
+
+    public bool AcceptInvite(long projectId, long userId)
+    {
+        List<ProjectMembers> members;
+        var query = FormattableStringFactory.Create($"UPDATE ProjectMembers SET InviteAccepted = 1 WHERE ProjectId = {projectId} AND UserId = {userId}");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out members);
     }
 }

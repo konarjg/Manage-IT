@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\App.xaml
-11407045341
+8976823936
 
-20581864068
-216-1601392321
-MainWindow.xaml;
+331962863837
+2211179753863
+AdminPanelWindow.xaml;CalendarWindow.xaml;ChatWindow.xaml;CreateProjectWindow.xaml;MainWindow.xaml;ManageProjectWindow.xaml;ProjectManagementWIndow.xaml;SettingsWindow.xaml;
 
 False
 
