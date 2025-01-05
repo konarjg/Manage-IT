@@ -61,7 +61,7 @@
             {
                 $.ajax({
                     type: "POST",
-                    url: "/ManageProject?handler=CreateTaskList",
+                    url: "/ManageProject?handler=CreateTask",
                     data: { taskListId: taskListId, name: name, description: description, deadline: deadline },
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("XSRF-TOKEN",
@@ -159,7 +159,7 @@
                                                 var deadline = task.Deadline;
 
                                                 var daysLeft = (deadline - now).TotalDays;
-                                                var daysLeftText = $"{daysLeft}d left";
+                                                var daysLeftText = $"{(int)daysLeft}d left";
 
                                                 <div class="task">
                                                     <div class="taskTop">
@@ -195,7 +195,7 @@
 
                                                 
                                                 <span class="createTaskLabel">Description</span>
-                                                <textarea class="createTaskDescription" style="resize: none;" rows="30" cols="60"></textarea>
+                                                <textarea class="createTaskDescription" id="createTaskDescription" style="resize: none;" rows="30" cols="60"></textarea>
                                             </div>
                                         }
                                     </div>
@@ -211,6 +211,41 @@
                             </div>
                         </div>
                     </div>
+                    break;
+
+                case ProjectAction.Members:
+                    <div class="main">
+                        <div class="projectNav">
+                            <form asp-page-handler="back" method="post">
+                                <button class="navItem"><i class="fa fa-fw fa-arrow-left"></i>Back</button>
+                            </form>
+                        </div>
+                        <div class="membersBox">
+                            <div class="searchBox">
+                                <textarea class="search" id="search" maxlength="60" placeholder="Email or username" style="resize:none;"></textarea>
+                                <button class="inviteButton" onclick="invite('@Model.Project.ProjectId', document.getElementById('search').value)">Invite</button>
+                            </div>
+                            <div class="memberHeaderBox">
+                                <label class="memberHeader">Members</label>
+                            </div>
+
+                            <div class="membersListBox">
+                                <ol class="membersList">
+                                    @foreach (var member in Model.Members)
+                                    {
+                                        <li class="membersListItem">
+                                            <div class="loginBox">@member.Login</div>
+                                            <div class="emailBox">@member.Email</div>
+                                            <button class="memberButton">Manage</button>
+                                            <button class="memberButton">Kick</button>
+                                        </li>
+
+                                    }
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
                     break;
 
                 case ProjectAction.Info:

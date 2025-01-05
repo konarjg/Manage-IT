@@ -1,4 +1,5 @@
-﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
+﻿using Desktop;
+using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,24 @@ using System.Threading.Tasks;
 
 public static class ProjectManagementController
 {
-    public static void FetchProjectList(long userId, ref List<Project> projects, out string error)
+    public static void FetchProjectList(long userId, ref List<Project> projects, DisplayProjects display, out string error)
     {
-        bool success = ProjectManager.Instance.GetAllProjects(userId, out projects);
+        bool success = false;
+
+        switch (display)
+        {
+            case DisplayProjects.All:
+                success = ProjectManager.Instance.GetAllProjects(userId, out projects);
+                break;
+
+            case DisplayProjects.Owned:
+                success = ProjectManager.Instance.GetOwnedProjects(userId, out projects);
+                break;
+
+            case DisplayProjects.Shared:
+                success = ProjectManager.Instance.GetSharedProjects(userId, out projects);
+                break;
+        }
 
         if (success)
         {

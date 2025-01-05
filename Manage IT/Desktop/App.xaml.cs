@@ -118,6 +118,9 @@ namespace Desktop
             DatabaseAccess.Instantiate();
             UserManager.Instantiate();
             ProjectManager.Instantiate();
+            TaskListManager.Instantiate();
+            TaskManager.Instantiate();
+            MeetingManager.Instantiate();
             Instance = this;
             LoadAllSettings();
         }

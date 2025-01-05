@@ -4458,7 +4458,8 @@
             </Grid>
         </ControlTemplate>
     </Window.Resources>
+    
     <Window.Template>
-        <StaticResource ResourceKey="Invites"/>
+        <StaticResource ResourceKey="Tasks"/>
     </Window.Template>
 </Window>
