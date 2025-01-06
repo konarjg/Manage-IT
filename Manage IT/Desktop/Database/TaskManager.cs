@@ -1,13 +1,12 @@
-﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
+using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using Task = EFModeling.EntityProperties.DataAnnotations.Annotations.Task;
 
 public class TaskManager
 {
-    public static TaskManager Instance { get; private set; } 
+    public static TaskManager Instance { get; private set; }
 
     public static void Instantiate()
     {
@@ -44,7 +43,21 @@ public class TaskManager
 
         return DatabaseAccess.Instance.ExecuteQuery(queryTasks, out tasks);
     }
+    public bool CreateTaskDetails(TaskDetails data)
+    {
+        List<TaskDetails> taskDetails;
+        var queryTasks = FormattableStringFactory.Create($"INSERT INTO dbo.TaskDetails (UserId, TaskId) VALUES ('{data.UserId}','{data.TaskId}')");
 
+        return DatabaseAccess.Instance.ExecuteQuery(queryTasks, out taskDetails);
+    }
+
+    public bool ClearTaskDetails(TaskDetails data)
+    {
+        List<TaskDetails> taskDetails;
+        var queryTasks = FormattableStringFactory.Create($"DELETE FROM dbo.TaskDetails WHERE UserId = '{data.UserId}' AND TaskId = '{data.TaskId}'");
+
+        return DatabaseAccess.Instance.ExecuteQuery(queryTasks, out taskDetails);
+    }
     public bool DeleteTask(long taskId)
     {
         List<Task> tasks;
@@ -64,7 +77,7 @@ public class TaskManager
     public bool DeleteAllTasks(long projectId)
     {
         List<Task> tasks;
-        var query = FormattableStringFactory.Create($"WITH TaskIdsToDelete AS ( SELECT t.TaskId FROM dbo.Tasks t JOIN dbo.TaskLists tl ON t.TaskListId = tl.TaskListId ) DELETE FROM dbo.TaskDetails WHERE TaskId IN (SELECT TaskId FROM TaskIdsToDelete)"); 
+        var query = FormattableStringFactory.Create($"WITH TaskIdsToDelete AS ( SELECT t.TaskId FROM dbo.Tasks t JOIN dbo.TaskLists tl ON t.TaskListId = tl.TaskListId ) DELETE FROM dbo.TaskDetails WHERE TaskId IN (SELECT TaskId FROM TaskIdsToDelete)");
         var query1 = FormattableStringFactory.Create($"WITH ProjectIdsToDelete AS (SELECT tl.TaskListId FROM dbo.TaskLists tl WHERE tl.ProjectId = {projectId}) DELETE FROM dbo.Tasks WHERE TaskListId IN (SELECT TaskListId FROM ProjectIdsToDelete)");
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out tasks) && DatabaseAccess.Instance.ExecuteQuery(query1, out tasks);
