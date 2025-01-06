@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Markup;
+using System.Xml.Linq;
 
 public class ProjectManager
 {
@@ -28,6 +29,19 @@ public class ProjectManager
         }
 
         return results.FirstOrDefault();
+    }
+
+    public void DeleteOwnedProjects(long managerId)
+    {
+        List<Project> results;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects WHERE ManagerId = {managerId}");
+
+        DatabaseAccess.Instance.ExecuteQuery(query, out results);
+
+        foreach (var project in results) 
+        {
+            DeleteProject(project.ProjectId);
+        }
     }
 
     public bool GetAllProjects(long userId, out List<Project> projects)
