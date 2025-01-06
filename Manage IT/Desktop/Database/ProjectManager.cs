@@ -183,13 +183,14 @@ public class ProjectManager
 
         return data;
     }
+
     public bool AcceptInvite(Project project,User user)
     {
-    List<ProjectMembers> data;
-    var query = FormattableStringFactory.Create($"UPDATE dbo.ProjectMembers SET InviteAccepted = 1 WHERE UserId = {user.UserId} AND ProjectId = {project.ProjectId}");
+        List<ProjectMembers> data;
+        var query = FormattableStringFactory.Create($"UPDATE dbo.ProjectMembers SET InviteAccepted = 1 WHERE UserId = {user.UserId} AND ProjectId = {project.ProjectId}");
 
-    bool success = DatabaseAccess.Instance.ExecuteQuery(query, out data);
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out data);
 
-    return success;
+        return success;
     }
 }
