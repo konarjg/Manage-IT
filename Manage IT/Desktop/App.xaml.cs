@@ -1,4 +1,5 @@
-﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
+﻿using Desktop.Database;
+using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -121,6 +122,7 @@ namespace Desktop
             TaskListManager.Instantiate();
             TaskManager.Instantiate();
             MeetingManager.Instantiate();
+            ChatManager.Instantiate();
             Instance = this;
             LoadAllSettings();
         }

@@ -1,4 +1,5 @@
 using Desktop;
+using Desktop.Database;
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,22 @@ public class UserManager
     public static void Instantiate()
     {
         Instance = new UserManager();
+    }
+
+    public bool GetUser(long userId, out User user)
+    {
+        List<User> users;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE UserId = {userId}");
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out users) && users != null && users.Count != 0;
+
+        if (!success)
+        {
+            user = null;
+            return false;
+        }
+
+        user = users[0];
+        return true;
     }
 
     public bool RegisterUser(User user, out string error)
@@ -202,6 +219,8 @@ public class UserManager
     public bool DeleteUser(User user)
     {
         List<User> users;
+        ProjectManager.Instance.DeleteOwnedProjects(user.UserId);
+        ChatManager.Instance.DeleteAllConversations(user.UserId);
         var query = FormattableStringFactory.Create($"DELETE FROM dbo.Users WHERE Email LIKE '{user.Email}'");
 
         bool success = DatabaseAccess.Instance.ExecuteQuery(query, out users);
