@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "WAjtVjUuQnk6LM69fUNT/QfEWbYKgZjOSfpJuEdGJVw=",
+  "Hash": "41ZgNsKiEJKQ4kshIv5/TZLAQEDUmrommDK8nyhHNMc=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "Web\\wwwroot",
       "Source": "Web",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
       "BasePath": "_content/Web",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Calendar.css",
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Calendar.css",
       "SourceId": "Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
       "BasePath": "_content/Web",
       "RelativePath": "Calendar.css",
       "AssetKind": "All",
@@ -34,10 +34,10 @@
       "OriginalItemSpec": "wwwroot\\Calendar.css"
     },
     {
-      "Identity": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\icon.png",
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\icon.png",
       "SourceId": "Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
       "BasePath": "_content/Web",
       "RelativePath": "Graphics/icon.png",
       "AssetKind": "All",
@@ -51,10 +51,10 @@
       "OriginalItemSpec": "wwwroot\\Graphics\\icon.png"
     },
     {
-      "Identity": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\iconhov.png",
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\iconhov.png",
       "SourceId": "Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
       "BasePath": "_content/Web",
       "RelativePath": "Graphics/iconhov.png",
       "AssetKind": "All",
@@ -68,10 +68,10 @@
       "OriginalItemSpec": "wwwroot\\Graphics\\iconhov.png"
     },
     {
-      "Identity": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\logo.png",
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\logo.png",
       "SourceId": "Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
       "BasePath": "_content/Web",
       "RelativePath": "Graphics/logo.png",
       "AssetKind": "All",
@@ -85,10 +85,10 @@
       "OriginalItemSpec": "wwwroot\\Graphics\\logo.png"
     },
     {
-      "Identity": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\main.jpeg",
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\main.jpeg",
       "SourceId": "Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
       "BasePath": "_content/Web",
       "RelativePath": "Graphics/main.jpeg",
       "AssetKind": "All",
@@ -102,10 +102,10 @@
       "OriginalItemSpec": "wwwroot\\Graphics\\main.jpeg"
     },
     {
-      "Identity": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Index.css",
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Index.css",
       "SourceId": "Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
       "BasePath": "_content/Web",
       "RelativePath": "Index.css",
       "AssetKind": "All",
@@ -119,10 +119,10 @@
       "OriginalItemSpec": "wwwroot\\Index.css"
     },
     {
-      "Identity": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\RegisterForm.css",
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\RegisterForm.css",
       "SourceId": "Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
       "BasePath": "_content/Web",
       "RelativePath": "RegisterForm.css",
       "AssetKind": "All",

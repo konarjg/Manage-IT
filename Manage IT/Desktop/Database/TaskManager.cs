@@ -15,6 +15,22 @@ public class TaskManager
         Instance = new TaskManager();
     }
 
+    public bool CreateTaskDetails(TaskDetails data)
+    {
+        List<TaskDetails> taskDetails;
+        var queryTasks = FormattableStringFactory.Create($"INSERT INTO dbo.TaskDetails (UserId, TaskId) VALUES ('{data.UserId}','{data.TaskId}')");
+
+        return DatabaseAccess.Instance.ExecuteQuery(queryTasks, out taskDetails);
+    }
+
+    public bool ClearTaskDetails(TaskDetails data)
+    {
+        List<TaskDetails> taskDetails;
+        var queryTasks = FormattableStringFactory.Create($"DELETE FROM dbo.TaskDetails WHERE UserId = '{data.UserId}' AND TaskId = '{data.TaskId}'");
+
+        return DatabaseAccess.Instance.ExecuteQuery(queryTasks, out taskDetails);
+    }
+
     public Task GetTask(long taskId)
     {
         List<Task> tasks;

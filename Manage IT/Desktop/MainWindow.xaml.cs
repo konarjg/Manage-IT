@@ -286,9 +286,59 @@ namespace Desktop
             Close();
         }
 
+        private void SubmitForgotPasswordForm(out User data)
+        {
+            var credential = GetTemplateControl<TextBox>("Credential").Text;
+            var password = GetTemplateControl<PasswordBox>("Password").Password;
+            var confirmPassword = GetTemplateControl<PasswordBox>("ConfirmPassword").Password;
+
+            if (credential == string.Empty || password == string.Empty || confirmPassword == string.Empty)
+            {
+                throw new Exception("You have to fill in every field!");
+            }
+
+            if (password != confirmPassword)
+            {
+                throw new Exception("Passwords aren't identical!");
+            }
+
+            if (PasswordValidation.IsMatch(password))
+            {
+                throw new Exception("Password must be at least 8 characters long, contain at least 1 special character, at least 1 uppercase letter and at least 1 number!");
+            }
+
+            password = Security.HashText(password, Encoding.UTF8);
+            data = new();
+            data.Login = credential;
+            data.Email = credential;
+            data.Password = password;
+        }
+
         public void SubmitForgotPasswordFormClick(object sender, RoutedEventArgs e)
         {
+            User data;
+            GetTemplateControl<TextBlock>("Error").Foreground = Brushes.Red;
 
+            try
+            {
+                var error = string.Empty;
+                SubmitForgotPasswordForm(out data);
+                ForgotPasswordController.SubmitForgotPasswordForm(data, out error);
+
+                if (error == string.Empty)
+                {
+                    GetTemplateControl<TextBlock>("Error").Foreground = Brushes.White;
+                    GetTemplateControl<TextBlock>("Error").Text = "Password restoration email has been sent";
+                    return;
+                }
+
+                GetTemplateControl<TextBlock>("Error").Text = error;
+            }
+            catch (Exception error)
+            {
+                GetTemplateControl<TextBlock>("Error").Foreground = Brushes.Red;
+                GetTemplateControl<TextBlock>("Error").Text = error.Message;
+            }
         }
 
     }

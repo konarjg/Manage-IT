@@ -541,6 +541,11 @@ namespace Desktop
             TimerMembers.Stop();
             UpdateTopNavContent();
 
+            if (UserManager.Instance.CurrentSessionUser.Admin)
+            {
+                GetTemplateControl<Button>("AdminPanel").Visibility = Visibility.Visible;
+            }
+
             switch (TemplateKey)
             {
                 case "Main":
@@ -571,6 +576,15 @@ namespace Desktop
         public void BackClick(object sender, RoutedEventArgs e)
         {
             ProjectManagementWindow window = new();
+            window.Activate();
+            window.Visibility = Visibility.Visible;
+
+            Close();
+        }
+
+        public void AdminPanelClick(object sender, RoutedEventArgs e)
+        {
+            var window = new AdminPanelWindow(Project);
             window.Activate();
             window.Visibility = Visibility.Visible;
 
