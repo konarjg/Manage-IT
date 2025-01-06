@@ -32,7 +32,7 @@ namespace Desktop
         private Stack<ControlTemplate> templateHistory;
         Project project;
         User pickedUser; //we will use it for editing specific user or tranferring rights to it.
-        
+
         private T GetTemplateControl<T>(string name) where T : class
         {
             return Template.FindName(name, this as FrameworkElement) as T;
@@ -49,13 +49,13 @@ namespace Desktop
             if (newTemplate != null)
             {
                 Template = newTemplate;
-               
+
             }
             else
             {
                 MessageBox.Show($"Template '{name}' not found in resources.");
             }
-            
+
         }
         private void ProjectNameHeaderDispName(object sender, RoutedEventArgs e)
         {
@@ -77,14 +77,16 @@ namespace Desktop
             {
                 MessageBox.Show("No previous template to switch back to.");
             }
-            
+
         }
 
 
-        private void ResetTextInputs() {
+        private void ResetTextInputs()
+        {
             var allTextBoxes = FindVisualChildren<TextBox>(this);
             var allPasswordBoxes = FindVisualChildren<PasswordBox>(this);
-            foreach (var textBox in allTextBoxes) {
+            foreach (var textBox in allTextBoxes)
+            {
                 textBox.Text = string.Empty;
             }
             foreach (var passwordBox in allPasswordBoxes)
@@ -101,8 +103,8 @@ namespace Desktop
             //add logic to lead picked project name
             templateHistory = new Stack<ControlTemplate>();
         }
-      
-            
+
+
         public void BackClick(object sender, RoutedEventArgs e)
         {
             //prolly if in main adm panel window then do this.close()
@@ -220,9 +222,9 @@ namespace Desktop
             int userId = (int)button.Tag;
             User user;
             UserManager.Instance.GetUserById(userId, out user);
-            ProjectManager.Instance.RemoveProjectMember(project,user);
-            
-    
+            ProjectManager.Instance.RemoveProjectMember(project, user);
+
+
             SwitchPageTemplate("Invites");
             TextBlock Error = GetTemplateControl<TextBlock>("Error");
             Error.Foreground = Brushes.Red;
@@ -304,9 +306,9 @@ namespace Desktop
             data = new();
             data.Login = UserManager.Instance.CurrentSessionUser.Login;
             data.Password = password;
-           
-            
-            
+
+
+
 
             bool success = UserManager.Instance.LoginUser(data);
             if (success == false)
@@ -324,7 +326,7 @@ namespace Desktop
         }
         public void UserDeleteConfirmCancelClick(object sender, RoutedEventArgs e)
         {
-             TextBlock overviewError = GetTemplateControl<TextBlock>("Error");
+            TextBlock overviewError = GetTemplateControl<TextBlock>("Error");
             SwitchBackToPreviousTemplate();
         }
 
@@ -350,7 +352,8 @@ namespace Desktop
 
             SwitchBackToPreviousTemplate();
             TextBlock Error = GetTemplateControl<TextBlock>("Error");
-            if (Error != null && successUE) { 
+            if (Error != null && successUE)
+            {
                 Error.Text = "User has been added successfully";
                 Error.Foreground = Brushes.White;
             }
@@ -515,15 +518,15 @@ namespace Desktop
             {
                 if (error == null)
                 {
-                    bool success = UserManager.Instance.GetUserById(project.ManagerId,out User manager);
+                    bool success = UserManager.Instance.GetUserById(project.ManagerId, out User manager);
                     if (success)
                     {
 
-                    
-                        if(UserManager.Instance.CurrentSessionUser.Admin != false)
-    
 
-                        error.Text = "Rights transferred";
+                        if (UserManager.Instance.CurrentSessionUser.Admin != false)
+
+
+                            error.Text = "Rights transferred";
                     }
                     else
                     {
@@ -535,7 +538,7 @@ namespace Desktop
             {
                 error.Text = "Password is incorrect";
             }
-            
+
             //SwitchPageTemplate("UserEditPermissionsTransferProject");
 
         }
@@ -626,19 +629,21 @@ namespace Desktop
             TextBox taskListErr = GetTemplateControl<TextBox>("Error");
             if (taskListName != String.Empty)
             {
-                
+
                 TaskListManager.Instance.CreateTaskList(data);
                 SwitchBackToPreviousTemplate();
-                
+
                 taskListErr.Foreground = Brushes.White;
                 taskListErr.Text = "Task list has been created";
             }
             else if (taskListName == String.Empty)
             {
+                taskListErr.Foreground = Brushes.Red;
                 taskListErr.Text = "Insert project's name";
             }
             else
             {
+                taskListErr.Foreground = Brushes.Red;
                 taskListErr.Text = "An error has occured";
             }
         }
@@ -649,11 +654,12 @@ namespace Desktop
             SwitchBackToPreviousTemplate();
         }
 
+        //left it uncommented since it's just switching ContentTemplates
         public void TasksAddTaskListLeaderClick(object sender, RoutedEventArgs e)
         {
             SwitchPageTemplate("TasksAddTaskListAssignLeader");
         }
-       
+
 
         /*public void TasksAddTaskListAssignLeaderConfirmClick(object sender, RoutedEventArgs e)
         {
@@ -669,6 +675,8 @@ namespace Desktop
         public void TasksEditTaskListConfirmClick(object sender, RoutedEventArgs e)
         {
             TaskList tasklist = new TaskList();
+            var taskListName = GetTemplateControl<TextBox>("TasksAddTaskListNameTextBox").Text;
+            var taskListDesc = GetTemplateControl<TextBox>("TasksAddTaskListDescriptionTextBox").Text;
             TaskListManager.Instance.UpdateTaskList(tasklist);
 
         }
@@ -716,7 +724,7 @@ namespace Desktop
             var taskDeadline = GetTemplateControl<TextBox>("TasksAddTaskDeadlineTextBox").Text;
             TextBlock Error = GetTemplateControl<TextBlock>("Error");
             bool isDeadlineValid = DateTime.TryParse(taskDeadline, out DateTime deadline);
-            if (isDeadlineValid && taskName!="")
+            if (isDeadlineValid && taskName != "")
             {
                 data = new();
                 data.Name = taskName;
@@ -727,11 +735,11 @@ namespace Desktop
                 //SwitchPageTemplate("UsersAddUserConfirm");
 
                 SwitchBackToPreviousTemplate();
-               
+
                 Error.Text = "Task has been created successfully";
                 Error.Foreground = Brushes.White;
             }
-            else if(taskName==String.Empty)
+            else if (taskName == String.Empty)
             {
                 Error.Text = "Insert task's name";
             }
@@ -740,7 +748,7 @@ namespace Desktop
                 Error.Text = "An error has occured";
             }
 
-           
+
         }
 
         public void TasksAddTaskCancelClick(object sender, RoutedEventArgs e)
@@ -776,7 +784,7 @@ namespace Desktop
                 //SwitchPageTemplate("UsersAddUserConfirm");
 
                 SwitchBackToPreviousTemplate();
-               
+
                 Error.Text = "Task has been created successfully";
                 Error.Foreground = Brushes.White;
             }
@@ -821,8 +829,60 @@ namespace Desktop
 
         public void TasksEditTaskConfirmClick(object sender, RoutedEventArgs e)
         {
+            // Assuming the UI has text boxes or controls to get updated task details.
+            var updatedTaskName = GetTemplateControl<TextBox>("TasksEditNameTextBox").Text;
+            var updatedTaskDesc = GetTemplateControl<TextBox>("TasksEditDescriptionTextBox").Text;
+            var updatedTaskDeadline = GetTemplateControl<TextBox>("TasksEditDeadlineTextBox").Text;
+            bool isDeadlineValid = DateTime.TryParse(updatedTaskDeadline, out DateTime deadline);
 
+            if (!isDeadlineValid)
+            {
+                MessageBox.Show("Invalid deadline date.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // Get the task ID from the selected item (assuming it's stored in a hidden field or data context).
+            long taskId = 0; // Assuming this is where the task ID should be retrieved
+                             // long taskId = (long)hiddenTaskId.Value; // Uncomment this line if you have hiddenTaskId available
+
+            // Instantiate the TaskManager if it hasn't been done already.
+            if (TaskManager.Instance == null)
+            {
+                TaskManager.Instantiate();
+            }
+
+            bool taskExists = TaskManager.Instance.GetTaskId(taskListId: 1, name: updatedTaskName, out taskId);
+
+            if (taskExists)
+            {
+                // Create a new Task object with updated details
+                EFModeling.EntityProperties.DataAnnotations.Annotations.Task updatedTask = new EFModeling.EntityProperties.DataAnnotations.Annotations.Task
+                {
+                    TaskId = taskId,
+                    Name = updatedTaskName,
+                    Description = updatedTaskDesc,
+                    Deadline = deadline
+                };
+
+                // Update the task
+                bool success = TaskManager.Instance.UpdateTask(updatedTask);
+                if (success)
+                {
+                    //we can also move to previous template and forward it to Error TextBlock
+                    MessageBox.Show("Task updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Failed to update the task.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Task not found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
+
 
         public void TasksEditTaskCancelClick(object sender, RoutedEventArgs e)
         {
@@ -831,18 +891,87 @@ namespace Desktop
 
         public void TasksEditTaskDeleteTaskClick(object sender, RoutedEventArgs e)
         {
+            // Ensure the sender is a button and fetch the taskId from its Tag property.
+            if (sender is Button deleteButton && deleteButton.Tag is long taskId)
+            {
+                // Instantiate the TaskManager if it hasn't been done already.
+                if (TaskManager.Instance == null)
+                {
+                    TaskManager.Instantiate();
+                }
 
+                bool success = TaskManager.Instance.DeleteTask(taskId);
+                if (success)
+                {
+                    MessageBox.Show("Task deleted successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Failed to delete the task.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Invalid task ID.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
 
         public void TasksEditTaskViewUsersAddClick(object sender, RoutedEventArgs e)
         {
+            // Assume the UI has controls to get UserId and TaskId
+            int userId = int.Parse(GetTemplateControl<TextBox>("UserTextBox").Text);
+            int taskId = int.Parse(GetTemplateControl<TextBox>("TaskTextBox").Text);
 
+            // Instantiate the TaskManager if it hasn't been done already.
+            if (TaskManager.Instance == null)
+            {
+                TaskManager.Instantiate();
+            }
+
+            // Create a new TaskDetails object
+            TaskDetails taskDetails = new TaskDetails
+            {
+                UserId = userId,
+                TaskId = taskId
+            };
+
+            // Add the TaskDetails entry (assuming you have a method to do this in DatabaseAccess)
+            bool success = true;
+            if (success)
+            {
+                MessageBox.Show("User added to task successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Failed to add user to task.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public void TasksEditTaskViewUsersRemoveClick(object sender, RoutedEventArgs e)
         {
+            // Assume the UI has controls to get UserId and TaskId
+            int userId = int.Parse(GetTemplateControl<TextBox>("UserIdTextBox").Text);
+            int taskId = int.Parse(GetTemplateControl<TextBox>("TaskIdTextBox").Text);
 
+            // Instantiate the TaskManager if it hasn't been done already.
+            if (TaskManager.Instance == null)
+            {
+                TaskManager.Instantiate();
+            }
+
+            // Remove the TaskDetails entry (assuming you have a method to do this in DatabaseAccess)
+            bool success = true;
+            if (success)
+            {
+                MessageBox.Show("User removed from task successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Failed to remove user from task.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
 
         public void TasksEditTaskAddUsersConfirmClick(object sender, RoutedEventArgs e)
         {
