@@ -331,6 +331,92 @@
                         <Button x:Name="CreateMeeting" Click="CreateMeeting" Margin="5" Grid.Row="8" Grid.Column="1" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3" Content="Create" FontSize="24"/>
                     </Grid>
                 </Border>
+
+                <Border x:Name="ManageTaskListPopup" BorderBrush="White" BorderThickness="5" Grid.Row="5" Grid.RowSpan="8" Grid.Column="2" Grid.ColumnSpan="2" Visibility="Collapsed">
+                    <Grid>
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                <GradientStop Color="#000000" Offset="0.0"/>
+                                <GradientStop Color="#000040" Offset="0.75"/>
+                            </LinearGradientBrush>
+                        </Grid.Background>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock x:Name="EditTaskListError" Margin="50,0,50,0" TextAlignment="Center" Grid.ColumnSpan="2" Foreground="Red" FontSize="36"></TextBlock>
+                        <TextBlock Grid.Row="1" Margin="10,0,10,0" Foreground="White" FontSize="36" Text="Title"></TextBlock>
+                        <TextBlock Grid.Row="2" Margin="10,0,10,0" Foreground="White" FontSize="36" Text="Description"></TextBlock>
+                        <TextBlock Grid.Row="5" Margin="10,0,10,0" Foreground="White" FontSize="36" Text="Deadline"></TextBlock>
+                        <TextBox x:Name="EditTaskListTitle" Margin="5" Grid.Row="1" Grid.Column="1" Background="Transparent" BorderBrush="White" CaretBrush="White" Foreground="White" FontSize="24" BorderThickness="3"/>
+                        <TextBox x:Name="EditTaskListDescription" Margin="5" Grid.Row="2" Grid.RowSpan="3" Grid.Column="1" Background="Transparent" BorderBrush="White" CaretBrush="White" Foreground="White" FontSize="24" BorderThickness="3" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible"/>
+                        <wpfTool:DateTimePicker x:Name="TaskListDeadLine" Grid.Row="5" Grid.Column="1" Margin="5" AllowTextInput="False" Format="ShortDate" TimePickerVisibility="Collapsed" Background="Transparent" BorderBrush="White" BorderThickness="3" Foreground="White" FontSize="24" TextAlignment="Left"/>
+                        <Button x:Name="EditDeleteTaskList" Click="EditDeleteTaskList" Margin="5" Grid.Row="8" Grid.ColumnSpan="2" Background="#ffa0a0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3" Content="Delete" FontSize="24"/>
+                        <Button x:Name="EditCloseTaskList" Click="EditCloseTaskList" Margin="5" Grid.Row="7" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3" Content="Cancel changes" FontSize="24"/>
+                        <Button x:Name="EditConfirmTaskList" Click="EditConfirmTaskList" Margin="5" Grid.Row="7" Grid.Column="1" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3" Content="Confirm changes" FontSize="24"/>
+                    </Grid>
+                </Border>
+
+                <Border x:Name="ManageTaskPopup" BorderBrush="White" BorderThickness="5" Grid.Row="3" Grid.RowSpan="12" Grid.Column="2" Grid.ColumnSpan="2" Visibility="Visible">
+                    <Grid>
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                <GradientStop Color="#000000" Offset="0.0"/>
+                                <GradientStop Color="#000040" Offset="0.75"/>
+                            </LinearGradientBrush>
+                        </Grid.Background>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock x:Name="EditTaskError" Margin="50,0,50,0" TextAlignment="Center" Grid.ColumnSpan="2" Foreground="Red" FontSize="36"></TextBlock>
+                        <TextBlock Grid.Row="1" Margin="10,0,10,0" Foreground="White" FontSize="36" Text="Title"></TextBlock>
+                        <TextBlock Grid.Row="2" Margin="10,0,10,0" Foreground="White" FontSize="36" Text="Description"></TextBlock>
+                        <TextBlock Grid.Row="5" Margin="10,0,10,0" Foreground="White" FontSize="36" Text="Deadline"></TextBlock>
+                        <TextBox x:Name="EditTaskTitle" Margin="5" Grid.Row="1" Grid.Column="1" Background="Transparent" BorderBrush="White" CaretBrush="White" Foreground="White" FontSize="24" BorderThickness="3"/>
+                        <TextBox x:Name="EditTaskDescription" Margin="5" Grid.Row="2" Grid.RowSpan="3" Grid.Column="1" Background="Transparent" BorderBrush="White" CaretBrush="White" Foreground="White" FontSize="24" BorderThickness="3" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible"/>
+                        <wpfTool:DateTimePicker x:Name="TaskDeadLine" Grid.Row="5" Grid.Column="1" Margin="5" AllowTextInput="False" Format="ShortDate" TimePickerVisibility="Collapsed" Background="Transparent" BorderBrush="White" BorderThickness="3" Foreground="White" FontSize="24" TextAlignment="Left"/>
+                        <TextBlock Grid.Row="6" Margin="10,0,10,0" Foreground="White" FontSize="36" Text="Assigned Members"></TextBlock>
+                        <TextBlock Grid.Row="8" Margin="10,0,10,0" Foreground="White" FontSize="36" Text="Task List"></TextBlock>
+                        <Button x:Name="EditReviewTask" Click="EditReviewTask" Margin="5" Grid.Row="10" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3" Content="Review" FontSize="24"/>
+                        <Button x:Name="EditHandInTask" Click="EdittHandInTask" Margin="5" Grid.Row="10" Grid.Column="1" Background="#ffffff" Foreground="#000000" BorderBrush="#000000" BorderThickness="3" Content="Hand in" FontSize="24"/>
+                        <Button x:Name="EditDeleteTask" Click="EditDeleteTask" Margin="5" Grid.Row="12" Grid.ColumnSpan="2" Background="#ffa0a0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3" Content="Delete" FontSize="24"/>
+                        <Button x:Name="EditCloseTask" Click="EditCloseTask" Margin="5" Grid.Row="11" Background="#ffe0e0" Foreground="#800000" BorderBrush="#800000" BorderThickness="3" Content="Cancel changes" FontSize="24"/>
+                        <Button x:Name="EditConfirmList" Click="EditConfirmList" Margin="5" Grid.Row="11" Grid.Column="1" Background="#e0ffe0" Foreground="#008000" BorderBrush="#008000" BorderThickness="3" Content="Confirm changes" FontSize="24"/>
+                    </Grid>
+                </Border>
             </Grid>
         </ControlTemplate>
 
@@ -583,6 +669,129 @@
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="6" Grid.RowSpan="6" Grid.Column="2" Grid.ColumnSpan="2">
                     <TextBox x:Name="Description" Background="Transparent" CaretBrush="White" Foreground="White" BorderBrush="White" BorderThickness="5" IsReadOnly="True" FontSize="48" MaxLines="30" AcceptsReturn="True" TextWrapping="Wrap"/>
                 </ScrollViewer>
+            </Grid>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ManageMember">
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                        <GradientStop Color="#000000" Offset="0.0"/>
+                        <GradientStop Color="#000040" Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="BackButton" Click="PanelBackClick" FontSize="120" Grid.Row="0" Grid.Column="0" Background="Transparent" Content="🔙" BorderThickness="0" Foreground="White" Grid.RowSpan="4" Margin="0,0,120,66"/>
+                <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="12" Grid.Column="1" Grid.ColumnSpan="4">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border BorderBrush="White" BorderThickness="0,0,0,5" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="6">
+                            <StackPanel Orientation="Horizontal" Width="1200" Height="80">
+                                <TextBlock x:Name="Error" Foreground="Red" Width="400" Height="50" FontSize="36" TextAlignment="Center"></TextBlock>
+                                <StackPanel Orientation="Horizontal" Width="600" Height="80" Margin="20,0,0,0">
+                                    <Button x:Name="Kick" Width="150" Height="60" Background="White" Content="Invite" Margin="15,0,0,0" FontSize="36" FontWeight="Bold" Click="InviteClick">
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="15"/>
+                                            </Style>
+                                        </Button.Resources>
+                                    </Button>
+                                    <Button x:Name="Invite" Width="150" Height="60" Background="White" Content="Invite" Margin="15,0,0,0" FontSize="36" FontWeight="Bold" Click="InviteClick">
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="15"/>
+                                            </Style>
+                                        </Button.Resources>
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <Border BorderBrush="White" BorderThickness="5,5,5,5" Grid.Row="2" Grid.RowSpan="14" Grid.Column="0" Grid.ColumnSpan="6" Margin="20,10,20,20">
+                            <ListBox x:Name="MembersList" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Setter Property="Focusable" Value="False"/>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                            </ListBox>
+                        </Border>
+
+
+                        <Border x:Name="KickPanel" BorderBrush="White" BorderThickness="5,5,5,5" Grid.Row="5" Grid.RowSpan="5" Grid.Column="2" Grid.ColumnSpan="2" Visibility="Collapsed">
+                            <StackPanel>
+                                <StackPanel.Background>
+                                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                        <GradientStop Color="#000000" Offset="0.0"/>
+                                        <GradientStop Color="#000040" Offset="0.75"/>
+                                    </LinearGradientBrush>
+                                </StackPanel.Background>
+
+                                <TextBlock x:Name="Title" Text="Do you really wish to kick this member?" Foreground="White" FontSize="32" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="320" Margin="0,30,0,0">
+                                    <Button x:Name="Cancel" Click="CancelKickClick" HorizontalAlignment="Center" Content="Cancel" Margin="0,0,5,0" Width="150" Height="60" FontSize="36" FontWeight="Bold" BorderBrush="Black" Background="White" BorderThickness="2"></Button>
+                                    <Button x:Name="Confirm" Click="ConfirmKickClick" HorizontalAlignment="Center" Content="Kick" Width="150" Margin="5,0,0,0" Height="60" FontSize="36" FontWeight="Bold" BorderBrush="Red" Foreground="Red" Background="#ffb3b2" BorderThickness="2"></Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+
+                    </Grid>
+                </Border>
             </Grid>
         </ControlTemplate>
 
