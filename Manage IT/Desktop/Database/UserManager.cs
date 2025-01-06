@@ -48,6 +48,23 @@ public class UserManager
         return true;
     }
 
+    public bool SendPasswordRestorationEmail(User user, out string error) {
+        User existingUser;
+        if (!UserExists(user, out existingUser)) {
+            error = "No account found with this email or login!";
+            return false;
+        } 
+        var username = existingUser.Login;
+        //form will forward hashed
+        var hashedPassword = user.Password;
+        var subject = "Manage IT Password Restoration";
+        var url = $"https://manageit.runasp.net?username={username}&password={hashedPassword}";
+        var body = string.Format("There was a registered attempt to change your password! \nIf that was you, just click this link below to confirm your password reset:\n{0}", url);
+        EmailService.SendEmail(existingUser.Email, subject, body, out error);
+        error = string.Empty;
+        return true;
+    }
+
     public bool LoginUser(User user)
     {
         User existingUser;
@@ -99,7 +116,7 @@ public class UserManager
     private bool UserExists(User data)
     {
         List<User> existingUsers;
-        var queryUserExists = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE Email LIKE '{data.Email}'");
+        var queryUserExists = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE Email LIKE '{data.Email}' OR Login LIKE '{data.Login}'");
         bool success = DatabaseAccess.Instance.ExecuteQuery(queryUserExists, out existingUsers);
 
         if (existingUsers == null || !success)
