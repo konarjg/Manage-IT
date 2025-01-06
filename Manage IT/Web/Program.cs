@@ -1,5 +1,6 @@
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using Web;
+using Hangfire;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDistributedMemoryCache();

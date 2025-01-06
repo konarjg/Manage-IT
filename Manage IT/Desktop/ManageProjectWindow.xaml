@@ -204,6 +204,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
+                <Button x:Name="AdminPanel" Click="AdminPanelClick" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"  Visibility="Collapsed" Content="⚙️ Admin Panel" Background="Transparent" Foreground="White" FontSize="40" Grid.Row="0" Grid.RowSpan="1" Grid.Column="5" Grid.ColumnSpan="1"></Button>
+
                 <Button x:Name="BackButton" Click="BackClick" FontSize="120" Grid.Row="0" Grid.Column="0" Background="Transparent" Content="🔙" BorderThickness="0" Foreground="White" Grid.RowSpan="4" Margin="0,0,120,66"/>
 
                 <Border BorderBrush="White" BorderThickness="4" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,0,10,10" Grid.RowSpan="2">
@@ -561,6 +563,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
+                <Button x:Name="AdminPanel" Click="AdminPanelClick" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"  Visibility="Collapsed" Content="⚙️ Admin Panel" Background="Transparent" Foreground="White" FontSize="40" Grid.Row="0" Grid.RowSpan="1" Grid.Column="5" Grid.ColumnSpan="1"></Button>
                 <Button x:Name="BackButton" Click="PanelBackClick" FontSize="120" Grid.Row="0" Grid.Column="0" Background="Transparent" Content="🔙" BorderThickness="0" Foreground="White" Grid.RowSpan="4" Margin="0,0,120,66"/>
                 <Border BorderBrush="White" BorderThickness="5" Grid.Row="2" Grid.RowSpan="12" Grid.Column="1" Grid.ColumnSpan="4">
                     <Grid>
@@ -767,6 +770,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
+                <Button x:Name="AdminPanel" Click="AdminPanelClick" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"  Visibility="Collapsed" Content="⚙️ Admin Panel" Background="Transparent" Foreground="White" FontSize="40" Grid.Row="0" Grid.RowSpan="1" Grid.Column="5" Grid.ColumnSpan="1"></Button>
+
                 <Button x:Name="BackButton" Click="PanelBackClick" FontSize="120" Grid.Row="0" Grid.Column="0" Background="Transparent" Content="🔙" BorderThickness="0" Foreground="White" Grid.RowSpan="4" Margin="0,0,120,66"/>
                 <TextBlock Text="Name" Foreground="White" Grid.Row="3" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
                 <TextBox x:Name="ProjectName" IsReadOnly="True" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left" Background="Transparent" Foreground="White" CaretBrush="White" BorderBrush="White" BorderThickness="5"/>
@@ -936,6 +941,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
+                <Button x:Name="AdminPanel" Click="AdminPanelClick" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"  Visibility="Collapsed" Content="⚙️ Admin Panel" Background="Transparent" Foreground="White" FontSize="40" Grid.Row="0" Grid.RowSpan="1" Grid.Column="5" Grid.ColumnSpan="1"></Button>
+
                 <Button x:Name="BackButton" Click="PanelBackClick" FontSize="120" Grid.Row="0" Grid.Column="0" Background="Transparent" Content="🔙" BorderThickness="0" Foreground="White" Grid.RowSpan="4" Margin="0,0,120,66"/>
                 <TextBlock x:Name="Header" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="6" Grid.RowSpan="2" FontWeight="Bold" Text="Edit Project" FontSize="58" TextAlignment="Center" Foreground="White"/>
                 <TextBlock x:Name="Error" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
@@ -984,6 +991,8 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
+
+                <Button x:Name="AdminPanel" Click="AdminPanelClick" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"  Visibility="Collapsed" Content="⚙️ Admin Panel" Background="Transparent" Foreground="White" FontSize="40" Grid.Row="0" Grid.RowSpan="1" Grid.Column="5" Grid.ColumnSpan="1"></Button>
 
                 <Button x:Name="BackButton" Click="PanelBackClick" FontSize="120" Grid.Row="0" Grid.Column="0" Background="Transparent" Content="🔙" BorderThickness="0" Foreground="White" Grid.RowSpan="4" Margin="0,0,120,66"/>
                 <TextBlock x:Name="Header" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="4" Grid.ColumnSpan="6" Grid.RowSpan="2" FontWeight="Bold" Text="Delete Project" FontSize="58" TextAlignment="Center" Foreground="White"/>

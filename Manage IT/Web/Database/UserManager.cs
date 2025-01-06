@@ -24,6 +24,14 @@ public class UserManager
         CurrentSessionUser = null;
     }
 
+    public bool RestorePassword(long userId, string password)
+    {
+        List<User> users;
+        var query = FormattableStringFactory.Create($"UPDATE dbo.Users SET Password = '{password}' WHERE UserId = {userId}");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out users);
+    }
+
     public bool GetUser(long userId, out User user)
     {
         List<User> users;

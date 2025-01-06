@@ -26,11 +26,6 @@ namespace Desktop
 
         public void ProjectManagementViewLoaded(object sender, RoutedEventArgs e)
         {
-            if (UserManager.Instance.CurrentSessionUser.Admin)
-            {
-                AdminPanel.Visibility = Visibility.Visible;
-            }
-
             string error;
             ProjectManagementController.FetchProjectList(UserManager.Instance.CurrentSessionUser.UserId, ref Projects, App.Instance.UserSettings.DisplayProjects, out error);
 
@@ -90,15 +85,6 @@ namespace Desktop
             CreateProjectWindow createForm = new();
             createForm.Activate();
             createForm.Visibility = Visibility.Visible;
-            Close();
-        }
-
-        public void AdminPanelClick(object sender, RoutedEventArgs e)
-        {
-            var window = new AdminPanelWindow();
-            window.Activate();
-            window.Visibility = Visibility.Visible;
-
             Close();
         }
 

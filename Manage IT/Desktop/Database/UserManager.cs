@@ -20,6 +20,25 @@ public class UserManager
         Instance = new UserManager();
     }
 
+    public bool SendPasswordRestorationEmail(User user, out string error)
+    {
+        User existingUser;
+        if (!UserExists(user, out existingUser))
+        {
+            error = "No account found with this email or login!";
+            return false;
+        }
+        var userId = existingUser.UserId;
+        //form will forward hashed
+        var hashedPassword = user.Password;
+        var subject = "Manage IT Password Restoration";
+        var url = $"https://manageit.runasp.net/RestorePassword?userId={userId}&password={hashedPassword}";
+        var body = string.Format("There was a registered attempt to change your password! \nIf that was you, just click this link below to confirm your password reset:\n{0}", url);
+        EmailService.SendEmail(existingUser.Email, subject, body, out error);
+        error = string.Empty;
+        return true;
+    }
+
     public bool GetUser(long userId, out User user)
     {
         List<User> users;
