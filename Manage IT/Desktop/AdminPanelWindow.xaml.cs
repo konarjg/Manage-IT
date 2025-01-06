@@ -19,18 +19,36 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using System.Reflection.PortableExecutable;
 using System.Diagnostics.Eventing.Reader;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 
 
 namespace Desktop
 {
+    public class AdminPanelViewModel
+    {
+        //EXAMPLE DATA
+        public ObservableCollection<ProjectMembers> PendingInvites { get; set; } = new ObservableCollection<ProjectMembers> {
+            new ProjectMembers { UserId = 1},
+            new ProjectMembers { UserId = 2}
+            //new ProjectMembers { UserId = 3}
+        };
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
     /// <summary>
     /// Interaction logic for AdminPanelWindow.xaml
     /// </summary>
-    public partial class AdminPanelWindow : Window
+    public partial class AdminPanelWindow : Window 
     {
+
         private Stack<ControlTemplate> templateHistory;
-        Project project;
+        Project project = new Project { ProjectId = 1, ManagerId = 1, Name = "Testing" };
         User pickedUser; //we will use it for editing specific user or tranferring rights to it.
 
         private T GetTemplateControl<T>(string name) where T : class
@@ -61,7 +79,7 @@ namespace Desktop
         {
             TextBlock header = GetTemplateControl<TextBlock>("ProjectNameHeader");
             //header.Text = project.Name;
-            header.Text = "Project's name";
+            header.Text = project.Name;
         }
         private void SwitchBackToPreviousTemplate()
         {
@@ -79,9 +97,36 @@ namespace Desktop
             }
 
         }
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string? name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+        private void SendInvitationClick(object sender, RoutedEventArgs e)
+        {
+            TextBlock Error = GetTemplateControl<TextBlock>("Error");
 
+            var credential = GetTemplateControl<TextBox>("UserToInvite").Text;
+            User data = new();
+            data.Login = credential;
+            data.Email = credential;
+            bool successUE = UserManager.Instance.UserExists(data, out User user);
+            Error.Text = credential;
+            if (successUE)
+            {
+                UserManager.Instance.SendProjectInvite(user, project);
+                Error.Foreground = Brushes.White;
+                Error.Text = "User has been invited";
+            }
+            else
+            {
+                Error.Foreground = Brushes.Red;
+                Error.Text = "User hasn't been found";
+            }
+                
+        }
 
-        private void ResetTextInputs()
+            private void ResetTextInputs()
         {
             var allTextBoxes = FindVisualChildren<TextBox>(this);
             var allPasswordBoxes = FindVisualChildren<PasswordBox>(this);
@@ -101,7 +146,9 @@ namespace Desktop
         {
             InitializeComponent();
             //add logic to lead picked project name
+
             templateHistory = new Stack<ControlTemplate>();
+            DataContext = new AdminPanelViewModel();
         }
 
 
@@ -113,110 +160,73 @@ namespace Desktop
 
         public void OverviewClick(object sender, RoutedEventArgs e)
         {
+            templateHistory.Clear();
             SwitchPageTemplate("Overview");
         }
 
         public void UsersClick(object sender, RoutedEventArgs e)
         {
+            templateHistory.Clear();
             SwitchPageTemplate("Users");
         }
 
         public void SupportClick(object sender, RoutedEventArgs e)
         {
+            templateHistory.Clear();
             SwitchPageTemplate("Support");
         }
         public void TasksClick(object sender, RoutedEventArgs e)
         {
+            templateHistory.Clear();
             SwitchPageTemplate("Tasks");
+            
         }
+
+
 
         public void SecurityClick(object sender, RoutedEventArgs e)
         {
+            templateHistory.Clear();
             SwitchPageTemplate("Security");
         }
 
         public void AuditLogClick(object sender, RoutedEventArgs e)
         {
+            templateHistory.Clear();
             SwitchPageTemplate("AuditLog");
         }
 
         public void InvitesClick(object sender, RoutedEventArgs e)
         {
+            templateHistory.Clear();
             SwitchPageTemplate("Invites");
-            List<ProjectMembers> unacceptedInvites = ProjectManager.Instance.GetUnacceptedInvites(project);
 
-            // Assuming you have a Grid named "InvitesGrid" in your XAML to add these controls
-            Grid invitesGrid = this.FindName("InvitesGrid") as Grid;
-            invitesGrid.Children.Clear();
-            invitesGrid.RowDefinitions.Clear(); // Clear existing row definitions
-
-            int row = 1;
-            foreach (var invite in unacceptedInvites)
+            // Assuming the DataContext is already set to an instance of AdminPanelViewModel
+            if (DataContext is AdminPanelViewModel viewModel)
             {
-                // Add a new RowDefinition for each new row
-                invitesGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+                // Retrieve unaccepted invites (this example does not use them yet)
+                List<ProjectMembers> unacceptedInvites = ProjectManager.Instance.GetUnacceptedInvites(project);
 
-                User user;
-                UserManager.Instance.GetUserById(invite.UserId, out user);
-                TextBlock userNameBlock = new TextBlock
-                {
-                    Name = "UserName" + row,
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    FontWeight = FontWeights.Bold,
-                    Text = user.Login, // Assuming ProjectMembers has a UserName property
-                    FontSize = 36,
-                    TextAlignment = TextAlignment.Center,
-                    Foreground = Brushes.White
-                };
-                Grid.SetRow(userNameBlock, row);
-                Grid.SetColumn(userNameBlock, 0);
-                invitesGrid.Children.Add(userNameBlock);
+                // Optionally clear existing invites
+                viewModel.PendingInvites.Clear();
 
-                Button declineButton = new Button
-                {
-                    Name = "DeclineButton" + row,
-                    Content = "Decline",
-                    HorizontalContentAlignment = HorizontalAlignment.Center,
-                    Padding = new Thickness(48, 0, 48, 0),
-                    FontSize = 32,
-                    Margin = new Thickness(18, 18, 413, 18),
-                    Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ffe0e0")),
-                    Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#800000")),
-                    BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#800000")),
-                    BorderThickness = new Thickness(3),
-                    Tag = user.UserId // Store the user ID in the Tag property
-                };
-                declineButton.Click += DeclineInviteClick;
-                Grid.SetRow(declineButton, row);
-                Grid.SetColumn(declineButton, 1);
-                invitesGrid.Children.Add(declineButton);
+                // Add pending
+                // Add unaccepted invites to PendingInvites
+                foreach (var invite in unacceptedInvites) {
+                    viewModel.PendingInvites.Add(invite);
+                }
 
-                Button acceptButton = new Button
-                {
-                    Name = "AcceptButton" + row,
-                    Content = "Accept",
-                    HorizontalContentAlignment = HorizontalAlignment.Center,
-                    Padding = new Thickness(48, 0, 48, 0),
-                    FontSize = 32,
-                    Margin = new Thickness(412, 18, 20, 18),
-                    Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#e0ffe0")),
-                    Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#008000")),
-                    BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#008000")),
-                    BorderThickness = new Thickness(3),
-                    Tag = user.UserId // Store the user ID in the Tag property
-                };
-                acceptButton.Click += AcceptInviteClick;
-                Grid.SetRow(acceptButton, row);
-                Grid.SetColumn(acceptButton, 2);
-                invitesGrid.Children.Add(acceptButton);
 
-                row++;
+
+
+                // Update the template or UI as needed
+                SwitchPageTemplate("Invites");
             }
         }
 
+
         // Example methods for click events
-        private void DeclineInviteClick(object sender, RoutedEventArgs e)
+        private void DeclineInviteButtonClick(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
             int userId = (int)button.Tag;
@@ -233,7 +243,7 @@ namespace Desktop
             // Your decline logic here, using the userId
         }
 
-        private void AcceptInviteClick(object sender, RoutedEventArgs e)
+        private void AcceptInviteButtonClick(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
             int userId = (int)button.Tag;
@@ -936,11 +946,11 @@ namespace Desktop
                 TaskId = taskId
             };
 
-            // Add the TaskDetails entry (assuming you have a method to do this in DatabaseAccess)
             bool success = true;
             if (success)
             {
                 MessageBox.Show("User added to task successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                TaskManager.Instance.CreateTaskDetails(taskDetails);
             }
             else
             {
@@ -960,10 +970,16 @@ namespace Desktop
                 TaskManager.Instantiate();
             }
 
-            // Remove the TaskDetails entry (assuming you have a method to do this in DatabaseAccess)
+            // Create a new TaskDetails object
+            TaskDetails taskDetails = new TaskDetails
+            {
+                UserId = userId,
+                TaskId = taskId
+            };
             bool success = true;
             if (success)
             {
+                TaskManager.Instance.ClearTaskDetails(taskDetails);
                 MessageBox.Show("User removed from task successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
