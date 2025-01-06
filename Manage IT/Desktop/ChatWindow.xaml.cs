@@ -1,4 +1,5 @@
-﻿using Desktop.Database;
+﻿
+using Desktop.Database;
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
@@ -408,6 +409,15 @@ namespace Desktop
 
             Error.Text = "There was an unexpected error!";
             ErrorPopup.Visibility = Visibility.Visible;
+        }
+
+        public void BackClick(object sender, RoutedEventArgs e)
+        {
+            var window = new ProjectManagementWindow();
+            window.Activate();
+            window.Visibility = Visibility.Visible;
+
+            Close();
         }
     }
 }

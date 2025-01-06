@@ -110,5 +110,14 @@ namespace Desktop
 
             Close();
         }
+
+        public void CalendarClick(object sender, RoutedEventArgs e)
+        {
+            var window = new CalendarWindow();
+            window.Activate();
+            window.Visibility = Visibility.Visible;
+
+            Close();
+        }
     }
 }

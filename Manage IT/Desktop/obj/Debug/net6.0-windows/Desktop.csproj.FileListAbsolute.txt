@@ -170,3 +170,4 @@ C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\obj\Debug\net6.0-windows\refi
 C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\obj\Debug\net6.0-windows\Desktop.pdb
 C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\obj\Debug\net6.0-windows\Desktop.genruntimeconfig.cache
 C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\obj\Debug\net6.0-windows\ref\Desktop.dll
+C:\Users\konis\Desktop\Manage IT\Manage IT\Desktop\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
