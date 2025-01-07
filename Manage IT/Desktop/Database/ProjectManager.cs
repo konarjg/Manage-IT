@@ -22,7 +22,20 @@ public class ProjectManager
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out projects);
     }
+    public List<ProjectMembers> GetUnacceptedInvites(Project project)
+{
+    List<ProjectMembers> data;
+    var query = FormattableStringFactory.Create($"SELECT * FROM dbo.ProjectMembers WHERE InviteAccepted = 0 AND ProjectId = {project.ProjectId}");
 
+    bool success = DatabaseAccess.Instance.ExecuteQuery(query, out data);
+
+    if (!success)
+    {
+        return null;
+    }
+
+    return data;
+}
     public bool GetProject(long projectId, out Project project)
     {
         List<Project> projects;
