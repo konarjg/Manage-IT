@@ -41,6 +41,11 @@ namespace Desktop
 
             listBox.SelectedItems.Clear();
 
+            if (e.NewValue == null)
+            {
+                return;
+            }
+
             foreach (var item in e.NewValue as IList)
             {
                 listBox.SelectedItems.Add(item);
