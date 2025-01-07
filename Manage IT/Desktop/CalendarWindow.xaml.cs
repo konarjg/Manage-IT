@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Xceed.Wpf.Toolkit;
+using static System.Net.Mime.MediaTypeNames;
 using Task = EFModeling.EntityProperties.DataAnnotations.Annotations.Task;
 
 namespace Desktop
@@ -465,6 +466,16 @@ namespace Desktop
 
             var model = DataContext as CalendarModel;
             model.Items = date.DateItems;
+
+            if (ActiveDate != null)
+            {
+                var text = $"{ActiveDate.Date.Day} {GetMonthName(ActiveDate.Date.Month)} {ActiveDate.Date.Year}";
+                GetTemplateControl<TextBlock>("ActiveDateHeader").Text = text;
+            }
+            else
+            {
+                GetTemplateControl<TextBlock>("ActiveDateHeader").Text = "";
+            }
 
             UpdateCalendarDisplay();
         }

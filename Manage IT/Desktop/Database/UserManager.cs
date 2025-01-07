@@ -32,8 +32,8 @@ public class UserManager
         //form will forward hashed
         var hashedPassword = user.Password;
         var subject = "Manage IT Password Restoration";
-        var url = $"https://manageit.runasp.net/RestorePassword?userId={userId}&password={hashedPassword}";
-        var body = string.Format("There was a registered attempt to change your password! \nIf that was you, just click this link below to confirm your password reset:\n{0}", url);
+        var url = $"<a href='http://manageit.runasp.net/RestorePassword?userId={userId}&password={hashedPassword}'>Click to restore!</a>";
+        var body = string.Format($"There was a registered attempt to change your password!<br/>If that was you, just click this link below to confirm your password reset:<br/>{url}");
         EmailService.SendEmail(existingUser.Email, subject, body, out error);
         error = string.Empty;
         return true;

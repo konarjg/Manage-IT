@@ -204,6 +204,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Button x:Name="BackButton" Click="ForgotPasswordBackClick" FontSize="86" Grid.Row="0" Grid.Column="0" Background="Transparent" Content="🔙" BorderThickness="0" Foreground="White" Grid.RowSpan="2"/>
+                <TextBlock x:Name="Error" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="0" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Center" Foreground="Red" Grid.Column="2" Margin="0,15,0,0"/>
                 <TextBlock x:Name="Header" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="6" Grid.RowSpan="2" FontWeight="Bold" Text="Password Reset" FontSize="58" TextAlignment="Center" Foreground="White"/>
                 <TextBlock Text="Email or username" Foreground="White" Grid.Row="2" Grid.Column="2" FontSize="48" Grid.ColumnSpan="2"/>
                 <TextBox x:Name="Credential" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" FontSize="48" TextAlignment="Left" Background="Transparent" Foreground="White" BorderBrush="White" BorderThickness="5" CaretBrush="White"/>
@@ -261,6 +262,6 @@
     </Window.Resources>
 
     <Window.Template>
-        <StaticResource ResourceKey="Main"/>
+        <StaticResource ResourceKey="ForgotPassword"/>
     </Window.Template>
 </Window>
