@@ -1,5 +1,6 @@
 ﻿@page
 @using EFModeling.EntityProperties.DataAnnotations.Annotations;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model AccountManagement
 @{
     <html lang="en">
@@ -12,6 +13,7 @@
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
             <meta name="author" content="Bosnian IT Management Inc." />
             <link rel="stylesheet" href="~/AccountManagement.css" type="text/css" />
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
             <!--Because Razor adds a scope identifier and a helper tag,
             body needs to be styled in the style tag as per
@@ -37,58 +39,94 @@
                     document.getElementById("main").style.marginLeft = "0";
                 }
 
-                function getWidth() {
-                    if (self.innerWidth) {
-                        return self.innerWidth;
-                    }
+                function deleteAccount() {
+                    var result = confirm("Do you really want to delete Your account?");
 
-                    if (document.documentElement && document.documentElement.clientWidth) {
-                        return document.documentElement.clientWidth;
-                    }
-
-                    if (document.body) {
-                        return document.body.clientWidth;
-                    }
-                }
-
-                function getHeight() {
-                    if (self.innerHeight) {
-                        return self.innerHeight;
-                    }
-
-                    if (document.documentElement && document.documentElement.clientHeight) {
-                        return document.documentElement.clientHeight;
-                    }
-
-                    if (document.body) {
-                        return document.body.clientHeight;
+                    if (result) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/AccountManagement?handler=Delete",
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
                     }
                 }
 
-                function updateViewport() {
-                    var width = getWidth();
-                    var height = getHeight();
+                function disableAccount() {
+                    var result = confirm("Do you really want to disable Your account?");
 
-                    if (height < width) {
-                        return;
+                    if (result) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/AccountManagement?handler=Disable",
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
                     }
 
-                    var responsives = document.getElementsByClassName("responsive");
-                    var containers = document.getElementsByClassName("container");
-                    var buttonContainers = document.getElementsByClassName("buttons");
+                }
 
-                    responsives.forEach(responsive => {
-                        responsive.style.text - wrap = "wrap";
-                    });
+                function cancelChanges() {
+                    var login=document.getElementById("Username");
+                    var email=document.getElementById("Email");
+                    var password=document.getElementById("Password");
+                    var confirmPassword=document.getElementById("ConfirmPassword");
 
-                    containers.forEach(container => {
-                        container.style.flex - direction = "column";
-                    });
+                    login.value="";
+                    email.value="";
+                    password.value="";
+                    confirmPassword.value="";
 
-                    buttons.forEach(container => {
-                        container.style.flex - direction = "row";
+                }
+
+                function confirmChanges() {
+                    var login = document.getElementById("Username").value;
+                    var email = document.getElementById("Email").value;
+                    var password = document.getElementById("Password").value;
+                    var confirmPassword = document.getElementById("ConfirmPassword").value;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/AccountManagement?handler=Edit",
+                        data:{ login: login, email: email, password: password, confirmPassword: confirmPassword },
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("XSRF-TOKEN",
+                                $('input:hidden[name="__RequestVerificationToken"]').val());
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                window.location.reload();
+                            }
+                            else {
+                                alert(response.message);
+                            }
+                        },
+                        error: function () {
+                            alert("error");
+                        }
                     });
                 }
+
 
                 setInterval(updateViewport, 0);
             </script>
@@ -98,9 +136,6 @@
             <header>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
                 <div class="topnav">
-                    <a class="active" href=@Href("~/")><i class="fa fa-fw fa-home"></i> Home</a>
-                    <a href="#"><i class="fa fa-fw fa-download"></i> Downloads</a>
-                    <a href="#"><i class="fa fa-fw fa-question"></i>About</a>
                     <div class="topnav-right">
                         <a class="active" href=@Href("~/")><i class="fa fa-fw fa-home"></i> Home</a>
                         <a href="#"><i class="fa fa-fw fa-download"></i> Downloads</a>
@@ -125,12 +160,12 @@
                     <form class="accountForm">
                         <div class="accountPair">
                             <label class="accountLabel">Username</label>
-                            <input class="accountInput" type="text" id="username" placeholder="Username" />
+                            <input class="accountInput" type="text" id="username" placeholder="@Model.User.Login" />
                         </div>
 
                         <div class="accountPair">
                             <label class="accountLabel">Email</label>
-                            <input class="accountInput" type="email" id="email" placeholder="Email" />
+                            <input class="accountInput" type="email" id="email" placeholder="@Model.User.Email" />
                         </div>
 
                         <div class="accountPair">
@@ -141,6 +176,14 @@
                             <label class="accountLabel">Confirm password</label>
                             <input class="accountInput" type="password" id="confirmPassword" placeholder="Confirm password"/>
                         </div>
+                        <div class="accountButtons">
+                            <button onclick="deleteAccount()" class="accountRedButton">Delete account</button>
+                            <button onclick="disableAccount()" class="accountWhiteButton">Disable account</button>
+                        </div>
+                        <div class="accountButtons">
+                            <button onclick="cancelChanges()" class="accountRedButton">Cancel changes</button>
+                            <button onclick="confirmChanges()" class="accountGreenButton">Confirm changes</button>
+                         </div>
                     </form>
                 </div>
             </div>

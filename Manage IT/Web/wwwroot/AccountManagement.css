@@ -215,7 +215,7 @@ main {
 
 .account {
     width:80vw;
-    height:80vh;
+    height:70vh;
     margin-top:5vh;
     margin-left:auto;
     margin-right:auto;
@@ -227,7 +227,7 @@ main {
 
 .accountForm {
     width: 70vw;
-    height: 70vh;
+    height: 60vh;
     margin-top: auto;
     margin-bottom: auto;
     margin-left: auto;
@@ -244,13 +244,76 @@ main {
     margin-right: auto;
     display: flex;
     flex-direction: row;
+    align-content: center;
+    justify-content: center;
     gap: 15vw;
 }
 
 .accountLabel {
+    color:white;
+    font-size:24px;
+    width:15vw;
+    height:5vh;
 
 }
 
 .accountInput {
+    border:0.1vh solid white;
+    color:white;
+    background-color:transparent;
+    width:20vw;
+    height:5vh;
+    font-size:24px;
+}
 
+.accountButtons{
+    display:flex;
+    flex-direction:row;
+    gap:1vw;
+    width:65vw;
+    height:10vh;
+    align-content:center;
+    justify-content:center;
+}
+
+.accountRedButton {
+    border: 0.5vh solid #800000;
+    background-color: #FFE0E0;
+    color: #800000;
+    font-size: 24px;
+    width: 20vw;
+    height: 8vh;
+    border-radius: 5vh;
+}
+.accountRedButton:hover{
+    background-color:red;
+}
+
+.accountWhiteButton {
+    border: 0.5vh solid #808080;
+    background-color: #FFFFFF;
+    color: #808080;
+    font-size: 24px;
+    width: 20vw;
+    height: 8vh;
+    border-radius: 5vh;
+}
+
+.accountWhiteButton:hover{
+    background-color:lightblue;
+}
+
+
+.accountGreenButton {
+    border: 0.5vh solid #008000;
+    background-color: #E0FFE0;
+    color: #008000;
+    font-size: 24px;
+    width: 20vw;
+    height: 8vh;
+    border-radius: 5vh;
+}
+
+.accountGreenButton:hover{
+    background-color:lightgreen;
 }
