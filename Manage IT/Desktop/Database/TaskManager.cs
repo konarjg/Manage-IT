@@ -146,7 +146,7 @@ public class TaskManager
     {
         List<Task> tasks;
 
-        var query = FormattableStringFactory.Create($"UPDATE dbo.Tasks SET TaskListId = {data.TaskListId}, Name = '{data.Name}', Description = '{data.Description}', Deadline = '{data.Deadline.ToString("yyyy-MM-dd HH:mm:ss")}', Accepted = {data.AcceptedSql}, HandedIn = {(data.HandedIn ? 1 : 0)}");
+        var query = FormattableStringFactory.Create($"UPDATE dbo.Tasks SET TaskListId = {data.TaskListId}, Name = '{data.Name}', Description = '{data.Description}', Deadline = '{data.Deadline.ToString("yyyy-MM-dd HH:mm:ss")}', Accepted = {data.AcceptedSql}, HandedIn = {(data.HandedIn ? 1 : 0)} WHERE TaskId = {data.TaskId}");
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out tasks);
     }

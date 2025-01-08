@@ -159,6 +159,12 @@
                                                 var deadline = task.Deadline;
 
                                                 var daysLeft = (deadline - now).TotalDays;
+
+                                                if (daysLeft < 0)
+                                                {
+                                                    daysLeft = 0;
+                                                }
+
                                                 var daysLeftText = $"{(int)daysLeft}d left";
 
                                                 <div class="task">

@@ -8,7 +8,6 @@ namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
 
 internal class MockDatabaseContext
 {
-    public List<Prefix> Prefixes { get; set; }
     public List<Project> Projects { get; set; }
     public List<ProjectMembers> ProjectMembers { get; set; }
     public List<Task> Tasks { get; set; }
@@ -19,7 +18,6 @@ internal class MockDatabaseContext
 
     public MockDatabaseContext()
     {
-        Prefixes = new List<Prefix>();
         Projects = new List<Project>();
         ProjectMembers = new List<ProjectMembers>();
         Tasks = new List<Task>();
@@ -33,9 +31,6 @@ internal class MockDatabaseContext
     {
         switch (typeof(T))
         {
-            case Type t when t == typeof(Prefix):
-                return (List<T>)Convert.ChangeType(Prefixes, typeof(List<T>));
-
             case Type t when t == typeof(Project):
                 return (List<T>)Convert.ChangeType(Projects, typeof(List<T>));
 
