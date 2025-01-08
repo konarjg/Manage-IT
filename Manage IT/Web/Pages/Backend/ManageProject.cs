@@ -76,41 +76,43 @@ public class ManageProject : PageModel
         {
             HttpContext.Session.Remove("Project");
             HttpContext.Session.Remove("Action");
+            Action = ProjectAction.Manage;
         }
 
         if (HttpContext.Session.Get<Project>("Project") != null)
         {
             Project = HttpContext.Session.Get<Project>("Project");
             Action = HttpContext.Session.Get<ProjectAction>("Action");
-            return null;
         }
-
-        if (id == null || id == string.Empty)
+        else
         {
-            return Redirect("~/ProjectManagement");
+            if (id == null || id == string.Empty)
+            {
+                return Redirect("~/ProjectManagement");
+            }
+
+            long projectId;
+
+            if (!long.TryParse(id, out projectId))
+            {
+                return Redirect("~/ProjectManagement");
+            }
+
+            Project project;
+            bool success = ProjectManager.Instance.GetProject(projectId, out project);
+
+            if (!success || project == null)
+            {
+                return Redirect("~/ProjectManagement");
+            }
+
+            Project = project;
         }
-
-        long projectId;
-
-        if (!long.TryParse(id, out projectId))
-        {
-            return Redirect("~/ProjectManagement");
-        }
-
-        Project project;
-        bool success = ProjectManager.Instance.GetProject(projectId, out project);
-
-        if (!success || project == null)
-        {
-            return Redirect("~/ProjectManagement");
-        }
-
-        Project = project;
         
         if (HttpContext.Session.Get<List<TaskList>>("TaskLists") == null)
         {
             List<TaskList> taskLists;
-            success = TaskListManager.Instance.GetAllTaskLists(projectId, out taskLists);
+            bool success = TaskListManager.Instance.GetAllTaskLists(Project.ProjectId, out taskLists);
 
             if (!success || taskLists == null || taskLists.Count == 0)
             {
@@ -129,9 +131,7 @@ public class ManageProject : PageModel
         }
         
 
-        HttpContext.Session.Set("Project", project);
-
-        Action = ProjectAction.Manage;
+        HttpContext.Session.Set("Project", Project);
         HttpContext.Session.Set("Action", Action);
         return null;
     }
