@@ -12,6 +12,12 @@ public class TaskListManager
         Instance = new TaskListManager();
     }
 
+    public bool GetAllTaskLists(out List<TaskList> taskLists)
+    {
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.TaskLists");
+        return DatabaseAccess.Instance.ExecuteQuery(query, out taskLists);
+    }
+
     public bool GetAllTaskLists(long projectId, out List<TaskList> taskLists)
     {
         var query = FormattableStringFactory.Create($"SELECT * FROM dbo.TaskLists WHERE ProjectId = {projectId}");

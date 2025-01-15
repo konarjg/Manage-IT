@@ -235,6 +235,8 @@ main {
     display: flex;
     flex-direction: column;
     gap: 1vh;
+    align-content: center;
+    justify-content: center;
 }
 
 .accountPair {
@@ -316,4 +318,14 @@ main {
 
 .accountGreenButton:hover{
     background-color:lightgreen;
+}
+
+.accountError {
+    color: red;
+    font-size: 24px;
+    text-align: center;
+    width: 20vw;
+    height: 5vh;
+    margin-left: auto;
+    margin-right: auto;
 }

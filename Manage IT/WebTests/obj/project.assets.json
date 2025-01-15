@@ -6330,23 +6330,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\fuksa\\.nuget\\packages\\": {},
+    "C:\\Users\\konis\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\WebTests\\WebTests.csproj",
+      "projectUniqueName": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\WebTests\\WebTests.csproj",
       "projectName": "WebTests",
-      "projectPath": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\WebTests\\WebTests.csproj",
-      "packagesPath": "C:\\Users\\fuksa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\WebTests\\obj\\",
+      "projectPath": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\WebTests\\WebTests.csproj",
+      "packagesPath": "C:\\Users\\konis\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\WebTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\fuksa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\konis\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -6362,8 +6362,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\Web.csproj": {
-              "projectPath": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\Web.csproj"
+            "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\Web.csproj": {
+              "projectPath": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\Web.csproj"
             }
           }
         }
@@ -6431,7 +6431,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

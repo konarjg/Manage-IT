@@ -19,6 +19,75 @@ public class UserManager
         Instance = new UserManager();
     }
 
+    public bool GetAllUsers(out List<User> users)
+    {
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Users");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out users);
+    }
+
+    public bool UpdateUser(User data)
+    {
+        List<User> users;
+        var query = FormattableStringFactory.Create($"UPDATE dbo.Users SET Email = '{data.Email}', Login = '{data.Login}', Password = '{data.Password}' WHERE UserId = {data.UserId}");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out users);
+    }
+
+    public bool DisableUser(User user)
+    {
+        List<User> users;
+        var query = FormattableStringFactory.Create($"UPDATE dbo.Users SET Verified = 0 WHERE Email LIKE '{user.Email}'");
+
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out users);
+
+        if (!success)
+        {
+            return false;
+        }
+
+        var url = string.Format($"http://manageit.runasp.net/VerifyEmail?email={user.Email}");
+        var subject = "Your Manage IT account has been disabled!";
+        var body = $"Dear {user.Login}!<br/>Your account has been disabled!<br>If you wish to enable it again click the following link<br/><a href={url}>Click to enable your account</a>";
+        string error;
+
+        EmailService.SendEmail(user.Email, subject, body, out error);
+
+        if (error != "")
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public bool DeleteUser(User user)
+    {
+        List<User> users;
+        ProjectManager.Instance.DeleteOwnedProjects(user.UserId);
+        var query = FormattableStringFactory.Create($"DELETE FROM dbo.Users WHERE Email LIKE '{user.Email}'");
+
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out users);
+
+        if (!success)
+        {
+            return false;
+        }
+
+        var subject = "Your Manage IT account has been deleted!";
+        var body = $"Dear {user.Login}!<br/>Your account has been deleted!<br>If you wish to restore it, contact an administrator or create a new account!<br/> Thanks for choosing Manage IT!";
+        string error;
+
+        EmailService.SendEmail(user.Email, subject, body, out error);
+
+        if (error != "")
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     public void ResetUser()
     {
         CurrentSessionUser = null;
