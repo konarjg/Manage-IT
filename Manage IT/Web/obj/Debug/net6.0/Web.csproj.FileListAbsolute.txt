@@ -63,7 +63,6 @@ C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\obj\Debug\net6.0\staticwe
 C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\obj\Debug\net6.0\staticwebassets.development.json
 C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\obj\Debug\net6.0\scopedcss\bundle\Web.styles.css
-C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\obj\Debug\net6.0\Web.csproj.CopyComplete
 C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\obj\Debug\net6.0\Web.dll
 C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\obj\Debug\net6.0\refint\Web.dll
 C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\obj\Debug\net6.0\Web.pdb
@@ -176,3 +175,9 @@ C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\bin\Debug\net6.0\sv\Hangf
 C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\bin\Debug\net6.0\tr-TR\Hangfire.Core.resources.dll
 C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\bin\Debug\net6.0\zh-TW\Hangfire.Core.resources.dll
 C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\bin\Debug\net6.0\zh\Hangfire.Core.resources.dll
+C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\bin\Debug\net6.0\Web.staticwebassets.endpoints.json
+C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\obj\Debug\net6.0\Web.sourcelink.json
+C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\obj\Debug\net6.0\staticwebassets.build.endpoints.json
+C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\obj\Debug\net6.0\staticwebassets\msbuild.Web.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\obj\Debug\net6.0\staticwebassets.upToDateCheck.txt
+C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\obj\Debug\net6.0\Web.csproj.Up2Date

@@ -216,6 +216,23 @@
                                 <button class="createTaskListButton" onclick="createTaskList('@Model.Project.ProjectId.ToString()', document.getElementById('taskListNameField').value, document.getElementById('taskListDescriptionField').value)"><i class="fa fa-fw fa-plus"></i>Create Task List</button>
                             </div>
                         </div>
+                        <div class="taskListPopup">
+                            <form>
+                            <div class="taskListPair">
+                            <label class="taskListLabel">Title</label>
+                            <input type="text" id="title" />
+                            </div>
+                                <div class="taskListPair">
+                                    <label class="taskListLabel">Description</label>
+                                    <textarea id="description"></textarea>
+                                </div>
+                                <div class="taskListButtons">
+                                <button id="taskListCancelButton">Cancel changes</button>
+                                <button id="taskListConfirmButton">Confirm changes</button>
+                                </div>
+                                <button id="taskListDeleteButton">Delete</button>
+                            </form>
+                        </div>
                     </div>
                     break;
 

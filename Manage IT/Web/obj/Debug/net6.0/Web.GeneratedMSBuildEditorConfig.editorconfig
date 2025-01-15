@@ -9,69 +9,73 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Web
 build_property.RootNamespace = Web
-build_property.ProjectDir = C:\Users\konis\Desktop\Manage IT\Manage IT\Web\
+build_property.ProjectDir = C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\konis\Desktop\Manage IT\Manage IT\Web
+build_property.MSBuildProjectDirectory = C:\Users\fuksa\OneDrive\Pulpit\Manage IT\Manage IT\Web
 build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 6.0
+build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/AcceptInvite.cshtml]
+[C:/Users/fuksa/OneDrive/Pulpit/Manage IT/Manage IT/Web/Pages/AcceptInvite.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjZXB0SW52aXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/AccountManagement.cshtml]
+[C:/Users/fuksa/OneDrive/Pulpit/Manage IT/Manage IT/Web/Pages/AccountManagement.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudE1hbmFnZW1lbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/AdminPanel.cshtml]
+[C:/Users/fuksa/OneDrive/Pulpit/Manage IT/Manage IT/Web/Pages/AdminPanel.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5QYW5lbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/Calendar.cshtml]
+[C:/Users/fuksa/OneDrive/Pulpit/Manage IT/Manage IT/Web/Pages/Calendar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FsZW5kYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/CreateProjectForm.cshtml]
+[C:/Users/fuksa/OneDrive/Pulpit/Manage IT/Manage IT/Web/Pages/CreateProjectForm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JlYXRlUHJvamVjdEZvcm0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/GetSecurityParameters.cshtml]
+[C:/Users/fuksa/OneDrive/Pulpit/Manage IT/Manage IT/Web/Pages/GetSecurityParameters.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR2V0U2VjdXJpdHlQYXJhbWV0ZXJzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/GetSmtpParameters.cshtml]
+[C:/Users/fuksa/OneDrive/Pulpit/Manage IT/Manage IT/Web/Pages/GetSmtpParameters.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR2V0U210cFBhcmFtZXRlcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/Index.cshtml]
+[C:/Users/fuksa/OneDrive/Pulpit/Manage IT/Manage IT/Web/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/LoginForm.cshtml]
+[C:/Users/fuksa/OneDrive/Pulpit/Manage IT/Manage IT/Web/Pages/LoginForm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW5Gb3JtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/LogOut.cshtml]
+[C:/Users/fuksa/OneDrive/Pulpit/Manage IT/Manage IT/Web/Pages/LogOut.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nT3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/ManageProject.cshtml]
+[C:/Users/fuksa/OneDrive/Pulpit/Manage IT/Manage IT/Web/Pages/ManageProject.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFuYWdlUHJvamVjdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/ProjectManagement.cshtml]
+[C:/Users/fuksa/OneDrive/Pulpit/Manage IT/Manage IT/Web/Pages/ProjectManagement.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvamVjdE1hbmFnZW1lbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/RegisterForm.cshtml]
+[C:/Users/fuksa/OneDrive/Pulpit/Manage IT/Manage IT/Web/Pages/RegisterForm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0ZXJGb3JtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/RestorePassword.cshtml]
+[C:/Users/fuksa/OneDrive/Pulpit/Manage IT/Manage IT/Web/Pages/RestorePassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVzdG9yZVBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/VerifyEmail.cshtml]
+[C:/Users/fuksa/OneDrive/Pulpit/Manage IT/Manage IT/Web/Pages/VerifyEmail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmVyaWZ5RW1haWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
