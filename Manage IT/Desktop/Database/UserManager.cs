@@ -1,7 +1,9 @@
 using Desktop;
+using Desktop.Database;
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
@@ -11,12 +13,59 @@ public class UserManager
 {
     public User CurrentSessionUser { get; set; }
 
-
     public static UserManager Instance { get; private set; }
 
     public static void Instantiate()
     {
         Instance = new UserManager();
+    }
+
+    public bool SendPasswordRestorationEmail(User user, out string error)
+    {
+        User existingUser;
+        if (!UserExists(user, out existingUser))
+        {
+            error = "No account found with this email or login!";
+            return false;
+        }
+        var userId = existingUser.UserId;
+        //form will forward hashed
+        var hashedPassword = user.Password;
+        var subject = "Manage IT Password Restoration";
+        var url = $"<a href='http://manageit.runasp.net/RestorePassword?userId={userId}&password={hashedPassword}'>Click to restore!</a>";
+        var body = string.Format($"There was a registered attempt to change your password!<br/>If that was you, just click this link below to confirm your password reset:<br/>{url}");
+        EmailService.SendEmail(existingUser.Email, subject, body, out error);
+        error = string.Empty;
+        return true;
+    }
+
+    public bool GetUser(long userId, out User user)
+    {
+        List<User> users;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE UserId = {userId}");
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out users) && users != null && users.Count != 0;
+
+        if (!success)
+        {
+            user = null;
+            return false;
+        }
+
+        user = users[0];
+        return true;
+    }
+    public bool GetAllUsers(out List<User> users)
+    {
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Users");
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out users) && users != null && users.Count != 0;
+
+        if (!success)
+        {
+            users = null;
+            return false;
+        }
+
+        return true;
     }
 
     public bool RegisterUser(User user, out string error)
@@ -31,7 +80,7 @@ public class UserManager
         var query = FormattableStringFactory.Create($"INSERT INTO dbo.Users (Login,Password,Email,Admin,Verified) VALUES ('{user.Login}', '{user.Password}','{user.Email}', 0, 0)");
 
         var success = DatabaseAccess.Instance.ExecuteQuery(query, out users);
-
+        
         if (!success)
         {
             error = "There was an unexpected error! Could not create an account.";
@@ -48,20 +97,41 @@ public class UserManager
         return true;
     }
 
-    public bool SendPasswordRestorationEmail(User user, out string error) {
-        User existingUser;
-        if (!UserExists(user, out existingUser)) {
-            error = "No account found with this email or login!";
+    public bool GetCurrentUserPermissions(long projectId, out UserPermissions permissions)
+    {
+        var userId = CurrentSessionUser.UserId;
+
+        List<UserPermissions> records;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.UserPermissions WHERE UserId = {userId} AND ProjectId = {projectId}");
+        
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out records);
+
+        if (!success)
+        {
+            permissions = null;
             return false;
-        } 
-        var username = existingUser.Login;
-        //form will forward hashed
-        var hashedPassword = user.Password;
-        var subject = "Manage IT Password Restoration";
-        var url = $"https://manageit.runasp.net?username={username}&password={hashedPassword}";
-        var body = string.Format("There was a registered attempt to change your password! \nIf that was you, just click this link below to confirm your password reset:\n{0}", url);
-        EmailService.SendEmail(existingUser.Email, subject, body, out error);
-        error = string.Empty;
+        }
+
+        permissions = records.FirstOrDefault();
+
+        return true;
+    }
+
+    public bool GetUserPermissions(long userId, long projectId, out UserPermissions permissions)
+    {
+        List<UserPermissions> records;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.UserPermissions WHERE UserId = {userId} AND ProjectId = {projectId}");
+
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out records);
+
+        if (!success)
+        {
+            permissions = null;
+            return false;
+        }
+
+        permissions = records.FirstOrDefault();
+
         return true;
     }
 
@@ -116,7 +186,7 @@ public class UserManager
     private bool UserExists(User data)
     {
         List<User> existingUsers;
-        var queryUserExists = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE Email LIKE '{data.Email}' OR Login LIKE '{data.Login}'");
+        var queryUserExists = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE Email LIKE '{data.Email}'");
         bool success = DatabaseAccess.Instance.ExecuteQuery(queryUserExists, out existingUsers);
 
         if (existingUsers == null || !success)
@@ -181,6 +251,8 @@ public class UserManager
     public bool DeleteUser(User user)
     {
         List<User> users;
+        ProjectManager.Instance.DeleteOwnedProjects(user.UserId);
+        ChatManager.Instance.DeleteAllConversations(user.UserId);
         var query = FormattableStringFactory.Create($"DELETE FROM dbo.Users WHERE Email LIKE '{user.Email}'");
 
         bool success = DatabaseAccess.Instance.ExecuteQuery(query, out users);
@@ -233,16 +305,29 @@ public class UserManager
 
         return EmailService.SendEmail(data.Email, subject, body, out error);
     }
-    public bool GetUserById(long id, out User user)
-    {
-        List<User> users;
-        var query = FormattableStringFactory.Create($"SELECT * FROM users WHERE UserID = " + id + " LIMIT 1");
-        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out users);
-        user = users[0];
-        
 
-        return success;
+    public void CreatePermissionsForCurrentUser(string name)
+    {
+        List<UserPermissions> temp;
+        FormattableString query = FormattableStringFactory.Create($"INSERT INTO dbo.UserPermissions (ProjectId, UserId, Editing, InvitingMembers, KickingMembers) SELECT ProjectId, {CurrentSessionUser.UserId}, 1, 1, 1 FROM dbo.Projects WHERE Name LIKE '{name}'");
+
+        DatabaseAccess.Instance.ExecuteQuery(query, out temp);
     }
 
+    public bool DeleteAllPermissions(long projectId)
+    {
+        List<UserPermissions> permissions;
+        var query = FormattableStringFactory.Create($"DELETE FROM dbo.UserPermissions WHERE ProjectId = {projectId}");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out permissions);
+    }
+
+    public bool UpdateUserPermissions(UserPermissions data)
+    {
+        List<UserPermissions> permissions;
+        var query = FormattableStringFactory.Create($"UPDATE dbo.UserPermissions SET Editing = {(data.Editing ? 1 : 0)}, InvitingMembers = {(data.InvitingMembers ? 1 : 0)}, KickingMembers = {(data.KickingMembers ? 1 : 0)} WHERE UserId = {data.UserId} AND ProjectId = {data.ProjectId}");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out permissions);
+    }
 
 }
