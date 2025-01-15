@@ -38,13 +38,21 @@ public class TaskListManager
         return DatabaseAccess.Instance.ExecuteQuery(query, out taskLists);
     }
 
+    public bool DeleteTaskLists(long projectId)
+    {
+        TaskManager.Instance.DeleteAllTasks(projectId);
+        List<TaskList> lists;
+        var query = FormattableStringFactory.Create($"DELETE FROM dbo.TaskLists WHERE ProjectId = {projectId}");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out lists);
+    }
+
     public bool DeleteTaskList(long taskListId)
     {
         List<Task> tasks;
-        List<TaskDetails> details;
-        bool success = TaskManager.Instance.GetAllTasks(taskListId, out tasks, out details);
+        bool success = TaskManager.Instance.GetAllTasks(taskListId, out tasks);
 
-        if (tasks != null && tasks.Count != 0 && details != null && details.Count != 0)
+        if (tasks != null && tasks.Count != 0)
         {
             foreach (var task in tasks)
             {

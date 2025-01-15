@@ -80,15 +80,28 @@ public class ProjectManager
         return success;
     }
 
+    private void DeleteAllMembers(long projectId)
+    {
+        List<ProjectMembers> data;
+        var query = FormattableStringFactory.Create($"DELETE FROM dbo.ProjectMembers WHERE ProjectId = {projectId}");
+
+        DatabaseAccess.Instance.ExecuteQuery(query, out data);
+    }
+
     public bool DeleteProject(long projectId)
     {
         List<Meeting> meetings;
         List<Project> projects;
-        var query = FormattableStringFactory.Create($"DELETE FROM dbo.Meetings WHERE ProjectId = {projectId}");
-        var query1 = FormattableStringFactory.Create($"DELETE FROM dbo.Projects WHERE ProjectId = {projectId}");
 
-        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out meetings);
-        bool success1 = DatabaseAccess.Instance.ExecuteQuery(query1, out projects);
+        TaskListManager.Instance.DeleteTaskLists(projectId);
+        UserManager.Instance.DeleteAllPermissions(projectId);
+        DeleteAllMembers(projectId);
+
+        var query = FormattableStringFactory.Create($"DELETE FROM dbo.Projects WHERE ProjectId = {projectId}");
+
+        Project data;
+        bool success = GetProject(projectId, out data);
+        bool success1 = DatabaseAccess.Instance.ExecuteQuery(query, out projects);
 
         return success && success1;
     }
