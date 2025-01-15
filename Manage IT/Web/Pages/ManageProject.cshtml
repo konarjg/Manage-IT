@@ -1,5 +1,6 @@
 ﻿@page
 @using EFModeling.EntityProperties.DataAnnotations.Annotations;
+@using System.Text.Json;
 @using Task = EFModeling.EntityProperties.DataAnnotations.Annotations.Task;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model ManageProject
@@ -79,6 +80,76 @@
                     }
                 });
             }
+
+            var currentTaskList = null;
+
+            function manageTaskList(taskListJson) {
+                var popup = document.getElementById("taskListPopup");
+                popup.style.visibility = "visible";
+                taskList = JSON.parse(taskListJson);
+                currentTaskList = taskList;
+
+                var name = document.getElementById("title");
+                var description = document.getElementById("description");
+
+                name.value = taskList.Name;
+                description.value = taskList.Description;
+            }
+
+            function taskListPopupCancel() {
+                var popup = document.getElementById("taskListPopup");
+                popup.style.visibility = "collapse";
+            }
+
+            function taskListPopupConfirm() {
+                var taskList = currentTaskList;
+                taskList.Name = document.getElementById("title").value;
+                taskList.Description = document.getElementById("description").value;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/ManageProject?handler=UpdateTaskList",
+                    data: { taskListJson: JSON.stringify(taskList) },
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("XSRF-TOKEN",
+                            $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.reload();
+                        } else {
+                            alert("Could not update the task list!");
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            }
+
+            function taskListPopupDelete() {
+                var taskList = currentTaskList;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/ManageProject?handler=DeleteTaskList",
+                    data: { taskListJson: JSON.stringify(taskList) },
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("XSRF-TOKEN",
+                            $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.reload();
+                        } else {
+                            alert("Could not delete the task list!");
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            }
         </script>
     </head>
 
@@ -142,8 +213,12 @@
                             {
                                 <div class="taskList">
                                     <div class="taskListTop">
+                                        @{
+                                            string json = JsonSerializer.Serialize(taskList);
+                                        }
+
                                         <span>@taskList.Name</span>
-                                        <span class="dots"><i class="fa fa-fw fa-ellipsis-v"></i></span>
+                                        <span class="dots"><i class="fa fa-fw fa-ellipsis-v" onclick="manageTaskList('@json')"></i></span>
                                     </div>
 
                                     <div class="taskListTasks">
@@ -179,7 +254,7 @@
                                                         <span class="taskSubDays">@daysLeftText</span>
                                                     </div>
 
-                                                    <textarea readonly="readonly" class="taskDescription" style="resize: none;" rows="30" cols="60">This is a test task!</textarea>
+                                                    <textarea readonly="readonly" class="taskDescription" style="resize: none;" rows="30" cols="60">@task.Description</textarea>
                                                 </div>
                                             }
 
@@ -215,22 +290,20 @@
                                 <button class="createTaskListButton" onclick="createTaskList('@Model.Project.ProjectId.ToString()', document.getElementById('taskListNameField').value, document.getElementById('taskListDescriptionField').value)"><i class="fa fa-fw fa-plus"></i>Create Task List</button>
                             </div>
                         </div>
-                        <div class="taskListPopup">
-                            <form>
+                        <div id="taskListPopup">
                             <div class="taskListPair">
-                            <label class="taskListLabel">Title</label>
-                            <input type="text" id="title" />
+                                <label class="taskListLabel">Title</label>
+                                <input type="text" id="title" />
                             </div>
-                                <div class="taskListPair">
-                                    <label class="taskListLabel">Description</label>
-                                    <textarea id="description"></textarea>
-                                </div>
-                                <div class="taskListButtons">
-                                <button id="taskListCancelButton">Cancel changes</button>
-                                <button id="taskListConfirmButton">Confirm changes</button>
-                                </div>
-                                <button id="taskListDeleteButton">Delete</button>
-                            </form>
+                            <div class="taskListPair">
+                                <label class="taskListLabel">Description</label>
+                                <textarea id="description"></textarea>
+                            </div>
+                            <div class="taskListButtons">
+                                <button id="taskListCancelButton" onclick="taskListPopupCancel()">Cancel changes</button>
+                                <button id="taskListConfirmButton" onclick="taskListPopupConfirm()">Confirm changes</button>
+                            </div>
+                            <button id="taskListDeleteButton" onclick="taskListPopupDelete()">Delete</button>
                         </div>
                     </div>
                     break;

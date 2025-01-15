@@ -287,6 +287,24 @@ public class ManageProject : PageModel
         return Redirect("~/ProjectManagement");
     }
 
+    public JsonResult OnPostUpdateTaskList(string taskListJson)
+    {
+        var taskList = JsonSerializer.Deserialize<TaskList>(taskListJson);
+        bool querySuccess = TaskListManager.Instance.UpdateTaskList(taskList);
+
+        HttpContext.Session.Remove("TaskLists");
+        return new(new { success = querySuccess });
+    }
+
+    public JsonResult OnPostDeleteTaskList(string taskListJson)
+    {
+        var taskList = JsonSerializer.Deserialize<TaskList>(taskListJson);
+        bool querySuccess = TaskListManager.Instance.DeleteTaskList(taskList.TaskListId);
+
+        HttpContext.Session.Remove("TaskLists");
+        return new(new { success = querySuccess });
+    }
+
     public JsonResult OnPostCreateTaskList(string projectId, string name, string description)
     {
         if (name == null || description == null)

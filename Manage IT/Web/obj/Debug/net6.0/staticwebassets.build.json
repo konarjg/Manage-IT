@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ijJ2q9sqsIJQK/HjHpbEfNj0Ru9yM/7IrRxNj56O1PA=",
+  "Hash": "41ZgNsKiEJKQ4kshIv5/TZLAQEDUmrommDK8nyhHNMc=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
@@ -10,734 +10,130 @@
     {
       "Name": "Web\\wwwroot",
       "Source": "Web",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
       "BasePath": "_content/Web",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Calendar.css",
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Calendar.css",
       "SourceId": "Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
       "BasePath": "_content/Web",
-      "RelativePath": "Calendar#[.{fingerprint}]?.css",
+      "RelativePath": "Calendar.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "3k9tklm5yf",
-      "Integrity": "XYIKJw72yhLIDeS9zSOqepGFwZOWFB1yvN41GiXVQW0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Calendar.css"
     },
     {
-      "Identity": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\icon.png",
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\icon.png",
       "SourceId": "Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
       "BasePath": "_content/Web",
-      "RelativePath": "Graphics/icon#[.{fingerprint}]?.png",
+      "RelativePath": "Graphics/icon.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "mlq4u48qhj",
-      "Integrity": "qs021mM0+wJP5aqT81O2/VYcHVk55AdR+ibhcxPLkp8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Graphics\\icon.png"
     },
     {
-      "Identity": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\iconhov.png",
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\iconhov.png",
       "SourceId": "Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
       "BasePath": "_content/Web",
-      "RelativePath": "Graphics/iconhov#[.{fingerprint}]?.png",
+      "RelativePath": "Graphics/iconhov.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "exrdttxa4r",
-      "Integrity": "oi8V6SZcRaYUQifkc4JMc409Fk3qtlKGVnqSJ2WzxJQ=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Graphics\\iconhov.png"
     },
     {
-      "Identity": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\logo.png",
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\logo.png",
       "SourceId": "Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
       "BasePath": "_content/Web",
-      "RelativePath": "Graphics/logo#[.{fingerprint}]?.png",
+      "RelativePath": "Graphics/logo.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "veh8dbc049",
-      "Integrity": "2fyq06Wb5b/MYx44u7dzy16m5ielEnrZKmzdeluJiCU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Graphics\\logo.png"
     },
     {
-      "Identity": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\main.jpeg",
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\main.jpeg",
       "SourceId": "Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
       "BasePath": "_content/Web",
-      "RelativePath": "Graphics/main#[.{fingerprint}]?.jpeg",
+      "RelativePath": "Graphics/main.jpeg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "tg0gramtpo",
-      "Integrity": "o5b07oTgUbHtUysg+5mXi4rFNl+Y26j9Pt9JNTWNCQ4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Graphics\\main.jpeg"
     },
     {
-      "Identity": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Index.css",
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Index.css",
       "SourceId": "Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
       "BasePath": "_content/Web",
-      "RelativePath": "Index#[.{fingerprint}]?.css",
+      "RelativePath": "Index.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "7wy0r1fhbo",
-      "Integrity": "WYAx9Up0Pv2aJsNcUSzhTYWZ0Agbb8PfJfsRi+AeDGk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Index.css"
     },
     {
-      "Identity": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\RegisterForm.css",
+      "Identity": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\RegisterForm.css",
       "SourceId": "Web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\",
       "BasePath": "_content/Web",
-      "RelativePath": "RegisterForm#[.{fingerprint}]?.css",
+      "RelativePath": "RegisterForm.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "fqqyln7lz6",
-      "Integrity": "11wnqKQyIzV7RiSMiLaeofByE9hLywR103HSjCjHiaI=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\RegisterForm.css"
-    }
-  ],
-  "Endpoints": [
-    {
-      "Route": "Calendar.3k9tklm5yf.css",
-      "AssetFile": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Calendar.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "9896"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"XYIKJw72yhLIDeS9zSOqepGFwZOWFB1yvN41GiXVQW0=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 15 Jan 2025 16:56:08 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "3k9tklm5yf"
-        },
-        {
-          "Name": "label",
-          "Value": "Calendar.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-XYIKJw72yhLIDeS9zSOqepGFwZOWFB1yvN41GiXVQW0="
-        }
-      ]
-    },
-    {
-      "Route": "Calendar.css",
-      "AssetFile": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Calendar.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "9896"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"XYIKJw72yhLIDeS9zSOqepGFwZOWFB1yvN41GiXVQW0=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 15 Jan 2025 16:56:08 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-XYIKJw72yhLIDeS9zSOqepGFwZOWFB1yvN41GiXVQW0="
-        }
-      ]
-    },
-    {
-      "Route": "Graphics/icon.mlq4u48qhj.png",
-      "AssetFile": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\icon.png",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "82069"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/png"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"qs021mM0+wJP5aqT81O2/VYcHVk55AdR+ibhcxPLkp8=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 15 Jan 2025 16:56:08 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "mlq4u48qhj"
-        },
-        {
-          "Name": "label",
-          "Value": "Graphics/icon.png"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-qs021mM0+wJP5aqT81O2/VYcHVk55AdR+ibhcxPLkp8="
-        }
-      ]
-    },
-    {
-      "Route": "Graphics/icon.png",
-      "AssetFile": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\icon.png",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "82069"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/png"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"qs021mM0+wJP5aqT81O2/VYcHVk55AdR+ibhcxPLkp8=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 15 Jan 2025 16:56:08 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-qs021mM0+wJP5aqT81O2/VYcHVk55AdR+ibhcxPLkp8="
-        }
-      ]
-    },
-    {
-      "Route": "Graphics/iconhov.exrdttxa4r.png",
-      "AssetFile": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\iconhov.png",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "82069"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/png"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"oi8V6SZcRaYUQifkc4JMc409Fk3qtlKGVnqSJ2WzxJQ=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 15 Jan 2025 16:56:08 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "exrdttxa4r"
-        },
-        {
-          "Name": "label",
-          "Value": "Graphics/iconhov.png"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-oi8V6SZcRaYUQifkc4JMc409Fk3qtlKGVnqSJ2WzxJQ="
-        }
-      ]
-    },
-    {
-      "Route": "Graphics/iconhov.png",
-      "AssetFile": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\iconhov.png",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "82069"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/png"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"oi8V6SZcRaYUQifkc4JMc409Fk3qtlKGVnqSJ2WzxJQ=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 15 Jan 2025 16:56:08 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-oi8V6SZcRaYUQifkc4JMc409Fk3qtlKGVnqSJ2WzxJQ="
-        }
-      ]
-    },
-    {
-      "Route": "Graphics/logo.png",
-      "AssetFile": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\logo.png",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "82996"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/png"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"2fyq06Wb5b/MYx44u7dzy16m5ielEnrZKmzdeluJiCU=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 15 Jan 2025 16:56:08 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-2fyq06Wb5b/MYx44u7dzy16m5ielEnrZKmzdeluJiCU="
-        }
-      ]
-    },
-    {
-      "Route": "Graphics/logo.veh8dbc049.png",
-      "AssetFile": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\logo.png",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "82996"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/png"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"2fyq06Wb5b/MYx44u7dzy16m5ielEnrZKmzdeluJiCU=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 15 Jan 2025 16:56:08 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "veh8dbc049"
-        },
-        {
-          "Name": "label",
-          "Value": "Graphics/logo.png"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-2fyq06Wb5b/MYx44u7dzy16m5ielEnrZKmzdeluJiCU="
-        }
-      ]
-    },
-    {
-      "Route": "Graphics/main.jpeg",
-      "AssetFile": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\main.jpeg",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "68535"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/jpeg"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"o5b07oTgUbHtUysg+5mXi4rFNl+Y26j9Pt9JNTWNCQ4=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 15 Jan 2025 16:56:08 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-o5b07oTgUbHtUysg+5mXi4rFNl+Y26j9Pt9JNTWNCQ4="
-        }
-      ]
-    },
-    {
-      "Route": "Graphics/main.tg0gramtpo.jpeg",
-      "AssetFile": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\main.jpeg",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "68535"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/jpeg"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"o5b07oTgUbHtUysg+5mXi4rFNl+Y26j9Pt9JNTWNCQ4=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 15 Jan 2025 16:56:08 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "tg0gramtpo"
-        },
-        {
-          "Name": "label",
-          "Value": "Graphics/main.jpeg"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-o5b07oTgUbHtUysg+5mXi4rFNl+Y26j9Pt9JNTWNCQ4="
-        }
-      ]
-    },
-    {
-      "Route": "Index.7wy0r1fhbo.css",
-      "AssetFile": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Index.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2065"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"WYAx9Up0Pv2aJsNcUSzhTYWZ0Agbb8PfJfsRi+AeDGk=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 15 Jan 2025 16:56:08 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "7wy0r1fhbo"
-        },
-        {
-          "Name": "label",
-          "Value": "Index.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-WYAx9Up0Pv2aJsNcUSzhTYWZ0Agbb8PfJfsRi+AeDGk="
-        }
-      ]
-    },
-    {
-      "Route": "Index.css",
-      "AssetFile": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Index.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2065"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"WYAx9Up0Pv2aJsNcUSzhTYWZ0Agbb8PfJfsRi+AeDGk=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 15 Jan 2025 16:56:08 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-WYAx9Up0Pv2aJsNcUSzhTYWZ0Agbb8PfJfsRi+AeDGk="
-        }
-      ]
-    },
-    {
-      "Route": "RegisterForm.css",
-      "AssetFile": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\RegisterForm.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2207"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"11wnqKQyIzV7RiSMiLaeofByE9hLywR103HSjCjHiaI=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 15 Jan 2025 16:56:08 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-11wnqKQyIzV7RiSMiLaeofByE9hLywR103HSjCjHiaI="
-        }
-      ]
-    },
-    {
-      "Route": "RegisterForm.fqqyln7lz6.css",
-      "AssetFile": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\RegisterForm.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2207"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"11wnqKQyIzV7RiSMiLaeofByE9hLywR103HSjCjHiaI=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 15 Jan 2025 16:56:08 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "fqqyln7lz6"
-        },
-        {
-          "Name": "label",
-          "Value": "RegisterForm.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-11wnqKQyIzV7RiSMiLaeofByE9hLywR103HSjCjHiaI="
-        }
-      ]
     }
   ]
 }
