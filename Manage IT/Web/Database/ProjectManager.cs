@@ -10,12 +10,33 @@ public class ProjectManager
         Instance = new ProjectManager();
     }
 
+    public bool GetAllProjects(out List<Project> projects)
+    {
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out projects);
+    }
+
     public bool GetAllProjects(long managerId, out List<Project> projects)
     {
         var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects WHERE ManagerId = {managerId}");
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out projects);
     }
+
+    public void DeleteOwnedProjects(long managerId)
+    {
+        List<Project> results;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects WHERE ManagerId = {managerId}");
+
+        DatabaseAccess.Instance.ExecuteQuery(query, out results);
+
+        foreach (var project in results)
+        {
+            DeleteProject(project.ProjectId);
+        }
+    }
+
 
     public bool GetProject(long projectId, out Project project)
     {

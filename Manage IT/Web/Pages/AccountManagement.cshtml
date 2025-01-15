@@ -1,6 +1,7 @@
 ﻿@page
 @using EFModeling.EntityProperties.DataAnnotations.Annotations;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@Html.AntiForgeryToken()
 @model AccountManagement
 @{
     <html lang="en">
@@ -39,7 +40,8 @@
                     document.getElementById("main").style.marginLeft = "0";
                 }
 
-                function deleteAccount() {
+                function deleteAccount(event) {
+                    event.preventDefault();
                     var result = confirm("Do you really want to delete Your account?");
 
                     if (result) {
@@ -52,8 +54,8 @@
                             },
                             success: function (response) {
                                 if (response.success) {
-                                    window.location.reload();
-                                }
+                                    window.location.href = "/LoginForm";
+                                } 
                             },
                             error: function () {
                                 alert("error");
@@ -62,8 +64,9 @@
                     }
                 }
 
-                function disableAccount() {
-                    var result = confirm("Do you really want to disable Your account?");
+                function disableAccount(event) {
+                    event.preventDefault();
+                    var result = confirm("Do You really want to disable Your account?");
 
                     if (result) {
                         $.ajax({
@@ -75,8 +78,8 @@
                             },
                             success: function (response) {
                                 if (response.success) {
-                                    window.location.reload();
-                                }
+                                    window.location.href = response.redirect;
+                                } 
                             },
                             error: function () {
                                 alert("error");
@@ -86,11 +89,12 @@
 
                 }
 
-                function cancelChanges() {
-                    var login=document.getElementById("Username");
-                    var email=document.getElementById("Email");
-                    var password=document.getElementById("Password");
-                    var confirmPassword=document.getElementById("ConfirmPassword");
+                function cancelChanges(event) {
+                    event.preventDefault();
+                    var login=document.getElementById("username");
+                    var email=document.getElementById("email");
+                    var password=document.getElementById("password");
+                    var confirmPassword=document.getElementById("confirmPassword");
 
                     login.value="";
                     email.value="";
@@ -99,26 +103,31 @@
 
                 }
 
-                function confirmChanges() {
-                    var login = document.getElementById("Username").value;
-                    var email = document.getElementById("Email").value;
-                    var password = document.getElementById("Password").value;
-                    var confirmPassword = document.getElementById("ConfirmPassword").value;
+                function confirmChanges(event) {
+                    event.preventDefault();
+
+                    var login = document.getElementById("username").value;
+                    var email = document.getElementById("email").value;
+                    var password = document.getElementById("password").value;
+                    var confirmPassword = document.getElementById("confirmPassword").value;
+                    var error = document.getElementById("error");
 
                     $.ajax({
                         type: "POST",
                         url: "/AccountManagement?handler=Edit",
-                        data:{ login: login, email: email, password: password, confirmPassword: confirmPassword },
+                        data: { login: login, email: email, password: password, confirmPassword: confirmPassword },
                         beforeSend: function (xhr) {
                             xhr.setRequestHeader("XSRF-TOKEN",
                                 $('input:hidden[name="__RequestVerificationToken"]').val());
                         },
                         success: function (response) {
                             if (response.success) {
-                                window.location.reload();
+                                error.style.color = "white";
+                                error.innerText = response.message;
                             }
                             else {
-                                alert(response.message);
+                                error.style.color = "red";
+                                error.innerText = response.message;
                             }
                         },
                         error: function () {
@@ -127,8 +136,6 @@
                     });
                 }
 
-
-                setInterval(updateViewport, 0);
             </script>
         </head>
 
@@ -136,21 +143,19 @@
             <header>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
                 <div class="topnav">
+                    <a class="active" href=@Href("~/")><i class="fa fa-fw fa-home"></i> Home</a>
+                    <a href="#"><i class="fa fa-fw fa-download"></i> Downloads</a>
+                    <a href="#"><i class="fa fa-fw fa-question"></i>About</a>
                     <div class="topnav-right">
-                        <a class="active" href=@Href("~/")><i class="fa fa-fw fa-home"></i> Home</a>
-                        <a href="#"><i class="fa fa-fw fa-download"></i> Downloads</a>
-                        <a href="#"><i class="fa fa-fw fa-question"></i>About</a>
-                        <div class="topnav-right">
-                            @if (HttpContext.Session.Get<User>("User").Admin)
-                            {
-                                <a href=@Href("~/AdminPanel")><i class="fa fa-fw fa-cog"></i>Admin Panel</a>
-                            }
+                        @if (HttpContext.Session.Get<User>("User").Admin)
+                        {
+                            <a href=@Href("~/AdminPanel")><i class="fa fa-fw fa-cog"></i>Admin Panel</a>
+                        }
 
-                            <a href=@Href("~/AccountManagement")><i class="fa fa-fw fa-user-circle"></i>My Account</a>
-                            <a href=@Href("~/Chat")><i class="fa fa-fw fa-commenting"></i>Chat</a>
-                            <a href=@Href("~/Calendar")><i class="fa fa-fw fa-calendar"></i>Calendar</a>
-                            <a href=@Href("~/LogOut")><i class="fa fa-fw fa-sign-out"></i>Log Out</a>
-                        </div>
+                        <a href=@Href("~/AccountManagement")><i class="fa fa-fw fa-user-circle"></i>My Account</a>
+                        <a href=@Href("~/Chat")><i class="fa fa-fw fa-commenting"></i>Chat</a>
+                        <a href=@Href("~/Calendar")><i class="fa fa-fw fa-calendar"></i>Calendar</a>
+                        <a href=@Href("~/LogOut")><i class="fa fa-fw fa-sign-out"></i>Log Out</a>
                     </div>
                 </div>
             </header>
@@ -158,6 +163,9 @@
             <div class="main">
                 <div class="account">
                     <form class="accountForm">
+                        <div id="accountPair" class="accountError">
+                            <div id="error" class="accountError"></div>
+                        </div>
                         <div class="accountPair">
                             <label class="accountLabel">Username</label>
                             <input class="accountInput" type="text" id="username" placeholder="@Model.User.Login" />
@@ -177,12 +185,12 @@
                             <input class="accountInput" type="password" id="confirmPassword" placeholder="Confirm password"/>
                         </div>
                         <div class="accountButtons">
-                            <button onclick="deleteAccount()" class="accountRedButton">Delete account</button>
-                            <button onclick="disableAccount()" class="accountWhiteButton">Disable account</button>
+                            <button onclick="deleteAccount(event)" class="accountRedButton">Delete account</button>
+                            <button onclick="disableAccount(event)" class="accountWhiteButton">Disable account</button>
                         </div>
                         <div class="accountButtons">
-                            <button onclick="cancelChanges()" class="accountRedButton">Cancel changes</button>
-                            <button onclick="confirmChanges()" class="accountGreenButton">Confirm changes</button>
+                            <button onclick="cancelChanges(event)" class="accountRedButton">Cancel changes</button>
+                            <button onclick="confirmChanges(event)" class="accountGreenButton">Confirm changes</button>
                          </div>
                     </form>
                 </div>

@@ -267,7 +267,7 @@ input[type=date] ::-webkit-calendar-picker-indicator {
     color: white;
     display: flex;
     flex-direction: row;
-    gap: 2vw;
+    gap: 1vw;
     border: 5px solid white;
     border-radius: 1vh;
     overflow-x: scroll;
@@ -332,8 +332,6 @@ input[type=date] ::-webkit-calendar-picker-indicator {
     margin-top: 1vh;
     width: 25vw;
     height: 25vh;
-    margin-left: auto;
-    margin-right: auto;
     border: 5px solid white;
     display: flex;
     flex-direction: column;

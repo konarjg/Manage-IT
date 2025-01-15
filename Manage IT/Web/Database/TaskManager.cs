@@ -63,7 +63,7 @@ public class TaskManager
     public bool CreateTask(Task data)
     {
         List<Task> tasks;
-        var queryTasks = FormattableStringFactory.Create($"INSERT INTO dbo.Tasks (Name, TaskListId, Description, Deadline) VALUES ('{data.Name}', {data.TaskListId}, '{data.Description}', '{data.Deadline.ToString("yyyy-MM-dd")}')");
+        var queryTasks = FormattableStringFactory.Create($"INSERT INTO dbo.Tasks (Name, TaskListId, Description, Deadline, HandedIn) VALUES ('{data.Name}', {data.TaskListId}, '{data.Description}', '{data.Deadline.ToString("yyyy-MM-dd")}', 0)");
 
         return DatabaseAccess.Instance.ExecuteQuery(queryTasks, out tasks);
     }
