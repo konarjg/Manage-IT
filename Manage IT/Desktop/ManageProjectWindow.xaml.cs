@@ -1,8 +1,9 @@
-﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
+using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -45,6 +46,180 @@ namespace Desktop
             }
 
             return null;
+        }
+    }
+
+    public class MemberModel
+    {
+        public string Login { get; set; }
+        public bool Assigned { get; set; }
+        public User User { get; set; }
+
+        public MemberModel(User user, List<User> taskMembers)
+        {
+            User = user;
+            Assigned = taskMembers.FirstOrDefault(x => x.UserId == user.UserId) != null;
+            Login = user.Login;
+        }
+    }
+
+    public class TaskListModel : INotifyPropertyChanged
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public TaskList TaskList { get; set; }
+        public bool IsManager { get; set; }
+        public Visibility ManagerVisible { get; set; }
+        public string CloseText { get; set; }
+
+        public TaskListModel(TaskList list, UserPermissions permissions)
+        {
+            TaskList = list;
+            Name = list.Name;
+            Description = list.Description;
+            IsManager = permissions.Editing;
+            ManagerVisible = IsManager ? Visibility.Visible : Visibility.Collapsed;
+            CloseText = "Close";
+
+            OnPropertyChanged(nameof(Name));
+            OnPropertyChanged(nameof(Description));
+            OnPropertyChanged(nameof(IsManager));
+            OnPropertyChanged(nameof(ManagerVisible));
+            OnPropertyChanged(nameof(CloseText));
+        }
+
+        public bool Save()
+        {
+            if (Name == "" || Description == "")
+            {
+                return false;
+            }
+
+            TaskList.Name = Name;
+            TaskList.Description = Description;
+            return true;
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string? name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+    }
+
+    public class TaskModel : INotifyPropertyChanged
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public DateTime? Deadline { get; set; }
+        public ObservableCollection<TaskList> TaskLists { get; set; } 
+        public ObservableCollection<MemberModel> Members { get; set; }
+        public TaskList SelectedTaskList { get; set; }
+        public ObservableCollection<MemberModel> SelectedMembers { get; set; }
+        public Task Task { get; set; }
+        public List<User> TaskMembers { get; set; }
+        public bool IsManager { get; set; }
+        public Visibility ManagerVisible { get; set; }
+        public Visibility UserVisible { get; set; }
+        public Visibility EditVisible { get; set; }
+        public string CloseText { get; set; }
+        public bool ReviewEnabled { get; set; }
+        public bool HandInEnabled { get; set; }
+
+        public TaskModel(Task task, List<TaskList> taskLists, List<User> members, List<User> taskMembers, Project project, UserPermissions permissions)
+        {
+            Task = task;
+            Name = task.Name;
+            Description = task.Description;
+            Deadline = task.Deadline;
+            IsManager = permissions.Editing;
+            EditVisible = IsManager ? Visibility.Visible : Visibility.Collapsed;
+            ManagerVisible = project.ManagerId == UserManager.Instance.CurrentSessionUser.UserId ? Visibility.Visible : Visibility.Collapsed;
+            UserVisible = project.ManagerId != UserManager.Instance.CurrentSessionUser.UserId ? Visibility.Visible : Visibility.Hidden;
+            Members = new();
+            TaskLists = new();
+            TaskMembers = taskMembers;
+            CloseText = "Close";
+
+            ReviewEnabled = task.HandedIn;
+            HandInEnabled = !task.HandedIn;
+
+            SelectedTaskList = taskLists.Where(x => x.TaskListId == task.TaskListId).FirstOrDefault();
+
+            foreach (var taskList in taskLists)
+            {
+                TaskLists.Add(taskList);
+            }
+
+            SelectedMembers = new();
+
+            foreach (var member in members)
+            {
+                var item = new MemberModel(member, taskMembers);
+                Members.Add(item);
+
+                if (item.Assigned)
+                {
+                    SelectedMembers.Add(item);
+                }
+            }
+
+            OnPropertyChanged(nameof(Name));
+            OnPropertyChanged(nameof(Description));
+            OnPropertyChanged(nameof(Deadline));
+            OnPropertyChanged(nameof(IsManager));
+            OnPropertyChanged(nameof(ManagerVisible));
+            OnPropertyChanged(nameof(UserVisible));
+            OnPropertyChanged(nameof(TaskLists));
+            OnPropertyChanged(nameof(Members));
+            OnPropertyChanged(nameof(CloseText));
+            OnPropertyChanged(nameof(SelectedTaskList));
+            OnPropertyChanged(nameof(SelectedMembers));
+            OnPropertyChanged(nameof(ReviewEnabled));
+            OnPropertyChanged(nameof(HandInEnabled));
+        }
+
+        public void SaveHandIn()
+        {
+            ReviewEnabled = Task.HandedIn;
+            HandInEnabled = !Task.HandedIn;
+            OnPropertyChanged(nameof(ReviewEnabled));
+            OnPropertyChanged(nameof(HandInEnabled));
+        }
+
+        public void SaveReview()
+        {
+            ReviewEnabled = Task.HandedIn;
+            HandInEnabled = !Task.HandedIn;
+            OnPropertyChanged(nameof(ReviewEnabled));
+            OnPropertyChanged(nameof(HandInEnabled));
+        }
+
+        public bool Save()
+        {
+            if (Name == "" || Description == "" || Deadline == null || SelectedTaskList == null)
+            {
+                return false;
+            }
+
+            Task.Name = Name;
+            Task.Description = Description;
+            Task.Deadline = (DateTime)Deadline;
+            Task.TaskListId = SelectedTaskList.TaskListId;
+            TaskMembers.Clear();
+
+            foreach (var member in SelectedMembers)
+            {
+                TaskMembers.Add(member.User);
+            }
+
+            return true;
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string? name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 
@@ -305,8 +480,16 @@ namespace Desktop
                 item.Loaded += (s, e) =>
                 {
                     List<Task> tasks;
+                    bool success;
 
-                    bool success = TaskManager.Instance.GetAllTasks(taskList.TaskListId, out tasks);
+                    if (Project.ManagerId == UserManager.Instance.CurrentSessionUser.UserId)
+                    {
+                        success = TaskManager.Instance.GetAllTasks(taskList.TaskListId, out tasks);
+                    }
+                    else
+                    {
+                        success = TaskManager.Instance.GetAllAssignedTasks(taskList.TaskListId, UserManager.Instance.CurrentSessionUser.UserId, out tasks);
+                    }
 
                     if (!success)
                     {
@@ -358,6 +541,11 @@ namespace Desktop
             TimerMembers.Stop();
             UpdateTopNavContent();
 
+            if (UserManager.Instance.CurrentSessionUser.Admin)
+            {
+              GetTemplateControl<Button>("AdminPanel").Visibility = Visibility.Visible;
+            }
+
             switch (TemplateKey)
             {
                 case "Main":
@@ -388,6 +576,15 @@ namespace Desktop
         public void BackClick(object sender, RoutedEventArgs e)
         {
             ProjectManagementWindow window = new();
+            window.Activate();
+            window.Visibility = Visibility.Visible;
+
+            Close();
+        }
+
+        public void AdminPanelClick(object sender, RoutedEventArgs e)
+        {
+            var window = new AdminPanelWindow(Project,true);
             window.Activate();
             window.Visibility = Visibility.Visible;
 
@@ -754,16 +951,6 @@ namespace Desktop
             errorText.Text = "There was an unexpected error!";
         }
 
-        public void ManageTaskList(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void ManageTask(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         public void CloseManageMember(object sender, RoutedEventArgs e)
         {
             var panel = GetTemplateControl<Border>("ManageMemberPopup");
@@ -808,10 +995,12 @@ namespace Desktop
         {
             var panel = GetTemplateControl<Border>("CreateMeetingPopup");
             panel.Visibility = Visibility.Collapsed;
+            GetTemplateControl<Button>("BackButton").Visibility = Visibility.Visible;
         }
 
         public void CreateMeeting(object sender, RoutedEventArgs e)
         {
+            GetTemplateControl<Button>("BackButton").Visibility = Visibility.Collapsed;
             var panel = GetTemplateControl<Border>("CreateMeetingPopup");
             var error = GetTemplateControl<TextBlock>("MeetingError");
             var title = GetTemplateControl<TextBox>("MeetingTitle").Text;
@@ -841,7 +1030,286 @@ namespace Desktop
             }
 
             panel.Visibility = Visibility.Collapsed;
+            GetTemplateControl<Button>("BackButton").Visibility = Visibility.Visible;
         }
 
+        public void ManageTaskList(object sender, RoutedEventArgs e)
+        {
+            GetTemplateControl<Button>("BackButton").Visibility = Visibility.Collapsed;
+            var popup = GetTemplateControl<Border>("ManageTaskListPopup");
+            var taskListId = (sender as Button).Tag as long?;
+            var taskList = TaskListManager.Instance.GetTaskList((long)taskListId);
+            var permissions = Permissions;
+
+            popup.DataContext = new TaskListModel(taskList, permissions);
+            popup.Visibility = Visibility.Visible;
+        }
+
+        public void ManageTask(object sender, RoutedEventArgs e)
+        {
+            GetTemplateControl<Button>("BackButton").Visibility = Visibility.Collapsed;
+            var popup = GetTemplateControl<Border>("ManageTaskPopup");
+            var taskId = (sender as Button).Tag as long?;
+            var task = TaskManager.Instance.GetTask((long)taskId);
+            var permissions = Permissions;
+
+            List<User> members;
+            List<User> taskMembers = TaskManager.Instance.GetMembers(task.TaskId);
+            ProjectManager.Instance.GetProjectMembers(Project.ProjectId, out members);
+
+            popup.DataContext = new TaskModel(task, TaskLists, members, taskMembers, Project, permissions);
+            popup.Visibility = Visibility.Visible;
+        }
+
+        public void EditDeleteTaskList(object sender, RoutedEventArgs e)
+        {
+            var popup = GetTemplateControl<Border>("ManageTaskListPopup");
+            var error = GetTemplateControl<TextBlock>("EditTaskListError");
+            var model = popup.DataContext as TaskListModel;
+
+            var data = model.TaskList;
+
+            bool success = TaskListManager.Instance.DeleteTaskList(data.TaskListId);
+
+            if (success)
+            {
+                LoadTaskLists();
+
+                Dispatcher.Invoke(() =>
+                {
+                    UpdateTaskListsContent();
+                });
+
+                error.Foreground = Brushes.White;
+                error.Text = "Task list edited!";
+                popup.Visibility = Visibility.Collapsed;
+                return;
+            }
+
+            error.Text = "There was an unexpected error!";
+        }
+
+        public void EditCloseTaskList(object sender, RoutedEventArgs e)
+        {
+            var popup = GetTemplateControl<Border>("ManageTaskListPopup");
+            popup.Visibility = Visibility.Collapsed;
+            GetTemplateControl<Button>("BackButton").Visibility = Visibility.Visible;
+        }
+
+        public void EditConfirmTaskList(object sender, RoutedEventArgs e)
+        {
+            var popup = GetTemplateControl<Border>("ManageTaskListPopup");
+            var error = GetTemplateControl<TextBlock>("EditTaskListError");
+            var model = popup.DataContext as TaskListModel;
+            bool saved = model.Save();
+
+            if (!saved)
+            {
+                error.Text = "You have to fill in every field!";
+                return;
+            }
+
+            var data = model.TaskList;
+
+            bool success = TaskListManager.Instance.UpdateTaskList(data);
+
+            if (success)
+            {
+                LoadTaskLists();
+
+                Dispatcher.Invoke(() =>
+                {
+                    UpdateTaskListsContent();
+                });
+
+                error.Foreground = Brushes.White;
+                error.Text = "Task list edited!";
+                return;
+            }
+
+            error.Text = "There was an unexpected error!";
+        }
+
+        public void EditReviewTask(object sender, RoutedEventArgs e)
+        {
+            var popup = GetTemplateControl<Border>("ReviewPopup");
+            popup.Visibility = Visibility.Visible;
+        }
+
+        public void CancelReview(object sender, RoutedEventArgs e)
+        {
+            var popup = GetTemplateControl<Border>("ReviewPopup");
+            popup.Visibility = Visibility.Collapsed;
+        }
+
+        public void RejectReview(object sender, RoutedEventArgs e)
+        {
+            var popup = GetTemplateControl<Border>("ReviewPopup");
+            var model = GetTemplateControl<Border>("ManageTaskPopup").DataContext as TaskModel;
+            var error = GetTemplateControl<TextBlock>("EditTaskError");
+
+            model.Task.Accepted = false;
+            model.Task.HandedIn = false;
+            bool success = TaskManager.Instance.UpdateTask(model.Task);
+
+            if (!success)
+            {
+                popup.Visibility = Visibility.Collapsed;
+                error.Text = "There was an unexpected error!";
+                return;
+            }
+
+            model.SaveReview();
+            popup.Visibility = Visibility.Collapsed;
+            error.Foreground = Brushes.White;
+            error.Text = "Task has been rejected!";
+
+            LoadTaskLists();
+
+            Dispatcher.Invoke(() =>
+            {
+                UpdateTaskListsContent();
+            });
+        }
+
+        public void AcceptReview(object sender, RoutedEventArgs e)
+        {
+            var popup = GetTemplateControl<Border>("ReviewPopup");
+            var model = GetTemplateControl<Border>("ManageTaskPopup").DataContext as TaskModel;
+            var error = GetTemplateControl<TextBlock>("EditTaskError");
+
+            model.Task.Accepted = true;
+            bool success = TaskManager.Instance.UpdateTask(model.Task);
+
+            if (!success)
+            {
+                popup.Visibility = Visibility.Collapsed;
+                error.Text = "There was an unexpected error!";
+                return;
+            }
+
+            model.SaveReview();
+            popup.Visibility = Visibility.Collapsed;
+            error.Foreground = Brushes.White;
+            error.Text = "Task has been accepted!";
+            LoadTaskLists();
+
+            Dispatcher.Invoke(() =>
+            {
+                UpdateTaskListsContent();
+            });
+        }
+
+        public void EditHandInTask(object sender, RoutedEventArgs e)
+        {
+            var popup = GetTemplateControl<Border>("HandInPopup");
+            popup.Visibility = Visibility.Visible;
+            GetTemplateControl<Button>("BackButton").Visibility = Visibility.Visible;
+        }
+
+        public void CancelHandIn(object sender, RoutedEventArgs e)
+        {
+            var popup = GetTemplateControl<Border>("HandInPopup");
+            popup.Visibility = Visibility.Collapsed;
+        }
+
+        public void ConfirmHandIn(object sender, RoutedEventArgs e)
+        {
+            var popup = GetTemplateControl<Border>("HandInPopup");
+            var model = GetTemplateControl<Border>("ManageTaskPopup").DataContext as TaskModel;
+            var error = GetTemplateControl<TextBlock>("EditTaskError");
+
+            model.Task.HandedIn = true;
+            model.Task.Accepted = null;
+            bool success = TaskManager.Instance.UpdateTask(model.Task);
+
+            if (!success)
+            {
+                popup.Visibility = Visibility.Collapsed;
+                error.Text = "There was an unexpected error!";
+                return;
+            }
+
+            model.SaveHandIn();
+            popup.Visibility = Visibility.Collapsed;
+            error.Foreground = Brushes.White;
+            error.Text = "Task has been handed in!";
+
+            LoadTaskLists();
+
+            Dispatcher.Invoke(() =>
+            {
+                UpdateTaskListsContent();
+            });
+        }
+
+        public void EditDeleteTask(object sender, RoutedEventArgs e)
+        {
+            var popup = GetTemplateControl<Border>("ManageTaskPopup");
+            var error = GetTemplateControl<TextBlock>("EditTaskError");
+            var model = popup.DataContext as TaskModel;
+
+            var data = model.Task;
+
+            bool success = TaskManager.Instance.DeleteTask(data.TaskId);
+
+            if (success)
+            {
+                LoadTaskLists();
+
+                Dispatcher.Invoke(() =>
+                {
+                    UpdateTaskListsContent();
+                });
+
+                popup.Visibility = Visibility.Collapsed;
+                GetTemplateControl<Button>("BackButton").Visibility = Visibility.Visible;
+                return;
+            }
+
+            error.Text = "There was an unexpected error!";
+        }
+
+        public void EditCloseTask(object sender, RoutedEventArgs e)
+        {
+            var popup = GetTemplateControl<Border>("ManageTaskPopup");
+            popup.Visibility = Visibility.Collapsed;
+            GetTemplateControl<Button>("BackButton").Visibility = Visibility.Visible;
+        }
+
+        public void EditConfirmTask(object sender, RoutedEventArgs e)
+        {
+            var popup = GetTemplateControl<Border>("ManageTaskPopup");
+            var error = GetTemplateControl<TextBlock>("EditTaskError");
+            var model = popup.DataContext as TaskModel;
+            bool saved = model.Save();
+
+            if (!saved)
+            {
+                error.Text = "You have to fill in every field and select a task list!";
+                return;
+            }
+
+            var data = model.Task;
+            var members = model.TaskMembers;
+
+            bool success = TaskManager.Instance.UpdateTask(data) && TaskManager.Instance.AssignMembers(data.TaskId, members);
+
+            if (success)
+            {
+                LoadTaskLists();
+
+                Dispatcher.Invoke(() =>
+                {
+                    UpdateTaskListsContent();
+                });
+
+                error.Foreground = Brushes.White;
+                error.Text = "Task edited!";
+                return;
+            }
+
+            error.Text = "There was an unexpected error!";
+        }
     }
 }
