@@ -1,14 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\ManageIT\\Manage IT\\",
+  "WorkspaceRootPath": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|d:\\manageit\\manage it\\desktop\\manageprojectwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|solutionrelative:desktop\\manageprojectwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{6E466D14-5F61-4514-B629-700F0F2C7B74}|Web\\Web.csproj|c:\\users\\fuksa\\onedrive\\pulpit\\manage it\\manage it\\web\\wwwroot\\manageproject.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{6E466D14-5F61-4514-B629-700F0F2C7B74}|Web\\Web.csproj|solutionrelative:web\\wwwroot\\manageproject.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|d:\\manageit\\manage it\\desktop\\managerpanelwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{AE1A0BB3-A4E4-4BFD-ACC6-6A25D79398D9}|Desktop\\Desktop.csproj|solutionrelative:desktop\\managerpanelwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{6E466D14-5F61-4514-B629-700F0F2C7B74}|Web\\Web.csproj|c:\\users\\fuksa\\onedrive\\pulpit\\manage it\\manage it\\web\\pages\\manageproject.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6E466D14-5F61-4514-B629-700F0F2C7B74}|Web\\Web.csproj|solutionrelative:web\\pages\\manageproject.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,38 +18,33 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ManageProjectWindow.xaml",
-              "DocumentMoniker": "D:\\ManageIT\\Manage IT\\Desktop\\ManageProjectWindow.xaml",
-              "RelativeDocumentMoniker": "Desktop\\ManageProjectWindow.xaml",
-              "ToolTip": "D:\\ManageIT\\Manage IT\\Desktop\\ManageProjectWindow.xaml",
-              "RelativeToolTip": "Desktop\\ManageProjectWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-01-05T20:01:09.366Z",
+              "Title": "ManageProject.css",
+              "DocumentMoniker": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\ManageProject.css",
+              "RelativeDocumentMoniker": "Web\\wwwroot\\ManageProject.css",
+              "ToolTip": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\ManageProject.css",
+              "RelativeToolTip": "Web\\wwwroot\\ManageProject.css",
+              "ViewState": "AgIAAFgCAAAAAAAAAAAqwGwCAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-01-15T17:27:58.279Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ManagerPanelWindow.xaml",
-              "DocumentMoniker": "D:\\ManageIT\\Manage IT\\Desktop\\ManagerPanelWindow.xaml",
-              "RelativeDocumentMoniker": "Desktop\\ManagerPanelWindow.xaml",
-              "ToolTip": "D:\\ManageIT\\Manage IT\\Desktop\\ManagerPanelWindow.xaml",
-              "RelativeToolTip": "Desktop\\ManagerPanelWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-01-05T20:01:08.379Z"
+              "Title": "ManageProject.cshtml",
+              "DocumentMoniker": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\Pages\\ManageProject.cshtml",
+              "RelativeDocumentMoniker": "Web\\Pages\\ManageProject.cshtml",
+              "ToolTip": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\Pages\\ManageProject.cshtml",
+              "RelativeToolTip": "Web\\Pages\\ManageProject.cshtml",
+              "ViewState": "AgIAAMwAAAAAAAAAAAAAANwAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-15T16:57:58.084Z",
+              "EditorCaption": ""
             }
           ]
         }
