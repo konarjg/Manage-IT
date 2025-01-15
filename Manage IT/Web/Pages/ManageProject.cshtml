@@ -149,9 +149,8 @@
                                     <div class="taskListTasks">
                                         @{
                                             List<Task> tasks;
-                                            List<TaskDetails> taskDetails;
 
-                                            bool success = TaskManager.Instance.GetAllTasks(taskList.TaskListId, out tasks, out taskDetails);
+                                            bool success = TaskManager.Instance.GetAllTasks(taskList.TaskListId, out tasks);
 
                                             foreach (var task in tasks)
                                             {

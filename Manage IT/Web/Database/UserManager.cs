@@ -34,6 +34,23 @@ public class UserManager
         return DatabaseAccess.Instance.ExecuteQuery(query, out users);
     }
 
+    public bool RemoveUser(long userId)
+    {
+        List<User> users;
+        ProjectManager.Instance.DeleteOwnedProjects(userId);
+        var query = FormattableStringFactory.Create($"DELETE FROM dbo.Users WHERE UserId = {userId}");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out users);
+    }
+
+    public bool DeleteAllPermissions(long projectId)
+    {
+        List<UserPermissions> permissions;
+        var query = FormattableStringFactory.Create($"DELETE FROM dbo.UserPermissions WHERE ProjectId = {projectId}");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out permissions);
+    }
+
     public bool DisableUser(User user)
     {
         List<User> users;

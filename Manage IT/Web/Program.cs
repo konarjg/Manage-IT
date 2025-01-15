@@ -26,6 +26,7 @@ ProjectManager.Instantiate();
 MeetingManager.Instantiate();
 TaskListManager.Instantiate();
 TaskManager.Instantiate();
+ChatManager.Instantiate();
 
 app.UseHttpsRedirection();
 app.UseHsts();

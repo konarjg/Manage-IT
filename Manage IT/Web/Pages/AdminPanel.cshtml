@@ -1,5 +1,6 @@
 ﻿@page
 @using EFModeling.EntityProperties.DataAnnotations.Annotations;
+@using Task = EFModeling.EntityProperties.DataAnnotations.Annotations.Task;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @Html.AntiForgeryToken()
 @model AdminPanel
@@ -61,6 +62,174 @@
                     });
                 }
 
+                function removeUser(userId) {
+                    var result = confirm("Do you really want to remove this user?");
+
+                    if (result) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/AdminPanel?handler=RemoveUser",
+                            data: { userId: userId },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                }
+
+                function removeProject(projectId) {
+                    var result = confirm("Do you really want to remove this project?");
+
+                    if (result) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/AdminPanel?handler=RemoveProject",
+                            data: { projectId: projectId },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                }
+
+                function removeTaskList(taskListId) {
+                    var result = confirm("Do you really want to remove this task list?");
+
+                    if (result) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/AdminPanel?handler=RemoveTaskList",
+                            data: { taskListId: taskListId },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                }
+
+                function removeTask(taskId) {
+                    var result = confirm("Do you really want to remove this task?");
+
+                    if (result) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/AdminPanel?handler=RemoveTask",
+                            data: { taskId: taskId },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                }
+
+                function removeMeeting(meetingId) {
+                    var result = confirm("Do you really want to remove this meeting?");
+
+                    if (result) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/AdminPanel?handler=RemoveMeeting",
+                            data: { meetingId: meetingId },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                }
+
+                function removeConversation(conversationId) {
+                    var result = confirm("Do you really want to remove this conversation?");
+
+                    if (result) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/AdminPanel?handler=RemoveConversation",
+                            data: { conversationId: conversationId },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                }
+
+                function removeMessage(messageId) {
+                    var result = confirm("Do you really want to remove this message?");
+
+                    if (result) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/AdminPanel?handler=RemoveMessage",
+                            data: { messageId: messageId },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                 }
+
                 function setActiveButton(pageId) {
                     for (var i = 0; i <= 6; i++) {
                         document.getElementById("button" + i).style.backgroundColor = "white";
@@ -98,7 +267,7 @@
                 <div class="admin">
                     <div class="sideNav">
                     @{
-                        for (int i = 0; i < 10; i++)
+                        for (int i = 0; i < 7; i++)
                         {
                             AdminPageTemplate? template = (AdminPageTemplate?)i;
 
@@ -145,6 +314,11 @@
 
                                     foreach (var user in users)
                                     {
+                                        if (user.UserId == HttpContext.Session.Get<User>("User").UserId)
+                                        {
+                                            continue;
+                                        }
+
                                         <div class="record">
                                             <div class="recordColumn">@user.UserId</div>
                                             <div class="recordColumn">@user.Email</div>
@@ -152,7 +326,7 @@
                                             <div class="recordColumn">@user.Password</div>
                                             <div class="recordColumn">@user.Admin</div>
                                             <div class="recordColumn">@user.Verified</div>
-                                            <button class="recordButton">Remove</button>
+                                            <button class="recordButton" onclick="removeUser(@user.UserId)">Remove</button>
                                         </div>
                                     }
 
@@ -178,7 +352,7 @@
                                             <div class="recordColumn">@project.ManagerId</div>
                                             <div class="recordColumn">@project.Name</div>
                                             <div class="recordColumn">@project.Description</div>
-                                            <button class="recordButton">Remove</button>
+                                            <button class="recordButton" onclick="removeProject(@project.ProjectId)">Remove</button>
                                         </div>
                                     }
 
@@ -204,25 +378,111 @@
                                             <div class="recordColumn">@taskList.ProjectId</div>
                                             <div class="recordColumn">@taskList.Name</div>
                                             <div class="recordColumn">@taskList.Description</div>
-                                            <button class="recordButton">Remove</button>
+                                            <button class="recordButton" onclick="removeTaskList(@taskList.TaskListId)">Remove</button>
                                         </div>
                                     }
                                     break;
 
                                 case AdminPageTemplate.Tasks:
+                                    List<Task> tasks;
+                                    success = TaskManager.Instance.GetAllTasks(out tasks);
+                                    Model.Tasks = tasks;
 
+                                    <div class="recordHeader">
+                                        <div class="recordHeaderColumn">TaskId</div>
+                                        <div class="recordHeaderColumn">TaskListId</div>
+                                        <div class="recordHeaderColumn">Title</div>
+                                        <div class="recordHeaderColumn">Description</div>
+                                        <div class="recordHeaderColumn">Deadline</div>
+                                        <button class="recordButton" style="visibility:hidden;">Remove</button>
+                                    </div>
+
+                                    foreach (var task in tasks)
+                                    {
+                                        <div class="record">
+                                            <div class="recordColumn">@task.TaskId</div>
+                                            <div class="recordColumn">@task.TaskListId</div>
+                                            <div class="recordColumn">@task.Name</div>
+                                            <div class="recordColumn">@task.Description</div>
+                                            <div class="recordColumn">@task.Deadline.ToString("dd.MM.yyyy HH:mm")</div>
+                                            <button class="recordButton" onclick="removeTask(@task.TaskId)">Remove</button>
+                                        </div>
+                                    }
                                     break;
 
                                 case AdminPageTemplate.Meetings:
+                                    List<Meeting> meetings;
+                                    success = MeetingManager.Instance.GetAllMeetings(out meetings);
+                                    Model.Meetings = meetings;
 
+                                    <div class="recordHeader">
+                                        <div class="recordHeaderColumn">MeetingId</div>
+                                        <div class="recordHeaderColumn">ProjectId</div>
+                                        <div class="recordHeaderColumn">Title</div>
+                                        <div class="recordHeaderColumn">Description</div>
+                                        <div class="recordHeaderColumn">Date</div>
+                                        <button class="recordButton" style="visibility:hidden;">Remove</button>
+                                    </div>
+
+                                    foreach (var meeting in meetings)
+                                    {
+                                        <div class="record">
+                                            <div class="recordColumn">@meeting.MeetingId</div>
+                                            <div class="recordColumn">@meeting.ProjectId</div>
+                                            <div class="recordColumn">@meeting.Title</div>
+                                            <div class="recordColumn">@meeting.Description</div>
+                                            <div class="recordColumn">@meeting.Date.ToString("dd.MM.yyyy")</div>
+                                            <button class="recordButton" onclick="removeMeeting(@meeting.MeetingId)">Remove</button>
+                                        </div>
+                                    }
                                     break;
 
                                 case AdminPageTemplate.Conversations:
+                                    List<Conversation> conversations;
+                                    success = ChatManager.Instance.GetAllConversations(out conversations);
+                                    Model.Conversations = conversations;
 
+                                    <div class="recordHeader">
+                                        <div class="recordHeaderColumn">ConversationId</div>
+                                        <div class="recordHeaderColumn">User1Id</div>
+                                        <div class="recordHeaderColumn">User2Id</div>
+                                        <button class="recordButton" style="visibility:hidden;">Remove</button>
+                                    </div>
+
+                                    foreach (var conversation in conversations)
+                                    {
+                                        <div class="record">
+                                            <div class="recordColumn">@conversation.ConversationId</div>
+                                            <div class="recordColumn">@conversation.User1Id</div>
+                                            <div class="recordColumn">@conversation.User2Id</div>
+                                            <button class="recordButton" onclick="removeConversation(@conversation.ConversationId)">Remove</button>
+                                        </div>
+                                    }
                                     break;
 
                                 case AdminPageTemplate.Messages:
+                                    List<Message> messages;
+                                    success = ChatManager.Instance.GetAllMessages(out messages);
+                                    Model.Messages = messages;
 
+                                    <div class="recordHeader">
+                                        <div class="recordHeaderColumn">MessageId</div>
+                                        <div class="recordHeaderColumn">ConversationId</div>
+                                        <div class="recordHeaderColumn">UserId</div>
+                                        <div class="recordHeaderColumn">MessageBody</div>
+                                        <button class="recordButton" style="visibility:hidden;">Remove</button>
+                                    </div>
+
+                                    foreach (var message in messages)
+                                    {
+                                        <div class="record">
+                                            <div class="recordColumn">@message.MessageId</div>
+                                            <div class="recordColumn">@message.ConversationId</div>
+                                            <div class="recordColumn">@message.UserId</div>
+                                            <div class="recordColumn">@message.MessageBody</div>
+                                            <button class="recordButton" onclick="removeMessage(@message.MessageId)">Remove</button>
+                                        </div>
+                                    }
                                     break;
                             }
                         }
