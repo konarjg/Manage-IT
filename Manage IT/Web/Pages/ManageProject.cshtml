@@ -398,10 +398,29 @@
                     break;
 
                 case ProjectAction.EditMeeting:
+    <div class="main">
+        <div class="projectNav">
+            <form asp-page-handler="back" method="post">
+                <button class="navItem"><i class="fa fa-fw fa-arrow-left"></i>Back</button>
+            </form>
+        </div>
+
+        <form asp-page-handler="confirmMeeting" method="post">
+            <div class="infoBox">
+                <label class="error">@Model.Error</label>
+                <label class="label">Title</label>
+                <textarea class="infoField" rows="2" cols="20" maxlength="30" name="title"></textarea>
+                <label class="label">Description</label>
+                <textarea class="infoField" rows="30" cols="20" name="description"></textarea>
+                <label class="label">Date</label>
+                <input type="date" class="infoField" name="date" />
+                <input type="submit" class="navItem" value="Update meeting" />
+            </div>
+        </form>
+    </div>
 
 
-
-                    break;
+    break;
 
 
 
