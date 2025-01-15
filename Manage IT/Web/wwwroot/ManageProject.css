@@ -1,4 +1,4 @@
-﻿main {
+main {
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -257,6 +257,32 @@ input[type=date] ::-webkit-calendar-picker-indicator {
     gap: 64vw;
 }
 
+/*Meeting*/
+.meeting {
+    margin-top: 1vh;
+    width: 78vw;
+    height: 38vh;
+    margin-left: auto;
+    margin-right: auto;
+    border: 5px solid white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 1vh;
+    gap: 1vh;
+}
+
+.meetingTop {
+    font-size: 36px;
+    width: 74vw;
+    height: 4vh;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    display: inline-flex;
+    flex-direction: row;
+    gap: 64vw;
+}
+
 .taskListTasks {
     width: 75vw;
     height: 40vh;
@@ -295,6 +321,20 @@ input[type=date] ::-webkit-calendar-picker-indicator {
     justify-content: center;
     gap: 1vh;
 }
+.createMeeting {
+    margin-top: 1vh;
+    width: 78vw;
+    height: 38vh;
+    margin-left: auto;
+    margin-right: auto;
+    border: 5px solid white;
+    display: inline-flex;
+    flex-direction: column;
+    border-radius: 1vh;
+    align-content: center;
+    justify-content: center;
+    gap: 1vh;
+}
 
 .createTaskListLabel {
     margin-left: auto;
@@ -310,6 +350,27 @@ input[type=date] ::-webkit-calendar-picker-indicator {
     width: 50vw;
     min-height: 5vh;
     max-height: 10vh;
+}
+.createMeetingLabel {
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    font-size: 24px;
+}
+
+.createMeetingInput {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 48px;
+    width: 50vw;
+    min-height: 5vh;
+    max-height: 10vh;
+}
+.createMeetingLabel {
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    font-size: 24px;
 }
 
 .createTaskListButton {
