@@ -1,36 +1,32 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Calendar.css",
+      "Id": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Calendar.css",
       "PackagePath": "staticwebassets\\Calendar.css"
     },
     {
-      "Id": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\icon.png",
+      "Id": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\icon.png",
       "PackagePath": "staticwebassets\\Graphics\\icon.png"
     },
     {
-      "Id": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\iconhov.png",
+      "Id": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\iconhov.png",
       "PackagePath": "staticwebassets\\Graphics\\iconhov.png"
     },
     {
-      "Id": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\logo.png",
+      "Id": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\logo.png",
       "PackagePath": "staticwebassets\\Graphics\\logo.png"
     },
     {
-      "Id": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\main.jpeg",
+      "Id": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Graphics\\main.jpeg",
       "PackagePath": "staticwebassets\\Graphics\\main.jpeg"
     },
     {
-      "Id": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\Index.css",
+      "Id": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\Index.css",
       "PackagePath": "staticwebassets\\Index.css"
     },
     {
-      "Id": "C:\\Users\\fuksa\\OneDrive\\Pulpit\\Manage IT\\Manage IT\\Web\\wwwroot\\RegisterForm.css",
+      "Id": "C:\\Users\\konis\\Desktop\\Manage IT\\Manage IT\\Web\\wwwroot\\RegisterForm.css",
       "PackagePath": "staticwebassets\\RegisterForm.css"
-    },
-    {
-      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.Web.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
-      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.Web.Microsoft.AspNetCore.StaticWebAssets.props",

@@ -34,7 +34,7 @@ public class TaskListManager
     public bool UpdateTaskList(TaskList data)
     {
         List<TaskList> taskLists;
-        var query = FormattableStringFactory.Create($"UPDATE dbo.TaskLists SET Name = {data.Name}, Description = {data.Description} WHERE TaskListId = {data.TaskListId}");
+        var query = FormattableStringFactory.Create($"UPDATE dbo.TaskLists SET Name = '{data.Name}', Description = '{data.Description}' WHERE TaskListId = {data.TaskListId}");
         return DatabaseAccess.Instance.ExecuteQuery(query, out taskLists);
     }
 
