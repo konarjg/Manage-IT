@@ -1,4 +1,4 @@
-﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
+using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,16 +23,17 @@ namespace Desktop
         {
             InitializeComponent();
         }
+        private T GetTemplateControl<T>(string name) where T : class
+        {
+            return Template.FindName(name, this as FrameworkElement) as T;
+        }
 
         public void ProjectManagementViewLoaded(object sender, RoutedEventArgs e)
         {
-            if (UserManager.Instance.CurrentSessionUser.Admin)
-            {
-                AdminPanel.Visibility = Visibility.Visible;
-            }
-
             string error;
             ProjectManagementController.FetchProjectList(UserManager.Instance.CurrentSessionUser.UserId, ref Projects, App.Instance.UserSettings.DisplayProjects, out error);
+
+            
 
             if (error != "")
             {
@@ -62,7 +63,7 @@ namespace Desktop
 
         public void SettingsClick(object sender, RoutedEventArgs e)
         {
-            UserSettingsWindow window = new();
+            UserSettingsWindow window = new(false);
             window.Activate();
             window.Visibility = Visibility.Visible;
             Close();
@@ -84,21 +85,19 @@ namespace Desktop
             window.Visibility = Visibility.Visible;
             Close();
         }
+        public void AdminPanelClick(object sender, RoutedEventArgs e)
+        {
+            var window = new AdminPanelWindowMain();
+            window.Activate();
+            window.Visibility = Visibility.Visible;
 
+            Close();
+        }
         public void CreateProjectClick(object sender, RoutedEventArgs e)
         {
             CreateProjectWindow createForm = new();
             createForm.Activate();
             createForm.Visibility = Visibility.Visible;
-            Close();
-        }
-
-        public void AdminPanelClick(object sender, RoutedEventArgs e)
-        {
-            var window = new AdminPanelWindow();
-            window.Activate();
-            window.Visibility = Visibility.Visible;
-
             Close();
         }
 
@@ -110,5 +109,26 @@ namespace Desktop
 
             Close();
         }
+
+        public void CalendarClick(object sender, RoutedEventArgs e)
+        {
+            var window = new CalendarWindow();
+            window.Activate();
+            window.Visibility = Visibility.Visible;
+
+            Close();
+        }
+
+        public void CheckForAdmin(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button)
+            {
+                if (UserManager.Instance.CurrentSessionUser.Admin)
+                {
+                    button.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
     }
 }
