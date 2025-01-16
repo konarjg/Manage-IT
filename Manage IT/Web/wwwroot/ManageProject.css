@@ -257,32 +257,6 @@ input[type=date] ::-webkit-calendar-picker-indicator {
     gap: 64vw;
 }
 
-/*Meeting*/
-.meeting {
-    margin-top: 1vh;
-    width: 78vw;
-    height: 38vh;
-    margin-left: auto;
-    margin-right: auto;
-    border: 5px solid white;
-    display: flex;
-    flex-direction: column;
-    border-radius: 1vh;
-    gap: 1vh;
-}
-
-.meetingTop {
-    font-size: 36px;
-    width: 74vw;
-    height: 4vh;
-    margin-left: auto;
-    margin-right: auto;
-    color: white;
-    display: inline-flex;
-    flex-direction: row;
-    gap: 64vw;
-}
-
 .taskListTasks {
     width: 75vw;
     height: 40vh;
@@ -293,7 +267,7 @@ input[type=date] ::-webkit-calendar-picker-indicator {
     color: white;
     display: flex;
     flex-direction: row;
-    gap: 2vw;
+    gap: 1vw;
     border: 5px solid white;
     border-radius: 1vh;
     overflow-x: scroll;
@@ -308,20 +282,6 @@ input[type=date] ::-webkit-calendar-picker-indicator {
 }
 
 .createTaskList {
-    margin-top: 1vh;
-    width: 78vw;
-    height: 38vh;
-    margin-left: auto;
-    margin-right: auto;
-    border: 5px solid white;
-    display: inline-flex;
-    flex-direction: column;
-    border-radius: 1vh;
-    align-content: center;
-    justify-content: center;
-    gap: 1vh;
-}
-.createMeeting {
     margin-top: 1vh;
     width: 78vw;
     height: 38vh;
@@ -351,6 +311,33 @@ input[type=date] ::-webkit-calendar-picker-indicator {
     min-height: 5vh;
     max-height: 10vh;
 }
+
+.createTaskListButton {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1vh;
+    text-align: center;
+    font-size: 36px;
+    width: 20vw;
+    height: 12vh;
+    background-color: #a0a0ff;
+    color: white;
+}
+.createMeeting {
+    margin-top: 1vh;
+    width: 78vw;
+    height: 38vh;
+    margin-left: auto;
+    margin-right: auto;
+    border: 5px solid white;
+    display: inline-flex;
+    flex-direction: column;
+    border-radius: 1vh;
+    align-content: center;
+    justify-content: center;
+    gap: 1vh;
+}
+
 .createMeetingLabel {
     margin-left: auto;
     margin-right: auto;
@@ -366,14 +353,8 @@ input[type=date] ::-webkit-calendar-picker-indicator {
     min-height: 5vh;
     max-height: 10vh;
 }
-.createMeetingLabel {
-    margin-left: auto;
-    margin-right: auto;
-    color: white;
-    font-size: 24px;
-}
 
-.createTaskListButton {
+.createMeetingButton {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 1vh;
@@ -385,6 +366,7 @@ input[type=date] ::-webkit-calendar-picker-indicator {
     color: white;
 }
 
+
 .createTaskListButton:hover {
     background-color: #a0a0ff80;
 }
@@ -393,8 +375,6 @@ input[type=date] ::-webkit-calendar-picker-indicator {
     margin-top: 1vh;
     width: 25vw;
     height: 25vh;
-    margin-left: auto;
-    margin-right: auto;
     border: 5px solid white;
     display: flex;
     flex-direction: column;
@@ -668,3 +648,100 @@ input[type=date] ::-webkit-calendar-picker-indicator {
 {
     background-color:aqua;
 }
+
+.taskListPopup{
+    position:absolute;
+    top:0;
+    right:0;
+    width:50vw;
+    height:80vh;
+    display:flex;
+    flex-direction:column;
+    gap:2vh;
+    visibility:collapse;
+}
+
+.taskListPair{
+    width:45vw;
+    height:3vh;
+    display:flex;
+    flex-direction:row;
+    gap:5vw;
+}
+
+.taskListLabel{
+    width:20vw;
+    height:3vh;
+    font-size:24px;
+    color:white;
+}
+
+#title{
+    background-color:transparent;
+    color:white;
+    font-size:24px;
+    width:20vw;
+    height:3vh;
+    border: 0.5vh solid white;
+
+}
+
+#description {
+    background-color: transparent;
+    color: white;
+    font-size: 24px;
+    width: 20vw;
+    height: 3vh;
+    border: 0.5vh solid white;
+    
+}
+
+.taskListButtons {
+    width: 45vw;
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+}
+
+#taskListCancelButton{
+    background-color:#ffe0e0;
+    border: 0.5vh solid #800000;
+    color:#800000;
+    font-size:24px;
+}
+
+#taskListCancelButton:hover{
+    background-color:red;
+    color:white;
+}
+
+
+#taskListConfirmButton {
+    background-color: #e0ffe0;
+    border: 0.5vh solid #008000;
+    color: #008000;
+    font-size: 24px;
+}
+
+#taskListConfirmButton:hover {
+    background-color: green;
+    color: white;
+}
+
+
+#taskListDeleteButton {
+    background-color: #fff0f0;
+    border: 0.5vh solid #800000;
+    color: #800000;
+    font-size: 24px;
+    width:45vw;
+}
+
+#taskListDeleteButton:hover {
+    background-color: red;
+    color: white;
+    
+}
+
+
