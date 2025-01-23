@@ -1,5 +1,6 @@
 ﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System.Runtime.CompilerServices;
+using Web;
 
 public class ProjectManager
 {
@@ -123,5 +124,60 @@ public class ProjectManager
         var query = FormattableStringFactory.Create($"UPDATE ProjectMembers SET InviteAccepted = 1 WHERE ProjectId = {projectId} AND UserId = {userId}");
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out members);
+    }
+
+    public bool GetProjectMembers(long projectId, out List<User> members)
+    {
+        members = new();
+
+        List<ProjectMembers> data;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.ProjectMembers WHERE ProjectId = {projectId}");
+
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out data) && data != null && data.Count != 0;
+
+        foreach (var entry in data)
+        {
+            List<User> result;
+            var queryUser = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE UserId = {entry.UserId}");
+            bool successUser = DatabaseAccess.Instance.ExecuteQuery(queryUser, out result) && result != null && result.Count != 0;
+
+            if (successUser && result.FirstOrDefault() != null)
+            {
+                members.Add(result.FirstOrDefault());
+            }
+        }
+
+        return success;
+    }
+
+    public bool AddProjectMember(long projectId, long userId)
+    {
+        List<ProjectMembers> data;
+        List<UserPermissions> temp;
+        var query = FormattableStringFactory.Create($"INSERT INTO dbo.ProjectMembers (ProjectId, UserId, InviteAccepted) VALUES ({projectId}, {userId}, 0)");
+        var query1 = FormattableStringFactory.Create($"INSERT INTO dbo.UserPermissions (ProjectId, UserId, Editing, InvitingMembers, KickingMembers) VALUES ({projectId}, {userId}, 0, 0, 0)");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out data) && DatabaseAccess.Instance.ExecuteQuery(query1, out temp);
+    }
+
+    public bool RemoveProjectMember(Project project, User user)
+    {
+        List<ProjectMembers> data;
+        List<UserPermissions> temp;
+        var query = FormattableStringFactory.Create($"DELETE FROM dbo.UserPermissions WHERE ProjectId = {project.ProjectId} AND UserId = {user.UserId}");
+        var query1 = FormattableStringFactory.Create($"DELETE FROM dbo.ProjectMembers WHERE ProjectId = {project.ProjectId} AND UserId = {user.UserId}");
+
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out temp) && DatabaseAccess.Instance.ExecuteQuery(query1, out data);
+
+        if (!success)
+        {
+            return false;
+        }
+
+        var subject = "Manage IT Notification: You have been kicked from a project";
+        var body = $"Dear {user.Login},<br/>Unfortunately You have been kicked from a project named {project.Name}. If You don't agree with this decision, contact the manager or an administrator!";
+        string error;
+
+        return EmailService.SendEmail(user.Email, subject, body, out error);
     }
 }

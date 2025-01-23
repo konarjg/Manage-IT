@@ -18,49 +18,7 @@ public class ManageProject : PageModel
 {
     public string Error { get; set; }
     public Project Project { get; set; }
-    public List<User> Members { get; set; } = new()
-    {
-        new()
-        {
-            Email = "konarskikrzysztof1@gmail.com",
-            Login = "konis"
-        },
-        new()
-        {
-            Email = "272844@student.pwr.edu.pl",
-            Login = "konar"
-        },
-        new()
-        {
-            Email = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@gmail.com",
-            Login = "konis"
-        },
-        new()
-        {
-            Email = "272844@student.pwr.edu.pl",
-            Login = "konar"
-        },
-        new()
-        {
-            Email = "konarskikrzysztof1@gmail.com",
-            Login = "konis"
-        },
-        new()
-        {
-            Email = "272844@student.pwr.edu.pl",
-            Login = "konar"
-        },
-        new()
-        {
-            Email = "konarskikrzysztof1@gmail.com",
-            Login = "konis"
-        },
-        new()
-        {
-            Email = "272844@student.pwr.edu.pl",
-            Login = "konar"
-        }
-    };
+    public List<User> Members { get; set; }
 
     public List<TaskList> TaskLists { get; set; }
     public ProjectAction Action { get; set; }
@@ -75,6 +33,7 @@ public class ManageProject : PageModel
         if (id != null && id != string.Empty)
         {
             HttpContext.Session.Remove("Project");
+            HttpContext.Session.Remove("Members");
             HttpContext.Session.Remove("Action");
             Action = ProjectAction.Manage;
         }
@@ -82,6 +41,7 @@ public class ManageProject : PageModel
         if (HttpContext.Session.Get<Project>("Project") != null)
         {
             Project = HttpContext.Session.Get<Project>("Project");
+            Members = HttpContext.Session.Get<List<User>>("Members");
             Action = HttpContext.Session.Get<ProjectAction>("Action");
         }
         else
@@ -99,6 +59,7 @@ public class ManageProject : PageModel
             }
 
             Project project;
+            List<User> members;
             bool success = ProjectManager.Instance.GetProject(projectId, out project);
 
             if (!success || project == null)
@@ -106,7 +67,16 @@ public class ManageProject : PageModel
                 return Redirect("~/ProjectManagement");
             }
 
+
+            success = ProjectManager.Instance.GetProjectMembers(project.ProjectId, out members);
+
+            if (members == null)
+            {
+                return Redirect("~/ProjectManagement");
+            }
+
             Project = project;
+            Members = members;
         }
         
         if (HttpContext.Session.Get<List<TaskList>>("TaskLists") == null)
@@ -132,6 +102,7 @@ public class ManageProject : PageModel
         
 
         HttpContext.Session.Set("Project", Project);
+        HttpContext.Session.Set("Members", Members);
         HttpContext.Session.Set("Action", Action);
         return null;
     }
@@ -199,6 +170,7 @@ public class ManageProject : PageModel
         }
 
         HttpContext.Session.Remove("Project");
+        HttpContext.Session.Remove("Members");
         HttpContext.Session.Remove("Action");
         return Redirect("~/ProjectManagement");
     }
@@ -283,6 +255,7 @@ public class ManageProject : PageModel
     public IActionResult OnPostManage()
     {
         HttpContext.Session.Remove("Project");
+        HttpContext.Session.Remove("Members");
         HttpContext.Session.Remove("Action");
         return Redirect("~/ProjectManagement");
     }
