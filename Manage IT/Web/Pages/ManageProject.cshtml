@@ -181,6 +181,15 @@
                 case ProjectAction.Manage:
                     <div class="main">
                         <div class="projectNav">
+                            @{
+                                var user = HttpContext.Session.Get<User>("User");
+
+                                UserPermissions permissions;
+                                UserManager.Instance.GetUserPermissions(user.UserId, Model.Project.ProjectId, out permissions);
+
+                                string editVisible = permissions?.Editing != null ? permissions.Editing ? "visible" : "collapse" : "collapse";
+                            }
+
                             <form asp-page-handler="manage" method="post">
                                 <button class="back"><i class="fa fa-fw fa-arrow-left"></i></button>
                             </form>
@@ -195,15 +204,15 @@
                                 <button class="navItem"><i class="fa fa-fw fa-address-book"></i>Members</button>
                             </form>
 
-                            <form asp-page-handler="createMeeting" method="post">
+                            <form asp-page-handler="createMeeting" style="visibility:@editVisible" method="post">
                                 <button class="navItem"><i class="fa fa-fw fa-handshake-o"></i>Meeting</button>
                             </form>
 
-                            <form asp-page-handler="update" method="post">
+                            <form asp-page-handler="update" method="post" style="visibility:@editVisible">
                                 <button class="navItem"><i class="fa fa-fw fa-pencil-square"></i>Edit</button>
                             </form>
 
-                            <form asp-page-handler="delete" method="post">
+                            <form asp-page-handler="delete" method="post" style="visibility:@editVisible">
                                 <button class="navItem"><i class="fa fa-fw fa-trash"></i>Delete</button>
                             </form>
                         </div>
@@ -218,7 +227,7 @@
                                         }
 
                                         <span>@taskList.Name</span>
-                                        <span class="dots"><i class="fa fa-fw fa-ellipsis-v" onclick="manageTaskList('@json')"></i></span>
+                                        <span class="dots" style="visibility:@editVisible"><i class="fa fa-fw fa-ellipsis-v" onclick="manageTaskList('@json')"></i></span>
                                     </div>
 
                                     <div class="taskListTasks">
@@ -244,7 +253,7 @@
                                                 <div class="task">
                                                     <div class="taskTop">
                                                         <span>@task.Name</span>
-                                                        <span class="dots"><i class="fa fa-fw fa-ellipsis-v"></i></span>
+                                                        <span class="dots" style="visibility:@editVisible"><i class="fa fa-fw fa-ellipsis-v"></i></span>
                                                     </div>
 
                                                     <div class="taskSub">
@@ -258,7 +267,7 @@
                                                 </div>
                                             }
 
-                                            <div class="createTask">
+                                            <div class="createTask" style="visibility:@editVisible">
                                                 <button onclick="createTask('@taskList.TaskListId.ToString()', document.getElementById('createTaskName').value, document.getElementById('createTaskDescription').value, document.getElementById('createTaskDeadline').value)" class="createTaskButton"><i class="fa fa-fw fa-plus"></i>Create</button>
 
                                                 <div class="createTaskTop">
@@ -282,7 +291,7 @@
                                 </div>
                             }
 
-                            <div class="createTaskList">
+                            <div class="createTaskList" style="visibility:@editVisible">
                                 <span class="createTaskListLabel">Name</span>
                                 <textarea class="createTaskListInput" id="taskListNameField" rows="1" cols="30" maxlength="30" style="resize:none;"></textarea>
                                 <span class="createTaskListLabel">Description</span>

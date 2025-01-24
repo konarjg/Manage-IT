@@ -73,8 +73,8 @@ main {
 }
 
 main {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     gap: 10px;
     display: flex;
     flex-direction: column;
@@ -88,6 +88,7 @@ main {
     height: 50vh;
     margin-left: 12.5vw;
     margin-right: auto;
+    gap: 1vw;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
@@ -99,23 +100,40 @@ main {
     border: 5px solid gray;
 }
 
-.container div {
-    margin-left: 1vw;
-    margin-right: 1vw;
-    align-content: center;
-    justify-content: center;
-    display: inline-block;
-}
-
 .project {
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    min-width: 15vw;
+    max-width: 15vw;
     text-align: center;
+    padding: 10vh;
     color: #ffffff;
     text-decoration: none;
-    font-size: 72px;
+    font-size: 48px;
     transition: 0.1s;
     background-color: #8080ff80;
-    padding: 100px;
     border: 5px solid white;
+}
+
+.shared {
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    min-width: 15vw;
+    max-width: 15vw;
+    text-align: center;
+    padding: 10vh;
+    color: #ffffff;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 48px;
+    transition: 0.1s;
+    background-color: #80808080;
+    border: 5px solid white;
+}
+    
+.shared:hover {
+    background-color: #808080ff;
 }
 
 .project:hover {

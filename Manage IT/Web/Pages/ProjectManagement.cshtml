@@ -60,15 +60,15 @@
                 <div class="container">
                     @if (Model.Projects != null)
                     {
-                        @foreach (var project in Model.Projects)
+                        @foreach (var project in Model.Projects.OrderBy(x => x.ManagerId != HttpContext.Session.Get<User>("User").UserId))
                         {
-                            <div>
-                                <a class="project" href=@Href("~/ManageProject?id=" + project.ProjectId)>@project.Name</a>
-                            </div>
+                            string className = project.ManagerId == HttpContext.Session.Get<User>("User").UserId ? "project" : "shared";
+
+                            <a class="@className" href=@Href("~/ManageProject?id=" + project.ProjectId)>@project.Name</a>
                         }
                     }
 
-                    <div><a class="project" href=@Href("~/CreateProjectForm")><i class="fa fa-fw fa-plus"></i>Create</a></div>
+                    <a class="project" href=@Href("~/CreateProjectForm")><i class="fa fa-fw fa-plus"></i>Create</a>
                 </div>
             </div>
         }
