@@ -18,9 +18,35 @@ public class ProjectManager
         return DatabaseAccess.Instance.ExecuteQuery(query, out projects);
     }
 
-    public bool GetAllProjects(long managerId, out List<Project> projects)
+    public bool GetAllProjects(long userId, out List<Project> projects)
+    {
+        projects = new();
+        List<Project> owned = null;
+        List<Project> shared = null;
+
+        bool success = GetOwnedProjects(userId, out owned) && GetSharedProjects(userId, out shared);
+
+        if (!success)
+        {
+            return false;
+        }
+
+        projects.AddRange(owned);
+        projects.AddRange(shared);
+
+        return true;
+    }
+
+    public bool GetOwnedProjects(long managerId, out List<Project> projects)
     {
         var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects WHERE ManagerId = {managerId}");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out projects);
+    }
+
+    public bool GetSharedProjects(long userId, out List<Project> projects)
+    {
+        var query = FormattableStringFactory.Create($"SELECT p.* FROM dbo.Projects p JOIN dbo.ProjectMembers pm ON p.ProjectId = pm.ProjectId WHERE pm.UserId = {userId}");
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out projects);
     }
@@ -67,6 +93,11 @@ public class ProjectManager
         var query = FormattableStringFactory.Create($"INSERT INTO dbo.Projects (Name, Description, ManagerId) VALUES ('{data.Name}', '{data.Description}', {data.ManagerId})");
 
         bool success = DatabaseAccess.Instance.ExecuteQuery(query, out projects);
+
+        if (success)
+        {
+            UserManager.Instance.CreatePermissions(data.ManagerId, data.ProjectId);
+        }
 
         return success;
     }
@@ -134,6 +165,11 @@ public class ProjectManager
         var query = FormattableStringFactory.Create($"SELECT * FROM dbo.ProjectMembers WHERE ProjectId = {projectId}");
 
         bool success = DatabaseAccess.Instance.ExecuteQuery(query, out data) && data != null && data.Count != 0;
+
+        if (!success)
+        {
+            return false;
+        }
 
         foreach (var entry in data)
         {
