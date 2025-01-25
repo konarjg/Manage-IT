@@ -9,6 +9,7 @@
   <ItemGroup>
     <Content Remove="wwwroot\AccountManagement.css" />
     <Content Remove="wwwroot\AdminPanel.css" />
+    <Content Remove="wwwroot\Chat.css" />
     <Content Remove="wwwroot\LoginForm.css" />
     <Content Remove="wwwroot\ManageProject.css" />
     <Content Remove="wwwroot\ProjectManagement.css" />
@@ -33,6 +34,7 @@
     <None Include="wwwroot\Graphics\main.jpeg" />
     <None Include="wwwroot\ManageProject.css" />
     <None Include="wwwroot\AdminPanel.css" />
+    <None Include="wwwroot\Chat.css" />
     <None Include="wwwroot\ProjectManagement.css" />
     <None Include="wwwroot\LoginForm.css" />
     <None Include="wwwroot\RegisterForm.css" />
