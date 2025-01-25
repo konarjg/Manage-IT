@@ -113,8 +113,31 @@
             <h1 class="responsive">Welcome to Manage IT<br/>@Model.Header</h1>
                 <div class="container">
                     <div class="buttons">
-                        <a href=@Href("~/LoginForm") class="responsive">Manage IT In Browser</a>
-                        <a href="#desktop" class="responsive">Manage IT On Desktop</a>
+                            <a href=@Href("~/LoginForm") class="responsive" id="browserManageIT">Manage IT In Browser</a>
+                            <a href=@Href("~/Downloads") class="responsive"  id="desktopManageIT">Manage IT On Desktop</a>
+                            <script>
+                                document.getElementById('desktopManageIT').addEventListener('click', function () {
+                                const url = 'yourUrlToDownloadFile'; //placeholder
+                                fetch(url)
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error('Sieć odpowiedziała błędem: ' + response.status);
+                                    }
+                                    return response.blob();
+                                })
+                                .then(blob => {
+                                    const link = document.createElement('a');
+                                    link.href = window.URL.createObjectURL(blob);
+                                    link.download = 'ManageITSetup.exe'; // Opcjonalnie: zmień nazwę pliku
+                                    document.body.appendChild(link);
+                                    link.click();
+                                    document.body.removeChild(link);
+                                })
+                                .catch(error => {
+                                    console.error('Wystąpił problem z pobraniem pliku:', error);
+                                });
+                                });
+                            </script>
                     </div>
                     <img src="Graphics/main.jpeg" id="image"/>
                 </div>

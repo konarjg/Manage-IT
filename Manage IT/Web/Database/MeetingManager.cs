@@ -10,6 +10,12 @@ public class MeetingManager
         Instance = new MeetingManager();
     }
 
+    public bool GetAllMeetings(out List<Meeting> meetings)
+    {
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Meetings");
+        return DatabaseAccess.Instance.ExecuteQuery(query, out meetings);
+    }
+
     public bool UpdateMeeting(Meeting data)
     {
         List<Meeting> meetings;

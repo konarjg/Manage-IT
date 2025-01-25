@@ -8,6 +8,7 @@ using System.Windows.Markup;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Http;
 using System.Text.Json;
+using System.Xml.Linq;
 
 public class UserManager
 {
@@ -17,6 +18,32 @@ public class UserManager
     public static void Instantiate()
     {
         Instance = new UserManager();
+    }
+
+    public bool GetUserPermissions(long userId, long projectId, out UserPermissions permissions)
+    {
+        List<UserPermissions> records;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.UserPermissions WHERE UserId = {userId} AND ProjectId = {projectId}");
+
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out records);
+
+        if (!success)
+        {
+            permissions = null;
+            return false;
+        }
+
+        permissions = records.FirstOrDefault();
+
+        return true;
+    }
+
+    public bool CreatePermissions(long managerId, long projectId)
+    {
+        List<UserPermissions> records;
+        FormattableString query = FormattableStringFactory.Create($"INSERT INTO dbo.UserPermissions (ProjectId, UserId, Editing, InvitingMembers, KickingMembers) VALUES({projectId}, {managerId}, 1, 1, 1");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out records);
     }
 
     public bool GetAllUsers(out List<User> users)
@@ -32,6 +59,23 @@ public class UserManager
         var query = FormattableStringFactory.Create($"UPDATE dbo.Users SET Email = '{data.Email}', Login = '{data.Login}', Password = '{data.Password}' WHERE UserId = {data.UserId}");
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out users);
+    }
+
+    public bool RemoveUser(long userId)
+    {
+        List<User> users;
+        ProjectManager.Instance.DeleteOwnedProjects(userId);
+        var query = FormattableStringFactory.Create($"DELETE FROM dbo.Users WHERE UserId = {userId}");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out users);
+    }
+
+    public bool DeleteAllPermissions(long projectId)
+    {
+        List<UserPermissions> permissions;
+        var query = FormattableStringFactory.Create($"DELETE FROM dbo.UserPermissions WHERE ProjectId = {projectId}");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out permissions);
     }
 
     public bool DisableUser(User user)
