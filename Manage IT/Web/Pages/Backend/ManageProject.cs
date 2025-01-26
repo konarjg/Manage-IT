@@ -333,4 +333,31 @@ public class ManageProject : PageModel
         HttpContext.Session.Remove("TaskLists");
         return new(new { success = true });
     }
+
+    public JsonResult OnPostKickMember(string projectId, string memberId)
+    {
+        if (string.IsNullOrEmpty(projectId) || string.IsNullOrEmpty(memberId))
+        {
+            return new JsonResult(new { success = false, message = "Project ID and Member ID are required." });
+        }
+
+        if (!long.TryParse(projectId, out long projectIdLong) || !long.TryParse(memberId, out long memberIdLong))
+        {
+            return new JsonResult(new { success = false, message = "Invalid Project ID or Member ID." });
+        }
+
+
+        bool success = ProjectManager.Instance.KickMember(projectIdLong, memberIdLong);
+
+        if (!success)
+        {
+            return new JsonResult(new { success = false, message = "Could not remove the member from the project." });
+        }
+
+        HttpContext.Session.Remove("Members");
+        Action = ProjectAction.Members;
+        HttpContext.Session.Set("Action", Action);
+
+        return new JsonResult(new { success = true });
+    }
 }
