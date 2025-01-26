@@ -90,4 +90,11 @@ public class ProjectManager
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out members);
     }
+
+    public bool KickMember(long projectId, long memberId)
+    {
+        List<ProjectMembers> member;
+        var query = FormattableStringFactory.Create($"DELETE FROM dbo.ProjectMembers WHERE ProjectId = {projectId} AND UserId = {memberId}");
+        return DatabaseAccess.Instance.ExecuteQuery(query, out member);
+    }
 }
