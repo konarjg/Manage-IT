@@ -9,257 +9,331 @@
 @model ManageProject
 @{
     <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Manage IT | Main</title>
-        <link rel="icon" href=@Href("Graphics/logo.png") />
-        <meta name="description" content="A convenient IT Project management tool for both managers and employees." />
-        <meta name="keywords" content="management, IT, programming, project, www, programmer" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta name="author" content="Bosnian IT Management Inc." />
-        <link rel="stylesheet" href="~/ManageProject.css" type="text/css" />
+            <html lang="en">
+            <head>
+                <meta charset="utf-8" />
+                <title>Manage IT | Main</title>
+                <link rel="icon" href=@Href("Graphics/logo.png") />
+                <meta name="description" content="A convenient IT Project management tool for both managers and employees." />
+                <meta name="keywords" content="management, IT, programming, project, www, programmer" />
+                <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+                <meta name="author" content="Bosnian IT Management Inc." />
+                <link rel="stylesheet" href="~/ManageProject.css" type="text/css" />
 
-        <!--Because Razor adds a scope identifier and a helper tag,
-        body needs to be styled in the style tag as per
-        https://github.com/dotnet/aspnetcore/issues/41580-->
-        <style>
-            body {
-                width: 100vw;
-                height: 100vh;
-                margin: 0px;
-                background: linear-gradient(#000000, #000040);
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            }
-        </style>
+                <!--Because Razor adds a scope identifier and a helper tag,
+                body needs to be styled in the style tag as per
+                https://github.com/dotnet/aspnetcore/issues/41580-->
+                <style>
+                    body {
+                        width: 100vw;
+                        height: 100vh;
+                        margin: 0px;
+                        background: linear-gradient(#000000, #000040);
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    }
+                </style>
 
-        <script src="https://cdn.jsdelivr.net/npm/@@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/@@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/@@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-        <script>
-            function createTaskList(projectId, name, description)
-            {
-                $.ajax({
-                    type: "POST",
-                    url: "/ManageProject?handler=CreateTaskList",
-                    data: { projectId: projectId, name: name, description: description },
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.reload();
-                        } else {
-                            alert("Could not create the task list!");
-                        }
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
-            }
-
-            function createTask(taskListId, name, description, deadline)
-            {
-                $.ajax({
-                    type: "POST",
-                    url: "/ManageProject?handler=CreateTask",
-                    data: { taskListId: taskListId, name: name, description: description, deadline: deadline },
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.reload();
-                        } else {
-                            alert("Could not create the task!");
-                        }
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
-            }
-            function createMeeting(projectId, title, description, meetDate) {
-                console.log(`Date being sent: ${meetDate}`); // Debugging line
-                $.ajax({
-                    type: "POST",
-                    url: "/ManageProject?handler=CreateMeeting",
-                    data: { projectId:projectId, title: title, description: description, date: meetDate },
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.reload();
-                        } else {
-                            alert("Could not create the meeting!");
-                        }
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
-            }
-            function editMeeting(meetingId) {
-                $.ajax({
-                    type: "POST",
-                    url: "/ManageProject?handler=EditMeeting",
-                    data: { meetingId: meetingId },
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.reload();
-                        } else {
-                            alert("Could not open edit meeting menu");
-                        }
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
-            }
-            function deleteMeeting(meetingId) {
-                $.ajax({
-                    type: "POST",
-                    url: "/ManageProject?handler=DeleteMeeting",
-                    data: { meetingId: meetingId },
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.reload();
-                        } else {
-                            alert("Could not open meeting deletion menu");
-                        }
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
-            }
-            function updateMeeting(meetingId,projectId,updatedTitle,updatedDescription,updatedDate) {
-                console.log(`Date being sent: ${updatedDate}`); // Debugging line
-                $.ajax({
-                    type: "POST",
-                    url: "/ManageProject?handler=UpdateMeeting",
-                    data: { meetingId: meetingId, projectId: projectId, title: updatedTitle, description: updatedDescription, date: updatedDate },
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.reload();
-                        } else {
-                            alert("Could not update meeting");
-                        }
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
-            }
-            function deleteConfirmMeeting(meetingId) {
-                $.ajax({
-                    type: "POST",
-                    url: "/ManageProject?handler=DeleteConfirmMeeting",
-                    data: { meetingId: meetingId},
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.reload();
-                        } else {
-                            alert("Could not delete meeting");
-                        }
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
-            }
-
-        </script>
-    </head>
-
-    <body>
-        <header>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            <div class="topnav">
-                <a class="active" href=@Href("~/")><i class="fa fa-fw fa-home"></i> Home</a>
-                <a href="#"><i class="fa fa-fw fa-download"></i> Downloads</a>
-                <a href="#"><i class="fa fa-fw fa-question"></i>About</a>
-                <div class="topnav-right">
-                    @if (HttpContext.Session.Get<User>("User").Admin)
+                <script>
+                    function createTaskList(projectId, name, description)
                     {
-                        <a href=@Href("~/AdminPanel")><i class="fa fa-fw fa-cog"></i>Admin Panel</a>
+                        $.ajax({
+                            type: "POST",
+                            url: "/ManageProject?handler=CreateTaskList",
+                            data: { projectId: projectId, name: name, description: description },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                } else {
+                                    alert("Could not create the task list!");
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
                     }
 
-                    <a href=@Href("~/AccountManagement")><i class="fa fa-fw fa-user-circle"></i>My Account</a>
-                    <a href=@Href("~/Chat")><i class="fa fa-fw fa-commenting"></i>Chat</a>
-                    <a href=@Href("~/Calendar")><i class="fa fa-fw fa-calendar"></i>Calendar</a>
-                    <a href=@Href("~/LogOut")><i class="fa fa-fw fa-sign-out"></i>Log Out</a>
-                </div>
+                    function createTask(taskListId, name, description, deadline)
+                    {
+                        $.ajax({
+                            type: "POST",
+                            url: "/ManageProject?handler=CreateTask",
+                            data: { taskListId: taskListId, name: name, description: description, deadline: deadline },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                } else {
+                                    alert("Could not create the task!");
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                    function createMeeting(projectId, title, description, meetDate) {
+                        console.log(`Date being sent: ${meetDate}`); // Debugging line
+                        $.ajax({
+                            type: "POST",
+                            url: "/ManageProject?handler=CreateMeeting",
+                            data: { projectId:projectId, title: title, description: description, date: meetDate },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                } else {
+                                    alert("Could not create the meeting!");
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                    function editMeeting(meetingId) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/ManageProject?handler=EditMeeting",
+                            data: { meetingId: meetingId },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                } else {
+                                    alert("Could not open edit meeting menu");
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                function manageUser(memberId) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/ManageProject?handler=ManageMember",
+                        data: { memberId: memberId },
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("XSRF-TOKEN",
+                                $('input:hidden[name="__RequestVerificationToken"]').val());
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                window.location.reload();
+                            } else {
+                                alert("Could not open edit meeting menu");
+                            }
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                }
+                    function deleteMeeting(meetingId) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/ManageProject?handler=DeleteMeeting",
+                            data: { meetingId: meetingId },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                } else {
+                                    alert("Could not open meeting deletion menu");
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                    function updateMeeting(meetingId,projectId,updatedTitle,updatedDescription,updatedDate) {
+                        console.log(`Date being sent: ${updatedDate}`); // Debugging line
+                        $.ajax({
+                            type: "POST",
+                            url: "/ManageProject?handler=UpdateMeeting",
+                            data: { meetingId: meetingId, projectId: projectId, title: updatedTitle, description: updatedDescription, date: updatedDate },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                } else {
+                                    alert("Could not update meeting");
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                    function deleteConfirmMeeting(meetingId) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/ManageProject?handler=DeleteConfirmMeeting",
+                            data: { meetingId: meetingId},
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                } else {
+                                    alert("Could not delete meeting");
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                    function updateMemberPermissionsConfirm(memberID,projectID,newEditing,newInviting,newKicking) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/ManageProject?handler=UpdateMemberPermissionsConfirm",
+                        data: { userID: memberID,projectID:projectID,newEditing:newEditing,newInviting:newInviting,newKicking:newKicking },
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("XSRF-TOKEN",
+                                $('input:hidden[name="__RequestVerificationToken"]').val());
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                //window.location.reload();
+                                document.getElementById("manageMemberError").style.color = "white";
+                                document.getElementById("manageMemberError").innerHTML = "Member's permissions have been updated";
+                            } else {
+                                document.getElementById("manageMemberError").style.color = "red";
+                                document.getElementById("manageMemberError").innerHTML = "Could not update member's permissions";
+                            }
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                    }
 
-            </div>
-        </header>
+                    function invite(projectId, credential) {
+    if (credential == "" || credential == " ") {
+        document.getElementById("inviteError").style.color = "red";
+        document.getElementById("inviteError").innerHTML = "Please fill out this field";
+        return;
+    }
 
-        <div class="main">
-            @switch (Model.Action)
-            {
-                case ProjectAction.Manage:
-                    <div class="main">
-                        <div class="projectNav">
-                            <form asp-page-handler="manage" method="post">
-                                <button class="back"><i class="fa fa-fw fa-arrow-left"></i></button>
-                            </form>
+    $.ajax({
+        type: "POST",
+        url: "/ManageProject?handler=InviteUserToProject",
+        data: { projectID: projectId, credential: credential },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+        },
+        success: function (response) {
+            if (response.success) {
+                document.getElementById("inviteError").style.color = "white";
+                document.getElementById("inviteError").innerHTML = "User invited successfully";
+            } else {
+                document.getElementById("inviteError").style.color = "red";
+                document.getElementById("inviteError").innerHTML = "Couldn't invite the user";
+            }
+        },
+        error: function () {
+            alert("error");
+        }
+    });
+}
 
-                            <div class="title">@Model.Project.Name</div>
+                </script>
+            </head>
 
-                            <form asp-page-handler="info" method="post">
-                                <button class="navItem"><i class="fa fa-fw fa-info-circle"></i>Project Info</button>
-                            </form>
+            <body>
+                <header>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                    <div class="topnav">
+                        <a class="active" href=@Href("~/")><i class="fa fa-fw fa-home"></i> Home</a>
+                        <a href="#"><i class="fa fa-fw fa-download"></i> Downloads</a>
+                        <a href="#"><i class="fa fa-fw fa-question"></i>About</a>
+                        <div class="topnav-right">
+                            @if (HttpContext.Session.Get<User>("User").Admin)
+                    {
+                                <a href=@Href("~/AdminPanel")><i class="fa fa-fw fa-cog"></i>Admin Panel</a>
+                    }
 
-                            <form asp-page-handler="members" method="post">
-                                <button class="navItem"><i class="fa fa-fw fa-address-book"></i>Members</button>
-                            </form>
-
-                            <form asp-page-handler="meetings" method="post">
-                                <button class="navItem"><i class="fa fa-fw fa-handshake-o"></i>Meetings</button>
-                            </form>
-
-                            <form asp-page-handler="update" method="post">
-                                <button class="navItem"><i class="fa fa-fw fa-pencil-square"></i>Edit</button>
-                            </form>
-
-                            <form asp-page-handler="delete" method="post">
-                                <button class="navItem"><i class="fa fa-fw fa-trash"></i>Delete</button>
-                            </form>
+                            <a href=@Href("~/AccountManagement")><i class="fa fa-fw fa-user-circle"></i>My Account</a>
+                            <a href=@Href("~/Chat")><i class="fa fa-fw fa-commenting"></i>Chat</a>
+                            <a href=@Href("~/Calendar")><i class="fa fa-fw fa-calendar"></i>Calendar</a>
+                            <a href=@Href("~/LogOut")><i class="fa fa-fw fa-sign-out"></i>Log Out</a>
                         </div>
 
-                        <div class="project">
-                            @foreach (var taskList in Model.TaskLists)
-                            {
-                                <div class="taskList">
-                                    <div class="taskListTop">
-                                        <span>@taskList.Name</span>
-                                        <span class="dots"><i class="fa fa-fw fa-ellipsis-v"></i></span>
-                                    </div>
+                    </div>
+                </header>
 
-                                    <div class="taskListTasks">
-                                        @{
+                <div class="main">
+                    @switch (Model.Action)
+            {
+                case ProjectAction.Manage:
+                            <div class="main">
+                                <div class="projectNav">
+                                    <form asp-page-handler="manage" method="post">
+                                        <button class="back"><i class="fa fa-fw fa-arrow-left"></i></button>
+                                    </form>
+
+                                    <div class="title">@Model.Project.Name</div>
+
+                                    <form asp-page-handler="info" method="post">
+                                        <button class="navItem"><i class="fa fa-fw fa-info-circle"></i>Project Info</button>
+                                    </form>
+
+                                    <form asp-page-handler="members" method="post">
+                                        <button class="navItem"><i class="fa fa-fw fa-address-book"></i>Members</button>
+                                    </form>
+
+                                    <form asp-page-handler="meetings" method="post">
+                                        <button class="navItem"><i class="fa fa-fw fa-handshake-o"></i>Meetings</button>
+                                    </form>
+
+                                    <form asp-page-handler="update" method="post">
+                                        <button class="navItem"><i class="fa fa-fw fa-pencil-square"></i>Edit</button>
+                                    </form>
+
+                                    <form asp-page-handler="delete" method="post">
+                                        <button class="navItem"><i class="fa fa-fw fa-trash"></i>Delete</button>
+                                    </form>
+                                </div>
+
+                                <div class="project">
+                                    @foreach (var taskList in Model.TaskLists)
+                            {
+                                        <div class="taskList">
+                                            <div class="taskListTop">
+                                                <span>@taskList.Name</span>
+                                                <span class="dots"><i class="fa fa-fw fa-ellipsis-v"></i></span>
+                                            </div>
+
+                                            <div class="taskListTasks">
+                                                @{
                                             List<Task> tasks;
 
                                             bool success = TaskManager.Instance.GetAllTasks(taskList.TaskListId, out tasks);
@@ -278,165 +352,219 @@
 
                                                 var daysLeftText = $"{(int)daysLeft}d left";
 
-                                                <div class="task">
-                                                    <div class="taskTop">
-                                                        <span>@task.Name</span>
-                                                        <span class="dots"><i class="fa fa-fw fa-ellipsis-v"></i></span>
-                                                    </div>
+                                                                <div class="task">
+                                                                    <div class="taskTop">
+                                                                        <span>@task.Name</span>
+                                                                        <span class="dots"><i class="fa fa-fw fa-ellipsis-v"></i></span>
+                                                                    </div>
 
-                                                    <div class="taskSub">
-                                                        <div class="taskSubPfp">
-                                                        </div>
+                                                                    <div class="taskSub">
+                                                                        <div class="taskSubPfp">
+                                                                        </div>
 
-                                                        <span class="taskSubDays">@daysLeftText</span>
-                                                    </div>
+                                                                        <span class="taskSubDays">@daysLeftText</span>
+                                                                    </div>
 
-                                                    <textarea readonly="readonly" class="taskDescription" style="resize: none;" rows="30" cols="60">This is a test task!</textarea>
-                                                </div>
+                                                                    <textarea readonly="readonly" class="taskDescription" style="resize: none;" rows="30" cols="60">This is a test task!</textarea>
+                                                                </div>
                                             }
 
-                                            <div class="createTask">
-                                                <button onclick="createTask('@taskList.TaskListId.ToString()', document.getElementById('createTaskName').value, document.getElementById('createTaskDescription').value, document.getElementById('createTaskDeadline').value)" class="createTaskButton"><i class="fa fa-fw fa-plus"></i>Create</button>
+                                                            <div class="createTask">
+                                                                <button onclick="createTask('@taskList.TaskListId.ToString()', document.getElementById('createTaskName').value, document.getElementById('createTaskDescription').value, document.getElementById('createTaskDeadline').value)" class="createTaskButton"><i class="fa fa-fw fa-plus"></i>Create</button>
 
-                                                <div class="createTaskTop">
-                                                    <span class="createTaskLabel">Name</span>
-                                                    <textarea id="createTaskName" style="resize:none;" class="createTaskName" rows="1" cols="30" maxlength="30"></textarea>
-                                                </div>
+                                                                <div class="createTaskTop">
+                                                                    <span class="createTaskLabel">Name</span>
+                                                                    <textarea id="createTaskName" style="resize:none;" class="createTaskName" rows="1" cols="30" maxlength="30"></textarea>
+                                                                </div>
 
-                                                <div class="createTaskSub">
-                                                    <span class="createTaskLabel">Deadline</span>
-                                                    <form>
-                                                        <input id="createTaskDeadline" type="datetime-local" class="createTaskDate"/>
-                                                    </form>
-                                                </div>
+                                                                <div class="createTaskSub">
+                                                                    <span class="createTaskLabel">Deadline</span>
+                                                                    <form>
+                                                                        <input id="createTaskDeadline" type="datetime-local" class="createTaskDate"/>
+                                                                    </form>
+                                                                </div>
 
-                                                
-                                                <span class="createTaskLabel">Description</span>
-                                                <textarea class="createTaskDescription" id="createTaskDescription" style="resize: none;" rows="30" cols="60"></textarea>
+                                                                
+                                                                <span class="createTaskLabel">Description</span>
+                                                                <textarea class="createTaskDescription" id="createTaskDescription" style="resize: none;" rows="30" cols="60"></textarea>
+                                                            </div>
+                                                }
                                             </div>
-                                        }
-                                    </div>
-                                </div>
+                                        </div>
                             }
 
-                            <div class="createTaskList">
-                                <span class="createTaskListLabel">Name</span>
-                                <textarea class="createTaskListInput" id="taskListNameField" rows="1" cols="30" maxlength="30" style="resize:none;"></textarea>
-                                <span class="createTaskListLabel">Description</span>
-                                <textarea class="createTaskListInput" id="taskListDescriptionField" rows="30" cols="60" style="resize:none;"></textarea>
-                                <button class="createTaskListButton" onclick="createTaskList('@Model.Project.ProjectId.ToString()', document.getElementById('taskListNameField').value, document.getElementById('taskListDescriptionField').value)"><i class="fa fa-fw fa-plus"></i>Create Task List</button>
-                            </div>
-                        </div>
-                        <div class="taskListPopup">
-                            <form>
-                            <div class="taskListPair">
-                            <label class="taskListLabel">Title</label>
-                            <input type="text" id="title" />
-                            </div>
-                                <div class="taskListPair">
-                                    <label class="taskListLabel">Description</label>
-                                    <textarea id="description"></textarea>
+                                    <div class="createTaskList">
+                                        <span class="createTaskListLabel">Name</span>
+                                        <textarea class="createTaskListInput" id="taskListNameField" rows="1" cols="30" maxlength="30" style="resize:none;"></textarea>
+                                        <span class="createTaskListLabel">Description</span>
+                                        <textarea class="createTaskListInput" id="taskListDescriptionField" rows="30" cols="60" style="resize:none;"></textarea>
+                                        <button class="createTaskListButton" onclick="createTaskList('@Model.Project.ProjectId.ToString()', document.getElementById('taskListNameField').value, document.getElementById('taskListDescriptionField').value)"><i class="fa fa-fw fa-plus"></i>Create Task List</button>
+                                    </div>
                                 </div>
-                                <div class="taskListButtons">
-                                <button id="taskListCancelButton">Cancel changes</button>
-                                <button id="taskListConfirmButton">Confirm changes</button>
+                                <div class="taskListPopup">
+                                    <form>
+                                    <div class="taskListPair">
+                                    <label class="taskListLabel">Title</label>
+                                    <input type="text" id="title" />
+                                    </div>
+                                        <div class="taskListPair">
+                                            <label class="taskListLabel">Description</label>
+                                            <textarea id="description"></textarea>
+                                        </div>
+                                        <div class="taskListButtons">
+                                        <button id="taskListCancelButton">Cancel changes</button>
+                                        <button id="taskListConfirmButton">Confirm changes</button>
+                                        </div>
+                                        <button id="taskListDeleteButton">Delete</button>
+                                    </form>
                                 </div>
-                                <button id="taskListDeleteButton">Delete</button>
-                            </form>
-                        </div>
-                    </div>
+                            </div>
                     break;
 
                 case ProjectAction.Members:
-                    <div class="main">
-                        <div class="projectNav">
-                            <form asp-page-handler="back" method="post">
-                                <button class="navItem"><i class="fa fa-fw fa-arrow-left"></i>Back</button>
-                            </form>
-                        </div>
-                        <div class="membersBox">
-                            <div class="searchBox">
-                                <textarea class="search" id="search" maxlength="60" placeholder="Email or username" style="resize:none;"></textarea>
-                                <button class="inviteButton" onclick="invite('@Model.Project.ProjectId', document.getElementById('search').value)">Invite</button>
-                            </div>
-                            <div class="memberHeaderBox">
-                                <label class="memberHeader">Members</label>
-                            </div>
 
-                            <div class="membersListBox">
-                                <ol class="membersList">
-                                    @foreach (var member in Model.Members)
-                                    {
-                                        <li class="membersListItem">
-                                            <div class="loginBox">@member.Login</div>
-                                            <div class="emailBox">@member.Email</div>
-                                            <button class="memberButton">Manage</button>
-                                            <button class="memberButton">Kick</button>
-                                        </li>
+
+
+
+
+
+
+                    bool successFetchPerms = UserManager.Instance.GetUserPermissions(HttpContext.Session.Get<User>("User").UserId, Model.Project.ProjectId, out UserPermissions currentUserPermissions);
+                            <div class="main">
+                                <div class="projectNav">
+                                    <form asp-page-handler="back" method="post">
+                                        <button class="navItem"><i class="fa fa-fw fa-arrow-left"></i>Back</button>
+                                    </form>
+                                </div>
+                                <div class="membersBox">
+                                    
+                                    <div class="searchBox">
+                                @if (HttpContext.Session.Get<User>("User").UserId == HttpContext.Session.Get<Project>("Project").ManagerId || currentUserPermissions.InvitingMembers)
+                                {
+                                     <label class="memberHeader"></label><b id="inviteError" style="color:red"></b><br />
+                                        <label class="memberHeader">Email or username:</label> <textarea class="search" id="search" maxlength="60" style="resize:none;"></textarea>
+                                        <button class="inviteButton" onclick="invite('@Model.Project.ProjectId.ToString()',document.getElementById('search').value)">Invite</button>
+                                       
+                                }
+                                    </div>
+                                    <div class="memberHeaderBox">
+                                        <label class="memberHeader">Members</label>
+                                    </div>
+
+                                    <div class="membersListBox">
+                                        <ol class="membersList">
+  
+                                        @foreach (var member in Model.Members)
+                                        {
+                                            int index = Model.Members.IndexOf(member);
+                                            if (Model.inviteStatuses[index]) //if invite is sth else than true/accepted
+                                            {
+
+                                                <i>NOT ACCEPTED/ERR</i>
+                                            }
+
+                                        
+
+                                                <li class="membersListItem">
+                                                
+                                                    <div class="loginBox">@member.Login</div>
+                                                    <div class="emailBox">@member.Email</div>
+                                            @if (HttpContext.Session.Get<User>("User").UserId == HttpContext.Session.Get<Project>("Project").ManagerId || currentUserPermissions.Editing)
+
+
+
+                                            {
+                                                    <form asp-page-handler="manageMember" method="post">
+                                                        <input type="hidden" name="memberId" value="@member.UserId" />
+                                                        <button class="memberButton" type="submit" >Manage</button>
+                                                    </form>
+                                            }
+                                            @if (HttpContext.Session.Get<User>("User").UserId == HttpContext.Session.Get<Project>("Project").ManagerId || currentUserPermissions.KickingMembers)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            {
+
+                                                    <button class="memberButton" value="@member.UserId">Kick</button>
+
+                                            }
+                                            </li>
 
                                     }
-                                </ol>
+                                        </ol>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
                     break;
 
                 case ProjectAction.Info:
-                    <div class="main">
-                        <div class="projectNav">
-                            <form asp-page-handler="back" method="post">
-                                <button class="navItem"><i class="fa fa-fw fa-arrow-left"></i>Back</button>
-                            </form>
-                        </div>
+                            <div class="main">
+                                <div class="projectNav">
+                                    <form asp-page-handler="back" method="post">
+                                        <button class="navItem"><i class="fa fa-fw fa-arrow-left"></i>Back</button>
+                                    </form>
+                                </div>
 
-                        <div class="infoBox">
-                            <label class="label">Name</label>
-                            <textarea class="infoField" disabled="disabled" rows="2" cols="60" maxlength="30">@Model.Project.Name</textarea>
-                            <label class="label">Description</label>
-                            <textarea class="infoField" disabled="disabled" rows="5" cols="60" maxlength="50">@Model.Project.Description</textarea>
-                        </div>
-                    </div>
+                                <div class="infoBox">
+                                    <label class="label">Name</label>
+                                    <textarea class="infoField" disabled="disabled" rows="2" cols="60" maxlength="30">@Model.Project.Name</textarea>
+                                    <label class="label">Description</label>
+                                    <textarea class="infoField" disabled="disabled" rows="5" cols="60" maxlength="50">@Model.Project.Description</textarea>
+                                </div>
+                            </div>
                     break;
 
                 case ProjectAction.Update:
-                    <div class="main">
-                        <div class="projectNav">
-                            <form asp-page-handler="back" method="post">
-                                <button class="navItem"><i class="fa fa-fw fa-arrow-left"></i>Back</button>
-                            </form>
-                        </div>
+                            <div class="main">
+                                <div class="projectNav">
+                                    <form asp-page-handler="back" method="post">
+                                        <button class="navItem"><i class="fa fa-fw fa-arrow-left"></i>Back</button>
+                                    </form>
+                                </div>
 
-                        <form method="post">
-                            <div class="infoBox">
-                                <label class="error">@Model.Error</label>
-                                <label class="label">Name</label>
-                                <textarea class="infoField" rows="2" cols="60" maxlength="30" name="name">@Model.Project.Name</textarea>
-                                <label class="label">Description</label>
-                                <textarea class="infoField" rows="5" cols="60" maxlength="50" name="description">@Model.Project.Description</textarea>
-                                <input type="submit" class="navItem" value="Save"/>
+                                <form method="post">
+                                    <div class="infoBox">
+                                        <label class="error">@Model.Error</label>
+                                        <label class="label">Name</label>
+                                        <textarea class="infoField" rows="2" cols="60" maxlength="30" name="name">@Model.Project.Name</textarea>
+                                        <label class="label">Description</label>
+                                        <textarea class="infoField" rows="5" cols="60" maxlength="50" name="description">@Model.Project.Description</textarea>
+                                        <input type="submit" class="navItem" value="Save"/>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
-                    </div>
                     break;
 
                 case ProjectAction.Delete:
-                    <div class="main">
-                        <div class="projectNav">
-                            <form asp-page-handler="back" method="post">
-                                <button class="navItem"><i class="fa fa-fw fa-arrow-left"></i>Back</button>
-                            </form>
-                        </div>
+                            <div class="main">
+                                <div class="projectNav">
+                                    <form asp-page-handler="back" method="post">
+                                        <button class="navItem"><i class="fa fa-fw fa-arrow-left"></i>Back</button>
+                                    </form>
+                                </div>
 
-                        <form asp-page-handler="confirm" method="post">
-                            <div class="infoBox">
-                                <label class="error">@Model.Error</label>
-                                <label class="label">Enter Project Name To Confirm</label>
-                                <textarea class="infoField" placeholder="@Model.Project.Name" rows="2" cols="60" maxlength="30" name="name"></textarea>
-                                <input type="submit" class="navItem" value="Delete Project" />
+                                <form asp-page-handler="confirm" method="post">
+                                    <div class="infoBox">
+                                        <label class="error">@Model.Error</label>
+                                        <label class="label">Enter Project Name To Confirm</label>
+                                        <textarea class="infoField" placeholder="@Model.Project.Name" rows="2" cols="60" maxlength="30" name="name"></textarea>
+                                        <input type="submit" class="navItem" value="Delete Project" />
+                                    </div>
+                                </form>
                             </div>
-                        </form>
-                    </div>
                     break;
 
                 /*case ProjectAction.CreateMeeting:
@@ -463,92 +591,92 @@
                     break;*/
 
                 case ProjectAction.Meetings:
-                    <label class="error">@Model.Error</label>
-                    <div class="projectNav">
-                        <form asp-page-handler="back" method="post">
-                            <button class="navItem"><i class="fa fa-fw fa-arrow-left"></i>Back</button>
-                        </form>
-                    </div>
-                    <div class="project">
-                        @foreach (var meeting in Model.Meetings)
+                            <label class="error">@Model.Error</label>
+                            <div class="projectNav">
+                                <form asp-page-handler="back" method="post">
+                                    <button class="navItem"><i class="fa fa-fw fa-arrow-left"></i>Back</button>
+                                </form>
+                            </div>
+                            <div class="project">
+                                @foreach (var meeting in Model.Meetings)
 
                         {
-                            <div class="taskList">
-                                <div class="taskListTop">
-                                    <span>@meeting.Title</span>
-                                </div>
-                                <div class="taskListTop">
-                                    <form asp-page-handler="editMeeting" method="post">
-                                        <input type="hidden" name="meetingId" value="@meeting.MeetingId" />
+                                    <div class="taskList">
+                                        <div class="taskListTop">
+                                            <span>@meeting.Title</span>
+                                        </div>
+                                        <div class="taskListTop">
+                                            <form asp-page-handler="editMeeting" method="post">
+                                                <input type="hidden" name="meetingId" value="@meeting.MeetingId" />
 
-                                        <button type="submit"><span class="dots"><i class="fa fa-fw fa-ellipsis-v"></i></span></button>
-                                    </form>
+                                                <button type="submit"><span class="dots"><i class="fa fa-fw fa-ellipsis-v"></i></span></button>
+                                            </form>
 
-                                    <form asp-page-handler="deleteMeeting" method="post">
-                                        <input type="hidden" name="meetingId" value="@meeting.MeetingId" />
+                                            <form asp-page-handler="deleteMeeting" method="post">
+                                                <input type="hidden" name="meetingId" value="@meeting.MeetingId" />
 
-                                        <button type="submit"><big>X</big></button>
-                                    </form>
-                                </div>
-                                <label class="label">@meeting.Description</label>
-                                <label class="label">@meeting.Date</label>
-                            </div>
+                                                <button type="submit"><big>X</big></button>
+                                            </form>
+                                        </div>
+                                        <label class="label">@meeting.Description</label>
+                                        <label class="label">@meeting.Date</label>
+                                    </div>
                         }
 
-                        
-                        <!--<div class="createTaskList">
-                            <span class="createMeetingLabel">Title</span>
-                            <textarea class="createMeetingDescInput" id="MeetingNameField" rows="1" cols="30" maxlength="30" style="resize:none;"></textarea>
-                            <span class="createMeetingLabel">Description</span>
-                            <textarea class="createMeetingDescInput" id="MeetingDescriptionField" rows="15" cols="60" style="resize:none;"></textarea>
-                            <span class="createMeetingLabel">Date of meeting:</span>
-                            <form>
-                                <input id="createMeetingDate" type="datetime-local" class="createTaskDate" />
-                            </form>
-                            <button class="createMeetingButton" onclick="createMeeting('', document.getElementById('MeetingNameField').value, document.getElementById('MeetingDescriptionField').value)"><i class="fa fa-fw fa-plus"></i>Create Meeting</button>
-                        </div>
-                        <form asp-page-handler="createMeeting" method="post">-->
-                            <div class="createMeeting">
-                                <span class="createMeetingLabel">Name</span>
-                                <textarea class="createMeetingInput" id="meetingNameField" rows="1" cols="30" maxlength="30" style="resize:none;"></textarea>
-                                <span class="createMeetingLabel">Description</span>
-                                <textarea class="createMeetingInput" id="meetingDescriptionField" rows="30" cols="60" style="resize:none;"></textarea>
-                                <span class="createMeetingLabel">Date of meeting:</span>
-                                <input class="createMeetingInput" id="createMeetingDate" type="datetime-local"/>
-                                <button class="createMeetingButton" onclick="createMeeting('@Model.Project.ProjectId.ToString()', document.getElementById('meetingNameField').value, document.getElementById('meetingDescriptionField').value,document.getElementById('createMeetingDate').value)"><i class="fa fa-fw fa-plus"></i>Create Meeting</button>
+                                
+                                <!--<div class="createTaskList">
+                                    <span class="createMeetingLabel">Title</span>
+                                    <textarea class="createMeetingDescInput" id="MeetingNameField" rows="1" cols="30" maxlength="30" style="resize:none;"></textarea>
+                                    <span class="createMeetingLabel">Description</span>
+                                    <textarea class="createMeetingDescInput" id="MeetingDescriptionField" rows="15" cols="60" style="resize:none;"></textarea>
+                                    <span class="createMeetingLabel">Date of meeting:</span>
+                                    <form>
+                                        <input id="createMeetingDate" type="datetime-local" class="createTaskDate" />
+                                    </form>
+                                    <button class="createMeetingButton" onclick="createMeeting('', document.getElementById('MeetingNameField').value, document.getElementById('MeetingDescriptionField').value)"><i class="fa fa-fw fa-plus"></i>Create Meeting</button>
+                                </div>
+                                <form asp-page-handler="createMeeting" method="post">-->
+                                    <div class="createMeeting">
+                                        <span class="createMeetingLabel">Name</span>
+                                        <textarea class="createMeetingInput" id="meetingNameField" rows="1" cols="30" maxlength="30" style="resize:none;"></textarea>
+                                        <span class="createMeetingLabel">Description</span>
+                                        <textarea class="createMeetingInput" id="meetingDescriptionField" rows="30" cols="60" style="resize:none;"></textarea>
+                                        <span class="createMeetingLabel">Date of meeting:</span>
+                                        <input class="createMeetingInput" id="createMeetingDate" type="datetime-local"/>
+                                        <button class="createMeetingButton" onclick="createMeeting('@Model.Project.ProjectId.ToString()', document.getElementById('meetingNameField').value, document.getElementById('meetingDescriptionField').value,document.getElementById('createMeetingDate').value)"><i class="fa fa-fw fa-plus"></i>Create Meeting</button>
+                                    </div>
                             </div>
-                    </div>
 
                     break;
 
 
 
                 case ProjectAction.DeleteMeeting:
-                    @if (TempData["currentlyEditedMeeting"] != null)
+                            @if (TempData["currentlyEditedMeeting"] != null)
                     {
                         Model.currentlyEditedMeeting = JsonConvert.DeserializeObject<Meeting>((string)TempData["currentlyEditedMeeting"]);
                     }
-                    <label class="error">@Model.Error</label>
-                    <div class="projectNav">
-                        <form asp-page-handler="back" method="post">
-                            <button class="navItem"><i class="fa fa-fw fa-arrow-left"></i>Back</button>
-                        </form>
-                    </div>
-                    <div class="project">
-                        <div class="createMeeting">
-                            <center><big><font color="white">Delete meeting '@Model.currentlyEditedMeeting.Title'</font></big></center><br />
+                            <label class="error">@Model.Error</label>
+                            <div class="projectNav">
+                                <form asp-page-handler="back" method="post">
+                                    <button class="navItem"><i class="fa fa-fw fa-arrow-left"></i>Back</button>
+                                </form>
+                            </div>
+                            <div class="project">
+                                <div class="createMeeting">
+                                    <center><big><font color="white">Delete meeting '@Model.currentlyEditedMeeting.Title'</font></big></center><br />
 
 
-                            <center><big><font color="white">Are you sure you want to delete this meeting?</font></big></center>
+                                    <center><big><font color="white">Are you sure you want to delete this meeting?</font></big></center>
 
-                            <br />
+                                    <br />
 
 
-                            <center><big><font color="white">This operation cannot be undone.</font></big></center><br />
+                                    <center><big><font color="white">This operation cannot be undone.</font></big></center><br />
 
-                            <button class="createMeetingButton" onclick="deleteConfirmMeeting('@Model.currentlyEditedMeeting.MeetingId.ToString()')">Delete meeting</button>
-                        </div>
-                    </div>
+                                    <button class="createMeetingButton" onclick="deleteConfirmMeeting('@Model.currentlyEditedMeeting.MeetingId.ToString()')">Delete meeting</button>
+                                </div>
+                            </div>
                     break;
 
 
@@ -561,19 +689,19 @@
                         }
                     
 
-                    <label class="error">@Model.Error</label>
-                    <div class="projectNav">
-                        <form asp-page-handler="back" method="post">
-                            <button class="navItem"><i class="fa fa-fw fa-arrow-left"></i>Back</button>
-                        </form>
-                    </div>
-                    <div class="project">
-                        <span class="createMeetingLabel">Name</span>
-                        <textarea class="createMeetingInput" id="meetingNameField" rows="1" cols="30" maxlength="30" style="resize:none;">@Model.currentlyEditedMeeting.Title</textarea>
-                        <span class="createMeetingLabel">Description</span>
-                        <textarea class="createMeetingInput" id="meetingDescriptionField" rows="30" cols="60" style="resize:none;">@Model.currentlyEditedMeeting.Description</textarea>
-                        <span class="createMeetingLabel">Date of meeting:</span>
-                        @{
+                            <label class="error">@Model.Error</label>
+                            <div class="projectNav">
+                                <form asp-page-handler="back" method="post">
+                                    <button class="navItem"><i class="fa fa-fw fa-arrow-left"></i>Back</button>
+                                </form>
+                            </div>
+                            <div class="project">
+                                <span class="createMeetingLabel">Name</span>
+                                <textarea class="createMeetingInput" id="meetingNameField" rows="1" cols="30" maxlength="30" style="resize:none;">@Model.currentlyEditedMeeting.Title</textarea>
+                                <span class="createMeetingLabel">Description</span>
+                                <textarea class="createMeetingInput" id="meetingDescriptionField" rows="30" cols="60" style="resize:none;">@Model.currentlyEditedMeeting.Description</textarea>
+                                <span class="createMeetingLabel">Date of meeting:</span>
+                                @{
                             DateTime meetingDate = Model.currentlyEditedMeeting.Date; // Example date
 
 
@@ -591,26 +719,106 @@
                             // Log the formatted date to verify
 
                             Console.WriteLine($"Formatted meeting date: {formattedDate}");
-                        }
-                        <input class="createMeetingInput" id="SetMeetingDate" type="datetime-local" value="@formattedDate" />
+                                }
+                                <input class="createMeetingInput" id="SetMeetingDate" type="datetime-local" value="@formattedDate" />
 
 
-                        <button class="createMeetingButton" onclick="updateMeeting('@Model.currentlyEditedMeeting.MeetingId.ToString()','@Model.Project.ProjectId.ToString()', document.getElementById('meetingNameField').value, document.getElementById('meetingDescriptionField').value,document.getElementById('SetMeetingDate').value)">Update Meeting</button>
-                    </div>
+                                <button class="createMeetingButton" onclick="updateMeeting('@Model.currentlyEditedMeeting.MeetingId.ToString()','@Model.Project.ProjectId.ToString()', document.getElementById('meetingNameField').value, document.getElementById('meetingDescriptionField').value,document.getElementById('SetMeetingDate').value)">Update Meeting</button>
+                        </div>
+
+
+
 
 
                     break;
 
+
+
+                case ProjectAction.ManageMember:
+                    if (TempData["currentlyManagedMember"] != null)
+                    {
+                        Model.currentlyManagedMember = JsonConvert.DeserializeObject<User>((string)TempData["currentlyManagedMember"]);
+                    }
+
+                    if (TempData["currentlyManagedMemberPermissions"] != null)
+
+                    {
+                        Model.currentlyManagedMemberPermissions = JsonConvert.DeserializeObject<UserPermissions>((string)TempData["currentlyManagedMemberPermissions"]);
+                    }
+
+                        @if (Model.currentlyManagedMember != null && Model.currentlyManagedMemberPermissions != null)
+
+
+
+                    {
+                            <div class="projectNav">
+                                <form asp-page-handler="back" method="post">
+                                    <button class="navItem"><i class="fa fa-fw fa-arrow-left"></i>Back</button>
+                                </form>
+                            </div>
+                            <div class="project">
+                            <center>
+                                    <div class="border">
+                                        <b id="manageMemberError" style="color:red"></b><br />
+                                        <div class="createMeetingLabel">
+                                            Manage user
+                                        </div>
+                                        <div class="createMeetingLabel">
+                                            Username: @Model.currentlyManagedMember.Login
+                                        </div>
+                                        <div class="createMeetingLabel">
+                                            Email: @Model.currentlyManagedMember.Email
+                                        </div>
+                                        <div class="column">
+                                            <label for="Editing"><span style="color:white">Editing</span></label>
+                                            <input type="checkbox" class="checkbox" id="Editing" @(Model.currentlyManagedMemberPermissions.Editing ? "checked" : "")>
+                                        </div>
+                                        <div class="column">
+                                            <label for="Inviting">
+                                                <span style="color:white">Inviting Members</span>
+                                            </label>
+                                            <input type="checkbox" class="checkbox" id="Inviting" @(Model.currentlyManagedMemberPermissions.InvitingMembers ? "checked" : "")>
+                                        </div>
+                                        <div class="column">
+                                            <label for="Kicking">
+                                                <span style="color:white">Kicking Members</span>
+                                            </label>
+                                            <input type="checkbox" class="checkbox" id="Kicking" @(Model.currentlyManagedMemberPermissions.KickingMembers ? "checked" : "")>
+                                        </div>
+                                    <button class="createMeetingButton" onclick="updateMemberPermissionsConfirm('@Model.currentlyManagedMember.UserId.ToString()', '@Model.Project.ProjectId.ToString()', document.getElementById('Editing').checked.toString(), document.getElementById('Inviting').checked.toString(), document.getElementById('Kicking').checked.toString())">Confirm changes</button>
+                                    </div>
+
+                                </center>
+
+                               
+
+                               
+                                }
+
+                              
+                            </div>
+
+                    }
+
+                    break;
+
+                            // Other cases...
+
+                    
+
+
+
+
             }
-        </div>
-        
-        <footer>
-            <div class="bottomnavbar">
-                <a href="#feedback">Feedback</a>
-                <a href="#ToS">Terms of Service</a>
-                <a href="#privacy-policy">Privacy policy</a>
-            </div>
-        </footer>
-    </body>
-    </html>
+                </div>
+                
+                <footer>
+                    <div class="bottomnavbar">
+                        <a href="#feedback">Feedback</a>
+                        <a href="#ToS">Terms of Service</a>
+                        <a href="#privacy-policy">Privacy policy</a>
+                    </div>
+                </footer>
+            </body>
+            </html>
 }
