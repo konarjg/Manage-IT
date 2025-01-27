@@ -94,6 +94,19 @@ public class ProjectManager
         }
     }
 
+    public void DeleteOwnedProjects(long managerId)
+    {
+        List<Project> results;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects WHERE ManagerId = {managerId}");
+
+        DatabaseAccess.Instance.ExecuteQuery(query, out results);
+
+        foreach (var project in results) 
+        {
+            DeleteProject(project.ProjectId);
+        }
+    }
+
     public bool GetAllProjects(long userId, out List<Project> projects)
     {
         projects = new();

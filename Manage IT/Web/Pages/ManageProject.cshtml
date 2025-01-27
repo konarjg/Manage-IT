@@ -1,8 +1,11 @@
 @page
 @using EFModeling.EntityProperties.DataAnnotations.Annotations;
+<<<<<<< HEAD
 @using Microsoft.AspNetCore.Mvc.RazorPages;
 @using Microsoft.AspNetCore.Mvc;
 @using Newtonsoft.Json;
+=======
+>>>>>>> main
 @using System.Text.Json;
 @using Task = EFModeling.EntityProperties.DataAnnotations.Annotations.Task;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -33,9 +36,106 @@
                     }
                 </style>
 
+<<<<<<< HEAD
                 <script src="https://cdn.jsdelivr.net/npm/@@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/@@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+=======
+            function createTask(taskListId, name, description, deadline)
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "/ManageProject?handler=CreateTask",
+                    data: { taskListId: taskListId, name: name, description: description, deadline: deadline },
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("XSRF-TOKEN",
+                            $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.reload();
+                        } else {
+                            alert("Could not create the task!");
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            }
+
+            var currentTaskList = null;
+
+            function manageTaskList(taskListJson) {
+                var popup = document.getElementById("taskListPopup");
+                popup.style.visibility = "visible";
+                taskList = JSON.parse(taskListJson);
+                currentTaskList = taskList;
+
+                var name = document.getElementById("title");
+                var description = document.getElementById("description");
+
+                name.value = taskList.Name;
+                description.value = taskList.Description;
+            }
+
+            function taskListPopupCancel() {
+                var popup = document.getElementById("taskListPopup");
+                popup.style.visibility = "collapse";
+            }
+
+            function taskListPopupConfirm() {
+                var taskList = currentTaskList;
+                taskList.Name = document.getElementById("title").value;
+                taskList.Description = document.getElementById("description").value;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/ManageProject?handler=UpdateTaskList",
+                    data: { taskListJson: JSON.stringify(taskList) },
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("XSRF-TOKEN",
+                            $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.reload();
+                        } else {
+                            alert("Could not update the task list!");
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            }
+
+            function taskListPopupDelete() {
+                var taskList = currentTaskList;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/ManageProject?handler=DeleteTaskList",
+                    data: { taskListJson: JSON.stringify(taskList) },
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("XSRF-TOKEN",
+                            $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.reload();
+                        } else {
+                            alert("Could not delete the task list!");
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            }
+        </script>
+    </head>
+>>>>>>> main
 
                 <script>
                     function createTaskList(projectId, name, description)
@@ -243,6 +343,7 @@
         return;
     }
 
+<<<<<<< HEAD
     $.ajax({
         type: "POST",
         url: "/ManageProject?handler=InviteUserToProject",
@@ -264,6 +365,26 @@
         }
     });
 }
+=======
+        <div class="main">
+            @switch (Model.Action)
+            {
+                case ProjectAction.Manage:
+                    <div class="main">
+                        <div class="projectNav">
+                            @{
+                                var user = HttpContext.Session.Get<User>("User");
+
+                                UserPermissions permissions;
+                                UserManager.Instance.GetUserPermissions(user.UserId, Model.Project.ProjectId, out permissions);
+
+                                string editVisible = permissions?.Editing != null ? permissions.Editing ? "visible" : "collapse" : "collapse";
+                            }
+
+                            <form asp-page-handler="manage" method="post">
+                                <button class="back"><i class="fa fa-fw fa-arrow-left"></i></button>
+                            </form>
+>>>>>>> main
 
                 </script>
             </head>
@@ -281,10 +402,28 @@
                                 <a href=@Href("~/AdminPanel")><i class="fa fa-fw fa-cog"></i>Admin Panel</a>
                     }
 
+<<<<<<< HEAD
                             <a href=@Href("~/AccountManagement")><i class="fa fa-fw fa-user-circle"></i>My Account</a>
                             <a href=@Href("~/Chat")><i class="fa fa-fw fa-commenting"></i>Chat</a>
                             <a href=@Href("~/Calendar")><i class="fa fa-fw fa-calendar"></i>Calendar</a>
                             <a href=@Href("~/LogOut")><i class="fa fa-fw fa-sign-out"></i>Log Out</a>
+=======
+                            <form asp-page-handler="members" method="post">
+                                <button class="navItem"><i class="fa fa-fw fa-address-book"></i>Members</button>
+                            </form>
+
+                            <form asp-page-handler="createMeeting" style="visibility:@editVisible" method="post">
+                                <button class="navItem"><i class="fa fa-fw fa-handshake-o"></i>Meeting</button>
+                            </form>
+
+                            <form asp-page-handler="update" method="post" style="visibility:@editVisible">
+                                <button class="navItem"><i class="fa fa-fw fa-pencil-square"></i>Edit</button>
+                            </form>
+
+                            <form asp-page-handler="delete" method="post" style="visibility:@editVisible">
+                                <button class="navItem"><i class="fa fa-fw fa-trash"></i>Delete</button>
+                            </form>
+>>>>>>> main
                         </div>
 
                     </div>
@@ -326,11 +465,23 @@
                                 <div class="project">
                                     @foreach (var taskList in Model.TaskLists)
                             {
+<<<<<<< HEAD
                                         <div class="taskList">
                                             <div class="taskListTop">
                                                 <span>@taskList.Name</span>
                                                 <span class="dots"><i class="fa fa-fw fa-ellipsis-v"></i></span>
                                             </div>
+=======
+                                <div class="taskList">
+                                    <div class="taskListTop">
+                                        @{
+                                            string json = JsonSerializer.Serialize(taskList);
+                                        }
+
+                                        <span>@taskList.Name</span>
+                                        <span class="dots" style="visibility:@editVisible"><i class="fa fa-fw fa-ellipsis-v" onclick="manageTaskList('@json')"></i></span>
+                                    </div>
+>>>>>>> main
 
                                             <div class="taskListTasks">
                                                 @{
@@ -352,11 +503,19 @@
 
                                                 var daysLeftText = $"{(int)daysLeft}d left";
 
+<<<<<<< HEAD
                                                                 <div class="task">
                                                                     <div class="taskTop">
                                                                         <span>@task.Name</span>
                                                                         <span class="dots"><i class="fa fa-fw fa-ellipsis-v"></i></span>
                                                                     </div>
+=======
+                                                <div class="task">
+                                                    <div class="taskTop">
+                                                        <span>@task.Name</span>
+                                                        <span class="dots" style="visibility:@editVisible"><i class="fa fa-fw fa-ellipsis-v"></i></span>
+                                                    </div>
+>>>>>>> main
 
                                                                     <div class="taskSub">
                                                                         <div class="taskSubPfp">
@@ -365,12 +524,21 @@
                                                                         <span class="taskSubDays">@daysLeftText</span>
                                                                     </div>
 
+<<<<<<< HEAD
                                                                     <textarea readonly="readonly" class="taskDescription" style="resize: none;" rows="30" cols="60">This is a test task!</textarea>
                                                                 </div>
                                             }
 
                                                             <div class="createTask">
                                                                 <button onclick="createTask('@taskList.TaskListId.ToString()', document.getElementById('createTaskName').value, document.getElementById('createTaskDescription').value, document.getElementById('createTaskDeadline').value)" class="createTaskButton"><i class="fa fa-fw fa-plus"></i>Create</button>
+=======
+                                                    <textarea readonly="readonly" class="taskDescription" style="resize: none;" rows="30" cols="60">@task.Description</textarea>
+                                                </div>
+                                            }
+
+                                            <div class="createTask" style="visibility:@editVisible">
+                                                <button onclick="createTask('@taskList.TaskListId.ToString()', document.getElementById('createTaskName').value, document.getElementById('createTaskDescription').value, document.getElementById('createTaskDeadline').value)" class="createTaskButton"><i class="fa fa-fw fa-plus"></i>Create</button>
+>>>>>>> main
 
                                                                 <div class="createTaskTop">
                                                                     <span class="createTaskLabel">Name</span>
@@ -393,6 +561,7 @@
                                         </div>
                             }
 
+<<<<<<< HEAD
                                     <div class="createTaskList">
                                         <span class="createTaskListLabel">Name</span>
                                         <textarea class="createTaskListInput" id="taskListNameField" rows="1" cols="30" maxlength="30" style="resize:none;"></textarea>
@@ -419,6 +588,33 @@
                                     </form>
                                 </div>
                             </div>
+=======
+                            <div class="createTaskList" style="visibility:@editVisible">
+                                <span class="createTaskListLabel">Name</span>
+                                <textarea class="createTaskListInput" id="taskListNameField" rows="1" cols="30" maxlength="30" style="resize:none;"></textarea>
+                                <span class="createTaskListLabel">Description</span>
+                                <textarea class="createTaskListInput" id="taskListDescriptionField" rows="30" cols="60" style="resize:none;"></textarea>
+                                <button class="createTaskListButton" onclick="createTaskList('@Model.Project.ProjectId.ToString()', document.getElementById('taskListNameField').value, document.getElementById('taskListDescriptionField').value)"><i class="fa fa-fw fa-plus"></i>Create Task List</button>
+                            </div>
+                        </div>
+
+                        <div id="taskListPopup">
+                            <div class="taskListPair">
+                                <label class="taskListLabel">Title</label>
+                                <input type="text" id="title" />
+                            </div>
+                            <div class="taskListPair">
+                                <label class="taskListLabel">Description</label>
+                                <textarea id="description"></textarea>
+                            </div>
+                            <div class="taskListButtons">
+                                <button id="taskListCancelButton" onclick="taskListPopupCancel()">Cancel changes</button>
+                                <button id="taskListConfirmButton" onclick="taskListPopupConfirm()">Confirm changes</button>
+                            </div>
+                            <button id="taskListDeleteButton" onclick="taskListPopupDelete()">Delete</button>
+                        </div>
+                    </div>
+>>>>>>> main
                     break;
 
                 case ProjectAction.Members:

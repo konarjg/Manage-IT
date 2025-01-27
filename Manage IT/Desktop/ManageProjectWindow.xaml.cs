@@ -543,7 +543,11 @@ namespace Desktop
 
             if (UserManager.Instance.CurrentSessionUser.Admin)
             {
+<<<<<<< HEAD
               GetTemplateControl<Button>("AdminPanel").Visibility = Visibility.Visible;
+=======
+                GetTemplateControl<Button>("AdminPanel").Visibility = Visibility.Visible;
+>>>>>>> main
             }
 
             switch (TemplateKey)
@@ -584,7 +588,11 @@ namespace Desktop
 
         public void AdminPanelClick(object sender, RoutedEventArgs e)
         {
+<<<<<<< HEAD
             var window = new AdminPanelWindow(Project,true);
+=======
+            var window = new AdminPanelWindow(Project);
+>>>>>>> main
             window.Activate();
             window.Visibility = Visibility.Visible;
 

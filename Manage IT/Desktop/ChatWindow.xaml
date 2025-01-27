@@ -6,6 +6,33 @@
         xmlns:local="clr-namespace:Desktop"
         mc:Ignorable="d"
         Title="ChatWindow" Width="2560" Height="1080" WindowState="Maximized">
+    <Window.Resources>
+        <DataTemplate x:Key="Message">
+            <TextBox Text="{Binding Body}" Width="700" Height="150" Margin="10" FontSize="36" Foreground="White" TextWrapping="Wrap" Background="{Binding Color}" Padding="5" VerticalScrollBarVisibility="Visible" IsReadOnly="True"></TextBox>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="ConversationItem">
+            <Grid Width="350" Height="50" Margin="10,0,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="ConversationName" Tag="{Binding Name}" Text="{Binding Name}" Grid.ColumnSpan="5" Foreground="White" FontSize="36" TextTrimming="CharacterEllipsis" />
+                <Button Click="DeleteConversation" Tag="{Binding Conversation}" Grid.Column="7" Content="❌" FontSize="20" Margin="5" FontWeight="Bold" Background="#ffa0a0" BorderBrush="#800000" BorderThickness="2" Foreground="#800000" />
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
@@ -41,6 +68,8 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+
+        <Button x:Name="BackButton" Click="BackClick" FontSize="120" Grid.Row="0" Grid.Column="0" Background="Transparent" Content="🔙" BorderThickness="0" Foreground="White" Grid.RowSpan="4" Margin="0,0,120,66"/>
         <Border BorderBrush="White" BorderThickness="5" CornerRadius="10" Grid.Row="2" Grid.RowSpan="12" Grid.Column="1" Grid.ColumnSpan="4">
             <Grid Margin="10">
                 <Grid.RowDefinitions>
@@ -84,11 +113,11 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Margin="2" Grid.ColumnSpan="6">
-                        <TextBox x:Name="MessageBox" Padding="6,0,6,0"  Background="Transparent" CaretBrush="White" Foreground="White" BorderBrush="White" BorderThickness="2" FontSize="32" FontFamily="Arial" VerticalScrollBarVisibility="Visible"/>
+                        <TextBox x:Name="MessageBox" IsEnabled="{Binding MessageBoxActive}" Padding="6,0,6,0"  Background="Transparent" CaretBrush="White" Foreground="White" BorderBrush="White" BorderThickness="2" FontSize="32" FontFamily="Arial" VerticalScrollBarVisibility="Visible" TextChanged="MessageBoxTextChanged"/>
                         <TextBlock x:Name="MessageBoxPlaceholder" Margin="2" Padding="6,0,6,0"  Background="Transparent" Foreground="LightGray" FontSize="32"  FontFamily="Arial" Text="Type a message..." IsHitTestVisible="False"/>
                     </Grid>
 
-                    <Button Grid.Column="6" Margin="2" Content="➤" FontSize="48" Background="#a0a0ff" Foreground="#000080" BorderBrush="#000080" BorderThickness="2">
+                    <Button x:Name="SendMessageButton" IsEnabled="{Binding MessageBoxActive}" Click="SendMessage" Grid.Column="6" Margin="2" Content="➤" FontSize="48" Background="#a0a0ff" Foreground="#000080" BorderBrush="#000080" BorderThickness="2">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="0,5,5,0"></Setter>
@@ -97,9 +126,12 @@
                     </Button>
                 </Grid>
 
-                <StackPanel x:Name="Messages" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="14" Margin="5">
-
-                </StackPanel>
+                <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="14" Margin="5">
+                    <ListBox ItemsSource="{Binding Messages}" ItemTemplate="{StaticResource Message}" Background="Transparent" SelectionChanged="MessagesSelectionChanged">
+                        
+                    </ListBox>
+                </ScrollViewer>
+                
 
                 <Border Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="16" BorderBrush="White" BorderThickness="3" CornerRadius="10">
                     <Grid Margin="5">
@@ -128,9 +160,9 @@
 
                         <TextBlock Text="Conversations" Foreground="White" FontSize="36" Padding="5,0,5,0" FontWeight="Bold"/>
                         <ScrollViewer Grid.Row="1" Grid.RowSpan="14" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
-                            <StackPanel>
-
-                            </StackPanel>
+                            <ListBox x:Name="Conversations" IsSynchronizedWithCurrentItem="False" ItemsSource="{Binding Conversations}" ItemTemplate="{StaticResource ConversationItem}" SelectedItem="{Binding ActiveConversation, Mode=TwoWay}" Background="Transparent">
+                                
+                            </ListBox>
                         </ScrollViewer>
 
                         <Grid Grid.Row="15" Margin="0">
@@ -144,14 +176,40 @@
                             </Grid.ColumnDefinitions>
 
                             <Grid Grid.ColumnSpan="5">
-                                <TextBox Background="Transparent" CaretBrush="White" BorderBrush="White" BorderThickness="2" Foreground="White" Padding="5,0,5,0" FontSize="18"></TextBox>
-                                <TextBlock Text="Email or username" Background="Transparent" Foreground="LightGray" Margin="5,0,5,0" FontSize="18"></TextBlock>
+                                <TextBox x:Name="Credential" Background="Transparent" CaretBrush="White" BorderBrush="White" BorderThickness="2" Foreground="White" Padding="5,0,5,0" FontSize="18" TextChanged="CredentialTextChanged"></TextBox>
+                                <TextBlock x:Name="CredentialPlaceholder" Text="Email or username" Background="Transparent" Foreground="LightGray" Margin="5,0,5,0" FontSize="18" IsHitTestVisible="False"></TextBlock>
                             </Grid>
 
-                            <Button Grid.Column="6" Margin="0.5" Background="#a0a0ff" Foreground="#000080" BorderBrush="#000080" BorderThickness="1" Content="📩" FontSize="24"></Button>
+                            <Button Click="CreateConversation" Grid.Column="6" Margin="0.5" Background="#a0a0ff" Foreground="#000080" BorderBrush="#000080" BorderThickness="1" Content="📩" FontSize="24"></Button>
                         </Grid>
                     </Grid>
                 </Border>
+            </Grid>
+        </Border>
+
+        <Border x:Name="ErrorPopup" Visibility="Collapsed" BorderBrush="White" BorderThickness="5" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="6">
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                        <GradientStop Color="#000000" Offset="0.0"/>
+                        <GradientStop Color="#000040" Offset="0.75"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="Error" Text="There was an unexpected error!" Foreground="Red" FontSize="36" TextAlignment="Center" Grid.ColumnSpan="3" Margin="10" Padding="5"></TextBlock>
+                <Button x:Name="CloseError" Click="CloseErrorPopup" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Content="Ok" Background="White" FontSize="48" FontWeight="Bold"/>
             </Grid>
         </Border>
     </Grid>

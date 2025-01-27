@@ -1,5 +1,6 @@
 ﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Task = EFModeling.EntityProperties.DataAnnotations.Annotations.Task;
 
@@ -10,6 +11,20 @@ public class TaskListManager
     public static void Instantiate()
     {
         Instance = new TaskListManager();
+    }
+
+    public TaskList GetTaskList(long taskListId)
+    {
+        List<TaskList> taskLists;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.TaskLists WHERE TaskListId = {taskListId}");
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out taskLists) && taskLists != null && taskLists.Count != 0;
+    
+        if (!success)
+        {
+            return null;
+        }
+
+        return taskLists.FirstOrDefault();
     }
 
     public bool GetAllTaskLists(long projectId, out List<TaskList> taskLists)
@@ -28,7 +43,7 @@ public class TaskListManager
     public bool UpdateTaskList(TaskList data)
     {
         List<TaskList> taskLists;
-        var query = FormattableStringFactory.Create($"UPDATE dbo.TaskLists SET Name = {data.Name}, Description = {data.Description} WHERE TaskListId = {data.TaskListId}");
+        var query = FormattableStringFactory.Create($"UPDATE dbo.TaskLists SET Name = '{data.Name}', Description = '{data.Description}' WHERE TaskListId = {data.TaskListId}");
         return DatabaseAccess.Instance.ExecuteQuery(query, out taskLists);
     }
 

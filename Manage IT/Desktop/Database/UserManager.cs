@@ -54,6 +54,7 @@ public class UserManager
         user = users[0];
         return true;
     }
+<<<<<<< HEAD
     public bool GetAllUsers(out List<User> users)
     {
         var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Users");
@@ -67,6 +68,8 @@ public class UserManager
 
         return true;
     }
+=======
+>>>>>>> main
 
     public bool RegisterUser(User user, out string error)
     {

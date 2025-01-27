@@ -1,4 +1,5 @@
-﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
+﻿using Desktop.Database;
+using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -42,7 +43,7 @@ namespace Desktop
 
             UserSettingsList = JsonSerializer.Deserialize<UserSettingsList>(File.ReadAllText(UserSettingsPath));
 
-            if (UserSettingsList != null)
+            if (UserSettingsList != null && UserSettingsList.UserSettings != null)
             {
                 return;
             }
@@ -121,8 +122,17 @@ namespace Desktop
             TaskListManager.Instantiate();
             TaskManager.Instantiate();
             MeetingManager.Instantiate();
+            ChatManager.Instantiate();
             Instance = this;
             LoadAllSettings();
+            UserSettings = UserSettingsList.UserSettings.FirstOrDefault(x => x.RememberMe);
+
+            if (UserSettings == null)
+            {
+                return;
+            }
+
+            UserManager.Instance.CurrentSessionUser = new User(UserSettings.UserData);
         }
 
         protected override void OnExit(ExitEventArgs e)
@@ -138,9 +148,18 @@ namespace Desktop
             existing.First().UserData = new(settings.UserData);
             existing.First().SendSecurityAlerts = settings.SendSecurityAlerts;
             existing.First().SendProjectAlerts = settings.SendProjectAlerts;
-            existing.First().RememberMe = settings.RememberMe;
             existing.First().Enable2FA = settings.Enable2FA;
             existing.First().DisplayProjects = settings.DisplayProjects;
+
+            if (settings.RememberMe)
+            {
+                foreach (var setting in UserSettingsList.UserSettings)
+                {
+                    setting.RememberMe = false;
+                }
+            }
+
+            existing.First().RememberMe = settings.RememberMe;
         }
 
         public void ResetSettings()

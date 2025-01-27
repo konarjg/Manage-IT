@@ -118,6 +118,7 @@ namespace Desktop
 
             Close();
         }
+<<<<<<< HEAD
 
         public void CheckForAdmin(object sender, RoutedEventArgs e)
         {
@@ -130,5 +131,7 @@ namespace Desktop
             }
         }
 
+=======
+>>>>>>> main
     }
 }

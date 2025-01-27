@@ -649,6 +649,7 @@ input[type=date] ::-webkit-calendar-picker-indicator {
     background-color:aqua;
 }
 
+<<<<<<< HEAD
 .taskListPopup{
     position:absolute;
     top:0;
@@ -658,12 +659,33 @@ input[type=date] ::-webkit-calendar-picker-indicator {
     display:flex;
     flex-direction:column;
     gap:2vh;
+=======
+#taskListPopup{
+    background: linear-gradient(black, #000040);
+    position:absolute;
+    top:30vh;
+    right:25vw;
+    width:50vw;
+    height:45vh;
+    display:flex;
+    border: 1vh solid white;
+    flex-direction:column;
+    gap:1vh;
+>>>>>>> main
     visibility:collapse;
 }
 
 .taskListPair{
+<<<<<<< HEAD
     width:45vw;
     height:3vh;
+=======
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1vh;
+    width:45vw;
+    height:10vh;
+>>>>>>> main
     display:flex;
     flex-direction:row;
     gap:5vw;
@@ -683,13 +705,17 @@ input[type=date] ::-webkit-calendar-picker-indicator {
     width:20vw;
     height:3vh;
     border: 0.5vh solid white;
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 }
 
 #description {
     background-color: transparent;
     color: white;
     font-size: 24px;
+<<<<<<< HEAD
     width: 20vw;
     height: 3vh;
     border: 0.5vh solid white;
@@ -699,12 +725,30 @@ input[type=date] ::-webkit-calendar-picker-indicator {
 .taskListButtons {
     width: 45vw;
     height: 5vh;
+=======
+    resize: none;
+    width: 20vw;
+    height: 8vh;
+    border: 0.5vh solid white;
+}
+
+.taskListButtons {
+    margin-left: auto;
+    margin-right: auto;
+    width: 45vw;
+    height: 10vh;
+>>>>>>> main
     display: flex;
     flex-direction: row;
     gap: 1vw;
 }
 
 #taskListCancelButton{
+<<<<<<< HEAD
+=======
+    width: 22.5vw;
+    height: 10vh;
+>>>>>>> main
     background-color:#ffe0e0;
     border: 0.5vh solid #800000;
     color:#800000;
@@ -718,6 +762,11 @@ input[type=date] ::-webkit-calendar-picker-indicator {
 
 
 #taskListConfirmButton {
+<<<<<<< HEAD
+=======
+    width: 22.5vw;
+    height: 10vh;
+>>>>>>> main
     background-color: #e0ffe0;
     border: 0.5vh solid #008000;
     color: #008000;
@@ -725,7 +774,11 @@ input[type=date] ::-webkit-calendar-picker-indicator {
 }
 
 #taskListConfirmButton:hover {
+<<<<<<< HEAD
     background-color: green;
+=======
+    background-color: lightgreen;
+>>>>>>> main
     color: white;
 }
 
@@ -735,7 +788,14 @@ input[type=date] ::-webkit-calendar-picker-indicator {
     border: 0.5vh solid #800000;
     color: #800000;
     font-size: 24px;
+<<<<<<< HEAD
     width:45vw;
+=======
+    width: 45vw;
+    height: 5vh;
+    margin-left:auto;
+    margin-right: auto;
+>>>>>>> main
 }
 
 #taskListDeleteButton:hover {

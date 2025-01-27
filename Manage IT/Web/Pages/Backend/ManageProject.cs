@@ -26,6 +26,7 @@ public class ManageProject : PageModel
     public long projectID;
     public string Error { get; set; }
     public Project Project { get; set; }
+<<<<<<< HEAD
 
     public Meeting currentlyEditedMeeting = new();
     public User currentlyManagedMember = new();
@@ -35,6 +36,9 @@ public class ManageProject : PageModel
 
     public List<User> Members { get; set; }
     public List<bool> inviteStatuses { get; set; } //ik its not professional but GetInviteStatus for some reason refuses to fucking work properly despite working properly for me in Desktop version and JS not saying anything
+=======
+    public List<User> Members { get; set; }
+>>>>>>> main
 
     public List<TaskList> TaskLists { get; set; }
     public ProjectAction Action { get; set; }
@@ -49,6 +53,7 @@ public class ManageProject : PageModel
         if (id != null && id != string.Empty)
         {
             HttpContext.Session.Remove("Project");
+            HttpContext.Session.Remove("Members");
             HttpContext.Session.Remove("Action");
             Action = ProjectAction.Manage;
         }
@@ -56,6 +61,7 @@ public class ManageProject : PageModel
         if (HttpContext.Session.Get<Project>("Project") != null)
         {
             Project = HttpContext.Session.Get<Project>("Project");
+            Members = HttpContext.Session.Get<List<User>>("Members");
             Action = HttpContext.Session.Get<ProjectAction>("Action");
         }
         else
@@ -73,6 +79,10 @@ public class ManageProject : PageModel
             }
 
             Project project;
+<<<<<<< HEAD
+=======
+            List<User> members;
+>>>>>>> main
             bool success = ProjectManager.Instance.GetProject(projectId, out project);
 
             if (!success || project == null)
@@ -80,7 +90,20 @@ public class ManageProject : PageModel
                 return Redirect("~/ProjectManagement");
             }
 
+<<<<<<< HEAD
             Project = project;
+=======
+
+            success = ProjectManager.Instance.GetProjectMembers(project.ProjectId, out members);
+
+            if (members == null)
+            {
+                return Redirect("~/ProjectManagement");
+            }
+
+            Project = project;
+            Members = members;
+>>>>>>> main
         }
         
         if (HttpContext.Session.Get<List<TaskList>>("TaskLists") == null)
@@ -104,6 +127,7 @@ public class ManageProject : PageModel
             TaskLists = HttpContext.Session.Get<List<TaskList>>("TaskLists");
         }
 
+<<<<<<< HEAD
 
 
         if (HttpContext.Session.Get<List<Meeting>>("Meetings") == null)
@@ -152,6 +176,10 @@ public class ManageProject : PageModel
 
         projectID = Project.ProjectId;
         HttpContext.Session.Set("Project", Project);
+=======
+        HttpContext.Session.Set("Project", Project);
+        HttpContext.Session.Set("Members", Members);
+>>>>>>> main
         HttpContext.Session.Set("Action", Action);
         return null;
     }
@@ -221,6 +249,7 @@ public class ManageProject : PageModel
         }
 
         HttpContext.Session.Remove("Project");
+        HttpContext.Session.Remove("Members");
         HttpContext.Session.Remove("Action");
         return Redirect("~/ProjectManagement");
     }
@@ -372,10 +401,12 @@ public class ManageProject : PageModel
     public IActionResult OnPostManage()
     {
         HttpContext.Session.Remove("Project");
+        HttpContext.Session.Remove("Members");
         HttpContext.Session.Remove("Action");
         return Redirect("~/ProjectManagement");
     }
 
+<<<<<<< HEAD
     public JsonResult OnPostInviteUserToProject(string credential)
     {
         if (credential == null || credential==String.Empty)
@@ -391,6 +422,24 @@ public class ManageProject : PageModel
         
         bool successInvite = UserManager.Instance.SendProjectInvite(data,HttpContext.Session.Get<Project>("Project"));
         return new(new { success = successInvite });
+=======
+    public JsonResult OnPostUpdateTaskList(string taskListJson)
+    {
+        var taskList = JsonSerializer.Deserialize<TaskList>(taskListJson);
+        bool querySuccess = TaskListManager.Instance.UpdateTaskList(taskList);
+
+        HttpContext.Session.Remove("TaskLists");
+        return new(new { success = querySuccess });
+    }
+
+    public JsonResult OnPostDeleteTaskList(string taskListJson)
+    {
+        var taskList = JsonSerializer.Deserialize<TaskList>(taskListJson);
+        bool querySuccess = TaskListManager.Instance.DeleteTaskList(taskList.TaskListId);
+
+        HttpContext.Session.Remove("TaskLists");
+        return new(new { success = querySuccess });
+>>>>>>> main
     }
 
     public JsonResult OnPostCreateTaskList(string projectId, string name, string description)
