@@ -144,8 +144,6 @@
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
                 <div class="topnav">
                     <a class="active" href=@Href("~/")><i class="fa fa-fw fa-home"></i> Home</a>
-                    <a href="#"><i class="fa fa-fw fa-download"></i> Downloads</a>
-                    <a href="#"><i class="fa fa-fw fa-question"></i>About</a>
                     <div class="topnav-right">
                         @if (HttpContext.Session.Get<User>("User").Admin)
                         {
@@ -198,9 +196,7 @@
 
             <footer>
                 <div class="bottomnavbar">
-                    <a href="#feedback">Feedback</a>
-                    <a href="#ToS">Terms of Service</a>
-                    <a href="#privacy-policy">Privacy policy</a>
+                    
                 </div>
             </footer>
         </body>

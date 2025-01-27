@@ -261,7 +261,7 @@ public class UserManager
         return existingUsers.Count != 0;
     }
 
-    private bool UserExists(User data, out User user)
+    public bool UserExists(User data, out User user)
     {
         List<User> existingUsers;
         var queryUserExists = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE Email LIKE '{data.Email}' OR Login LIKE '{data.Login}'");

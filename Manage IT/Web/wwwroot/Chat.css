@@ -96,9 +96,6 @@
     border-top-left-radius:2vh;
     display: flex;
     flex-direction: column;
-    gap: 2vh;
-    overflow-x: hidden;
-    overflow-y: scroll;
 }
 
 .conversationsBox {
@@ -135,7 +132,8 @@
 
 .searchField {
     resize: none;
-    height: 3vh;
+    height: 5vh;
+    overflow-y: hidden;
     padding: 1vh;
     background-color: transparent;
     border: 0.5vh solid white;
@@ -158,14 +156,16 @@
 }
 
 .message {
+    display: inline-block;
     width: fit-content;
-    height: fit-content;
+    height: auto;
     min-width:30vw;
-    min-height:10vh;
+    max-width:30vw;
     padding:1vh;
     border-radius:3vh;
     color: white;
     font-size: 24px;
+    margin-bottom: 1vh;
 }
 
 .own {
@@ -187,32 +187,89 @@
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
-    border: 1vh solid white;
+    border: 0.5vh solid white;
     border-radius: 3vh;
     display: inline-flex;
     gap: 1vw;
     flex-direction: row;
     font-size: 28px;
-    margin-top:1vh;
+    color: white;
+    margin-top: 1vh;
 }
 
-.conversationName{
-    width:11vw;
-    height:4vh;
-    padding:1vh;
-    font-size:18px;
-    color:white;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    
-
+.current {
+    background-color: #a0a0ff;
+    color: black;
 }
 
-.delete{
+.conversation:hover {
+    background-color: #a0a0ff80;
+}
+
+.conversationName {
+    width: 11vw;
+    height: 4vh;
+    padding: 1vh;
+    font-size: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.delete {
     color:#aa0000;
     height:3vh;
     margin-top:auto;
     margin-bottom:auto;
     float:right;
+}
+
+.delete:hover {
+    color: red;
+}
+
+.messages {
+    width: 60vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.sendMessageBox {
+    width: 60vw;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    border-top: 1vh solid white;
+    font-size: 36px;
+}
+
+.messageField {
+    width: 45vw;
+    height: 8vh;
+    background-color: transparent;
+    color: white;
+    border: 0.5vh solid white;
+    font-size: 20px;
+    outline: none;
+    resize: none;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 2vw;
+    margin-right: initial;
+}
+
+.send {
+    color: white;
+    margin: auto;
+    margin-left: 1vw;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+.send:hover {
+    color: blue;
 }
