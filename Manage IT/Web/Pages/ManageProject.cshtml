@@ -1,11 +1,8 @@
 @page
 @using EFModeling.EntityProperties.DataAnnotations.Annotations;
-<<<<<<< HEAD
 @using Microsoft.AspNetCore.Mvc.RazorPages;
 @using Microsoft.AspNetCore.Mvc;
 @using Newtonsoft.Json;
-=======
->>>>>>> main
 @using System.Text.Json;
 @using Task = EFModeling.EntityProperties.DataAnnotations.Annotations.Task;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -36,11 +33,9 @@
                     }
                 </style>
 
-<<<<<<< HEAD
                 <script src="https://cdn.jsdelivr.net/npm/@@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/@@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-=======
             function createTask(taskListId, name, description, deadline)
             {
                 $.ajax({
@@ -135,10 +130,15 @@
             }
         </script>
     </head>
->>>>>>> main
-
                 <script>
                     function createTaskList(projectId, name, description)
+    <body>
+        <header>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <div class="topnav">
+                <a class="active" href=@Href("~/")><i class="fa fa-fw fa-home"></i> Home</a>
+                <div class="topnav-right">
+                    @if (HttpContext.Session.Get<User>("User").Admin)
                     {
                         $.ajax({
                             type: "POST",
@@ -343,7 +343,6 @@
         return;
     }
 
-<<<<<<< HEAD
     $.ajax({
         type: "POST",
         url: "/ManageProject?handler=InviteUserToProject",
@@ -365,7 +364,6 @@
         }
     });
 }
-=======
         <div class="main">
             @switch (Model.Action)
             {
@@ -384,7 +382,6 @@
                             <form asp-page-handler="manage" method="post">
                                 <button class="back"><i class="fa fa-fw fa-arrow-left"></i></button>
                             </form>
->>>>>>> main
 
                 </script>
             </head>
@@ -402,12 +399,10 @@
                                 <a href=@Href("~/AdminPanel")><i class="fa fa-fw fa-cog"></i>Admin Panel</a>
                     }
 
-<<<<<<< HEAD
                             <a href=@Href("~/AccountManagement")><i class="fa fa-fw fa-user-circle"></i>My Account</a>
                             <a href=@Href("~/Chat")><i class="fa fa-fw fa-commenting"></i>Chat</a>
                             <a href=@Href("~/Calendar")><i class="fa fa-fw fa-calendar"></i>Calendar</a>
                             <a href=@Href("~/LogOut")><i class="fa fa-fw fa-sign-out"></i>Log Out</a>
-=======
                             <form asp-page-handler="members" method="post">
                                 <button class="navItem"><i class="fa fa-fw fa-address-book"></i>Members</button>
                             </form>
@@ -423,7 +418,6 @@
                             <form asp-page-handler="delete" method="post" style="visibility:@editVisible">
                                 <button class="navItem"><i class="fa fa-fw fa-trash"></i>Delete</button>
                             </form>
->>>>>>> main
                         </div>
 
                     </div>
@@ -465,13 +459,11 @@
                                 <div class="project">
                                     @foreach (var taskList in Model.TaskLists)
                             {
-<<<<<<< HEAD
                                         <div class="taskList">
                                             <div class="taskListTop">
                                                 <span>@taskList.Name</span>
                                                 <span class="dots"><i class="fa fa-fw fa-ellipsis-v"></i></span>
                                             </div>
-=======
                                 <div class="taskList">
                                     <div class="taskListTop">
                                         @{
@@ -481,7 +473,6 @@
                                         <span>@taskList.Name</span>
                                         <span class="dots" style="visibility:@editVisible"><i class="fa fa-fw fa-ellipsis-v" onclick="manageTaskList('@json')"></i></span>
                                     </div>
->>>>>>> main
 
                                             <div class="taskListTasks">
                                                 @{
@@ -503,19 +494,17 @@
 
                                                 var daysLeftText = $"{(int)daysLeft}d left";
 
-<<<<<<< HEAD
                                                                 <div class="task">
                                                                     <div class="taskTop">
                                                                         <span>@task.Name</span>
                                                                         <span class="dots"><i class="fa fa-fw fa-ellipsis-v"></i></span>
                                                                     </div>
-=======
+
                                                 <div class="task">
                                                     <div class="taskTop">
                                                         <span>@task.Name</span>
                                                         <span class="dots" style="visibility:@editVisible"><i class="fa fa-fw fa-ellipsis-v"></i></span>
                                                     </div>
->>>>>>> main
 
                                                                     <div class="taskSub">
                                                                         <div class="taskSubPfp">
@@ -524,21 +513,18 @@
                                                                         <span class="taskSubDays">@daysLeftText</span>
                                                                     </div>
 
-<<<<<<< HEAD
                                                                     <textarea readonly="readonly" class="taskDescription" style="resize: none;" rows="30" cols="60">This is a test task!</textarea>
                                                                 </div>
                                             }
 
                                                             <div class="createTask">
                                                                 <button onclick="createTask('@taskList.TaskListId.ToString()', document.getElementById('createTaskName').value, document.getElementById('createTaskDescription').value, document.getElementById('createTaskDeadline').value)" class="createTaskButton"><i class="fa fa-fw fa-plus"></i>Create</button>
-=======
                                                     <textarea readonly="readonly" class="taskDescription" style="resize: none;" rows="30" cols="60">@task.Description</textarea>
                                                 </div>
                                             }
 
                                             <div class="createTask" style="visibility:@editVisible">
                                                 <button onclick="createTask('@taskList.TaskListId.ToString()', document.getElementById('createTaskName').value, document.getElementById('createTaskDescription').value, document.getElementById('createTaskDeadline').value)" class="createTaskButton"><i class="fa fa-fw fa-plus"></i>Create</button>
->>>>>>> main
 
                                                                 <div class="createTaskTop">
                                                                     <span class="createTaskLabel">Name</span>
@@ -561,7 +547,6 @@
                                         </div>
                             }
 
-<<<<<<< HEAD
                                     <div class="createTaskList">
                                         <span class="createTaskListLabel">Name</span>
                                         <textarea class="createTaskListInput" id="taskListNameField" rows="1" cols="30" maxlength="30" style="resize:none;"></textarea>
@@ -588,7 +573,6 @@
                                     </form>
                                 </div>
                             </div>
-=======
                             <div class="createTaskList" style="visibility:@editVisible">
                                 <span class="createTaskListLabel">Name</span>
                                 <textarea class="createTaskListInput" id="taskListNameField" rows="1" cols="30" maxlength="30" style="resize:none;"></textarea>
@@ -614,7 +598,7 @@
                             <button id="taskListDeleteButton" onclick="taskListPopupDelete()">Delete</button>
                         </div>
                     </div>
->>>>>>> main
+
                     break;
 
                 case ProjectAction.Members:
@@ -1017,4 +1001,13 @@
                 </footer>
             </body>
             </html>
+        </div>
+        
+        <footer>
+            <div class="bottomnavbar">
+                
+            </div>
+        </footer>
+    </body>
+    </html>
 }
