@@ -81,7 +81,7 @@
       "SendSecurityAlerts": true,
       "SendProjectAlerts": true,
       "RememberMe": false,
-      "Enable2FA": true
+      "Enable2FA": false
     }
   ]
 }
