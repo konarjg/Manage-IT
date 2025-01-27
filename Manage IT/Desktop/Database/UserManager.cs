@@ -54,6 +54,19 @@ public class UserManager
         user = users[0];
         return true;
     }
+    public bool GetAllUsers(out List<User> users)
+    {
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Users");
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out users) && users != null && users.Count != 0;
+
+        if (!success)
+        {
+            users = null;
+            return false;
+        }
+
+        return true;
+    }
 
     public bool RegisterUser(User user, out string error)
     {

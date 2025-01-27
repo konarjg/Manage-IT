@@ -31,7 +31,24 @@ public class MeetingManager
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out meetings);
     }
+    public bool GetMeetingsRelatedToProject(long projectID, out List<Meeting> result)
+    {
+        List<Project> projects;
+        result = new();
+        List<Meeting> meetings;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Meetings WHERE ProjectId = {projectID}");
 
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out meetings);
+
+        if (!success || meetings == null || meetings.Count == 0)
+        {
+            return false;
+        }
+
+        result.AddRange(meetings);
+
+        return true;
+    }
     public bool GetAllMeetings(User user, out List<Meeting> result)
     {
         List<Project> projects;

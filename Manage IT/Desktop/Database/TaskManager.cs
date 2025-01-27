@@ -1,14 +1,13 @@
-﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
+using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using Task = EFModeling.EntityProperties.DataAnnotations.Annotations.Task;
 
 public class TaskManager
 {
-    public static TaskManager Instance { get; private set; } 
+    public static TaskManager Instance { get; private set; }
 
     public static void Instantiate()
     {
@@ -141,7 +140,21 @@ public class TaskManager
 
         return DatabaseAccess.Instance.ExecuteQuery(queryTasks, out tasks);
     }
+    public bool CreateTaskDetails(TaskDetails data)
+    {
+        List<TaskDetails> taskDetails;
+        var queryTasks = FormattableStringFactory.Create($"INSERT INTO dbo.TaskDetails (UserId, TaskId) VALUES ('{data.UserId}','{data.TaskId}')");
 
+        return DatabaseAccess.Instance.ExecuteQuery(queryTasks, out taskDetails);
+    }
+
+    public bool ClearTaskDetails(TaskDetails data)
+    {
+        List<TaskDetails> taskDetails;
+        var queryTasks = FormattableStringFactory.Create($"DELETE FROM dbo.TaskDetails WHERE UserId = '{data.UserId}' AND TaskId = '{data.TaskId}'");
+
+        return DatabaseAccess.Instance.ExecuteQuery(queryTasks, out taskDetails);
+    }
     public bool DeleteTask(long taskId)
     {
         List<Task> tasks;

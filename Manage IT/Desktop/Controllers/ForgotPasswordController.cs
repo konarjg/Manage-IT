@@ -1,14 +1,17 @@
-﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
+using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-public static class ForgotPasswordController
+using System.Windows;
+namespace Desktop
 {
-    public static void SubmitForgotPasswordForm(User data, out string error)
+    public static class ForgotPasswordController
     {
-        UserManager.Instance.SendPasswordRestorationEmail(data, out error);
+        public static void SubmitForgotPasswordForm(User data, out string error)
+        {
+            UserManager.Instance.SendPasswordRestorationEmail(data, out error);
+        }
     }
 }

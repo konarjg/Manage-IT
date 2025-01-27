@@ -18,7 +18,21 @@ public class MeetingManager
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out meetings);
     }
+    public bool GetMeeting(long meetingId, out Meeting meeting)
+    {
+        List<Meeting> meetings;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Meetings WHERE MeetingId = {meetingId}");
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out meetings) && meetings != null && meetings.Count != 0;
 
+        if (!success)
+        {
+            meeting = null;
+            return false;
+        }
+
+        meeting = meetings[0];
+        return true;
+    }
     public bool CreateMeeting(Meeting data)
     {
         List<Meeting> meetings;
@@ -53,6 +67,24 @@ public class MeetingManager
 
             result.AddRange(meetings);
         }
+
+        return true;
+    }
+    public bool GetMeetingsRelatedToProject(long projectID, out List<Meeting> result)
+    {
+        List<Project> projects;
+        result = new();
+        List<Meeting> meetings;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Meetings WHERE ProjectId = {projectID}");
+
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out meetings);
+
+        if (!success || meetings == null || meetings.Count == 0)
+        {
+                return false;
+        }
+
+        result.AddRange(meetings);
 
         return true;
     }

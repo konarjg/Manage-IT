@@ -1,6 +1,14 @@
-﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
+using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System.Runtime.CompilerServices;
 using Web;
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Windows.Markup;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Http;
+using System.Text.Json;
 
 public class ProjectManager
 {
@@ -137,6 +145,43 @@ public class ProjectManager
 
         return success && success1;
     }
+    public bool GetProjectMembers(long projectId, out List<User> members)
+    {
+        var query = FormattableStringFactory.Create($@"
+        SELECT U.* 
+        FROM dbo.Users U 
+        INNER JOIN dbo.ProjectMembers PM ON U.UserId = PM.UserId 
+        WHERE PM.ProjectId = {projectId}");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out members);
+    }
+    public bool IsProjectMember(long projectId, long userId)
+    {
+        var query = FormattableStringFactory.Create($@"
+SELECT *
+FROM dbo.ProjectMembers 
+WHERE ProjectId = {projectId} AND UserId = {userId}");
+
+        int count;
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out List<ProjectMembers> user);
+
+        if (user != null)
+        {
+            if (user.Count() > 0)
+            {
+                return user[0].InviteAccepted;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 
     private bool ProjectExists(string name)
     {
@@ -148,6 +193,20 @@ public class ProjectManager
 
         return success;
     }
+    public bool GetInviteStatus(long projectID, long userID)
+    {
+        List<ProjectMembers> data;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.ProjectMembers WHERE UserId = {userID} AND ProjectId = {projectID} LIMIT 1");
+
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out data);
+
+        if (success)
+        {
+            return data[0].InviteAccepted;
+        }
+        return false;
+    }
+
 
     public bool AcceptInvite(long projectId, long userId)
     {
@@ -156,36 +215,6 @@ public class ProjectManager
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out members);
     }
-
-    public bool GetProjectMembers(long projectId, out List<User> members)
-    {
-        members = new();
-
-        List<ProjectMembers> data;
-        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.ProjectMembers WHERE ProjectId = {projectId}");
-
-        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out data) && data != null && data.Count != 0;
-
-        if (!success)
-        {
-            return false;
-        }
-
-        foreach (var entry in data)
-        {
-            List<User> result;
-            var queryUser = FormattableStringFactory.Create($"SELECT * FROM dbo.Users WHERE UserId = {entry.UserId}");
-            bool successUser = DatabaseAccess.Instance.ExecuteQuery(queryUser, out result) && result != null && result.Count != 0;
-
-            if (successUser && result.FirstOrDefault() != null)
-            {
-                members.Add(result.FirstOrDefault());
-            }
-        }
-
-        return success;
-    }
-
     public bool AddProjectMember(long projectId, long userId)
     {
         List<ProjectMembers> data;

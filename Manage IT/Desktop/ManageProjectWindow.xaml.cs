@@ -1,4 +1,4 @@
-﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
+using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
@@ -543,7 +543,7 @@ namespace Desktop
 
             if (UserManager.Instance.CurrentSessionUser.Admin)
             {
-                GetTemplateControl<Button>("AdminPanel").Visibility = Visibility.Visible;
+              GetTemplateControl<Button>("AdminPanel").Visibility = Visibility.Visible;
             }
 
             switch (TemplateKey)
@@ -584,7 +584,7 @@ namespace Desktop
 
         public void AdminPanelClick(object sender, RoutedEventArgs e)
         {
-            var window = new AdminPanelWindow(Project);
+            var window = new AdminPanelWindow(Project,true);
             window.Activate();
             window.Visibility = Visibility.Visible;
 

@@ -1,4 +1,4 @@
-﻿using Desktop;
+using Desktop;
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -54,6 +54,44 @@ public class ProjectManager
         }
 
         return results.FirstOrDefault();
+    }
+    public Project GetProjectById(long id)
+    {
+        List<Project> results;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects WHERE ProjectId = {id}");
+
+        if (!DatabaseAccess.Instance.ExecuteQuery(query, out results) || results == null || results.Count == 0)
+        {
+            return null;
+        }
+
+        return results.FirstOrDefault();
+    }
+    public bool GetAllProjects(out List<Project> projects)
+    {
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects");
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out projects) && projects != null && projects.Count != 0;
+
+        if (!success)
+        {
+            projects = null;
+            return false;
+        }
+
+        return true;
+    }
+
+    public void DeleteOwnedProjects(long managerId)
+    {
+        List<Project> results;
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects WHERE ManagerId = {managerId}");
+
+        DatabaseAccess.Instance.ExecuteQuery(query, out results);
+
+        foreach (var project in results) 
+        {
+            DeleteProject(project.ProjectId);
+        }
     }
 
     public void DeleteOwnedProjects(long managerId)
@@ -172,7 +210,13 @@ public class ProjectManager
     {
         List<Meeting> meetings;
         List<Project> projects;
-        
+
+
+        MeetingManager.Instance.GetMeetingsRelatedToProject(projectId,out meetings);
+        foreach (Meeting meeting in meetings)
+        {
+            MeetingManager.Instance.DeleteMeeting(meeting.MeetingId);
+        }
         TaskListManager.Instance.DeleteAllTaskLists(projectId);
         UserManager.Instance.DeleteAllPermissions(projectId);
         DeleteAllMembers(projectId);
