@@ -335,7 +335,7 @@ public class UserManager
     public bool CreatePermissions(long userId, long projectId)
     {
         List<UserPermissions> data;
-        FormattableString query = FormattableStringFactory.Create($"INSERT INTO dbo.UserPermissions(UserId, ProjectId, Editing, InvitingMembers, KickingMembers) VALUES({userId}, {projectId}, 1, 1, 1");
+        FormattableString query = FormattableStringFactory.Create($"INSERT INTO dbo.UserPermissions(UserId, ProjectId, Editing, InvitingMembers, KickingMembers) VALUES({userId}, {projectId}, 1, 1, 1)");
         return DatabaseAccess.Instance.ExecuteQuery(query, out data);
     }
 
