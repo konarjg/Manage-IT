@@ -6,7 +6,7 @@ public class GetSmtpParameters : PageModel
 {
     public ContentResult OnGet()
     {
-        var response = new ContentResult();
+        ContentResult response = new ContentResult();
         response.Content = EmailService.Parameters;
 
         return response;

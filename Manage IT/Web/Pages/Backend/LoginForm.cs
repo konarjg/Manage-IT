@@ -27,7 +27,7 @@ public class LoginForm : PageModel
 
         password = Security.HashText(password, Encoding.UTF8);
 
-        var data = new User();
+        User data = new User();
         data.Email = credential;
         data.Login = credential;
         data.Password = password;

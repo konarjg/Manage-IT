@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Desktop
 {
@@ -20,16 +15,16 @@ namespace Desktop
 
         public static void Initialize()
         {
-            var url = "http://manageit.runasp.net/GetSmtpParameters";
-       
-            using (var client = new HttpClient())
-            {
-                var message = new HttpRequestMessage(HttpMethod.Get, url);
-                var response = client.Send(message);
+            string url = "http://manageit.runasp.net/GetSmtpParameters";
 
-                using (var stream = response.Content.ReadAsStream())
+            using (HttpClient client = new HttpClient())
+            {
+                HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Get, url);
+                HttpResponseMessage response = client.Send(message);
+
+                using (Stream stream = response.Content.ReadAsStream())
                 {
-                    using (var reader = new StreamReader(stream))
+                    using (StreamReader reader = new StreamReader(stream))
                     {
                         Email = Security.DecryptText(reader.ReadLine());
                         Password = Security.DecryptText(reader.ReadLine());
@@ -63,7 +58,7 @@ namespace Desktop
                 error = string.Empty;
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 error = "There was an error while sending an email!";
                 client.Dispose();

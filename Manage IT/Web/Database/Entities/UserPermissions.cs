@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
 
@@ -8,9 +6,9 @@ namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
 public class UserPermissions
 {
     [ForeignKey("UserId")]
-    public int UserId { get; set; }
+    public long UserId { get; set; }
     [ForeignKey("ProjectId")]
-    public int ProjectId { get; set; }
+    public long ProjectId { get; set; }
     public bool Editing { get; set; }
     public bool InvitingMembers { get; set; }
     public bool KickingMembers { get; set; }

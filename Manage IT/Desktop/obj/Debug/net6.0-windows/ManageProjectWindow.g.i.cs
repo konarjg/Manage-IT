@@ -54,7 +54,7 @@ namespace Desktop {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Desktop;component/manageprojectwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Desktop;V1.0.0.0;component/manageprojectwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\ManageProjectWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

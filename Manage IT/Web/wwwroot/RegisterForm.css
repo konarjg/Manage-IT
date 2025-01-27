@@ -62,12 +62,12 @@
 
 .container {
     width: 100vw;
-    height: 100vh;
+    height: 80vh;
     align-content: center;
     justify-content: center;
     flex-direction: column;
     display: flex;
-    gap: 10px;
+    gap: 1vh;
 }
 
 .container div {
@@ -79,8 +79,8 @@
 
 .container input {
     font-size: 28px;
-    width: 400px;
-    height: 50px;
+    width: 20vw;
+    height: 5vh;
     border-color: white;
     border-style: solid;
     color: white;

@@ -14,14 +14,14 @@ public class MeetingManager
     public bool UpdateMeeting(Meeting data)
     {
         List<Meeting> meetings;
-        var query = FormattableStringFactory.Create($"UPDATE dbo.Meetings SET ProjectId = {data.ProjectId}, Date = '{data.Date.ToString("yyyy-MM-dd")}', Title = '{data.Title}', Description = '{data.Description}' WHERE MeetingId = {data.MeetingId}");
+        System.FormattableString query = FormattableStringFactory.Create($"UPDATE dbo.Meetings SET ProjectId = {data.ProjectId}, Date = '{data.Date.ToString("yyyy-MM-dd")}', Title = '{data.Title}', Description = '{data.Description}' WHERE MeetingId = {data.MeetingId}");
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out meetings);
     }
     public bool GetMeeting(long meetingId, out Meeting meeting)
     {
         List<Meeting> meetings;
-        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Meetings WHERE MeetingId = {meetingId}");
+        System.FormattableString query = FormattableStringFactory.Create($"SELECT * FROM dbo.Meetings WHERE MeetingId = {meetingId}");
         bool success = DatabaseAccess.Instance.ExecuteQuery(query, out meetings) && meetings != null && meetings.Count != 0;
 
         if (!success)
@@ -36,7 +36,7 @@ public class MeetingManager
     public bool CreateMeeting(Meeting data)
     {
         List<Meeting> meetings;
-        var query = FormattableStringFactory.Create($"INSERT INTO dbo.Meetings (ProjectId, Title, Description, Date) VALUES ({data.ProjectId}, '{data.Title}', '{data.Description}', '{data.Date.ToString("yyyy-MM-dd")}')");
+        System.FormattableString query = FormattableStringFactory.Create($"INSERT INTO dbo.Meetings (ProjectId, Title, Description, Date) VALUES ({data.ProjectId}, '{data.Title}', '{data.Description}', '{data.Date.ToString("yyyy-MM-dd")}')");
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out meetings);
     }
@@ -53,10 +53,10 @@ public class MeetingManager
             return false;
         }
 
-        foreach (var project in projects)
+        foreach (Project project in projects)
         {
             List<Meeting> meetings;
-            var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Meetings WHERE ProjectId = {project.ProjectId}");
+            System.FormattableString query = FormattableStringFactory.Create($"SELECT * FROM dbo.Meetings WHERE ProjectId = {project.ProjectId}");
 
             bool success = DatabaseAccess.Instance.ExecuteQuery(query, out meetings);
 
@@ -72,16 +72,15 @@ public class MeetingManager
     }
     public bool GetMeetingsRelatedToProject(long projectID, out List<Meeting> result)
     {
-        List<Project> projects;
         result = new();
         List<Meeting> meetings;
-        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Meetings WHERE ProjectId = {projectID}");
+        System.FormattableString query = FormattableStringFactory.Create($"SELECT * FROM dbo.Meetings WHERE ProjectId = {projectID}");
 
         bool success = DatabaseAccess.Instance.ExecuteQuery(query, out meetings);
 
         if (!success || meetings == null || meetings.Count == 0)
         {
-                return false;
+            return false;
         }
 
         result.AddRange(meetings);
@@ -92,7 +91,7 @@ public class MeetingManager
     public bool DeleteMeeting(long meetingId)
     {
         List<Meeting> meetings;
-        var query = FormattableStringFactory.Create($"DELETE FROM dbo.Meetings WHERE MeetingId = {meetingId}");
+        System.FormattableString query = FormattableStringFactory.Create($"DELETE FROM dbo.Meetings WHERE MeetingId = {meetingId}");
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out meetings);
     }

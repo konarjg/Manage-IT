@@ -1,10 +1,6 @@
 ﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Desktop.Database
 {
@@ -19,28 +15,28 @@ namespace Desktop.Database
 
         public bool GetAllConversations(long userId, out List<Conversation> conversations)
         {
-            var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Conversations WHERE User1Id = {userId} OR User2Id = {userId}");
+            System.FormattableString query = FormattableStringFactory.Create($"SELECT * FROM dbo.Conversations WHERE User1Id = {userId} OR User2Id = {userId}");
             return DatabaseAccess.Instance.ExecuteQuery(query, out conversations);
         }
 
         public bool GetAllMessages(long conversationId, out List<Message> messages)
         {
-            var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Messages WHERE ConversationId = {conversationId}");
+            System.FormattableString query = FormattableStringFactory.Create($"SELECT * FROM dbo.Messages WHERE ConversationId = {conversationId}");
             return DatabaseAccess.Instance.ExecuteQuery(query, out messages);
         }
 
         public bool CreateConversation(Conversation data)
         {
             List<Conversation> conversations;
-            var query = FormattableStringFactory.Create($"INSERT INTO dbo.Conversations(User1Id, User2Id) VALUES({data.User1Id}, {data.User2Id})");
-            
+            System.FormattableString query = FormattableStringFactory.Create($"INSERT INTO dbo.Conversations(User1Id, User2Id) VALUES({data.User1Id}, {data.User2Id})");
+
             return DatabaseAccess.Instance.ExecuteQuery(query, out conversations);
         }
 
         public bool AddMessage(Message data)
         {
             List<Message> messages;
-            var query = FormattableStringFactory.Create($"INSERT INTO dbo.Messages(ConversationId, UserId, MessageBody) VALUES({data.ConversationId}, {data.UserId}, '{data.MessageBody}')");
+            System.FormattableString query = FormattableStringFactory.Create($"INSERT INTO dbo.Messages(ConversationId, UserId, MessageBody) VALUES({data.ConversationId}, {data.UserId}, '{data.MessageBody}')");
 
             return DatabaseAccess.Instance.ExecuteQuery(query, out messages);
         }
@@ -48,15 +44,15 @@ namespace Desktop.Database
         public bool DeleteAllMessages(long conversationId)
         {
             List<Message> messages;
-            var query = FormattableStringFactory.Create($"DELETE FROM dbo.Messages WHERE ConversationId = {conversationId}");
-            
+            System.FormattableString query = FormattableStringFactory.Create($"DELETE FROM dbo.Messages WHERE ConversationId = {conversationId}");
+
             return DatabaseAccess.Instance.ExecuteQuery(query, out messages);
         }
 
         public bool DeleteConversation(long conversationId)
         {
             List<Conversation> conversations;
-            var query = FormattableStringFactory.Create($"DELETE FROM dbo.Conversations WHERE ConversationId = {conversationId}");
+            System.FormattableString query = FormattableStringFactory.Create($"DELETE FROM dbo.Conversations WHERE ConversationId = {conversationId}");
 
             return DeleteAllMessages(conversationId) && DatabaseAccess.Instance.ExecuteQuery(query, out conversations);
         }
@@ -70,13 +66,13 @@ namespace Desktop.Database
             {
                 return false;
             }
-            
-            foreach (var conversation in conversations) 
+
+            foreach (Conversation conversation in conversations)
             {
                 DeleteAllMessages(conversation.ConversationId);
             }
 
-            var query = FormattableStringFactory.Create($"DELETE FROM dbo.Conversations WHERE User1Id = {userId} OR User2Id = {userId}");
+            System.FormattableString query = FormattableStringFactory.Create($"DELETE FROM dbo.Conversations WHERE User1Id = {userId} OR User2Id = {userId}");
 
             return DatabaseAccess.Instance.ExecuteQuery(query, out conversations);
         }

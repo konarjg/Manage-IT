@@ -1,10 +1,7 @@
-﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Windows;
 
 namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
 
@@ -98,7 +95,7 @@ public class Database : IDisposable
                 DatabaseContext.SaveChanges();
                 return true;
             }
-            
+
             results = DatabaseContext.GetDatabaseSet<T>().FromSqlInterpolated(query).ToList();
             DatabaseContext.SaveChanges();
             return true;

@@ -5,7 +5,7 @@ public class GetSecurityParameters : PageModel
 {
     public ContentResult OnGet()
     {
-        var response = new ContentResult();
+        ContentResult response = new ContentResult();
         response.Content = Security.Parameters;
 
         return response;

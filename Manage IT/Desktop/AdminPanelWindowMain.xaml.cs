@@ -1,28 +1,11 @@
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Text;
-using System.Threading.Tasks;
-using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Markup;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Xml.Linq;
-using System.Reflection.PortableExecutable;
-using System.Diagnostics.Eventing.Reader;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
 
 namespace Desktop
 {
@@ -54,7 +37,7 @@ namespace Desktop
                 templateHistory.Push(Template); // Zapamiętaj aktualny szablon
             }
 
-            var newTemplate = Resources[name] as ControlTemplate;
+            ControlTemplate? newTemplate = Resources[name] as ControlTemplate;
             if (newTemplate != null)
             {
                 Template = newTemplate;
@@ -92,7 +75,7 @@ namespace Desktop
             }
             else
             {
-                var window = new ProjectManagementWindow();
+                ProjectManagementWindow window = new ProjectManagementWindow();
                 window.Activate();
                 window.Visibility = Visibility.Visible;
 
@@ -103,13 +86,13 @@ namespace Desktop
         private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject { if (depObj != null) { for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++) { DependencyObject child = VisualTreeHelper.GetChild(depObj, i); if (child != null && child is T) { yield return (T)child; } foreach (T childOfChild in FindVisualChildren<T>(child)) { yield return childOfChild; } } } }
         private void ResetTextInputs()
         {
-            var allTextBoxes = FindVisualChildren<TextBox>(this);
-            var allPasswordBoxes = FindVisualChildren<PasswordBox>(this);
-            foreach (var textBox in allTextBoxes)
+            IEnumerable<TextBox> allTextBoxes = FindVisualChildren<TextBox>(this);
+            IEnumerable<PasswordBox> allPasswordBoxes = FindVisualChildren<PasswordBox>(this);
+            foreach (TextBox textBox in allTextBoxes)
             {
                 textBox.Text = string.Empty;
             }
-            foreach (var passwordBox in allPasswordBoxes)
+            foreach (PasswordBox passwordBox in allPasswordBoxes)
             {
                 passwordBox.Clear();
             }
@@ -128,7 +111,7 @@ namespace Desktop
             SwitchBackToPreviousTemplate();
         }
         public void ConfirmDeleteClick(object sender, RoutedEventArgs e)
-        { 
+        {
             bool success = UserManager.Instance.DeleteUser(userToModify);
             if (!success)
             {
@@ -169,9 +152,7 @@ namespace Desktop
                 MessageBox.Show("Sender is not a StackPanel");
                 return;
             }
-
-            int i = 0;
-            foreach (var user in users)
+            foreach (User user in users)
             {
                 Button button = new Button();
                 button.Content = "id:" + user.UserId + " | " + user.Login;
@@ -198,18 +179,18 @@ namespace Desktop
         public void ModifyUserClick(object sender, RoutedEventArgs e, long userId)
         {
             bool success = UserManager.Instance.GetUser(userId, out User user);
-            if(success)
+            if (success)
             {
                 userToModify = user;
                 SwitchPageTemplate("UserEdit");
             }
-            
+
         }
 
         public void FillWithCredential(object sender, RoutedEventArgs e)
         {
             // Check if the sender is a TextBox
-            if (sender is TextBox textBox && userToModify!=null)
+            if (sender is TextBox textBox && userToModify != null)
             {
                 // Fetch the user (assuming you have the user already fetched and stored in a variable)
                 User user = userToModify;
@@ -241,7 +222,7 @@ namespace Desktop
             window.Activate();
             window.Visibility = Visibility.Visible;
             Close();
-           
+
         }
         public void ProjectListViewLoaded(object sender, RoutedEventArgs e)
         {
@@ -260,9 +241,7 @@ namespace Desktop
                 MessageBox.Show("Sender is not a StackPanel");
                 return;
             }
-
-            int i = 0;
-            foreach (var project in projects)
+            foreach (Project project in projects)
             {
                 Button button = new Button();
                 button.Content = "id:" + project.ProjectId + " | " + project.Name;
@@ -285,7 +264,7 @@ namespace Desktop
             if (sender is Button button && long.TryParse(button.Tag.ToString(), out long projectId))
             {
                 Project project = ProjectManager.Instance.GetProjectById(projectId);
-                var window = new AdminPanelWindow(project,false);
+                AdminPanelWindow window = new AdminPanelWindow(project, false);
                 window.Activate();
                 window.Visibility = Visibility.Visible;
 
@@ -355,7 +334,7 @@ namespace Desktop
 
         public void UserModifyReset(object sender, RoutedEventArgs e)
         {
-            TextBox loginTextBox = GetTemplateControl<TextBox>("ChangeUserNameTextBox"); 
+            TextBox loginTextBox = GetTemplateControl<TextBox>("ChangeUserNameTextBox");
             loginTextBox.Text = userToModify.Login;
             TextBox emailTextBox = GetTemplateControl<TextBox>("ChangeEmailTextBox");
             emailTextBox.Text = userToModify.Email;

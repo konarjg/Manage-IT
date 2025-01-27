@@ -1,9 +1,6 @@
 ﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using Task = EFModeling.EntityProperties.DataAnnotations.Annotations.Task;
 
 public class DatabaseAccess
 {
@@ -11,7 +8,7 @@ public class DatabaseAccess
 
     public DatabaseAccess()
     {
-        
+
     }
 
     public static void Instantiate()
@@ -23,7 +20,7 @@ public class DatabaseAccess
     {
         bool success;
 
-        using (var database = new Database())
+        using (Database database = new Database())
         {
             success = database.ExecuteQuery(query, out results);
         }

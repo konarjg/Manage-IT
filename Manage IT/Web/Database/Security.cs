@@ -1,12 +1,6 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using NETCore.Encrypt;
 using System.Security.Cryptography;
-using NETCore.Encrypt;
 using System.Text;
-using NETCore.Encrypt.Internal;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Web;
-using System.IO;
-using System;
 
 public static class Security
 {
@@ -16,7 +10,7 @@ public static class Security
     {
         get
         {
-            var parameters = string.Empty;
+            string parameters = string.Empty;
             parameters += EncryptionKey[0] + "\n";
             parameters += EncryptionKey[1];
 
@@ -26,12 +20,12 @@ public static class Security
 
     public static void Initialize()
     {
-        var path = System.AppDomain.CurrentDomain.BaseDirectory + "/scr.cfg";
+        string path = System.AppDomain.CurrentDomain.BaseDirectory + "/scr.cfg";
 
         if (File.Exists(path))
         {
-            var lines = File.ReadAllLines(path);
-            
+            string[] lines = File.ReadAllLines(path);
+
             for (int i = 0; i < EncryptionKey.Length; i++)
             {
                 EncryptionKey[i] = lines[i];
@@ -40,20 +34,20 @@ public static class Security
             return;
         }
 
-        var aes = EncryptProvider.CreateAesKey();
+        NETCore.Encrypt.Internal.AESKey aes = EncryptProvider.CreateAesKey();
         EncryptionKey[0] = aes.Key;
         EncryptionKey[1] = aes.IV;
 
-        var content = aes.Key + "\n" + aes.IV;
+        string content = aes.Key + "\n" + aes.IV;
         File.WriteAllText(path, content);
     }
 
     public static string HashText(string text, Encoding encoding)
     {
-        var data = encoding.GetBytes(text);
+        byte[] data = encoding.GetBytes(text);
         string result = string.Empty;
 
-        using (var sha512 = SHA512.Create())
+        using (SHA512 sha512 = SHA512.Create())
         {
             result = Convert.ToBase64String(sha512.ComputeHash(data));
         }

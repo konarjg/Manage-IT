@@ -1,10 +1,5 @@
 ﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 public class ChatManager
 {
@@ -17,32 +12,32 @@ public class ChatManager
 
     public bool GetAllConversations(out List<Conversation> conversations)
     {
-        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Conversations");
+        FormattableString query = FormattableStringFactory.Create($"SELECT * FROM dbo.Conversations");
         return DatabaseAccess.Instance.ExecuteQuery(query, out conversations);
     }
 
     public bool GetAllConversations(long userId, out List<Conversation> conversations)
     {
-        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Conversations WHERE User1Id = {userId} OR User2Id = {userId}");
+        FormattableString query = FormattableStringFactory.Create($"SELECT * FROM dbo.Conversations WHERE User1Id = {userId} OR User2Id = {userId}");
         return DatabaseAccess.Instance.ExecuteQuery(query, out conversations);
     }
 
     public bool GetAllMessages(out List<Message> messages)
     {
-        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Messages");
+        FormattableString query = FormattableStringFactory.Create($"SELECT * FROM dbo.Messages");
         return DatabaseAccess.Instance.ExecuteQuery(query, out messages);
     }
 
     public bool GetAllMessages(long conversationId, out List<Message> messages)
     {
-        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Messages WHERE ConversationId = {conversationId}");
+        FormattableString query = FormattableStringFactory.Create($"SELECT * FROM dbo.Messages WHERE ConversationId = {conversationId}");
         return DatabaseAccess.Instance.ExecuteQuery(query, out messages);
     }
 
     public bool CreateConversation(Conversation data)
     {
         List<Conversation> conversations;
-        var query = FormattableStringFactory.Create($"INSERT INTO dbo.Conversations(User1Id, User2Id) VALUES({data.User1Id}, {data.User2Id})");
+        FormattableString query = FormattableStringFactory.Create($"INSERT INTO dbo.Conversations(User1Id, User2Id) VALUES({data.User1Id}, {data.User2Id})");
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out conversations);
     }
@@ -50,7 +45,7 @@ public class ChatManager
     public bool AddMessage(Message data)
     {
         List<Message> messages;
-        var query = FormattableStringFactory.Create($"INSERT INTO dbo.Messages(ConversationId, UserId, MessageBody) VALUES({data.ConversationId}, {data.UserId}, '{data.MessageBody}')");
+        FormattableString query = FormattableStringFactory.Create($"INSERT INTO dbo.Messages(ConversationId, UserId, MessageBody) VALUES({data.ConversationId}, {data.UserId}, '{data.MessageBody}')");
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out messages);
     }
@@ -58,7 +53,7 @@ public class ChatManager
     public bool DeleteAllMessages(long conversationId)
     {
         List<Message> messages;
-        var query = FormattableStringFactory.Create($"DELETE FROM dbo.Messages WHERE ConversationId = {conversationId}");
+        FormattableString query = FormattableStringFactory.Create($"DELETE FROM dbo.Messages WHERE ConversationId = {conversationId}");
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out messages);
     }
@@ -66,7 +61,7 @@ public class ChatManager
     public bool DeleteConversation(long conversationId)
     {
         List<Conversation> conversations;
-        var query = FormattableStringFactory.Create($"DELETE FROM dbo.Conversations WHERE ConversationId = {conversationId}");
+        FormattableString query = FormattableStringFactory.Create($"DELETE FROM dbo.Conversations WHERE ConversationId = {conversationId}");
 
         return DeleteAllMessages(conversationId) && DatabaseAccess.Instance.ExecuteQuery(query, out conversations);
     }
@@ -74,7 +69,7 @@ public class ChatManager
     public bool DeleteMessage(long messageId)
     {
         List<Message> messages;
-        var query = FormattableStringFactory.Create($"DELETE FROM dbo.Messages WHERE MessageId = {messageId}");
+        FormattableString query = FormattableStringFactory.Create($"DELETE FROM dbo.Messages WHERE MessageId = {messageId}");
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out messages);
     }
@@ -89,12 +84,12 @@ public class ChatManager
             return false;
         }
 
-        foreach (var conversation in conversations)
+        foreach (Conversation conversation in conversations)
         {
             DeleteAllMessages(conversation.ConversationId);
         }
 
-        var query = FormattableStringFactory.Create($"DELETE FROM dbo.Conversations WHERE User1Id = {userId} OR User2Id = {userId}");
+        FormattableString query = FormattableStringFactory.Create($"DELETE FROM dbo.Conversations WHERE User1Id = {userId} OR User2Id = {userId}");
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out conversations);
     }

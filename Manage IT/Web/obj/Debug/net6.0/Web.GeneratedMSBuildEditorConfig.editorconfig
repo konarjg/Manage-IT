@@ -40,6 +40,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JlYXRlUHJvamVjdEZvcm0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/ForgotPasswordForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRm9yZ290UGFzc3dvcmRGb3JtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/GetSecurityParameters.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR2V0U2VjdXJpdHlQYXJhbWV0ZXJzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -66,6 +70,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/ProjectManagement.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvamVjdE1hbmFnZW1lbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/RecoverPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVjb3ZlclBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/RegisterForm.cshtml]

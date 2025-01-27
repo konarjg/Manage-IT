@@ -20,7 +20,7 @@ public class Chat : PageModel
         Conversations = HttpContext.Session.Get<List<Conversation>>("Conversations");
 
         User user2;
-        var data = new User()
+        User data = new User()
         {
             Email = credential,
             Login = credential
@@ -36,13 +36,13 @@ public class Chat : PageModel
             return new(new { success = false, message = "You cannot open a conversation with Yourself!" });
         }
 
-        var conversation = new Conversation()
+        Conversation conversation = new Conversation()
         {
             User1Id = HttpContext.Session.Get<User>("User").UserId,
             User2Id = user2.UserId
         };
 
-        if (Conversations.Where(x => x.User2Id ==  conversation.User2Id || x.User2Id == conversation.User2Id).Count() != 0)
+        if (Conversations.Where(x => x.User2Id == conversation.User2Id || x.User2Id == conversation.User2Id).Count() != 0)
         {
             return new(new { success = false, message = "You already have an open conversation with the specified user!" });
         }
@@ -65,7 +65,7 @@ public class Chat : PageModel
             Conversations = HttpContext.Session.Get<List<Conversation>>("Conversations");
             CurrentConversation = Conversations.FirstOrDefault(x => x?.ConversationId == conversationId);
         }
-        
+
         HttpContext.Session.Set("CurrentConversation", CurrentConversation);
         return new(new { success = true });
     }
@@ -80,10 +80,10 @@ public class Chat : PageModel
 
     public JsonResult OnPostSendMessage(string message)
     {
-        var user = HttpContext.Session.Get<User>("User");
+        User? user = HttpContext.Session.Get<User>("User");
         CurrentConversation = HttpContext.Session.Get<Conversation?>("CurrentConversation");
 
-        var data = new Message()
+        Message data = new Message()
         {
             UserId = user.UserId,
             ConversationId = CurrentConversation.ConversationId,

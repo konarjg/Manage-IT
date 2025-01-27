@@ -1,14 +1,6 @@
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System.Runtime.CompilerServices;
 using Web;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Windows.Markup;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Http;
-using System.Text.Json;
 
 public class ProjectManager
 {
@@ -21,7 +13,7 @@ public class ProjectManager
 
     public bool GetAllProjects(out List<Project> projects)
     {
-        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects");
+        FormattableString query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects");
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out projects);
     }
@@ -47,14 +39,14 @@ public class ProjectManager
 
     public bool GetOwnedProjects(long managerId, out List<Project> projects)
     {
-        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects WHERE ManagerId = {managerId}");
+        FormattableString query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects WHERE ManagerId = {managerId}");
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out projects);
     }
 
     public bool GetSharedProjects(long userId, out List<Project> projects)
     {
-        var query = FormattableStringFactory.Create($"SELECT p.* FROM dbo.Projects p JOIN dbo.ProjectMembers pm ON p.ProjectId = pm.ProjectId WHERE pm.UserId = {userId}");
+        FormattableString query = FormattableStringFactory.Create($"SELECT p.* FROM dbo.Projects p JOIN dbo.ProjectMembers pm ON p.ProjectId = pm.ProjectId WHERE pm.UserId = {userId}");
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out projects);
     }
@@ -62,11 +54,11 @@ public class ProjectManager
     public void DeleteOwnedProjects(long managerId)
     {
         List<Project> results;
-        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects WHERE ManagerId = {managerId}");
+        FormattableString query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects WHERE ManagerId = {managerId}");
 
         DatabaseAccess.Instance.ExecuteQuery(query, out results);
 
-        foreach (var project in results)
+        foreach (Project project in results)
         {
             DeleteProject(project.ProjectId);
         }
@@ -76,7 +68,7 @@ public class ProjectManager
     public bool GetProject(long projectId, out Project project)
     {
         List<Project> projects;
-        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects WHERE ProjectId = {projectId}");
+        FormattableString query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects WHERE ProjectId = {projectId}");
 
         bool success = DatabaseAccess.Instance.ExecuteQuery(query, out projects);
 
@@ -98,7 +90,7 @@ public class ProjectManager
         }
 
         List<Project> projects;
-        var query = FormattableStringFactory.Create($"INSERT INTO dbo.Projects (Name, Description, ManagerId) VALUES ('{data.Name}', '{data.Description}', {data.ManagerId})");
+        FormattableString query = FormattableStringFactory.Create($"INSERT INTO dbo.Projects (Name, Description, ManagerId) VALUES ('{data.Name}', '{data.Description}', {data.ManagerId})");
 
         bool success = DatabaseAccess.Instance.ExecuteQuery(query, out projects);
 
@@ -113,7 +105,7 @@ public class ProjectManager
     public bool UpdateProject(Project data)
     {
         List<Project> projects;
-        var query = FormattableStringFactory.Create($"UPDATE dbo.Projects SET ManagerId = {data.ManagerId}, Name = '{data.Name}', Description = '{data.Description}' WHERE ProjectId = {data.ProjectId}");
+        FormattableString query = FormattableStringFactory.Create($"UPDATE dbo.Projects SET ManagerId = {data.ManagerId}, Name = '{data.Name}', Description = '{data.Description}' WHERE ProjectId = {data.ProjectId}");
 
         bool success = DatabaseAccess.Instance.ExecuteQuery(query, out projects);
 
@@ -123,21 +115,20 @@ public class ProjectManager
     private void DeleteAllMembers(long projectId)
     {
         List<ProjectMembers> data;
-        var query = FormattableStringFactory.Create($"DELETE FROM dbo.ProjectMembers WHERE ProjectId = {projectId}");
+        FormattableString query = FormattableStringFactory.Create($"DELETE FROM dbo.ProjectMembers WHERE ProjectId = {projectId}");
 
         DatabaseAccess.Instance.ExecuteQuery(query, out data);
     }
 
     public bool DeleteProject(long projectId)
     {
-        List<Meeting> meetings;
         List<Project> projects;
 
         TaskListManager.Instance.DeleteTaskLists(projectId);
         UserManager.Instance.DeleteAllPermissions(projectId);
         DeleteAllMembers(projectId);
 
-        var query = FormattableStringFactory.Create($"DELETE FROM dbo.Projects WHERE ProjectId = {projectId}");
+        FormattableString query = FormattableStringFactory.Create($"DELETE FROM dbo.Projects WHERE ProjectId = {projectId}");
 
         Project data;
         bool success = GetProject(projectId, out data);
@@ -147,7 +138,7 @@ public class ProjectManager
     }
     public bool GetProjectMembers(long projectId, out List<User> members)
     {
-        var query = FormattableStringFactory.Create($@"
+        FormattableString query = FormattableStringFactory.Create($@"
         SELECT U.* 
         FROM dbo.Users U 
         INNER JOIN dbo.ProjectMembers PM ON U.UserId = PM.UserId 
@@ -157,12 +148,10 @@ public class ProjectManager
     }
     public bool IsProjectMember(long projectId, long userId)
     {
-        var query = FormattableStringFactory.Create($@"
+        FormattableString query = FormattableStringFactory.Create($@"
 SELECT *
 FROM dbo.ProjectMembers 
 WHERE ProjectId = {projectId} AND UserId = {userId}");
-
-        int count;
         bool success = DatabaseAccess.Instance.ExecuteQuery(query, out List<ProjectMembers> user);
 
         if (user != null)
@@ -186,7 +175,7 @@ WHERE ProjectId = {projectId} AND UserId = {userId}");
     private bool ProjectExists(string name)
     {
         List<Project> projects;
-        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects WHERE Name = '{name}'");
+        FormattableString query = FormattableStringFactory.Create($"SELECT * FROM dbo.Projects WHERE Name = '{name}'");
 
         bool success = DatabaseAccess.Instance.ExecuteQuery(query, out projects)
             && projects != null && projects.Count != 0;
@@ -196,7 +185,7 @@ WHERE ProjectId = {projectId} AND UserId = {userId}");
     public bool GetInviteStatus(long projectID, long userID)
     {
         List<ProjectMembers> data;
-        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.ProjectMembers WHERE UserId = {userID} AND ProjectId = {projectID} LIMIT 1");
+        FormattableString query = FormattableStringFactory.Create($"SELECT * FROM dbo.ProjectMembers WHERE UserId = {userID} AND ProjectId = {projectID} LIMIT 1");
 
         bool success = DatabaseAccess.Instance.ExecuteQuery(query, out data);
 
@@ -211,7 +200,7 @@ WHERE ProjectId = {projectId} AND UserId = {userId}");
     public bool AcceptInvite(long projectId, long userId)
     {
         List<ProjectMembers> members;
-        var query = FormattableStringFactory.Create($"UPDATE ProjectMembers SET InviteAccepted = 1 WHERE ProjectId = {projectId} AND UserId = {userId}");
+        FormattableString query = FormattableStringFactory.Create($"UPDATE ProjectMembers SET InviteAccepted = 1 WHERE ProjectId = {projectId} AND UserId = {userId}");
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out members);
     }
@@ -219,8 +208,8 @@ WHERE ProjectId = {projectId} AND UserId = {userId}");
     {
         List<ProjectMembers> data;
         List<UserPermissions> temp;
-        var query = FormattableStringFactory.Create($"INSERT INTO dbo.ProjectMembers (ProjectId, UserId, InviteAccepted) VALUES ({projectId}, {userId}, 0)");
-        var query1 = FormattableStringFactory.Create($"INSERT INTO dbo.UserPermissions (ProjectId, UserId, Editing, InvitingMembers, KickingMembers) VALUES ({projectId}, {userId}, 0, 0, 0)");
+        FormattableString query = FormattableStringFactory.Create($"INSERT INTO dbo.ProjectMembers (ProjectId, UserId, InviteAccepted) VALUES ({projectId}, {userId}, 0)");
+        FormattableString query1 = FormattableStringFactory.Create($"INSERT INTO dbo.UserPermissions (ProjectId, UserId, Editing, InvitingMembers, KickingMembers) VALUES ({projectId}, {userId}, 0, 0, 0)");
 
         return DatabaseAccess.Instance.ExecuteQuery(query, out data) && DatabaseAccess.Instance.ExecuteQuery(query1, out temp);
     }
@@ -229,8 +218,8 @@ WHERE ProjectId = {projectId} AND UserId = {userId}");
     {
         List<ProjectMembers> data;
         List<UserPermissions> temp;
-        var query = FormattableStringFactory.Create($"DELETE FROM dbo.UserPermissions WHERE ProjectId = {project.ProjectId} AND UserId = {user.UserId}");
-        var query1 = FormattableStringFactory.Create($"DELETE FROM dbo.ProjectMembers WHERE ProjectId = {project.ProjectId} AND UserId = {user.UserId}");
+        FormattableString query = FormattableStringFactory.Create($"DELETE FROM dbo.UserPermissions WHERE ProjectId = {project.ProjectId} AND UserId = {user.UserId}");
+        FormattableString query1 = FormattableStringFactory.Create($"DELETE FROM dbo.ProjectMembers WHERE ProjectId = {project.ProjectId} AND UserId = {user.UserId}");
 
         bool success = DatabaseAccess.Instance.ExecuteQuery(query, out temp) && DatabaseAccess.Instance.ExecuteQuery(query1, out data);
 
@@ -239,8 +228,8 @@ WHERE ProjectId = {projectId} AND UserId = {userId}");
             return false;
         }
 
-        var subject = "Manage IT Notification: You have been kicked from a project";
-        var body = $"Dear {user.Login},<br/>Unfortunately You have been kicked from a project named {project.Name}. If You don't agree with this decision, contact the manager or an administrator!";
+        string subject = "Manage IT Notification: You have been kicked from a project";
+        string body = $"Dear {user.Login},<br/>Unfortunately You have been kicked from a project named {project.Name}. If You don't agree with this decision, contact the manager or an administrator!";
         string error;
 
         return EmailService.SendEmail(user.Email, subject, body, out error);

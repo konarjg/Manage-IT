@@ -1,21 +1,12 @@
 ﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Desktop
 {
@@ -90,11 +81,11 @@ namespace Desktop
             switch (CurrentPage)
             {
                 case "Account":
-                    var changeUserNameText = GetTemplateControl<TextBox>("ChangeUserNameTextBox");
-                    var changeEmailText = GetTemplateControl<TextBox>("ChangeEmailTextBox");
-                    var newPassword = GetTemplateControl<PasswordBox>("NewPassword");
-                    var confirmPassword = GetTemplateControl<PasswordBox>("ConfirmPassword");
-                    var sendSecurityAlerts = GetTemplateControl<ToggleButton>("SendSecurityAlertsEmail");
+                    TextBox changeUserNameText = GetTemplateControl<TextBox>("ChangeUserNameTextBox");
+                    TextBox changeEmailText = GetTemplateControl<TextBox>("ChangeEmailTextBox");
+                    PasswordBox newPassword = GetTemplateControl<PasswordBox>("NewPassword");
+                    PasswordBox confirmPassword = GetTemplateControl<PasswordBox>("ConfirmPassword");
+                    ToggleButton sendSecurityAlerts = GetTemplateControl<ToggleButton>("SendSecurityAlertsEmail");
 
                     changeUserNameText.Text = CurrentSettings.UserData.Login;
                     changeEmailText.Text = CurrentSettings.UserData.Email;
@@ -103,16 +94,16 @@ namespace Desktop
                     break;
 
                 case "Projects":
-                    var displayProjects = GetTemplateControl<ListBox>("DisplayProjectsBox");
-                    var sendProjectAlerts = GetTemplateControl<ToggleButton>("SendProjectAlertsEmailToggle");
+                    ListBox displayProjects = GetTemplateControl<ListBox>("DisplayProjectsBox");
+                    ToggleButton sendProjectAlerts = GetTemplateControl<ToggleButton>("SendProjectAlertsEmailToggle");
 
                     displayProjects.SelectedIndex = (int)CurrentSettings.DisplayProjects;
                     sendProjectAlerts.IsChecked = CurrentSettings.SendProjectAlerts;
                     break;
 
                 case "AdditionalSettings":
-                    var rememberMeToggle = GetTemplateControl<ToggleButton>("RememberMeToggle");
-                    var enable2FAToggle = GetTemplateControl<ToggleButton>("Enable2FAToggle");
+                    ToggleButton rememberMeToggle = GetTemplateControl<ToggleButton>("RememberMeToggle");
+                    ToggleButton enable2FAToggle = GetTemplateControl<ToggleButton>("Enable2FAToggle");
 
                     rememberMeToggle.IsChecked = CurrentSettings.RememberMe;
                     enable2FAToggle.IsChecked = CurrentSettings.Enable2FA;
@@ -122,7 +113,7 @@ namespace Desktop
 
         public void BackClick(object sender, RoutedEventArgs e)
         {
-            var window = new ProjectManagementWindow();
+            ProjectManagementWindow window = new ProjectManagementWindow();
             window.Activate();
             window.Visibility = Visibility.Visible;
 
@@ -202,7 +193,7 @@ namespace Desktop
 
         public void DisplayProjectsChanged(object sender, SelectionChangedEventArgs e)
         {
-            var listBox = sender as ListBox;
+            ListBox? listBox = sender as ListBox;
 
             if (listBox.SelectedItem == null)
             {
@@ -218,7 +209,7 @@ namespace Desktop
         public void ConfirmDisableClick(object sender, RoutedEventArgs e)
         {
             bool success = UserManager.Instance.DisableUser(App.Instance.UserSettings.UserData);
-            var errorDisplay = GetTemplateControl<TextBlock>("Error");
+            TextBlock errorDisplay = GetTemplateControl<TextBlock>("Error");
 
             if (!success)
             {
@@ -245,7 +236,7 @@ namespace Desktop
         public void ConfirmDeleteClick(object sender, RoutedEventArgs e)
         {
             bool success = UserManager.Instance.DeleteUser(App.Instance.UserSettings.UserData);
-            var errorDisplay = GetTemplateControl<TextBlock>("Error");
+            TextBlock errorDisplay = GetTemplateControl<TextBlock>("Error");
 
             if (!success)
             {
@@ -268,12 +259,12 @@ namespace Desktop
 
         private void ApplyAccountSettings()
         {
-            var newUsername = GetTemplateControl<TextBox>("ChangeUserNameTextBox").Text;
-            var newEmail = GetTemplateControl<TextBox>("ChangeEmailTextBox").Text;
-            var newPassword = GetTemplateControl<PasswordBox>("NewPassword").Password;
-            var confirmPassword = GetTemplateControl<PasswordBox>("ConfirmPassword").Password;
-            var sendSecurityAlerts = GetTemplateControl<ToggleButton>("SendSecurityAlertsEmail").IsChecked;
-            var errorDisplay = GetTemplateControl<TextBlock>("Error");
+            string newUsername = GetTemplateControl<TextBox>("ChangeUserNameTextBox").Text;
+            string newEmail = GetTemplateControl<TextBox>("ChangeEmailTextBox").Text;
+            string newPassword = GetTemplateControl<PasswordBox>("NewPassword").Password;
+            string confirmPassword = GetTemplateControl<PasswordBox>("ConfirmPassword").Password;
+            bool? sendSecurityAlerts = GetTemplateControl<ToggleButton>("SendSecurityAlertsEmail").IsChecked;
+            TextBlock errorDisplay = GetTemplateControl<TextBlock>("Error");
 
             if (newUsername == string.Empty)
             {
@@ -327,8 +318,8 @@ namespace Desktop
 
         private void ApplyProjectsSettings()
         {
-            var displayProjects = GetTemplateControl<ListBox>("DisplayProjectsBox").SelectedIndex;
-            var sendProjectAlerts = GetTemplateControl<ToggleButton>("SendProjectAlertsEmailToggle").IsChecked;
+            int displayProjects = GetTemplateControl<ListBox>("DisplayProjectsBox").SelectedIndex;
+            bool? sendProjectAlerts = GetTemplateControl<ToggleButton>("SendProjectAlertsEmailToggle").IsChecked;
 
             CurrentSettings.DisplayProjects = (DisplayProjects)displayProjects;
             CurrentSettings.SendProjectAlerts = sendProjectAlerts != null ? (bool)sendProjectAlerts : false;
@@ -336,8 +327,8 @@ namespace Desktop
 
         private void ApplyAdditionalSettings()
         {
-            var rememberMe = GetTemplateControl<ToggleButton>("RememberMeToggle").IsChecked;
-            var enable2FA = GetTemplateControl<ToggleButton>("Enable2FAToggle").IsChecked;
+            bool? rememberMe = GetTemplateControl<ToggleButton>("RememberMeToggle").IsChecked;
+            bool? enable2FA = GetTemplateControl<ToggleButton>("Enable2FAToggle").IsChecked;
 
             CurrentSettings.RememberMe = rememberMe != null ? (bool)rememberMe : false;
             CurrentSettings.Enable2FA = enable2FA != null ? (bool)enable2FA : false;
@@ -347,7 +338,7 @@ namespace Desktop
 
         public void SettingsWindowConfirm(object sender, RoutedEventArgs e)
         {
-            var errorDisplay = GetTemplateControl<TextBlock>("Error");
+            TextBlock errorDisplay = GetTemplateControl<TextBlock>("Error");
 
             switch (CurrentPage)
             {
@@ -371,9 +362,9 @@ namespace Desktop
 
         public void SendSupportMessageClick(object sender, RoutedEventArgs e)
         {
-            var topic = GetTemplateControl<TextBox>("TopicBox").Text;
-            var message = GetTemplateControl<TextBox>("MessageBox").Text;
-            var errorDisplay = GetTemplateControl<TextBlock>("Error");
+            string topic = GetTemplateControl<TextBox>("TopicBox").Text;
+            string message = GetTemplateControl<TextBox>("MessageBox").Text;
+            TextBlock errorDisplay = GetTemplateControl<TextBlock>("Error");
 
             if (topic == string.Empty || message == string.Empty)
             {

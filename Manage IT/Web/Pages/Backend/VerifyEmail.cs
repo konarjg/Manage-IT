@@ -18,7 +18,7 @@ public class VerifyEmail : PageModel
 
         string error;
         Message = success ? "Your account has been verified!" : string.Empty;
-        
+
         if (success)
         {
             EmailService.SendEmail(email, "Manage IT account verification", "Your account has been verified!", out error);
