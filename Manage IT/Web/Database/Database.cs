@@ -1,9 +1,4 @@
-﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
 
@@ -16,7 +11,7 @@ public class DatabaseContext : DbContext
     public DbSet<TaskList> TaskLists { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserPermissions> UserPermissions { get; set; }
-    public DbSet<Meeting> Meetings { get; set; } 
+    public DbSet<Meeting> Meetings { get; set; }
     public DbSet<Conversation> Conversations { get; set; }
     public DbSet<Message> Messages { get; set; }
 
@@ -94,7 +89,7 @@ public class Database : IDisposable
             DatabaseContext.SaveChanges();
             return true;
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             return false;
         }
@@ -111,12 +106,12 @@ public class Database : IDisposable
                 DatabaseContext.SaveChanges();
                 return true;
             }
-            
+
             results = DatabaseContext.GetDatabaseSet<T>().FromSqlInterpolated(query).ToList();
             DatabaseContext.SaveChanges();
             return true;
         }
-        catch (Exception exception)
+        catch (Exception)
         {
             results = null;
             return false;

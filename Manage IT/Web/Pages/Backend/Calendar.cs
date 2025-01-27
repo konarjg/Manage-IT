@@ -1,5 +1,4 @@
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -27,7 +26,7 @@ public class Calendar : PageModel
 
         if (HttpContext.Session.Get<List<Meeting>>("Meetings") == null)
         {
-            var user = HttpContext.Session.Get<User>("User");
+            User? user = HttpContext.Session.Get<User>("User");
             List<Meeting> meetings;
             bool success = MeetingManager.Instance.GetAllMeetings(user, out meetings);
 

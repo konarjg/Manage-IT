@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
+﻿namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
 
 internal class MockDatabaseContext
 {
@@ -80,7 +74,7 @@ public class MockDatabase : IDisposable
     {
         try
         {
-            if (!query.Format.Contains("SELECT") && !query.Format.Contains("INSERT") 
+            if (!query.Format.Contains("SELECT") && !query.Format.Contains("INSERT")
                 && !query.Format.Contains("DELETE") && !query.Format.Contains("UPDATE"))
             {
                 throw new ArgumentException();
@@ -89,7 +83,7 @@ public class MockDatabase : IDisposable
             results = DatabaseContext.GetDatabaseSet<T>();
             return true;
         }
-        catch (Exception exception)
+        catch (Exception)
         {
             throw new ArgumentException();
         }

@@ -1,31 +1,12 @@
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Markup;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Xml.Linq;
-using System.Reflection.PortableExecutable;
-using System.Diagnostics.Eventing.Reader;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Diagnostics.Metrics;
-using System.Diagnostics;
-using static System.Net.Mime.MediaTypeNames;
-using System.Net.NetworkInformation;
 using Xceed.Wpf.Toolkit;
 
 
@@ -68,7 +49,7 @@ namespace Desktop
                 templateHistory.Push(Template); // Zapamiętaj aktualny szablon
             }
 
-            var newTemplate = Resources[name] as ControlTemplate;
+            ControlTemplate? newTemplate = Resources[name] as ControlTemplate;
             if (newTemplate != null)
             {
                 Template = newTemplate;
@@ -131,7 +112,7 @@ namespace Desktop
                 return;
             }
 
-            foreach (var member in members)
+            foreach (User member in members)
             {
                 Button button = new Button();
                 button.Content = $"id:{member.UserId} | {member.Login}";
@@ -156,11 +137,11 @@ namespace Desktop
             StackPanel membersListPanel = sender as StackPanel; // Cast sender to StackPanel
             if (membersListPanel == null)
             {
-                
+
                 return;
             }
 
-            foreach (var meeting in meetings)
+            foreach (Meeting meeting in meetings)
             {
                 Button button = new Button();
                 button.Content = $"id:{meeting.MeetingId} | {meeting.Title}";
@@ -219,7 +200,7 @@ namespace Desktop
                 return;
             }
 
-            foreach (var taskList in taskLists)
+            foreach (TaskList taskList in taskLists)
             {
                 Button button = new();
                 button.Content = $"id:{taskList.TaskListId} | {taskList.Name}";
@@ -232,7 +213,7 @@ namespace Desktop
                 taskListsListPanel.Children.Insert(0, button); // Adding to StackPanel's children
                 if (successTasks)
                 {
-                    foreach (var task in tasks)
+                    foreach (Task task in tasks)
                     {
                         Button button2 = new Button();
                         button2.Content = $"id:{task.TaskId} | {task.Name}";
@@ -284,10 +265,12 @@ namespace Desktop
             //header.Text = project.Name;
             header.Text = project.Name;
         }
-        private void ReplaceProjectNameInText(object sender, RoutedEventArgs e) {
+        private void ReplaceProjectNameInText(object sender, RoutedEventArgs e)
+        {
             string textToReplace = "(project.name)";
             string projectName = project.Name;
-            if (sender is TextBlock textBlock) {
+            if (sender is TextBlock textBlock)
+            {
                 textBlock.Text = textBlock.Text.Replace(textToReplace, projectName);
             }
         }
@@ -305,13 +288,13 @@ namespace Desktop
             {
                 if (backToProject)
                 {
-                    var window = new ManageProjectWindow(project);
+                    ManageProjectWindow window = new ManageProjectWindow(project);
                     window.Activate();
                     window.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    var window = new AdminPanelWindowMain();
+                    AdminPanelWindowMain window = new AdminPanelWindowMain();
                     window.Activate();
                     window.Visibility = Visibility.Visible;
                 }
@@ -330,7 +313,7 @@ namespace Desktop
         {
             TextBlock Error = GetTemplateControl<TextBlock>("Error");
 
-            var credential = GetTemplateControl<TextBox>("UserToInvite").Text;
+            string credential = GetTemplateControl<TextBox>("UserToInvite").Text;
             User data = new();
             data.Login = credential;
             data.Email = credential;
@@ -352,13 +335,13 @@ namespace Desktop
 
         private void ResetTextInputs()
         {
-            var allTextBoxes = FindVisualChildren<TextBox>(this);
-            var allPasswordBoxes = FindVisualChildren<PasswordBox>(this);
-            foreach (var textBox in allTextBoxes)
+            IEnumerable<TextBox> allTextBoxes = FindVisualChildren<TextBox>(this);
+            IEnumerable<PasswordBox> allPasswordBoxes = FindVisualChildren<PasswordBox>(this);
+            foreach (TextBox textBox in allTextBoxes)
             {
                 textBox.Text = string.Empty;
             }
-            foreach (var passwordBox in allPasswordBoxes)
+            foreach (PasswordBox passwordBox in allPasswordBoxes)
             {
                 passwordBox.Clear();
             }
@@ -501,8 +484,7 @@ namespace Desktop
         }
         public void DeleteProjectConfirmClick(object sender, RoutedEventArgs e)
         {
-            string error;
-            var password = GetTemplateControl<PasswordBox>("DeleteProjectConfirmPasswordPasswordBox").Password;
+            string password = GetTemplateControl<PasswordBox>("DeleteProjectConfirmPasswordPasswordBox").Password;
             password = Security.HashText(password, Encoding.UTF8);
             if (password == UserManager.Instance.CurrentSessionUser.Password)
             {
@@ -566,8 +548,8 @@ namespace Desktop
         private void OverviewConfirm()
         {
             User data;
-            var newProjName = GetTemplateControl<TextBox>("OverviewChangeProjectNameTextBox").Text;
-            var password = GetTemplateControl<PasswordBox>("OverviewConfirmPassword").Password;
+            string newProjName = GetTemplateControl<TextBox>("OverviewChangeProjectNameTextBox").Text;
+            string password = GetTemplateControl<PasswordBox>("OverviewConfirmPassword").Password;
             password = Security.HashText(password, Encoding.UTF8);
             TextBlock overviewError = GetTemplateControl<TextBlock>("Error");
             data = new();
@@ -587,7 +569,7 @@ namespace Desktop
                 Project updatedProject = project;
                 updatedProject.Name = newProjName;
                 ProjectManager.Instance.UpdateProject(updatedProject);
-                var window = new AdminPanelWindow(updatedProject, backToProject);
+                AdminPanelWindow window = new AdminPanelWindow(updatedProject, backToProject);
                 window.Activate();
                 window.Visibility = Visibility.Visible;
 
@@ -613,7 +595,7 @@ namespace Desktop
 
         public void UsersAddUserConfirmClick(object sender, RoutedEventArgs e)
         {
-            var credential = GetTemplateControl<TextBox>("UsersAddUserSearchByUsernameTextBox").Text;
+            string credential = GetTemplateControl<TextBox>("UsersAddUserSearchByUsernameTextBox").Text;
             User data = new();
             data.Login = credential;
             data.Email = credential;
@@ -785,7 +767,7 @@ namespace Desktop
 
         public void UserEditPermissionsTransferProjectConfirmClick(object sender, RoutedEventArgs e)
         {
-            var credential = GetTemplateControl<TextBox>("DeleteProjectConfirmPasswordText").Text;
+            string credential = GetTemplateControl<TextBox>("DeleteProjectConfirmPasswordText").Text;
             User current = UserManager.Instance.CurrentSessionUser;
             credential = Security.HashText(credential, Encoding.UTF8);
             TextBlock error = GetTemplateControl<TextBlock>("UserEditPermissionsTransferProject");
@@ -901,8 +883,8 @@ namespace Desktop
             TaskList data = new TaskList();
             data.ProjectId = project.ProjectId;
 
-            var taskListName = GetTemplateControl<TextBox>("TasksAddTaskListNameTextBox").Text;
-            var taskListDesc = GetTemplateControl<TextBox>("TasksAddTaskListDescriptionTextBox").Text;
+            string taskListName = GetTemplateControl<TextBox>("TasksAddTaskListNameTextBox").Text;
+            string taskListDesc = GetTemplateControl<TextBox>("TasksAddTaskListDescriptionTextBox").Text;
             TextBlock taskListErr = GetTemplateControl<TextBlock>("Error");
             if (taskListName != String.Empty)
             {
@@ -941,9 +923,9 @@ namespace Desktop
             Meeting data = new Meeting();
             data.ProjectId = project.ProjectId;
             TextBlock Err = GetTemplateControl<TextBlock>("Error");
-            var meetingTitle = GetTemplateControl<TextBox>("TasksAddTaskListNameTextBox").Text;
-            var meetingDesc = GetTemplateControl<TextBox>("TasksAddTaskListDescriptionTextBox").Text;
-            var meetingDate = GetTemplateControl<TextBox>("TasksAddTaskDeadlineTextBox").Text;
+            string meetingTitle = GetTemplateControl<TextBox>("TasksAddTaskListNameTextBox").Text;
+            string meetingDesc = GetTemplateControl<TextBox>("TasksAddTaskListDescriptionTextBox").Text;
+            string meetingDate = GetTemplateControl<TextBox>("TasksAddTaskDeadlineTextBox").Text;
             bool isDateValid = DateTime.TryParse(meetingDate, out DateTime deadline);
             if (meetingDate == String.Empty)
             {
@@ -961,14 +943,14 @@ namespace Desktop
             {
                 data.Title = meetingTitle;
                 data.Description = meetingDesc;
-                
+
                 MeetingManager.Instance.CreateMeeting(data);
                 SwitchBackToPreviousTemplate();
 
                 Err.Foreground = Brushes.White;
                 Err.Text = "Task list has been created";
             }
-            
+
             else
             {
                 Err.Foreground = Brushes.Red;
@@ -1034,19 +1016,19 @@ namespace Desktop
         public void TasksEditTaskListConfirmClick(object sender, RoutedEventArgs e)
         {
             TaskList tasklist = new TaskList();
-            var taskListName = GetTemplateControl<TextBox>("TasksEditTaskListNameTextBox").Text;
-            var taskListDesc = GetTemplateControl<TextBox>("TasksEditTaskListDescriptionTextBox").Text;
+            string taskListName = GetTemplateControl<TextBox>("TasksEditTaskListNameTextBox").Text;
+            string taskListDesc = GetTemplateControl<TextBox>("TasksEditTaskListDescriptionTextBox").Text;
             tasklist.Name = taskListName;
             tasklist.Description = taskListDesc;
             tasklist.TaskListId = currentlyEditedTaskList.TaskListId;
-            var err = GetTemplateControl<TextBlock>("Error");
+            TextBlock err = GetTemplateControl<TextBlock>("Error");
             if (taskListName == String.Empty)
             {
                 err.Foreground = Brushes.Red;
                 err.Text = "Task list must have a name";
                 return;
             }
-            
+
             bool success = TaskListManager.Instance.UpdateTaskList(tasklist);
             if (success)
             {
@@ -1165,7 +1147,7 @@ namespace Desktop
         {
             if (sender is TextBox textBox || sender is DateTimePicker dateTimePicker)
             {
-                var control = sender as FrameworkElement;
+                FrameworkElement? control = sender as FrameworkElement;
 
                 switch (control.Tag)
                 {
@@ -1190,7 +1172,7 @@ namespace Desktop
                         // Handle any other cases, if needed
                         break;
                 }
-            
+
             }
         }
 
@@ -1216,7 +1198,7 @@ namespace Desktop
             SwitchPageTemplate("MeetingsNewMeeting");
         }
 
-            public void TasksViewTaskListUsersAddUserClick(object sender, RoutedEventArgs e)
+        public void TasksViewTaskListUsersAddUserClick(object sender, RoutedEventArgs e)
         {
 
         }
@@ -1226,7 +1208,8 @@ namespace Desktop
             if (sender is TextBlock textBlock)
             {
                 // Assuming you have a way to get the taskList name
-                if (currentlyEditedTask != null) {
+                if (currentlyEditedTask != null)
+                {
                     TaskList taskList = TaskListManager.Instance.GetTaskList(currentlyEditedTask.TaskListId); // Replace this with your actual method to get the task list name
                     textBlock.Text = $"Task list: {taskList.Name}";
                 }
@@ -1261,9 +1244,9 @@ namespace Desktop
         public void TasksAddTaskConfirmClick(object sender, RoutedEventArgs e)
         {
             EFModeling.EntityProperties.DataAnnotations.Annotations.Task data = new EFModeling.EntityProperties.DataAnnotations.Annotations.Task();
-            var taskName = GetTemplateControl<TextBox>("TasksAddTaskNameTextBox").Text;
-            var taskDesc = GetTemplateControl<TextBox>("TasksAddTaskDescriptionTextBox").Text;
-            var taskDeadline = GetTemplateControl<TextBox>("TasksAddTaskDeadlineTextBox").Text;
+            string taskName = GetTemplateControl<TextBox>("TasksAddTaskNameTextBox").Text;
+            string taskDesc = GetTemplateControl<TextBox>("TasksAddTaskDescriptionTextBox").Text;
+            string taskDeadline = GetTemplateControl<TextBox>("TasksAddTaskDeadlineTextBox").Text;
             TextBlock Error = GetTemplateControl<TextBlock>("Error");
             bool isDeadlineValid = DateTime.TryParse(taskDeadline, out DateTime deadline);
             if (taskDeadline == String.Empty)
@@ -1290,7 +1273,7 @@ namespace Desktop
                 Error.Text = "Task has been created successfully";
                 Error.Foreground = Brushes.White;
             }
-            
+
             else
             {
                 Error.Text = "An error has occured";
@@ -1319,8 +1302,8 @@ namespace Desktop
         public void TasksAddTaskNewTaskListConfirmClick(object sender, RoutedEventArgs e)
         {
             TaskList data = new TaskList();
-            var taskListName = GetTemplateControl<TextBox>("TasksAddTaskListNameTextBox").Text;
-            var taskListDesc = GetTemplateControl<TextBox>("TasksAddTaskListDescriptionTextBox").Text;
+            string taskListName = GetTemplateControl<TextBox>("TasksAddTaskListNameTextBox").Text;
+            string taskListDesc = GetTemplateControl<TextBox>("TasksAddTaskListDescriptionTextBox").Text;
             TextBlock Error = GetTemplateControl<TextBlock>("Error");
             if (taskListName != String.Empty)
             {
@@ -1378,9 +1361,9 @@ namespace Desktop
         public void TasksEditTaskConfirmClick(object sender, RoutedEventArgs e)
         {
             // Assuming the UI has text boxes or controls to get updated task details.
-            var updatedTaskName = GetTemplateControl<TextBox>("TasksEditTaskNameTextBox");
-            var updatedTaskDesc = GetTemplateControl<TextBox>("TasksEditTaskDescriptionTextBox");
-            var updatedTaskDeadline = GetTemplateControl<TextBox>("TasksEditDeadlineTextBox");
+            TextBox updatedTaskName = GetTemplateControl<TextBox>("TasksEditTaskNameTextBox");
+            TextBox updatedTaskDesc = GetTemplateControl<TextBox>("TasksEditTaskDescriptionTextBox");
+            TextBox updatedTaskDeadline = GetTemplateControl<TextBox>("TasksEditDeadlineTextBox");
             TextBlock Error = GetTemplateControl<TextBlock>("Error");
             bool isDeadlineValid = DateTime.TryParse(updatedTaskDeadline.Text, out DateTime deadline);
 
@@ -1438,9 +1421,9 @@ namespace Desktop
         public void MeetingsEditMeetingConfirmClick(object sender, RoutedEventArgs e)
         {
             // Assuming the UI has text boxes or controls to get updated task details.
-            var updatedTaskName = GetTemplateControl<TextBox>("TasksEditTaskNameTextBox");
-            var updatedTaskDesc = GetTemplateControl<TextBox>("TasksEditTaskDescriptionTextBox");
-            var updatedTaskDeadline = GetTemplateControl<TextBox>("TasksEditDeadlineTextBox");
+            TextBox updatedTaskName = GetTemplateControl<TextBox>("TasksEditTaskNameTextBox");
+            TextBox updatedTaskDesc = GetTemplateControl<TextBox>("TasksEditTaskDescriptionTextBox");
+            TextBox updatedTaskDeadline = GetTemplateControl<TextBox>("TasksEditDeadlineTextBox");
             TextBlock Error = GetTemplateControl<TextBlock>("Error");
             bool isDeadlineValid = DateTime.TryParse(updatedTaskDeadline.Text, out DateTime deadline);
 
@@ -1611,7 +1594,7 @@ namespace Desktop
             {
                 TaskManager.Instance.ClearTaskDetails(taskDetails);
                 System.Windows.MessageBox.Show("User removed from task successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                
+
 
             }
             else

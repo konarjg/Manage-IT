@@ -1,13 +1,9 @@
 ﻿using Desktop.Database;
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Desktop
@@ -88,7 +84,7 @@ namespace Desktop
 
         public void SaveUserSettings()
         {
-            foreach (var settings in UserSettingsList.UserSettings)
+            foreach (UserSettings settings in UserSettingsList.UserSettings)
             {
                 if (settings.UserData != null)
                 {
@@ -102,7 +98,7 @@ namespace Desktop
                 }
             }
 
-            var options = new JsonSerializerOptions()
+            JsonSerializerOptions options = new JsonSerializerOptions()
             {
                 WriteIndented = true
             };
@@ -144,7 +140,7 @@ namespace Desktop
         public void SetUserSettings(UserSettings settings)
         {
             UserSettings = new UserSettings(settings);
-            var existing = UserSettingsList.UserSettings.Where(x => x.UserData != null && x.UserData.UserId == settings.UserData.UserId);
+            System.Collections.Generic.IEnumerable<UserSettings> existing = UserSettingsList.UserSettings.Where(x => x.UserData != null && x.UserData.UserId == settings.UserData.UserId);
             existing.First().UserData = new(settings.UserData);
             existing.First().SendSecurityAlerts = settings.SendSecurityAlerts;
             existing.First().SendProjectAlerts = settings.SendProjectAlerts;
@@ -153,7 +149,7 @@ namespace Desktop
 
             if (settings.RememberMe)
             {
-                foreach (var setting in UserSettingsList.UserSettings)
+                foreach (UserSettings setting in UserSettingsList.UserSettings)
                 {
                     setting.RememberMe = false;
                 }
@@ -164,7 +160,7 @@ namespace Desktop
 
         public void ResetSettings()
         {
-            var existing = UserSettingsList.UserSettings.Where(x => x.UserData != null && x.UserData.UserId == UserSettings.UserData.UserId).First();
+            UserSettings existing = UserSettingsList.UserSettings.Where(x => x.UserData != null && x.UserData.UserId == UserSettings.UserData.UserId).First();
             UserSettingsList.UserSettings.Remove(existing);
             SaveUserSettings();
             LoadAllSettings();

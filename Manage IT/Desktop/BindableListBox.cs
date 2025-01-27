@@ -1,10 +1,4 @@
-﻿using System.Collections;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Windows;
-using System.Windows.Controls;
-
-namespace Desktop
+﻿namespace Desktop
 {
     using System.Collections;
     using System.Collections.Specialized;
@@ -24,7 +18,7 @@ namespace Desktop
 
         private static void OnBindableSelectedItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var listBox = d as BindableListBox;
+            BindableListBox? listBox = d as BindableListBox;
             if (listBox == null) return;
 
             listBox.SelectionChanged -= listBox.OnSelectionChangedInternal;
@@ -46,7 +40,7 @@ namespace Desktop
                 return;
             }
 
-            foreach (var item in e.NewValue as IList)
+            foreach (object? item in e.NewValue as IList)
             {
                 listBox.SelectedItems.Add(item);
             }
@@ -58,12 +52,12 @@ namespace Desktop
         {
             if (BindableSelectedItems == null) return;
 
-            foreach (var item in e.RemovedItems)
+            foreach (object? item in e.RemovedItems)
             {
                 BindableSelectedItems.Remove(item);
             }
 
-            foreach (var item in e.AddedItems)
+            foreach (object? item in e.AddedItems)
             {
                 BindableSelectedItems.Add(item);
             }
@@ -81,7 +75,7 @@ namespace Desktop
             {
                 if (e.OldItems != null)
                 {
-                    foreach (var item in e.OldItems)
+                    foreach (object? item in e.OldItems)
                     {
                         SelectedItems.Remove(item);
                     }
@@ -89,7 +83,7 @@ namespace Desktop
 
                 if (e.NewItems != null)
                 {
-                    foreach (var item in e.NewItems)
+                    foreach (object? item in e.NewItems)
                     {
                         SelectedItems.Add(item);
                     }

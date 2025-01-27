@@ -1,24 +1,15 @@
 ﻿
 using Desktop.Database;
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using Task = System.Threading.Tasks.Task;
 
@@ -38,7 +29,7 @@ namespace Desktop
 
             bool success = UserManager.Instance.GetUser(data.User1Id, out user1);
             success = UserManager.Instance.GetUser(data.User2Id, out user2) && success;
-            
+
             if (!success)
             {
                 MessageBox.Show("An unexpected error has occured!");
@@ -64,10 +55,10 @@ namespace Desktop
 
         public MessageItem(Message data)
         {
-            var userId = UserManager.Instance.CurrentSessionUser.UserId;
+            long userId = UserManager.Instance.CurrentSessionUser.UserId;
             Body = data.MessageBody;
             Message = data;
-            
+
             if (data.UserId == userId)
             {
                 Color = new SolidColorBrush(new Color()
@@ -107,7 +98,7 @@ namespace Desktop
         private bool _messageBoxActive;
         private ObservableCollection<ConversationItem> _conversationItems;
 
-        public ObservableCollection<ConversationItem> Conversations { get; set; } 
+        public ObservableCollection<ConversationItem> Conversations { get; set; }
 
         public bool MessageBoxActive
         {
@@ -126,7 +117,7 @@ namespace Desktop
             }
         }
 
-        public ConversationItem ActiveConversation 
+        public ConversationItem ActiveConversation
         {
             get
             {
@@ -153,14 +144,14 @@ namespace Desktop
         {
             List<Conversation> conversations;
             ObservableCollection<ConversationItem> items = new();
-            var userId = UserManager.Instance.CurrentSessionUser.UserId;
+            long userId = UserManager.Instance.CurrentSessionUser.UserId;
 
             if (!ChatManager.Instance.GetAllConversations(userId, out conversations))
             {
                 conversations = new();
             }
 
-            foreach (var conversation in conversations)
+            foreach (Conversation conversation in conversations)
             {
                 items.Add(new ConversationItem(conversation));
             }
@@ -174,14 +165,14 @@ namespace Desktop
             {
                 List<Conversation> conversations;
                 ObservableCollection<ConversationItem> items = new();
-                var userId = UserManager.Instance.CurrentSessionUser.UserId;
+                long userId = UserManager.Instance.CurrentSessionUser.UserId;
 
                 if (!ChatManager.Instance.GetAllConversations(userId, out conversations))
                 {
                     conversations = new();
                 }
 
-                foreach (var conversation in conversations)
+                foreach (Conversation conversation in conversations)
                 {
                     items.Add(new ConversationItem(conversation));
                 }
@@ -206,7 +197,7 @@ namespace Desktop
                 messages = new();
             }
 
-            foreach (var message in messages)
+            foreach (Message message in messages)
             {
                 items.Add(new MessageItem(message));
             }
@@ -221,7 +212,7 @@ namespace Desktop
 
             dispatcher.Invoke(() =>
             {
-                var currentId = ActiveConversation?.Conversation.ConversationId;
+                long? currentId = ActiveConversation?.Conversation.ConversationId;
 
                 Conversations = _conversationItems;
 
@@ -245,7 +236,7 @@ namespace Desktop
 
             dispatcher.Invoke(() =>
             {
-                var currentId = ActiveConversation?.Conversation.ConversationId;
+                long? currentId = ActiveConversation?.Conversation.ConversationId;
 
                 Conversations = _conversationItems;
 
@@ -263,10 +254,10 @@ namespace Desktop
             });
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged; 
-        protected void OnPropertyChanged([CallerMemberName]string? name = null) 
-        { 
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name)); 
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string? name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 
@@ -296,8 +287,8 @@ namespace Desktop
 
         public void CreateConversation(object sender, RoutedEventArgs e)
         {
-            var credential = Credential.Text;
-            
+            string credential = Credential.Text;
+
             if (credential == string.Empty)
             {
                 Error.Text = "You have to specify a user!";
@@ -319,7 +310,7 @@ namespace Desktop
                 return;
             }
 
-            var conversation = new Conversation()
+            Conversation conversation = new Conversation()
             {
                 User1Id = UserManager.Instance.CurrentSessionUser.UserId,
                 User2Id = user.UserId
@@ -337,7 +328,7 @@ namespace Desktop
 
         public void DeleteConversation(object sender, RoutedEventArgs e)
         {
-            var data = (sender as Button).Tag as Conversation;
+            Conversation? data = (sender as Button).Tag as Conversation;
 
             if (ChatManager.Instance.DeleteConversation(data.ConversationId))
             {
@@ -375,7 +366,7 @@ namespace Desktop
         {
             if (Credential.Text != "")
             {
-                CredentialPlaceholder.Visibility = Visibility.Collapsed;    
+                CredentialPlaceholder.Visibility = Visibility.Collapsed;
             }
             else
             {
@@ -385,7 +376,7 @@ namespace Desktop
 
         public void SendMessage(object sender, RoutedEventArgs e)
         {
-            var body = MessageBox.Text;
+            string body = MessageBox.Text;
 
             if (body == "")
             {
@@ -394,7 +385,7 @@ namespace Desktop
                 return;
             }
 
-            var data = new Message()
+            Message data = new Message()
             {
                 ConversationId = (DataContext as ChatWindowModel).ActiveConversation.Conversation.ConversationId,
                 MessageBody = body,
@@ -413,7 +404,7 @@ namespace Desktop
 
         public void BackClick(object sender, RoutedEventArgs e)
         {
-            var window = new ProjectManagementWindow();
+            ProjectManagementWindow window = new ProjectManagementWindow();
             window.Activate();
             window.Visibility = Visibility.Visible;
 

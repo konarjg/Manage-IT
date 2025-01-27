@@ -1,8 +1,7 @@
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using Web;
-using Hangfire;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddSession(options =>
@@ -16,10 +15,10 @@ builder.Services.AddSession(options =>
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<DatabaseContext>();
 builder.Services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 Security.Initialize();
-EmailService.Initialize();  
+EmailService.Initialize();
 DatabaseAccess.Instantiate();
 UserManager.Instantiate();
 ProjectManager.Instantiate();

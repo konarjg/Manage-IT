@@ -1,12 +1,5 @@
-﻿using NETCore.Encrypt;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Web
 {
@@ -15,7 +8,7 @@ namespace Web
         private static readonly string Host = "smtp.gmail.com";
         private static readonly int Port = 587;
         private static string Email;
-        private static string Password; 
+        private static string Password;
 
         public static string Parameters
         {
@@ -27,11 +20,11 @@ namespace Web
 
         public static void Initialize()
         {
-            var path = System.AppDomain.CurrentDomain.BaseDirectory + "/smtp.cfg";
+            string path = System.AppDomain.CurrentDomain.BaseDirectory + "/smtp.cfg";
 
             if (File.Exists(path))
             {
-                var lines = File.ReadAllLines(path);
+                string[] lines = File.ReadAllLines(path);
 
                 Email = lines[0];
                 Password = lines[1];
@@ -63,7 +56,7 @@ namespace Web
                 error = string.Empty;
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 error = "There was an error while sending an email!";
                 client.Dispose();

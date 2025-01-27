@@ -1,16 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Desktop
 {
@@ -261,12 +252,12 @@ namespace Desktop
         {
             MonthYear.Text = GetMonthName(date.Month) + " " + date.Year;
 
-            var firstDayOfTheMonth = new DateTime(date.Year, date.Month, 1);
-            var lastDayOfTheMonth = firstDayOfTheMonth.AddMonths(1).AddDays(-1);
-            var numberOfDays = Convert.ToInt16(lastDayOfTheMonth.ToString("dd"));
+            DateTime firstDayOfTheMonth = new DateTime(date.Year, date.Month, 1);
+            DateTime lastDayOfTheMonth = firstDayOfTheMonth.AddMonths(1).AddDays(-1);
+            short numberOfDays = Convert.ToInt16(lastDayOfTheMonth.ToString("dd"));
 
             // Oblicz pierwszy widoczny dzień na kalendarzu
-            var startDate = firstDayOfTheMonth;
+            DateTime startDate = firstDayOfTheMonth;
             if (firstDayOfTheMonth.DayOfWeek != DayOfWeek.Sunday)
             {
                 startDate = firstDayOfTheMonth.AddDays(-(int)firstDayOfTheMonth.DayOfWeek);

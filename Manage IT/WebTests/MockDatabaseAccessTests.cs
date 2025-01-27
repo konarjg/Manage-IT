@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.CompilerServices;
 
 namespace WebTests
 {
@@ -13,10 +8,10 @@ namespace WebTests
         [TestMethod]
         public void ProcessQueryInsertShouldHaveNullResultsAndReturnTrue()
         {
-            var mock = new MockDatabaseAccess();
+            MockDatabaseAccess mock = new MockDatabaseAccess();
             List<User> results;
-            var format = FormattableStringFactory.Create("INSERT INTO Users");
-            var success = mock.ProcessQuery(format, out results);
+            FormattableString format = FormattableStringFactory.Create("INSERT INTO Users");
+            bool success = mock.ProcessQuery(format, out results);
 
             Assert.IsNull(results);
             Assert.IsTrue(success);
@@ -25,9 +20,9 @@ namespace WebTests
         [TestMethod]
         public void ProcessQueryInsertShouldAddTheQueryToBuffer()
         {
-            var mock = new MockDatabaseAccess();
+            MockDatabaseAccess mock = new MockDatabaseAccess();
             List<User> results;
-            var format = FormattableStringFactory.Create("INSERT INTO Users");
+            FormattableString format = FormattableStringFactory.Create("INSERT INTO Users");
             mock.ProcessQuery(format, out results);
 
             Assert.IsTrue(mock.QueryBuffer.Count != 0 && mock.QueryBuffer.Contains(format));
@@ -36,10 +31,10 @@ namespace WebTests
         [TestMethod]
         public void ProcessQueryUpdateShouldHaveNullResultsAndReturnTrue()
         {
-            var mock = new MockDatabaseAccess();
+            MockDatabaseAccess mock = new MockDatabaseAccess();
             List<User> results;
-            var format = FormattableStringFactory.Create("UPDATE Users");
-            var success = mock.ProcessQuery(format, out results);
+            FormattableString format = FormattableStringFactory.Create("UPDATE Users");
+            bool success = mock.ProcessQuery(format, out results);
 
             Assert.IsNull(results);
             Assert.IsTrue(success);
@@ -48,9 +43,9 @@ namespace WebTests
         [TestMethod]
         public void ProcessQueryUpdateShouldAddTheQueryToBuffer()
         {
-            var mock = new MockDatabaseAccess();
+            MockDatabaseAccess mock = new MockDatabaseAccess();
             List<User> results;
-            var format = FormattableStringFactory.Create("UPDATE Users");
+            FormattableString format = FormattableStringFactory.Create("UPDATE Users");
             mock.ProcessQuery(format, out results);
 
             Assert.IsTrue(mock.QueryBuffer.Count != 0 && mock.QueryBuffer.Contains(format));
@@ -59,10 +54,10 @@ namespace WebTests
         [TestMethod]
         public void ProcessQueryDeleteShouldHaveNullResultsAndReturnTrue()
         {
-            var mock = new MockDatabaseAccess();
+            MockDatabaseAccess mock = new MockDatabaseAccess();
             List<User> results;
-            var format = FormattableStringFactory.Create("DELETE * FROM Users");
-            var success = mock.ProcessQuery(format, out results);
+            FormattableString format = FormattableStringFactory.Create("DELETE * FROM Users");
+            bool success = mock.ProcessQuery(format, out results);
 
             Assert.IsNull(results);
             Assert.IsTrue(success);
@@ -71,9 +66,9 @@ namespace WebTests
         [TestMethod]
         public void ProcessQueryDeleteShouldAddTheQueryToBuffer()
         {
-            var mock = new MockDatabaseAccess();
+            MockDatabaseAccess mock = new MockDatabaseAccess();
             List<User> results;
-            var format = FormattableStringFactory.Create("DELETE * FROM Users");
+            FormattableString format = FormattableStringFactory.Create("DELETE * FROM Users");
             mock.ProcessQuery(format, out results);
 
             Assert.IsTrue(mock.QueryBuffer.Count != 0 && mock.QueryBuffer.Contains(format));
@@ -82,10 +77,10 @@ namespace WebTests
         [TestMethod]
         public void ProcessQuerySelectShouldHaveNotNullResultsAndReturnTrue()
         {
-            var mock = new MockDatabaseAccess();
+            MockDatabaseAccess mock = new MockDatabaseAccess();
             List<User> results;
-            var format = FormattableStringFactory.Create("SELECT * FROM Users");
-            var success = mock.ProcessQuery(format, out results);
+            FormattableString format = FormattableStringFactory.Create("SELECT * FROM Users");
+            bool success = mock.ProcessQuery(format, out results);
 
             Assert.IsNotNull(results);
             Assert.IsTrue(success);
@@ -94,9 +89,9 @@ namespace WebTests
         [TestMethod]
         public void ProcessQuerySelectShouldNotAddTheQueryToBuffer()
         {
-            var mock = new MockDatabaseAccess();
+            MockDatabaseAccess mock = new MockDatabaseAccess();
             List<User> results;
-            var format = FormattableStringFactory.Create("SELECT * FROM Users");
+            FormattableString format = FormattableStringFactory.Create("SELECT * FROM Users");
             mock.ProcessQuery(format, out results);
 
             Assert.IsTrue(mock.QueryBuffer.Count == 0);
@@ -105,10 +100,10 @@ namespace WebTests
         [TestMethod]
         public void ProcessQueryIncorrectTypeShouldHaveNullResultsAndReturnFalse()
         {
-            var mock = new MockDatabaseAccess();
+            MockDatabaseAccess mock = new MockDatabaseAccess();
             List<User> results;
-            var format = FormattableStringFactory.Create("DESTROY Users");
-            var success = mock.ProcessQuery(format, out results);
+            FormattableString format = FormattableStringFactory.Create("DESTROY Users");
+            bool success = mock.ProcessQuery(format, out results);
 
             Assert.IsNull(results);
             Assert.IsFalse(success);

@@ -18,7 +18,7 @@ public class AccountManagement : PageModel
 
     public JsonResult OnPostDelete()
     {
-        var data = HttpContext.Session.Get<User>("User");
+        User? data = HttpContext.Session.Get<User>("User");
 
         bool success = UserManager.Instance.DeleteUser(data);
 
@@ -34,7 +34,7 @@ public class AccountManagement : PageModel
 
     public JsonResult OnPostDisable()
     {
-        var data = HttpContext.Session.Get<User>("User");
+        User? data = HttpContext.Session.Get<User>("User");
 
         bool success = UserManager.Instance.DisableUser(data);
 
@@ -50,7 +50,7 @@ public class AccountManagement : PageModel
 
     public JsonResult OnPostEdit(string login, string email, string password, string confirmPassword)
     {
-        var data = HttpContext.Session.Get<User>("User");
+        User? data = HttpContext.Session.Get<User>("User");
 
         if (login == null || email == null || password == null || confirmPassword == null)
         {
@@ -95,6 +95,6 @@ public class AccountManagement : PageModel
             return new(new { success = false, message = "There was an unexpected error!" });
         }
 
-        return new(new { success = true, message = "Account was edited"});
+        return new(new { success = true, message = "Account was edited" });
     }
 }

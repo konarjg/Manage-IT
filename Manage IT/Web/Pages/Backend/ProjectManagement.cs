@@ -20,7 +20,7 @@ public class ProjectManagement : PageModel
 
         if (HttpContext.Session.Get<User>("User") == null)
         {
-            var user = UserManager.CurrentSessionUser;
+            User user = UserManager.CurrentSessionUser;
 
             if (user == null)
             {
@@ -32,7 +32,7 @@ public class ProjectManagement : PageModel
         }
 
         List<Project> projects;
-        var success = ProjectManager.Instance.GetAllProjects(HttpContext.Session.Get<User>("User").UserId, out projects);
+        bool success = ProjectManager.Instance.GetAllProjects(HttpContext.Session.Get<User>("User").UserId, out projects);
 
         if (!success || projects == null || projects.Count == 0)
         {

@@ -1,24 +1,10 @@
+using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Security;
-using System.Net.Http;
-using System.Net.Mail;
-using System.Threading.Tasks;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using EFModeling.EntityProperties.DataAnnotations.Annotations;
-using System.Diagnostics.Eventing.Reader;
 //using EFModeling.EntityPropertiesBase.DataAnnotations.Annotations;
 
 namespace Desktop
@@ -40,10 +26,10 @@ namespace Desktop
 
         private void SubmitRegisterForm(out User data)
         {
-            var email = GetTemplateControl<TextBox>("Email").Text;
-            var username = GetTemplateControl<TextBox>("Username").Text;
-            var password = GetTemplateControl<PasswordBox>("Password").Password;
-            var confirmPassword = GetTemplateControl<PasswordBox>("ConfirmPassword").Password;
+            string email = GetTemplateControl<TextBox>("Email").Text;
+            string username = GetTemplateControl<TextBox>("Username").Text;
+            string password = GetTemplateControl<PasswordBox>("Password").Password;
+            string confirmPassword = GetTemplateControl<PasswordBox>("ConfirmPassword").Password;
 
             if (email == string.Empty || username == string.Empty
                 || password == string.Empty || confirmPassword == string.Empty)
@@ -75,10 +61,10 @@ namespace Desktop
         }
         private void SubmitForgotPasswordForm(out User data)
         {
-            var credential = GetTemplateControl<TextBox>("Credential").Text;
-            var password = GetTemplateControl<PasswordBox>("Password").Password;
-            var confirmPassword = GetTemplateControl<PasswordBox>("ConfirmPassword").Password;
-            
+            string credential = GetTemplateControl<TextBox>("Credential").Text;
+            string password = GetTemplateControl<PasswordBox>("Password").Password;
+            string confirmPassword = GetTemplateControl<PasswordBox>("ConfirmPassword").Password;
+
 
             if (credential == string.Empty || password == string.Empty || confirmPassword == string.Empty)
             {
@@ -111,8 +97,8 @@ namespace Desktop
 
         private void SubmitLoginForm(out User data)
         {
-            var credential = GetTemplateControl<TextBox>("Credential").Text;
-            var password = GetTemplateControl<PasswordBox>("Password").Password;
+            string credential = GetTemplateControl<TextBox>("Credential").Text;
+            string password = GetTemplateControl<PasswordBox>("Password").Password;
 
             if (credential == string.Empty || password == string.Empty)
             {
@@ -169,14 +155,14 @@ namespace Desktop
             SwitchPageTemplate("Login");
         }
 
-        private void SubmitRegisterFormClick(object sender, RoutedEventArgs e) 
+        private void SubmitRegisterFormClick(object sender, RoutedEventArgs e)
         {
             User data;
             GetTemplateControl<TextBlock>("Error").Foreground = Brushes.Red;
 
             try
             {
-                var error = string.Empty;
+                string? error = string.Empty;
                 SubmitRegisterForm(out data);
                 RegisterController.SubmitRegisterForm(data, out error);
 
@@ -201,7 +187,7 @@ namespace Desktop
 
             try
             {
-                var error = string.Empty;
+                string? error = string.Empty;
                 SubmitLoginForm(out data);
                 LoginController.SubmitLoginForm(data, out error);
                 GetTemplateControl<TextBlock>("Error").Text = error;
@@ -219,7 +205,7 @@ namespace Desktop
 
             try
             {
-                var error = string.Empty;
+                string? error = string.Empty;
                 SubmitForgotPasswordForm(out data);
                 ForgotPasswordController.SubmitForgotPasswordForm(data, out error);
 

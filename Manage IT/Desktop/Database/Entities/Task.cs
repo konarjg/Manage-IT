@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Windows.Media;
-using Microsoft.EntityFrameworkCore;
 
 namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
 
@@ -19,11 +18,11 @@ public class Task
     public bool? Accepted { get; set; }
     public bool HandedIn { get; set; }
 
-    public string DaysLeft 
-    { 
+    public string DaysLeft
+    {
         get
         {
-            int diff = (int)((Deadline - DateTime.Now).TotalDays);
+            int diff = (int)(Deadline - DateTime.Now).TotalDays;
 
             if (diff < 0)
             {

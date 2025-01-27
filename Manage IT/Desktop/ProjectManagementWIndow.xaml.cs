@@ -1,17 +1,8 @@
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Desktop
 {
@@ -33,7 +24,7 @@ namespace Desktop
             string error;
             ProjectManagementController.FetchProjectList(UserManager.Instance.CurrentSessionUser.UserId, ref Projects, App.Instance.UserSettings.DisplayProjects, out error);
 
-            
+
 
             if (error != "")
             {
@@ -41,7 +32,7 @@ namespace Desktop
                 return;
             }
 
-            foreach (var project in Projects)
+            foreach (Project project in Projects)
             {
                 Button button = new();
                 button.Content = project.Name;
@@ -71,7 +62,7 @@ namespace Desktop
 
         public void ProjectClick(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
+            Button? button = sender as Button;
             long projectId;
 
             if (!long.TryParse(button.Name.Split("Project")[1], out projectId))
@@ -87,7 +78,7 @@ namespace Desktop
         }
         public void AdminPanelClick(object sender, RoutedEventArgs e)
         {
-            var window = new AdminPanelWindowMain();
+            AdminPanelWindowMain window = new AdminPanelWindowMain();
             window.Activate();
             window.Visibility = Visibility.Visible;
 
@@ -103,7 +94,7 @@ namespace Desktop
 
         public void ChatClick(object sender, RoutedEventArgs e)
         {
-            var window = new ChatWindow();
+            ChatWindow window = new ChatWindow();
             window.Activate();
             window.Visibility = Visibility.Visible;
 
@@ -112,7 +103,7 @@ namespace Desktop
 
         public void CalendarClick(object sender, RoutedEventArgs e)
         {
-            var window = new CalendarWindow();
+            CalendarWindow window = new CalendarWindow();
             window.Activate();
             window.Visibility = Visibility.Visible;
 

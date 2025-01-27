@@ -1,10 +1,4 @@
 ﻿using EFModeling.EntityProperties.DataAnnotations.Annotations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 public static class ManageProjectController
 {
@@ -13,7 +7,7 @@ public static class ManageProjectController
         Project data = new();
         data.ProjectId = projectId;
         data.ManagerId = managerId;
-        data.Name = name;   
+        data.Name = name;
         data.Description = description;
 
         bool success = ProjectManager.Instance.UpdateProject(data);

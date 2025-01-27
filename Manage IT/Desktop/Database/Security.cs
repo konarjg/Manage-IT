@@ -1,14 +1,9 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using System.Security.Cryptography;
-using NETCore.Encrypt;
-using System.Text;
-using NETCore.Encrypt.Internal;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Web;
-using System.IO;
+﻿using NETCore.Encrypt;
 using System;
+using System.IO;
 using System.Net.Http;
-using System.Windows;
+using System.Security.Cryptography;
+using System.Text;
 
 public static class Security
 {
@@ -16,16 +11,16 @@ public static class Security
 
     public static void Initialize()
     {
-        var url = "http://manageit.runasp.net/GetSecurityParameters";
+        string url = "http://manageit.runasp.net/GetSecurityParameters";
 
-        using (var client = new HttpClient())
+        using (HttpClient client = new HttpClient())
         {
-            var message = new HttpRequestMessage(HttpMethod.Get, url);
-            var response = client.Send(message);
+            HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Get, url);
+            HttpResponseMessage response = client.Send(message);
 
-            using (var stream = response.Content.ReadAsStream())
+            using (Stream stream = response.Content.ReadAsStream())
             {
-                using (var reader = new StreamReader(stream))
+                using (StreamReader reader = new StreamReader(stream))
                 {
                     for (int i = 0; i < EncryptionKey.Length; i++)
                     {
@@ -38,10 +33,10 @@ public static class Security
 
     public static string HashText(string text, Encoding encoding)
     {
-        var data = encoding.GetBytes(text);
+        byte[] data = encoding.GetBytes(text);
         string result = string.Empty;
 
-        using (var sha512 = SHA512.Create())
+        using (SHA512 sha512 = SHA512.Create())
         {
             result = Convert.ToBase64String(sha512.ComputeHash(data));
         }

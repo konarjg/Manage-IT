@@ -1,28 +1,17 @@
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using Xceed.Wpf.AvalonDock.Controls;
 using Xceed.Wpf.Toolkit;
-using Xceed.Wpf.Toolkit.PropertyGrid;
 using MessageBox = System.Windows.MessageBox;
 using Task = EFModeling.EntityProperties.DataAnnotations.Annotations.Task;
 
@@ -36,11 +25,11 @@ namespace Desktop
 
             for (int i = 0; i < count; i++)
             {
-                var MyChild = VisualTreeHelper.GetChild(parent, i);
+                DependencyObject MyChild = VisualTreeHelper.GetChild(parent, i);
                 if (MyChild is FrameworkElement && ((FrameworkElement)MyChild).Name == controlName)
                     return MyChild;
 
-                var FindResult = FindName(MyChild, controlName);
+                DependencyObject FindResult = FindName(MyChild, controlName);
                 if (FindResult != null)
                     return FindResult;
             }
@@ -112,7 +101,7 @@ namespace Desktop
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime? Deadline { get; set; }
-        public ObservableCollection<TaskList> TaskLists { get; set; } 
+        public ObservableCollection<TaskList> TaskLists { get; set; }
         public ObservableCollection<MemberModel> Members { get; set; }
         public TaskList SelectedTaskList { get; set; }
         public ObservableCollection<MemberModel> SelectedMembers { get; set; }
@@ -146,16 +135,16 @@ namespace Desktop
 
             SelectedTaskList = taskLists.Where(x => x.TaskListId == task.TaskListId).FirstOrDefault();
 
-            foreach (var taskList in taskLists)
+            foreach (TaskList taskList in taskLists)
             {
                 TaskLists.Add(taskList);
             }
 
             SelectedMembers = new();
 
-            foreach (var member in members)
+            foreach (User member in members)
             {
-                var item = new MemberModel(member, taskMembers);
+                MemberModel item = new MemberModel(member, taskMembers);
                 Members.Add(item);
 
                 if (item.Assigned)
@@ -208,7 +197,7 @@ namespace Desktop
             Task.TaskListId = SelectedTaskList.TaskListId;
             TaskMembers.Clear();
 
-            foreach (var member in SelectedMembers)
+            foreach (MemberModel member in SelectedMembers)
             {
                 TaskMembers.Add(member.User);
             }
@@ -311,9 +300,9 @@ namespace Desktop
 
         private void UpdateTopNavContent()
         {
-            var edit = GetTemplateControl<Button>("Edit");
-            var meeting = GetTemplateControl<Button>("Meeting");
-            var delete = GetTemplateControl<Button>("Delete");
+            Button edit = GetTemplateControl<Button>("Edit");
+            Button meeting = GetTemplateControl<Button>("Meeting");
+            Button delete = GetTemplateControl<Button>("Delete");
 
             if (edit == null || meeting == null || delete == null)
             {
@@ -332,7 +321,7 @@ namespace Desktop
 
         private void UpdateMainContent()
         {
-            var projectName = GetTemplateControl<TextBlock>("ProjectName");
+            TextBlock projectName = GetTemplateControl<TextBlock>("ProjectName");
 
             if (projectName == null)
             {
@@ -344,8 +333,8 @@ namespace Desktop
 
         private void UpdateProjectInfoContent()
         {
-            var projectName = GetTemplateControl<TextBox>("ProjectName");
-            var description = GetTemplateControl<TextBox>("Description");
+            TextBox projectName = GetTemplateControl<TextBox>("ProjectName");
+            TextBox description = GetTemplateControl<TextBox>("Description");
 
             if (projectName == null || description == null)
             {
@@ -358,8 +347,8 @@ namespace Desktop
 
         private void UpdateEditContent()
         {
-            var projectName = GetTemplateControl<TextBox>("ProjectName");
-            var description = GetTemplateControl<TextBox>("Description");
+            TextBox projectName = GetTemplateControl<TextBox>("ProjectName");
+            TextBox description = GetTemplateControl<TextBox>("Description");
 
             if (projectName == null || description == null)
             {
@@ -372,7 +361,7 @@ namespace Desktop
 
         private void UpdateDeleteContent()
         {
-            var placeholder = GetTemplateControl<TextBlock>("ProjectNamePlaceholder");
+            TextBlock placeholder = GetTemplateControl<TextBlock>("ProjectNamePlaceholder");
 
             if (placeholder == null)
             {
@@ -384,9 +373,9 @@ namespace Desktop
 
         private void UpdateMembersContent()
         {
-            var list = GetTemplateControl<ListBox>("MembersList");
-            var searchBox = GetTemplateControl<Grid>("SearchBox");
-            var invite = GetTemplateControl<Button>("Invite");
+            ListBox list = GetTemplateControl<ListBox>("MembersList");
+            Grid searchBox = GetTemplateControl<Grid>("SearchBox");
+            Button invite = GetTemplateControl<Button>("Invite");
 
             if (list == null || searchBox == null || invite == null)
             {
@@ -401,9 +390,9 @@ namespace Desktop
 
             list.Items.Clear();
 
-            foreach (var member in Members)
+            foreach (User member in Members)
             {
-                var item = new ListBoxItem()
+                ListBoxItem item = new ListBoxItem()
                 {
                     ContentTemplate = Resources["MemberListItem"] as DataTemplate,
                     Name = $"Member_{member.UserId}",
@@ -414,22 +403,22 @@ namespace Desktop
 
                 item.Loaded += (s, e) =>
                 {
-                    var panel = item.FindVisualChildren<StackPanel>().FirstOrDefault();
+                    StackPanel? panel = item.FindVisualChildren<StackPanel>().FirstOrDefault();
 
                     if (panel == null)
                     {
                         return;
 
                     }
-                    var buttons = panel.FindVisualChildren<Button>();
+                    IEnumerable<Button> buttons = panel.FindVisualChildren<Button>();
 
                     if (buttons == null)
                     {
                         return;
                     }
 
-                    var kick = buttons.Where(x => x.Name == "Kick").FirstOrDefault();
-                    var manage = buttons.Where(x => x.Name == "Manage").FirstOrDefault();
+                    Button? kick = buttons.Where(x => x.Name == "Kick").FirstOrDefault();
+                    Button? manage = buttons.Where(x => x.Name == "Manage").FirstOrDefault();
 
                     if (kick == null || manage == null)
                     {
@@ -453,8 +442,8 @@ namespace Desktop
 
         private void UpdateTaskListsContent()
         {
-            var taskLists = GetTemplateControl<StackPanel>("TaskLists");
-            var createTaskList = GetTemplateControl<ContentControl>("CreateTaskList");
+            StackPanel taskLists = GetTemplateControl<StackPanel>("TaskLists");
+            ContentControl createTaskList = GetTemplateControl<ContentControl>("CreateTaskList");
             taskLists.Children.Clear();
 
             if (taskLists == null || TaskLists == null)
@@ -467,9 +456,9 @@ namespace Desktop
                 createTaskList.Visibility = Visibility.Collapsed;
             }
 
-            foreach (var taskList in TaskLists)
+            foreach (TaskList taskList in TaskLists)
             {
-                var item = new ContentControl()
+                ContentControl item = new ContentControl()
                 {
                     Height = 350,
                     ContentTemplate = Resources["TaskList"] as DataTemplate,
@@ -496,8 +485,8 @@ namespace Desktop
                         return;
                     }
 
-                    var taskPanel = VisualTreeTraversal.FindName(item, "Tasks") as StackPanel;
-                    var createTask = taskPanel.Children[0];
+                    StackPanel? taskPanel = VisualTreeTraversal.FindName(item, "Tasks") as StackPanel;
+                    UIElement createTask = taskPanel.Children[0];
 
                     if (!Permissions.Editing)
                     {
@@ -506,9 +495,9 @@ namespace Desktop
 
                     taskPanel.Children.Clear();
 
-                    foreach (var task in tasks)
+                    foreach (Task task in tasks)
                     {
-                        var taskItem = new ContentControl()
+                        ContentControl taskItem = new ContentControl()
                         {
                             Width = 450,
                             Height = 200,
@@ -543,7 +532,7 @@ namespace Desktop
 
             if (UserManager.Instance.CurrentSessionUser.Admin)
             {
-              GetTemplateControl<Button>("AdminPanel").Visibility = Visibility.Visible;
+                GetTemplateControl<Button>("AdminPanel").Visibility = Visibility.Visible;
             }
 
             switch (TemplateKey)
@@ -584,7 +573,7 @@ namespace Desktop
 
         public void AdminPanelClick(object sender, RoutedEventArgs e)
         {
-            var window = new AdminPanelWindow(Project,true);
+            AdminPanelWindow window = new AdminPanelWindow(Project, true);
             window.Activate();
             window.Visibility = Visibility.Visible;
 
@@ -603,7 +592,7 @@ namespace Desktop
 
         public void MeetingClick(object sender, RoutedEventArgs e)
         {
-            var panel = GetTemplateControl<Border>("CreateMeetingPopup");
+            Border panel = GetTemplateControl<Border>("CreateMeetingPopup");
             panel.Visibility = Visibility.Visible;
         }
 
@@ -621,11 +610,11 @@ namespace Desktop
         {
             SwitchPageTemplate("Main");
         }
-        
+
         public void SubmitEditFormClick(object sender, RoutedEventArgs e)
         {
-            var projectName = GetTemplateControl<TextBox>("ProjectName").Text;
-            var description = GetTemplateControl<TextBox>("Description").Text;
+            string projectName = GetTemplateControl<TextBox>("ProjectName").Text;
+            string description = GetTemplateControl<TextBox>("Description").Text;
 
             if (projectName == "" || description == "")
             {
@@ -649,7 +638,7 @@ namespace Desktop
 
         public void SubmitDeleteFormClick(object sender, RoutedEventArgs e)
         {
-            var projectName = GetTemplateControl<TextBox>("ProjectName").Text;
+            string projectName = GetTemplateControl<TextBox>("ProjectName").Text;
 
             if (projectName != Project.Name)
             {
@@ -680,8 +669,8 @@ namespace Desktop
 
         private void DeleteProjectNameTextChanged(object sender, TextChangedEventArgs e)
         {
-            var projectName = GetTemplateControl<TextBox>("ProjectName");
-            var placeholder = GetTemplateControl<TextBlock>("ProjectNamePlaceholder");
+            TextBox projectName = GetTemplateControl<TextBox>("ProjectName");
+            TextBlock placeholder = GetTemplateControl<TextBlock>("ProjectNamePlaceholder");
 
             if (projectName.Text == "")
             {
@@ -695,8 +684,8 @@ namespace Desktop
 
         public void SearchBoxTextChanged(object sender, TextChangedEventArgs e)
         {
-            var searchText = GetTemplateControl<TextBox>("SearchBoxText");
-            var placeholder = GetTemplateControl<TextBlock>("SearchBoxPlaceholder");
+            TextBox searchText = GetTemplateControl<TextBox>("SearchBoxText");
+            TextBlock placeholder = GetTemplateControl<TextBlock>("SearchBoxPlaceholder");
 
             if (searchText.Text == "")
             {
@@ -710,8 +699,8 @@ namespace Desktop
 
         public void InviteClick(object sender, RoutedEventArgs e)
         {
-            var searchBox = GetTemplateControl<TextBox>("SearchBoxText").Text;
-            var error = GetTemplateControl<TextBlock>("Error");
+            string searchBox = GetTemplateControl<TextBox>("SearchBoxText").Text;
+            TextBlock error = GetTemplateControl<TextBlock>("Error");
 
             if (searchBox == string.Empty)
             {
@@ -739,18 +728,18 @@ namespace Desktop
 
         public void ManageClick(object sender, RoutedEventArgs e)
         {
-            var panel = GetTemplateControl<Border>("ManageMemberPopup");
-            var error = GetTemplateControl<TextBlock>("ManageMemberPopupError");
+            Border panel = GetTemplateControl<Border>("ManageMemberPopup");
+            TextBlock error = GetTemplateControl<TextBlock>("ManageMemberPopupError");
 
-            var username = GetTemplateControl<TextBlock>("Username");
-            var email = GetTemplateControl<TextBlock>("Email");
-            var editing = GetTemplateControl<ToggleButton>("Editing");
-            var inviting = GetTemplateControl<ToggleButton>("Inviting");
-            var kicking = GetTemplateControl<ToggleButton>("Kicking");
-            
+            TextBlock username = GetTemplateControl<TextBlock>("Username");
+            TextBlock email = GetTemplateControl<TextBlock>("Email");
+            ToggleButton editing = GetTemplateControl<ToggleButton>("Editing");
+            ToggleButton inviting = GetTemplateControl<ToggleButton>("Inviting");
+            ToggleButton kicking = GetTemplateControl<ToggleButton>("Kicking");
 
-            var userId = long.Parse((sender as Button).Tag.ToString());
-            var user = Members.Where(x => x.UserId == userId).FirstOrDefault();
+
+            long userId = long.Parse((sender as Button).Tag.ToString());
+            User? user = Members.Where(x => x.UserId == userId).FirstOrDefault();
             UserPermissions permissions;
 
             bool success = UserManager.Instance.GetUserPermissions(userId, Project.ProjectId, out permissions);
@@ -773,9 +762,9 @@ namespace Desktop
 
         public void KickClick(object sender, RoutedEventArgs e)
         {
-            var panel = GetTemplateControl<Border>("KickPanel");
-            var button = sender as Button;
-            var userId = long.Parse(button.Tag.ToString());
+            Border panel = GetTemplateControl<Border>("KickPanel");
+            Button? button = sender as Button;
+            long userId = long.Parse(button.Tag.ToString());
             CurrentKickedUser = Members.Where(x => x.UserId == userId).FirstOrDefault();
 
             panel.Visibility = Visibility.Visible;
@@ -783,13 +772,13 @@ namespace Desktop
 
         public void CancelKickClick(object sender, RoutedEventArgs e)
         {
-            var panel = GetTemplateControl<Border>("KickPanel");
+            Border panel = GetTemplateControl<Border>("KickPanel");
             panel.Visibility = Visibility.Collapsed;
         }
 
         public async void ConfirmKickClick(object sender, RoutedEventArgs e)
         {
-            var panel = GetTemplateControl<Border>("KickPanel");
+            Border panel = GetTemplateControl<Border>("KickPanel");
 
             ProjectManager.Instance.RemoveProjectMember(Project, CurrentKickedUser);
             CurrentKickedUser = null;
@@ -800,8 +789,8 @@ namespace Desktop
 
         public void ClearCreateTaskListClick(object sender, RoutedEventArgs e)
         {
-            var name = GetTemplateControl<TextBox>("CreateTaskListName");
-            var description = GetTemplateControl<TextBox>("CreateTaskListDescription");
+            TextBox name = GetTemplateControl<TextBox>("CreateTaskListName");
+            TextBox description = GetTemplateControl<TextBox>("CreateTaskListDescription");
 
             name.Text = string.Empty;
             description.Text = string.Empty;
@@ -809,10 +798,10 @@ namespace Desktop
 
         public void CreateTaskListClick(object sender, RoutedEventArgs e)
         {
-            var name = GetTemplateControl<TextBox>("CreateTaskListName").Text;
-            var description = GetTemplateControl<TextBox>("CreateTaskListDescription").Text;
-            var errorPopup = GetTemplateControl<Border>("ErrorPopup");
-            var errorText = GetTemplateControl<TextBlock>("Error");
+            string name = GetTemplateControl<TextBox>("CreateTaskListName").Text;
+            string description = GetTemplateControl<TextBox>("CreateTaskListDescription").Text;
+            Border errorPopup = GetTemplateControl<Border>("ErrorPopup");
+            TextBlock errorText = GetTemplateControl<TextBlock>("Error");
 
             if (name == string.Empty || description == string.Empty)
             {
@@ -841,14 +830,14 @@ namespace Desktop
 
         public void CloseErrorPopup(object sender, RoutedEventArgs e)
         {
-            var errorPopup = GetTemplateControl<Border>("ErrorPopup");
+            Border errorPopup = GetTemplateControl<Border>("ErrorPopup");
             errorPopup.Visibility = Visibility.Collapsed;
         }
 
         public void CreateTaskNameTextChanged(object sender, TextChangedEventArgs e)
         {
-            var name = sender as TextBox;
-            var placeholder = name.Parent.FindVisualChildren<TextBlock>().ToList()[0];
+            TextBox? name = sender as TextBox;
+            TextBlock placeholder = name.Parent.FindVisualChildren<TextBlock>().ToList()[0];
 
             if (name.Text != "")
             {
@@ -862,8 +851,8 @@ namespace Desktop
 
         public void CreateTaskDescriptionTextChanged(object sender, TextChangedEventArgs e)
         {
-            var description = sender as TextBox;
-            var placeholder = description.Parent.FindVisualChildren<TextBlock>().ToList()[0];
+            TextBox? description = sender as TextBox;
+            TextBlock placeholder = description.Parent.FindVisualChildren<TextBlock>().ToList()[0];
 
             if (description.Text != "")
             {
@@ -877,8 +866,8 @@ namespace Desktop
 
         public void CreateTaskDeadlineTextChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            var deadline = sender as DateTimePicker;
-            var placeholder = deadline.Parent.FindVisualChildren<TextBlock>().ToList()[0];
+            DateTimePicker? deadline = sender as DateTimePicker;
+            TextBlock placeholder = deadline.Parent.FindVisualChildren<TextBlock>().ToList()[0];
 
             if (e.NewValue != null)
             {
@@ -892,14 +881,14 @@ namespace Desktop
 
         public void ClearCreateTaskClick(object sender, RoutedEventArgs e)
         {
-            var buttonGrid = (sender as Button).Parent as Grid;
-            var mainGrid = buttonGrid.Parent as Grid;
+            Grid? buttonGrid = (sender as Button).Parent as Grid;
+            Grid? mainGrid = buttonGrid.Parent as Grid;
 
-            var innerGrids = mainGrid.FindVisualChildren<Grid>().ToList();
+            List<Grid> innerGrids = mainGrid.FindVisualChildren<Grid>().ToList();
 
-            var name = innerGrids.Where(x => x.Name == "NameGrid").FirstOrDefault().FindVisualChildren<TextBox>().ToList()[0];
-            var description = innerGrids.Where(x => x.Name == "DescriptionGrid").FirstOrDefault().FindVisualChildren<TextBox>().ToList()[0];
-            var deadline = innerGrids.Where(x => x.Name == "DeadlineGrid").FirstOrDefault().FindVisualChildren<DateTimePicker>().ToList()[0];
+            TextBox name = innerGrids.Where(x => x.Name == "NameGrid").FirstOrDefault().FindVisualChildren<TextBox>().ToList()[0];
+            TextBox description = innerGrids.Where(x => x.Name == "DescriptionGrid").FirstOrDefault().FindVisualChildren<TextBox>().ToList()[0];
+            DateTimePicker deadline = innerGrids.Where(x => x.Name == "DeadlineGrid").FirstOrDefault().FindVisualChildren<DateTimePicker>().ToList()[0];
 
             name.Text = string.Empty;
             description.Text = string.Empty;
@@ -908,20 +897,20 @@ namespace Desktop
 
         public void CreateTaskClick(object sender, RoutedEventArgs e)
         {
-            var buttonGrid = (sender as Button).Parent as Grid;
-            var mainGrid = buttonGrid.Parent as Grid;
+            Grid? buttonGrid = (sender as Button).Parent as Grid;
+            Grid? mainGrid = buttonGrid.Parent as Grid;
 
-            var border = mainGrid.Parent as Border;
-            var taskList = border.Parent as ContentControl;
-            var taskListId = long.Parse(taskList.Tag.ToString());
+            Border? border = mainGrid.Parent as Border;
+            ContentControl? taskList = border.Parent as ContentControl;
+            long taskListId = long.Parse(taskList.Tag.ToString());
 
-            var innerGrids = mainGrid.FindVisualChildren<Grid>().ToList();
+            List<Grid> innerGrids = mainGrid.FindVisualChildren<Grid>().ToList();
 
-            var name = innerGrids.Where(x => x.Name == "NameGrid").FirstOrDefault().FindVisualChildren<TextBox>().ToList()[0].Text;
-            var description = innerGrids.Where(x => x.Name == "DescriptionGrid").FirstOrDefault().FindVisualChildren<TextBox>().ToList()[0].Text;
-            var deadline = innerGrids.Where(x => x.Name == "DeadlineGrid").FirstOrDefault().FindVisualChildren<DateTimePicker>().ToList()[0].Value;
-            var errorPopup = GetTemplateControl<Border>("ErrorPopup");
-            var errorText = GetTemplateControl<TextBlock>("Error");
+            string name = innerGrids.Where(x => x.Name == "NameGrid").FirstOrDefault().FindVisualChildren<TextBox>().ToList()[0].Text;
+            string description = innerGrids.Where(x => x.Name == "DescriptionGrid").FirstOrDefault().FindVisualChildren<TextBox>().ToList()[0].Text;
+            DateTime? deadline = innerGrids.Where(x => x.Name == "DeadlineGrid").FirstOrDefault().FindVisualChildren<DateTimePicker>().ToList()[0].Value;
+            Border errorPopup = GetTemplateControl<Border>("ErrorPopup");
+            TextBlock errorText = GetTemplateControl<TextBlock>("Error");
 
             if (name == string.Empty || description == string.Empty || deadline == null)
             {
@@ -953,15 +942,15 @@ namespace Desktop
 
         public void CloseManageMember(object sender, RoutedEventArgs e)
         {
-            var panel = GetTemplateControl<Border>("ManageMemberPopup");
+            Border panel = GetTemplateControl<Border>("ManageMemberPopup");
             panel.Visibility = Visibility.Collapsed;
         }
-        
+
         public void CancelMemberChanges(object sender, RoutedEventArgs e)
         {
-            var editing = GetTemplateControl<ToggleButton>("Editing");
-            var inviting = GetTemplateControl<ToggleButton>("Inviting");
-            var kicking = GetTemplateControl<ToggleButton>("Kicking");
+            ToggleButton editing = GetTemplateControl<ToggleButton>("Editing");
+            ToggleButton inviting = GetTemplateControl<ToggleButton>("Inviting");
+            ToggleButton kicking = GetTemplateControl<ToggleButton>("Kicking");
 
             editing.IsChecked = CurrentManagedPermissions.Editing;
             inviting.IsChecked = CurrentManagedPermissions.InvitingMembers;
@@ -970,10 +959,10 @@ namespace Desktop
 
         public void ConfirmMemberChanges(object sender, RoutedEventArgs e)
         {
-            var editing = GetTemplateControl<ToggleButton>("Editing");
-            var inviting = GetTemplateControl<ToggleButton>("Inviting");
-            var kicking = GetTemplateControl<ToggleButton>("Kicking");
-            var error = GetTemplateControl<TextBlock>("ManageMemberPopupError");
+            ToggleButton editing = GetTemplateControl<ToggleButton>("Editing");
+            ToggleButton inviting = GetTemplateControl<ToggleButton>("Inviting");
+            ToggleButton kicking = GetTemplateControl<ToggleButton>("Kicking");
+            TextBlock error = GetTemplateControl<TextBlock>("ManageMemberPopupError");
 
             CurrentManagedPermissions.Editing = editing.IsChecked != null ? (bool)editing.IsChecked : false;
             CurrentManagedPermissions.InvitingMembers = inviting.IsChecked != null ? (bool)inviting.IsChecked : false;
@@ -993,7 +982,7 @@ namespace Desktop
 
         public void CloseMeeting(object sender, RoutedEventArgs e)
         {
-            var panel = GetTemplateControl<Border>("CreateMeetingPopup");
+            Border panel = GetTemplateControl<Border>("CreateMeetingPopup");
             panel.Visibility = Visibility.Collapsed;
             GetTemplateControl<Button>("BackButton").Visibility = Visibility.Visible;
         }
@@ -1001,11 +990,11 @@ namespace Desktop
         public void CreateMeeting(object sender, RoutedEventArgs e)
         {
             GetTemplateControl<Button>("BackButton").Visibility = Visibility.Collapsed;
-            var panel = GetTemplateControl<Border>("CreateMeetingPopup");
-            var error = GetTemplateControl<TextBlock>("MeetingError");
-            var title = GetTemplateControl<TextBox>("MeetingTitle").Text;
-            var description = GetTemplateControl<TextBox>("MeetingDescription").Text;
-            var date = GetTemplateControl<DateTimePicker>("MeetingDate").Value;
+            Border panel = GetTemplateControl<Border>("CreateMeetingPopup");
+            TextBlock error = GetTemplateControl<TextBlock>("MeetingError");
+            string title = GetTemplateControl<TextBox>("MeetingTitle").Text;
+            string description = GetTemplateControl<TextBox>("MeetingDescription").Text;
+            DateTime? date = GetTemplateControl<DateTimePicker>("MeetingDate").Value;
 
             if (title == "" || description == "" || date == null)
             {
@@ -1013,7 +1002,7 @@ namespace Desktop
                 return;
             }
 
-            var data = new Meeting()
+            Meeting data = new Meeting()
             {
                 Title = title,
                 Description = description,
@@ -1036,10 +1025,10 @@ namespace Desktop
         public void ManageTaskList(object sender, RoutedEventArgs e)
         {
             GetTemplateControl<Button>("BackButton").Visibility = Visibility.Collapsed;
-            var popup = GetTemplateControl<Border>("ManageTaskListPopup");
-            var taskListId = (sender as Button).Tag as long?;
-            var taskList = TaskListManager.Instance.GetTaskList((long)taskListId);
-            var permissions = Permissions;
+            Border popup = GetTemplateControl<Border>("ManageTaskListPopup");
+            long? taskListId = (sender as Button).Tag as long?;
+            TaskList taskList = TaskListManager.Instance.GetTaskList((long)taskListId);
+            UserPermissions permissions = Permissions;
 
             popup.DataContext = new TaskListModel(taskList, permissions);
             popup.Visibility = Visibility.Visible;
@@ -1048,10 +1037,10 @@ namespace Desktop
         public void ManageTask(object sender, RoutedEventArgs e)
         {
             GetTemplateControl<Button>("BackButton").Visibility = Visibility.Collapsed;
-            var popup = GetTemplateControl<Border>("ManageTaskPopup");
-            var taskId = (sender as Button).Tag as long?;
-            var task = TaskManager.Instance.GetTask((long)taskId);
-            var permissions = Permissions;
+            Border popup = GetTemplateControl<Border>("ManageTaskPopup");
+            long? taskId = (sender as Button).Tag as long?;
+            Task task = TaskManager.Instance.GetTask((long)taskId);
+            UserPermissions permissions = Permissions;
 
             List<User> members;
             List<User> taskMembers = TaskManager.Instance.GetMembers(task.TaskId);
@@ -1063,11 +1052,11 @@ namespace Desktop
 
         public void EditDeleteTaskList(object sender, RoutedEventArgs e)
         {
-            var popup = GetTemplateControl<Border>("ManageTaskListPopup");
-            var error = GetTemplateControl<TextBlock>("EditTaskListError");
-            var model = popup.DataContext as TaskListModel;
+            Border popup = GetTemplateControl<Border>("ManageTaskListPopup");
+            TextBlock error = GetTemplateControl<TextBlock>("EditTaskListError");
+            TaskListModel? model = popup.DataContext as TaskListModel;
 
-            var data = model.TaskList;
+            TaskList data = model.TaskList;
 
             bool success = TaskListManager.Instance.DeleteTaskList(data.TaskListId);
 
@@ -1091,16 +1080,16 @@ namespace Desktop
 
         public void EditCloseTaskList(object sender, RoutedEventArgs e)
         {
-            var popup = GetTemplateControl<Border>("ManageTaskListPopup");
+            Border popup = GetTemplateControl<Border>("ManageTaskListPopup");
             popup.Visibility = Visibility.Collapsed;
             GetTemplateControl<Button>("BackButton").Visibility = Visibility.Visible;
         }
 
         public void EditConfirmTaskList(object sender, RoutedEventArgs e)
         {
-            var popup = GetTemplateControl<Border>("ManageTaskListPopup");
-            var error = GetTemplateControl<TextBlock>("EditTaskListError");
-            var model = popup.DataContext as TaskListModel;
+            Border popup = GetTemplateControl<Border>("ManageTaskListPopup");
+            TextBlock error = GetTemplateControl<TextBlock>("EditTaskListError");
+            TaskListModel? model = popup.DataContext as TaskListModel;
             bool saved = model.Save();
 
             if (!saved)
@@ -1109,7 +1098,7 @@ namespace Desktop
                 return;
             }
 
-            var data = model.TaskList;
+            TaskList data = model.TaskList;
 
             bool success = TaskListManager.Instance.UpdateTaskList(data);
 
@@ -1132,21 +1121,21 @@ namespace Desktop
 
         public void EditReviewTask(object sender, RoutedEventArgs e)
         {
-            var popup = GetTemplateControl<Border>("ReviewPopup");
+            Border popup = GetTemplateControl<Border>("ReviewPopup");
             popup.Visibility = Visibility.Visible;
         }
 
         public void CancelReview(object sender, RoutedEventArgs e)
         {
-            var popup = GetTemplateControl<Border>("ReviewPopup");
+            Border popup = GetTemplateControl<Border>("ReviewPopup");
             popup.Visibility = Visibility.Collapsed;
         }
 
         public void RejectReview(object sender, RoutedEventArgs e)
         {
-            var popup = GetTemplateControl<Border>("ReviewPopup");
-            var model = GetTemplateControl<Border>("ManageTaskPopup").DataContext as TaskModel;
-            var error = GetTemplateControl<TextBlock>("EditTaskError");
+            Border popup = GetTemplateControl<Border>("ReviewPopup");
+            TaskModel? model = GetTemplateControl<Border>("ManageTaskPopup").DataContext as TaskModel;
+            TextBlock error = GetTemplateControl<TextBlock>("EditTaskError");
 
             model.Task.Accepted = false;
             model.Task.HandedIn = false;
@@ -1174,9 +1163,9 @@ namespace Desktop
 
         public void AcceptReview(object sender, RoutedEventArgs e)
         {
-            var popup = GetTemplateControl<Border>("ReviewPopup");
-            var model = GetTemplateControl<Border>("ManageTaskPopup").DataContext as TaskModel;
-            var error = GetTemplateControl<TextBlock>("EditTaskError");
+            Border popup = GetTemplateControl<Border>("ReviewPopup");
+            TaskModel? model = GetTemplateControl<Border>("ManageTaskPopup").DataContext as TaskModel;
+            TextBlock error = GetTemplateControl<TextBlock>("EditTaskError");
 
             model.Task.Accepted = true;
             bool success = TaskManager.Instance.UpdateTask(model.Task);
@@ -1202,22 +1191,22 @@ namespace Desktop
 
         public void EditHandInTask(object sender, RoutedEventArgs e)
         {
-            var popup = GetTemplateControl<Border>("HandInPopup");
+            Border popup = GetTemplateControl<Border>("HandInPopup");
             popup.Visibility = Visibility.Visible;
             GetTemplateControl<Button>("BackButton").Visibility = Visibility.Visible;
         }
 
         public void CancelHandIn(object sender, RoutedEventArgs e)
         {
-            var popup = GetTemplateControl<Border>("HandInPopup");
+            Border popup = GetTemplateControl<Border>("HandInPopup");
             popup.Visibility = Visibility.Collapsed;
         }
 
         public void ConfirmHandIn(object sender, RoutedEventArgs e)
         {
-            var popup = GetTemplateControl<Border>("HandInPopup");
-            var model = GetTemplateControl<Border>("ManageTaskPopup").DataContext as TaskModel;
-            var error = GetTemplateControl<TextBlock>("EditTaskError");
+            Border popup = GetTemplateControl<Border>("HandInPopup");
+            TaskModel? model = GetTemplateControl<Border>("ManageTaskPopup").DataContext as TaskModel;
+            TextBlock error = GetTemplateControl<TextBlock>("EditTaskError");
 
             model.Task.HandedIn = true;
             model.Task.Accepted = null;
@@ -1245,11 +1234,11 @@ namespace Desktop
 
         public void EditDeleteTask(object sender, RoutedEventArgs e)
         {
-            var popup = GetTemplateControl<Border>("ManageTaskPopup");
-            var error = GetTemplateControl<TextBlock>("EditTaskError");
-            var model = popup.DataContext as TaskModel;
+            Border popup = GetTemplateControl<Border>("ManageTaskPopup");
+            TextBlock error = GetTemplateControl<TextBlock>("EditTaskError");
+            TaskModel? model = popup.DataContext as TaskModel;
 
-            var data = model.Task;
+            Task data = model.Task;
 
             bool success = TaskManager.Instance.DeleteTask(data.TaskId);
 
@@ -1272,16 +1261,16 @@ namespace Desktop
 
         public void EditCloseTask(object sender, RoutedEventArgs e)
         {
-            var popup = GetTemplateControl<Border>("ManageTaskPopup");
+            Border popup = GetTemplateControl<Border>("ManageTaskPopup");
             popup.Visibility = Visibility.Collapsed;
             GetTemplateControl<Button>("BackButton").Visibility = Visibility.Visible;
         }
 
         public void EditConfirmTask(object sender, RoutedEventArgs e)
         {
-            var popup = GetTemplateControl<Border>("ManageTaskPopup");
-            var error = GetTemplateControl<TextBlock>("EditTaskError");
-            var model = popup.DataContext as TaskModel;
+            Border popup = GetTemplateControl<Border>("ManageTaskPopup");
+            TextBlock error = GetTemplateControl<TextBlock>("EditTaskError");
+            TaskModel? model = popup.DataContext as TaskModel;
             bool saved = model.Save();
 
             if (!saved)
@@ -1290,8 +1279,8 @@ namespace Desktop
                 return;
             }
 
-            var data = model.Task;
-            var members = model.TaskMembers;
+            Task data = model.Task;
+            List<User> members = model.TaskMembers;
 
             bool success = TaskManager.Instance.UpdateTask(data) && TaskManager.Instance.AssignMembers(data.TaskId, members);
 

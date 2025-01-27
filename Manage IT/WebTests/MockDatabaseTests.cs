@@ -1,10 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.CompilerServices;
 
 namespace WebTests
 {
@@ -14,7 +8,7 @@ namespace WebTests
         [TestMethod]
         public void GetDatabaseSetForTypeUserShouldReturnAnEmptyListOfUsers()
         {
-            var mock = new MockDatabaseContext();
+            MockDatabaseContext mock = new MockDatabaseContext();
 
             Assert.IsInstanceOfType(mock.GetDatabaseSet<User>(), typeof(List<User>));
         }
@@ -22,7 +16,7 @@ namespace WebTests
         [TestMethod]
         public void GetDatabaseSetForTypeProjectShouldReturnAnEmptyListOfProjects()
         {
-            var mock = new MockDatabaseContext();
+            MockDatabaseContext mock = new MockDatabaseContext();
 
             Assert.IsInstanceOfType(mock.GetDatabaseSet<Project>(), typeof(List<Project>));
         }
@@ -30,7 +24,7 @@ namespace WebTests
         [TestMethod]
         public void GetDatabaseSetForTypeProjectMembersShouldReturnAnEmptyListOfProjectMembers()
         {
-            var mock = new MockDatabaseContext();
+            MockDatabaseContext mock = new MockDatabaseContext();
 
             Assert.IsInstanceOfType(mock.GetDatabaseSet<ProjectMembers>(), typeof(List<ProjectMembers>));
         }
@@ -38,7 +32,7 @@ namespace WebTests
         [TestMethod]
         public void GetDatabaseSetForTypeTaskShouldReturnAnEmptyListOfTasks()
         {
-            var mock = new MockDatabaseContext();
+            MockDatabaseContext mock = new MockDatabaseContext();
 
             Assert.IsInstanceOfType(mock.GetDatabaseSet<Task>(), typeof(List<Task>));
         }
@@ -46,7 +40,7 @@ namespace WebTests
         [TestMethod]
         public void GetDatabaseSetForTypeTaskListShouldReturnAnEmptyListOfTaskLists()
         {
-            var mock = new MockDatabaseContext();
+            MockDatabaseContext mock = new MockDatabaseContext();
 
             Assert.IsInstanceOfType(mock.GetDatabaseSet<TaskList>(), typeof(List<TaskList>));
         }
@@ -54,7 +48,7 @@ namespace WebTests
         [TestMethod]
         public void GetDatabaseSetForTypeTaskDetailsShouldReturnAnEmptyListOfTaskDetails()
         {
-            var mock = new MockDatabaseContext();
+            MockDatabaseContext mock = new MockDatabaseContext();
 
             Assert.IsInstanceOfType(mock.GetDatabaseSet<TaskDetails>(), typeof(List<TaskDetails>));
         }
@@ -62,7 +56,7 @@ namespace WebTests
         [TestMethod]
         public void GetDatabaseSetForTypeUserPermissionsShouldReturnAnEmptyListOfUserPermissions()
         {
-            var mock = new MockDatabaseContext();
+            MockDatabaseContext mock = new MockDatabaseContext();
 
             Assert.IsInstanceOfType(mock.GetDatabaseSet<UserPermissions>(), typeof(List<UserPermissions>));
         }
@@ -70,14 +64,14 @@ namespace WebTests
         [TestMethod]
         public void GetDatabaseSetForIncorrectTypeShouldReturnNull()
         {
-            var mock = new MockDatabaseContext();
+            MockDatabaseContext mock = new MockDatabaseContext();
             Assert.IsNull(mock.GetDatabaseSet<Database>());
         }
 
         [TestMethod]
         public void DisposeShouldThrowNotImplementedException()
         {
-            Assert.ThrowsException<NotImplementedException>(() => { using (var mock = new MockDatabase()) { } });
+            Assert.ThrowsException<NotImplementedException>(() => { using (MockDatabase mock = new MockDatabase()) { } });
         }
 
         [TestMethod]
@@ -85,16 +79,16 @@ namespace WebTests
         {
             try
             {
-                using (var mock = new MockDatabase())
+                using (MockDatabase mock = new MockDatabase())
                 {
                     List<User> results;
-                    var format = FormattableStringFactory.Create("SELECT * FROM Users");
+                    FormattableString format = FormattableStringFactory.Create("SELECT * FROM Users");
 
                     Assert.IsTrue(mock.ExecuteQuery(format, out results));
                     Assert.IsNotNull(results);
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
         }
 
         [TestMethod]
@@ -102,16 +96,16 @@ namespace WebTests
         {
             try
             {
-                using (var mock = new MockDatabase())
+                using (MockDatabase mock = new MockDatabase())
                 {
                     List<User> results;
-                    var format = FormattableStringFactory.Create("INSERT INTO Users");
+                    FormattableString format = FormattableStringFactory.Create("INSERT INTO Users");
 
                     Assert.IsTrue(mock.ExecuteQuery(format, out results));
                     Assert.IsNotNull(results);
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
         }
 
         [TestMethod]
@@ -119,16 +113,16 @@ namespace WebTests
         {
             try
             {
-                using (var mock = new MockDatabase())
+                using (MockDatabase mock = new MockDatabase())
                 {
                     List<User> results;
-                    var format = FormattableStringFactory.Create("UPDATE Users");
+                    FormattableString format = FormattableStringFactory.Create("UPDATE Users");
 
                     Assert.IsTrue(mock.ExecuteQuery(format, out results));
                     Assert.IsNotNull(results);
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
         }
 
         [TestMethod]
@@ -136,16 +130,16 @@ namespace WebTests
         {
             try
             {
-                using (var mock = new MockDatabase())
+                using (MockDatabase mock = new MockDatabase())
                 {
                     List<User> results;
-                    var format = FormattableStringFactory.Create("DELETE * FROM Users");
+                    FormattableString format = FormattableStringFactory.Create("DELETE * FROM Users");
 
                     Assert.IsTrue(mock.ExecuteQuery(format, out results));
                     Assert.IsNotNull(results);
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
         }
 
         [TestMethod]
@@ -153,15 +147,15 @@ namespace WebTests
         {
             try
             {
-                using (var mock = new MockDatabase())
+                using (MockDatabase mock = new MockDatabase())
                 {
                     List<User> results;
-                    var format = FormattableStringFactory.Create("DESTROY Users");
+                    FormattableString format = FormattableStringFactory.Create("DESTROY Users");
 
                     Assert.ThrowsException<ArgumentException>(() => mock.ExecuteQuery(format, out results));
                 }
             }
-            catch(Exception ex) { }
+            catch (Exception) { }
         }
     }
 }
