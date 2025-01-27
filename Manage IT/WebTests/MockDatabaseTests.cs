@@ -20,14 +20,6 @@ namespace WebTests
         }
 
         [TestMethod]
-        public void GetDatabaseSetForTypePrefixShouldReturnAnEmptyListOfPrefixes()
-        {
-            var mock = new MockDatabaseContext();
-
-            Assert.IsInstanceOfType(mock.GetDatabaseSet<Prefix>(), typeof(List<Prefix>));
-        }
-
-        [TestMethod]
         public void GetDatabaseSetForTypeProjectShouldReturnAnEmptyListOfProjects()
         {
             var mock = new MockDatabaseContext();

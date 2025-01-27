@@ -1,0 +1,499 @@
+﻿@page
+@using EFModeling.EntityProperties.DataAnnotations.Annotations;
+@using Task = EFModeling.EntityProperties.DataAnnotations.Annotations.Task;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@Html.AntiForgeryToken()
+@model AdminPanel
+@{
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="utf-8" />
+            <title>Manage IT | Main</title>
+            <link rel="icon" href=@Href("Graphics/logo.png") />
+            <meta name="description" content="A convenient IT Project management tool for both managers and employees." />
+            <meta name="keywords" content="management, IT, programming, project, www, programmer" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+            <meta name="author" content="Bosnian IT Management Inc." />
+            <link rel="stylesheet" href="~/AdminPanel.css" type="text/css"/>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+            <!--Because Razor adds a scope identifier and a helper tag, 
+            body needs to be styled in the style tag as per
+            https://github.com/dotnet/aspnetcore/issues/41580-->
+            <style>
+                body {
+                    width: 100vw;
+                    height: 100vh;
+                    margin: 0px;
+                    background: linear-gradient(#000000, #000040);
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                }
+            </style>
+
+            <script>
+                function openNav() {
+                    document.getElementById("mySidebar").style.width = "250px";
+                    document.getElementById("main").style.marginLeft = "250px";
+                }
+
+                function closeNav() {
+                    document.getElementById("mySidebar").style.width = "0";
+                    document.getElementById("main").style.marginLeft= "0";
+                }
+
+                function switchPageTemplate(pageId) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/AdminPanel?handler=SwitchPageTemplate",
+                        data: { pageId : pageId },
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("XSRF-TOKEN",
+                                $('input:hidden[name="__RequestVerificationToken"]').val());
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                window.location.reload();
+                            }
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                }
+
+                function removeUser(userId) {
+                    var result = confirm("Do you really want to remove this user?");
+
+                    if (result) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/AdminPanel?handler=RemoveUser",
+                            data: { userId: userId },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                }
+
+                function removeProject(projectId) {
+                    var result = confirm("Do you really want to remove this project?");
+
+                    if (result) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/AdminPanel?handler=RemoveProject",
+                            data: { projectId: projectId },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                }
+
+                function removeTaskList(taskListId) {
+                    var result = confirm("Do you really want to remove this task list?");
+
+                    if (result) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/AdminPanel?handler=RemoveTaskList",
+                            data: { taskListId: taskListId },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                }
+
+                function removeTask(taskId) {
+                    var result = confirm("Do you really want to remove this task?");
+
+                    if (result) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/AdminPanel?handler=RemoveTask",
+                            data: { taskId: taskId },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                }
+
+                function removeMeeting(meetingId) {
+                    var result = confirm("Do you really want to remove this meeting?");
+
+                    if (result) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/AdminPanel?handler=RemoveMeeting",
+                            data: { meetingId: meetingId },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                }
+
+                function removeConversation(conversationId) {
+                    var result = confirm("Do you really want to remove this conversation?");
+
+                    if (result) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/AdminPanel?handler=RemoveConversation",
+                            data: { conversationId: conversationId },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                }
+
+                function removeMessage(messageId) {
+                    var result = confirm("Do you really want to remove this message?");
+
+                    if (result) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/AdminPanel?handler=RemoveMessage",
+                            data: { messageId: messageId },
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                 }
+
+                function setActiveButton(pageId) {
+                    for (var i = 0; i <= 6; i++) {
+                        document.getElementById("button" + i).style.backgroundColor = "white";
+                    }
+                    
+                    var button = document.getElementById("button" + pageId);
+                    button.style.backgroundColor = "#c0c0ff";
+                }
+
+            </script>
+        </head>
+
+        <body>
+            <header>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                <div class="topnav">
+                    <a class="active" href=@Href("~/")><i class="fa fa-fw fa-home"></i> Home</a>
+                    <div class="topnav-right">
+                        @if (HttpContext.Session.Get<User>("User").Admin)
+                        {
+                            <a href=@Href("~/AdminPanel")><i class="fa fa-fw fa-cog"></i>Admin Panel</a>
+                        }
+
+                        <a href=@Href("~/AccountManagement")><i class="fa fa-fw fa-user-circle"></i>My Account</a>
+                        <a href=@Href("~/Chat")><i class="fa fa-fw fa-commenting"></i>Chat</a>
+                        <a href=@Href("~/Calendar")><i class="fa fa-fw fa-calendar"></i>Calendar</a>
+                        <a href=@Href("~/LogOut")><i class="fa fa-fw fa-sign-out"></i>Log Out</a>
+                    </div>
+                </div>
+            </header>
+
+            <div class="main">
+                <div class="admin">
+                    <div class="sideNav">
+                    @{
+                        for (int i = 0; i < 7; i++)
+                        {
+                            AdminPageTemplate? template = (AdminPageTemplate?)i;
+
+                            <button id="@("button" + i)" onclick="switchPageTemplate(@i)">@template.ToHeader()</button>
+                        }
+                    }
+                    </div>
+
+
+                    @{
+                        if (Model.PageTemplate != null)
+                        {
+                            var template = (int)Model.PageTemplate;
+
+                            <script>
+                                setActiveButton(@template);
+                            </script>
+                        }
+                    }
+
+                    <div class="content">
+                        <p class="header">@Model.PageTemplate.ToHeader()</p>
+
+                        <div class="recordList">
+                        @{
+                            bool success = false;
+
+                            switch(Model.PageTemplate)
+                            {
+                                case AdminPageTemplate.Users:
+                                    List<User> users;
+                                    success = UserManager.Instance.GetAllUsers(out users);
+                                    Model.Users = users;
+
+                                    <div class="recordHeader">
+                                        <div class="recordHeaderColumn">UserId</div>
+                                        <div class="recordHeaderColumn">Email</div>
+                                        <div class="recordHeaderColumn">Login</div>
+                                        <div class="recordHeaderColumn">Password</div>
+                                        <div class="recordHeaderColumn">Admin</div>
+                                        <div class="recordHeaderColumn">Verified</div>
+                                        <button class="recordButton" style="visibility:hidden;">Remove</button>
+                                    </div>
+
+                                    foreach (var user in users)
+                                    {
+                                        if (user.UserId == HttpContext.Session.Get<User>("User").UserId)
+                                        {
+                                            continue;
+                                        }
+
+                                        <div class="record">
+                                            <div class="recordColumn">@user.UserId</div>
+                                            <div class="recordColumn">@user.Email</div>
+                                            <div class="recordColumn">@user.Login</div>
+                                            <div class="recordColumn">@user.Password</div>
+                                            <div class="recordColumn">@user.Admin</div>
+                                            <div class="recordColumn">@user.Verified</div>
+                                            <button class="recordButton" onclick="removeUser(@user.UserId)">Remove</button>
+                                        </div>
+                                    }
+
+                                    break;
+
+                                case AdminPageTemplate.Projects:
+                                    List<Project> projects;
+                                    success = ProjectManager.Instance.GetAllProjects(out projects);
+                                    Model.Projects = projects;
+
+                                    <div class="recordHeader">
+                                        <div class="recordHeaderColumn">ProjectId</div>
+                                        <div class="recordHeaderColumn">ManagerId</div>
+                                        <div class="recordHeaderColumn">Name</div>
+                                        <div class="recordHeaderColumn">Description</div>
+                                        <button class="recordButton" style="visibility:hidden;">Remove</button>
+                                    </div>
+
+                                    foreach (var project in projects)
+                                    {
+                                        <div class="record">
+                                            <div class="recordColumn">@project.ProjectId</div>
+                                            <div class="recordColumn">@project.ManagerId</div>
+                                            <div class="recordColumn">@project.Name</div>
+                                            <div class="recordColumn">@project.Description</div>
+                                            <button class="recordButton" onclick="removeProject(@project.ProjectId)">Remove</button>
+                                        </div>
+                                    }
+
+                                    break;
+
+                                case AdminPageTemplate.TaskLists:
+                                    List<TaskList> taskLists;
+                                    success = TaskListManager.Instance.GetAllTaskLists(out taskLists);
+                                    Model.TaskLists = taskLists;
+
+                                    <div class="recordHeader">
+                                        <div class="recordHeaderColumn">TaskListId</div>
+                                        <div class="recordHeaderColumn">ProjectId</div>
+                                        <div class="recordHeaderColumn">Name</div>
+                                        <div class="recordHeaderColumn">Description</div>
+                                        <button class="recordButton" style="visibility:hidden;">Remove</button>
+                                    </div>
+
+                                    foreach (var taskList in taskLists)
+                                    {
+                                        <div class="record">
+                                            <div class="recordColumn">@taskList.TaskListId</div>
+                                            <div class="recordColumn">@taskList.ProjectId</div>
+                                            <div class="recordColumn">@taskList.Name</div>
+                                            <div class="recordColumn">@taskList.Description</div>
+                                            <button class="recordButton" onclick="removeTaskList(@taskList.TaskListId)">Remove</button>
+                                        </div>
+                                    }
+                                    break;
+
+                                case AdminPageTemplate.Tasks:
+                                    List<Task> tasks;
+                                    success = TaskManager.Instance.GetAllTasks(out tasks);
+                                    Model.Tasks = tasks;
+
+                                    <div class="recordHeader">
+                                        <div class="recordHeaderColumn">TaskId</div>
+                                        <div class="recordHeaderColumn">TaskListId</div>
+                                        <div class="recordHeaderColumn">Title</div>
+                                        <div class="recordHeaderColumn">Description</div>
+                                        <div class="recordHeaderColumn">Deadline</div>
+                                        <button class="recordButton" style="visibility:hidden;">Remove</button>
+                                    </div>
+
+                                    foreach (var task in tasks)
+                                    {
+                                        <div class="record">
+                                            <div class="recordColumn">@task.TaskId</div>
+                                            <div class="recordColumn">@task.TaskListId</div>
+                                            <div class="recordColumn">@task.Name</div>
+                                            <div class="recordColumn">@task.Description</div>
+                                            <div class="recordColumn">@task.Deadline.ToString("dd.MM.yyyy HH:mm")</div>
+                                            <button class="recordButton" onclick="removeTask(@task.TaskId)">Remove</button>
+                                        </div>
+                                    }
+                                    break;
+
+                                case AdminPageTemplate.Meetings:
+                                    List<Meeting> meetings;
+                                    success = MeetingManager.Instance.GetAllMeetings(out meetings);
+                                    Model.Meetings = meetings;
+
+                                    <div class="recordHeader">
+                                        <div class="recordHeaderColumn">MeetingId</div>
+                                        <div class="recordHeaderColumn">ProjectId</div>
+                                        <div class="recordHeaderColumn">Title</div>
+                                        <div class="recordHeaderColumn">Description</div>
+                                        <div class="recordHeaderColumn">Date</div>
+                                        <button class="recordButton" style="visibility:hidden;">Remove</button>
+                                    </div>
+
+                                    foreach (var meeting in meetings)
+                                    {
+                                        <div class="record">
+                                            <div class="recordColumn">@meeting.MeetingId</div>
+                                            <div class="recordColumn">@meeting.ProjectId</div>
+                                            <div class="recordColumn">@meeting.Title</div>
+                                            <div class="recordColumn">@meeting.Description</div>
+                                            <div class="recordColumn">@meeting.Date.ToString("dd.MM.yyyy")</div>
+                                            <button class="recordButton" onclick="removeMeeting(@meeting.MeetingId)">Remove</button>
+                                        </div>
+                                    }
+                                    break;
+
+                                case AdminPageTemplate.Conversations:
+                                    List<Conversation> conversations;
+                                    success = ChatManager.Instance.GetAllConversations(out conversations);
+                                    Model.Conversations = conversations;
+
+                                    <div class="recordHeader">
+                                        <div class="recordHeaderColumn">ConversationId</div>
+                                        <div class="recordHeaderColumn">User1Id</div>
+                                        <div class="recordHeaderColumn">User2Id</div>
+                                        <button class="recordButton" style="visibility:hidden;">Remove</button>
+                                    </div>
+
+                                    foreach (var conversation in conversations)
+                                    {
+                                        <div class="record">
+                                            <div class="recordColumn">@conversation.ConversationId</div>
+                                            <div class="recordColumn">@conversation.User1Id</div>
+                                            <div class="recordColumn">@conversation.User2Id</div>
+                                            <button class="recordButton" onclick="removeConversation(@conversation.ConversationId)">Remove</button>
+                                        </div>
+                                    }
+                                    break;
+
+                                case AdminPageTemplate.Messages:
+                                    List<Message> messages;
+                                    success = ChatManager.Instance.GetAllMessages(out messages);
+                                    Model.Messages = messages;
+
+                                    <div class="recordHeader">
+                                        <div class="recordHeaderColumn">MessageId</div>
+                                        <div class="recordHeaderColumn">ConversationId</div>
+                                        <div class="recordHeaderColumn">UserId</div>
+                                        <div class="recordHeaderColumn">MessageBody</div>
+                                        <button class="recordButton" style="visibility:hidden;">Remove</button>
+                                    </div>
+
+                                    foreach (var message in messages)
+                                    {
+                                        <div class="record">
+                                            <div class="recordColumn">@message.MessageId</div>
+                                            <div class="recordColumn">@message.ConversationId</div>
+                                            <div class="recordColumn">@message.UserId</div>
+                                            <div class="recordColumn">@message.MessageBody</div>
+                                            <button class="recordButton" onclick="removeMessage(@message.MessageId)">Remove</button>
+                                        </div>
+                                    }
+                                    break;
+                            }
+                        }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer>
+                <div class="bottomnavbar">
+                   
+                </div>
+            </footer>
+        </body>
+    </html>
+}

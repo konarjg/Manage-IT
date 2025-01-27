@@ -20,8 +20,20 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjZXB0SW52aXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/AccountManagement.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudE1hbmFnZW1lbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/AdminPanel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5QYW5lbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/Calendar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FsZW5kYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/Chat.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2hhdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/CreateProjectForm.cshtml]
@@ -58,6 +70,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/RegisterForm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0ZXJGb3JtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/RestorePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVzdG9yZVBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/konis/Desktop/Manage IT/Manage IT/Web/Pages/VerifyEmail.cshtml]

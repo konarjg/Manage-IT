@@ -1,0 +1,275 @@
+﻿p {
+    font-size: 54px;
+    text-align: center;
+    font-weight: normal;
+    color: #ffffff;
+}
+
+.topnav {
+    width: 100%;
+    overflow: auto;
+}
+
+.topnav a {
+    float: left;
+    text-align: center;
+    padding: 12px;
+    color: #4040ff;
+    text-decoration: none;
+    font-size: 22px;
+    transition: 0.1s;
+}
+
+/* Navbar links on mouse-over */
+.topnav a:hover {
+    color: #ffffff;
+    transition: 0.1s;
+}
+
+/* Current/active navbar link */
+.topnav .active {
+    color: #a0a0ff;
+}
+
+.topnav-right {
+    float: right;
+}
+
+/* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
+@media screen and (max-width: 500px) {
+    .navbar a {
+        float: none;
+        display: block;
+    }
+}
+
+.bottomnavbar {
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+}
+
+.bottomnavbar a {
+    float: left;
+    display: block;
+    color: #158eea;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 22px;
+    transition: 0.1s;
+}
+
+.bottomnavbar a:hover {
+    color: white;
+    transition: 0.1s;
+}
+
+.main {
+    width: 100vw;
+    height: 80vh;
+    gap: 1vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat {
+    width: 80vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: row;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:2vh;
+    gap:0.05vw;
+
+}
+
+.chatBox{
+    width:60vw;
+    height:80vh;
+    border-top: 1vh solid white;
+    border-left: 1vh solid white;
+    border-bottom: 1vh solid white;
+    border-bottom-left-radius:2vh;
+    border-top-left-radius:2vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.conversationsBox {
+    width: 20vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    border: 1vh solid white;
+    border-top-right-radius: 2vh;
+    border-bottom-right-radius: 2vh;
+}
+
+.conversations {
+    width: 20vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border-bottom: 1vh solid white;
+}
+
+.searchBox {
+    width: 15vw;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 36px;
+}
+
+.searchField {
+    resize: none;
+    height: 5vh;
+    overflow-y: hidden;
+    padding: 1vh;
+    background-color: transparent;
+    border: 0.5vh solid white;
+    outline: none;
+    color: white;
+    font-size: 18px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.search {
+    margin-top: auto;
+    margin-bottom: auto;
+    color: white;
+    cursor: pointer;
+}
+
+.search:hover {
+    color: blue;
+}
+
+.message {
+    display: inline-block;
+    width: fit-content;
+    height: auto;
+    min-width:30vw;
+    max-width:30vw;
+    padding:1vh;
+    border-radius:3vh;
+    color: white;
+    font-size: 24px;
+    margin-bottom: 1vh;
+}
+
+.own {
+    background-color: #a0a0ff;
+    margin-left: 1vw;
+    margin-top: 1vh;
+}
+
+.else {
+    background-color: #808080;
+    margin-left: auto;
+    margin-right: 1vw;
+    margin-top: 1vh;
+}
+
+.conversation {
+    width: 16vw;
+    height: 5vh;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    border: 0.5vh solid white;
+    border-radius: 3vh;
+    display: inline-flex;
+    gap: 1vw;
+    flex-direction: row;
+    font-size: 28px;
+    color: white;
+    margin-top: 1vh;
+}
+
+.current {
+    background-color: #a0a0ff;
+    color: black;
+}
+
+.conversation:hover {
+    background-color: #a0a0ff80;
+}
+
+.conversationName {
+    width: 11vw;
+    height: 4vh;
+    padding: 1vh;
+    font-size: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.delete {
+    color:#aa0000;
+    height:3vh;
+    margin-top:auto;
+    margin-bottom:auto;
+    float:right;
+}
+
+.delete:hover {
+    color: red;
+}
+
+.messages {
+    width: 60vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.sendMessageBox {
+    width: 60vw;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    border-top: 1vh solid white;
+    font-size: 36px;
+}
+
+.messageField {
+    width: 45vw;
+    height: 8vh;
+    background-color: transparent;
+    color: white;
+    border: 0.5vh solid white;
+    font-size: 20px;
+    outline: none;
+    resize: none;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 2vw;
+    margin-right: initial;
+}
+
+.send {
+    color: white;
+    margin: auto;
+    margin-left: 1vw;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+.send:hover {
+    color: blue;
+}

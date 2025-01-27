@@ -649,21 +649,26 @@ input[type=date] ::-webkit-calendar-picker-indicator {
     background-color:aqua;
 }
 
-.taskListPopup{
+#taskListPopup{
+    background: linear-gradient(black, #000040);
     position:absolute;
-    top:0;
-    right:0;
+    top:30vh;
+    right:25vw;
     width:50vw;
-    height:80vh;
+    height:45vh;
     display:flex;
+    border: 1vh solid white;
     flex-direction:column;
-    gap:2vh;
+    gap:1vh;
     visibility:collapse;
 }
 
 .taskListPair{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1vh;
     width:45vw;
-    height:3vh;
+    height:10vh;
     display:flex;
     flex-direction:row;
     gap:5vw;
@@ -683,28 +688,31 @@ input[type=date] ::-webkit-calendar-picker-indicator {
     width:20vw;
     height:3vh;
     border: 0.5vh solid white;
-
 }
 
 #description {
     background-color: transparent;
     color: white;
     font-size: 24px;
+    resize: none;
     width: 20vw;
-    height: 3vh;
+    height: 8vh;
     border: 0.5vh solid white;
-    
 }
 
 .taskListButtons {
+    margin-left: auto;
+    margin-right: auto;
     width: 45vw;
-    height: 5vh;
+    height: 10vh;
     display: flex;
     flex-direction: row;
     gap: 1vw;
 }
 
 #taskListCancelButton{
+    width: 22.5vw;
+    height: 10vh;
     background-color:#ffe0e0;
     border: 0.5vh solid #800000;
     color:#800000;
@@ -718,6 +726,8 @@ input[type=date] ::-webkit-calendar-picker-indicator {
 
 
 #taskListConfirmButton {
+    width: 22.5vw;
+    height: 10vh;
     background-color: #e0ffe0;
     border: 0.5vh solid #008000;
     color: #008000;
@@ -725,7 +735,7 @@ input[type=date] ::-webkit-calendar-picker-indicator {
 }
 
 #taskListConfirmButton:hover {
-    background-color: green;
+    background-color: lightgreen;
     color: white;
 }
 
@@ -735,7 +745,10 @@ input[type=date] ::-webkit-calendar-picker-indicator {
     border: 0.5vh solid #800000;
     color: #800000;
     font-size: 24px;
-    width:45vw;
+    width: 45vw;
+    height: 5vh;
+    margin-left:auto;
+    margin-right: auto;
 }
 
 #taskListDeleteButton:hover {

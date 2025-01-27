@@ -19,9 +19,24 @@
       },
       "DisplayProjects": "All",
       "SendSecurityAlerts": true,
-      "SendProjectAlerts": false,
+      "SendProjectAlerts": true,
       "RememberMe": false,
-      "Enable2FA": true
+      "Enable2FA": false
+    },
+    {
+      "UserData": {
+        "UserId": 10031,
+        "Login": "alusia",
+        "Password": "4hNxFSY6MW78fC4plQr2wFXh6Jfit6YWZ3HdTcpCIdRQpQi8NKelcodB5NgEDSIfo4dCQk5K2KpZT\u002BCUptyr9g==",
+        "Email": "fuksalicja21@gmail.com",
+        "Verified": true,
+        "Admin": false
+      },
+      "DisplayProjects": "All",
+      "SendSecurityAlerts": true,
+      "SendProjectAlerts": true,
+      "RememberMe": false,
+      "Enable2FA": false
     },
     {
       "UserData": {
@@ -31,6 +46,36 @@
         "Email": "272844@student.pwr.edu.pl",
         "Verified": true,
         "Admin": false
+      },
+      "DisplayProjects": "All",
+      "SendSecurityAlerts": true,
+      "SendProjectAlerts": true,
+      "RememberMe": false,
+      "Enable2FA": false
+    },
+    {
+      "UserData": {
+        "UserId": 10039,
+        "Login": "alicja",
+        "Password": "4hNxFSY6MW78fC4plQr2wFXh6Jfit6YWZ3HdTcpCIdRQpQi8NKelcodB5NgEDSIfo4dCQk5K2KpZT\u002BCUptyr9g==",
+        "Email": "fuksalicja21@gmail.com",
+        "Verified": true,
+        "Admin": false
+      },
+      "DisplayProjects": "All",
+      "SendSecurityAlerts": true,
+      "SendProjectAlerts": true,
+      "RememberMe": false,
+      "Enable2FA": false
+    },
+    {
+      "UserData": {
+        "UserId": 10040,
+        "Login": "konis",
+        "Password": "4hNxFSY6MW78fC4plQr2wFXh6Jfit6YWZ3HdTcpCIdRQpQi8NKelcodB5NgEDSIfo4dCQk5K2KpZT\u002BCUptyr9g==",
+        "Email": "konarskikrzysztof1@gmail.com",
+        "Verified": true,
+        "Admin": true
       },
       "DisplayProjects": "All",
       "SendSecurityAlerts": true,

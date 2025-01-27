@@ -7,12 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\AccountManagement.css" />
+    <Content Remove="wwwroot\AdminPanel.css" />
+    <Content Remove="wwwroot\Chat.css" />
     <Content Remove="wwwroot\LoginForm.css" />
     <Content Remove="wwwroot\ManageProject.css" />
     <Content Remove="wwwroot\ProjectManagement.css" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Hangfire" Version="1.8.17" />
     <PackageReference Include="MediaBrowser.Common" Version="4.8.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.35" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.35" />
@@ -22,12 +26,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\AccountManagement.css" />
     <None Include="wwwroot\Graphics\icon.png" />
     <None Include="wwwroot\Graphics\iconhov.png" />
     <None Include="wwwroot\Index.css" />
     <None Include="wwwroot\Graphics\logo.png" />
     <None Include="wwwroot\Graphics\main.jpeg" />
     <None Include="wwwroot\ManageProject.css" />
+    <None Include="wwwroot\AdminPanel.css" />
+    <None Include="wwwroot\Chat.css" />
     <None Include="wwwroot\ProjectManagement.css" />
     <None Include="wwwroot\LoginForm.css" />
     <None Include="wwwroot\RegisterForm.css" />

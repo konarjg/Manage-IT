@@ -12,6 +12,12 @@ public class TaskListManager
         Instance = new TaskListManager();
     }
 
+    public bool GetAllTaskLists(out List<TaskList> taskLists)
+    {
+        var query = FormattableStringFactory.Create($"SELECT * FROM dbo.TaskLists");
+        return DatabaseAccess.Instance.ExecuteQuery(query, out taskLists);
+    }
+
     public bool GetAllTaskLists(long projectId, out List<TaskList> taskLists)
     {
         var query = FormattableStringFactory.Create($"SELECT * FROM dbo.TaskLists WHERE ProjectId = {projectId}");
@@ -28,17 +34,25 @@ public class TaskListManager
     public bool UpdateTaskList(TaskList data)
     {
         List<TaskList> taskLists;
-        var query = FormattableStringFactory.Create($"UPDATE dbo.TaskLists SET Name = {data.Name}, Description = {data.Description} WHERE TaskListId = {data.TaskListId}");
+        var query = FormattableStringFactory.Create($"UPDATE dbo.TaskLists SET Name = '{data.Name}', Description = '{data.Description}' WHERE TaskListId = {data.TaskListId}");
         return DatabaseAccess.Instance.ExecuteQuery(query, out taskLists);
+    }
+
+    public bool DeleteTaskLists(long projectId)
+    {
+        TaskManager.Instance.DeleteAllTasks(projectId);
+        List<TaskList> lists;
+        var query = FormattableStringFactory.Create($"DELETE FROM dbo.TaskLists WHERE ProjectId = {projectId}");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out lists);
     }
 
     public bool DeleteTaskList(long taskListId)
     {
         List<Task> tasks;
-        List<TaskDetails> details;
-        bool success = TaskManager.Instance.GetAllTasks(taskListId, out tasks, out details);
+        bool success = TaskManager.Instance.GetAllTasks(taskListId, out tasks);
 
-        if (tasks != null && tasks.Count != 0 && details != null && details.Count != 0)
+        if (tasks != null && tasks.Count != 0)
         {
             foreach (var task in tasks)
             {
