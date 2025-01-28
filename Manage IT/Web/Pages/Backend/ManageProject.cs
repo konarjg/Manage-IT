@@ -540,9 +540,6 @@ public class ManageProject : PageModel
         return new JsonResult(new { success = true });
     }
 
-
-
-
     public JsonResult OnPostCreateTask(string taskListId, string name, string description, string deadline)
     {
         if (name == null || description == null)
@@ -625,6 +622,19 @@ public class ManageProject : PageModel
         return new JsonResult(new { success = true });
     }
 
+    public JsonResult OnPostManageTask(string taskJson)
+    {
+        var task = JsonSerializer.Deserialize<Task>(taskJson);
 
+        HttpContext.Session.Set("ManagedTask", task);
 
+        return new(new { success = true });
+    }
+
+    public JsonResult OnPostStopManagingTask()
+    {
+        HttpContext.Session.Remove("ManagedTask");
+
+        return new(new { success = true });
+    }
 }

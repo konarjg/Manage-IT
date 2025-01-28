@@ -1,5 +1,6 @@
 using EFModeling.EntityProperties.DataAnnotations.Annotations;
 using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 using Web;
 
 public class UserManager
@@ -332,11 +333,12 @@ public class UserManager
         return EmailService.SendEmail(data.Email, subject, body, out error);
     }
 
-    public bool CreatePermissions(long userId, long projectId)
+    public bool CreatePermissions(long userId, string name)
     {
-        List<UserPermissions> data;
-        FormattableString query = FormattableStringFactory.Create($"INSERT INTO dbo.UserPermissions(UserId, ProjectId, Editing, InvitingMembers, KickingMembers) VALUES({userId}, {projectId}, 1, 1, 1)");
-        return DatabaseAccess.Instance.ExecuteQuery(query, out data);
+        List<UserPermissions> temp;
+        FormattableString query = FormattableStringFactory.Create($"INSERT INTO dbo.UserPermissions (ProjectId, UserId, Editing, InvitingMembers, KickingMembers) SELECT ProjectId, {userId}, 1, 1, 1 FROM dbo.Projects WHERE Name LIKE '{name}'");
+
+        return DatabaseAccess.Instance.ExecuteQuery(query, out temp);
     }
 
 }
