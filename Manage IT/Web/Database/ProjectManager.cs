@@ -96,7 +96,7 @@ public class ProjectManager
 
         if (success)
         {
-            UserManager.Instance.CreatePermissions(data.ManagerId, data.ProjectId);
+            UserManager.Instance.CreatePermissions(data.ManagerId, data.Name);
         }
 
         return success;
@@ -124,6 +124,7 @@ public class ProjectManager
     {
         List<Project> projects;
 
+        MeetingManager.Instance.DeleteAllMeetings(projectId);
         TaskListManager.Instance.DeleteTaskLists(projectId);
         UserManager.Instance.DeleteAllPermissions(projectId);
         DeleteAllMembers(projectId);
@@ -149,9 +150,9 @@ public class ProjectManager
     public bool IsProjectMember(long projectId, long userId)
     {
         FormattableString query = FormattableStringFactory.Create($@"
-SELECT *
-FROM dbo.ProjectMembers 
-WHERE ProjectId = {projectId} AND UserId = {userId}");
+        SELECT *
+        FROM dbo.ProjectMembers 
+        WHERE ProjectId = {projectId} AND UserId = {userId}");
         bool success = DatabaseAccess.Instance.ExecuteQuery(query, out List<ProjectMembers> user);
 
         if (user != null)
@@ -185,7 +186,7 @@ WHERE ProjectId = {projectId} AND UserId = {userId}");
     public bool GetInviteStatus(long projectID, long userID)
     {
         List<ProjectMembers> data;
-        FormattableString query = FormattableStringFactory.Create($"SELECT * FROM dbo.ProjectMembers WHERE UserId = {userID} AND ProjectId = {projectID} LIMIT 1");
+        FormattableString query = FormattableStringFactory.Create($"SELECT * FROM dbo.ProjectMembers WHERE UserId = {userID} AND ProjectId = {projectID}");
 
         bool success = DatabaseAccess.Instance.ExecuteQuery(query, out data);
 

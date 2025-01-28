@@ -754,7 +754,200 @@ input[type=date] ::-webkit-calendar-picker-indicator {
 #taskListDeleteButton:hover {
     background-color: red;
     color: white;
-    
+}
+
+#taskPopup {
+    background: linear-gradient(black, #000040);
+    visibility: collapse;
+    position: absolute;
+    top: 5.5vh;
+    right: 22.5vw;
+    width: 50vw;
+    height: 80vh;
+    display: flex;
+    border: 1vh solid white;
+    flex-direction: column;
+    gap: 1vh;
+    padding-top: 2.5vh;
+    padding-bottom: 2.5vh;
+    padding-left: 2.5vw;
+    padding-right: 2.5vw;
+}
+
+.taskPair {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1vh;
+    width: 45vw;
+    height: 15vh;
+    display: flex;
+    flex-direction: row;
+    gap: 5vw;
+}
+
+.taskLabel {
+    width: 20vw;
+    height: 3vh;
+    font-size: 24px;
+    color: white;
+}
+
+#title {
+    background-color: transparent;
+    color: white;
+    font-size: 24px;
+    width: 20vw;
+    height: 3vh;
+    border: 0.5vh solid white;
+}
+
+#taskDescription {
+    background-color: transparent;
+    color: white;
+    font-size: 24px;
+    resize: none;
+    width: 20vw;
+    height: 10vh;
+    border: 0.5vh solid white;
+}
+
+#datePicker {
+    background-color: transparent;
+    color: white;
+    font-size: 24px;
+    resize: none;
+    width: 20vw;
+    height: 4vh;
+    border: 0.5vh solid white;
+}
+
+#memberList {
+    background-color: transparent;
+    color: white;
+    font-size: 24px;
+    width: 20vw;
+    height: 12vh;
+    border: 0.5vh solid white;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.25vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    text-overflow: ellipsis;
+}
+
+#taskList {
+    background-color: transparent;
+    color: white;
+    font-size: 24px;
+    width: 20vw;
+    height: 12vh;
+    border: 0.5vh solid white;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.25vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    text-overflow: ellipsis;
+}
+
+.listItem {
+    width: 18vw;
+    height: 3vh;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    padding: 1vh;
+}
+
+.listItem:hover {
+    background-color: #ffffff20;
+}
+
+.selected {
+    background-color: #ffffff30;
+}
+
+.taskButtonsContainer {
+    margin-left: auto;
+    margin-right: auto;
+    width: 45vw;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+.taskButtons {
+    margin-left: auto;
+    margin-right: auto;
+    width: 45vw;
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+}
+
+#taskReviewButton {
+    width: 22vw;
+    height: 5vh;
+    background-color: white;
+    border: 0.5vh solid #808080;
+    color: #000000;
+    font-size: 24px;
+}
+
+#taskReviewButton:hover {
+    background-color: #dddddd;
+    color: black;
+}
+
+#taskCancelButton {
+    width: 22.5vw;
+    height: 5vh;
+    background-color: #ffe0e0;
+    border: 0.5vh solid #800000;
+    color: #800000;
+    font-size: 24px;
+}
+
+#taskCancelButton:hover {
+    background-color: red;
+    color: white;
 }
 
 
+#taskConfirmButton {
+    width: 22.5vw;
+    height: 5vh;
+    background-color: #e0ffe0;
+    border: 0.5vh solid #008000;
+    color: #008000;
+    font-size: 24px;
+}
+
+#taskConfirmButton:hover {
+    background-color: lightgreen;
+    color: white;
+}
+
+
+#taskDeleteButton {
+    background-color: #fff0f0;
+    border: 0.5vh solid #800000;
+    color: #800000;
+    font-size: 24px;
+    width: 45vw;
+    height: 5vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#taskDeleteButton:hover {
+    background-color: red;
+    color: white;
+}
+
+#datePicker::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}

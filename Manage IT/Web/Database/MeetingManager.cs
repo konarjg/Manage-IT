@@ -16,6 +16,13 @@ public class MeetingManager
         return DatabaseAccess.Instance.ExecuteQuery(query, out meetings);
     }
 
+    public bool DeleteAllMeetings(long projectId)
+    {
+        List<Meeting> meetings;
+        FormattableString query = FormattableStringFactory.Create($"DELETE FROM dbo.Meetings WHERE ProjectId = {projectId}");
+        return DatabaseAccess.Instance.ExecuteQuery(query, out meetings);
+    }
+
     public bool GetMeeting(long meetingId, out Meeting meeting)
     {
         List<Meeting> meetings;

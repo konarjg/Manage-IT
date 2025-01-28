@@ -335,6 +335,59 @@
                 });
             }
 
+            function manageTask(taskJson) {
+                $.ajax({
+                    type: "POST",
+                    url: "/ManageProject?handler=ManageTask",
+                    data: { taskJson: taskJson },
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("XSRF-TOKEN",
+                            $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.reload();
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            }
+
+            function taskPopupReview() {
+
+            }
+
+            function taskPopupCancel() {
+                var popup = document.getElementById("taskPopup");
+                popup.style.visibility = "collapse";
+
+                $.ajax({
+                    type: "POST",
+                    url: "/ManageProject?handler=StopManagingTask",
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("XSRF-TOKEN",
+                            $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.reload();
+                        } 
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            }
+
+            function taskPopupConfirm() {
+
+            }
+
+            function taskPopupDelete() {
+
+            }
 
         </script>
     </head>
@@ -420,6 +473,7 @@
 
                                             foreach (var task in tasks)
                                             {
+                                                string taskJson = JsonSerializer.Serialize(task);
                                                 var now = DateTime.Now;
                                                 var deadline = task.Deadline;
 
@@ -435,7 +489,7 @@
                                                 <div class="task">
                                                     <div class="taskTop">
                                                         <span>@task.Name</span>
-                                                        <span class="dots" style="visibility:@editVisible"><i class="fa fa-fw fa-ellipsis-v"></i></span>
+                                                        <span class="dots" style="visibility:@editVisible"><i class="fa fa-fw fa-ellipsis-v" onclick="manageTask('@taskJson')"></i></span>
                                                     </div>
 
                                                     <div class="taskSub">
@@ -450,23 +504,23 @@
                                             }
 
                                             <div class="createTask" style="visibility:@editVisible">
-                                                <button onclick="createTask('@taskList.TaskListId.ToString()', document.getElementById('createTaskName').value, document.getElementById('createTaskDescription').value, document.getElementById('createTaskDeadline').value)" class="createTaskButton"><i class="fa fa-fw fa-plus"></i>Create</button>
+                                                <button onclick="createTask('@taskList.TaskListId.ToString()', document.getElementById('createTaskName @taskList.TaskListId').value, document.getElementById('createTaskDescription @taskList.TaskListId').value, document.getElementById('createTaskDeadline @taskList.TaskListId').value)" class="createTaskButton"><i class="fa fa-fw fa-plus"></i>Create</button>
 
                                                 <div class="createTaskTop">
                                                     <span class="createTaskLabel">Name</span>
-                                                    <textarea id="createTaskName" style="resize:none;" class="createTaskName" rows="1" cols="30" maxlength="30"></textarea>
+                                                    <textarea id="createTaskName @taskList.TaskListId" style="resize:none;" class="createTaskName" rows="1" cols="30" maxlength="30"></textarea>
                                                 </div>
 
                                                 <div class="createTaskSub">
                                                     <span class="createTaskLabel">Deadline</span>
                                                     <form>
-                                                        <input id="createTaskDeadline" type="datetime-local" class="createTaskDate" />
+                                                        <input id="createTaskDeadline @taskList.TaskListId" type="datetime-local" class="createTaskDate" />
                                                     </form>
                                                 </div>
 
 
                                                 <span class="createTaskLabel">Description</span>
-                                                <textarea class="createTaskDescription" id="createTaskDescription" style="resize: none;" rows="30" cols="60"></textarea>
+                                                <textarea class="createTaskDescription" id="createTaskDescription @taskList.TaskListId" style="resize: none;" rows="30" cols="60"></textarea>
                                             </div>
                                         }
                                     </div>
@@ -496,6 +550,63 @@
                                 <button id="taskListConfirmButton" onclick="taskListPopupConfirm()">Confirm changes</button>
                             </div>
                             <button id="taskListDeleteButton" onclick="taskListPopupDelete()">Delete</button>
+                        </div>
+
+                        @{
+                            var currentTask = HttpContext.Session.Get<Task>("ManagedTask");
+                            var members = currentTask != null ? TaskManager.Instance.GetMembers(currentTask.TaskId) : new List<User>();
+                            var taskPopupVisibility = currentTask != null ? "visible" : "collapse";
+                        }
+
+                        <div id="taskPopup" style="visibility:@taskPopupVisibility">
+                            @if (currentTask != null)
+                            {
+                                <div class="taskPair">
+                                    <label class="taskLabel">Title</label>
+                                    <input type="text" id="title" value="@currentTask.Name"/>
+                                </div>
+                                <div class="taskPair">
+                                    <label class="taskLabel">Description</label>
+                                    <textarea id="taskDescription">@currentTask.Description</textarea>
+                                </div>
+                                <div class="taskPair">
+                                    <label class="taskLabel">Deadline</label>
+                                    <form>
+                                        <input type="datetime-local" id="datePicker" value="@currentTask.Deadline.ToString("yyyy-MM-dd HH:mm:ss")" />
+                                    </form>
+                                </div>
+                                <div class="taskPair">
+                                    <label class="taskLabel">Assigned Members</label>
+                                    <div id="memberList">
+                                        @foreach (var member in Model.Members)
+                                        {
+                                            var className = members.FirstOrDefault(x => x.UserId == member.UserId) != null ? "selected" : "";
+                                            <span class="listItem @className">@member.Login</span>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="taskPair">
+                                    <label class="taskLabel">Task List</label>
+                                    <div id="taskList">
+                                        @foreach (var taskList in Model.TaskLists)
+                                        {
+                                            var className = taskList.TaskListId == currentTask.TaskListId ? "selected" : "";
+                                            <span class="listItem @className">@taskList.Name</span>
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="taskButtonsContainer">
+                                    <div class="taskButtons">
+                                        <button id="taskReviewButton" onclick="taskPopupReview()">Review</button>
+                                    </div>
+                                    <div class="taskButtons">
+                                        <button id="taskCancelButton" onclick="taskPopupCancel()">Close</button>
+                                        <button id="taskConfirmButton" onclick="taskPopupConfirm()">Confirm changes</button>
+                                    </div>
+                                    <button id="taskDeleteButton" onclick="taskPopupDelete()">Delete</button>
+                                </div>
+                            }
                         </div>
                     </div>
                     break;

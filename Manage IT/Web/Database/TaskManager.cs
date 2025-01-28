@@ -17,6 +17,56 @@ public class TaskManager
         return DatabaseAccess.Instance.ExecuteQuery(query, out tasks);
     }
 
+    public bool AssignMembers(long taskId, List<User> members)
+    {
+        bool success = DeleteMembers(taskId);
+
+        if (!success)
+        {
+            return false;
+        }
+
+        foreach (User member in members)
+        {
+            List<TaskDetails> details;
+            System.FormattableString query = FormattableStringFactory.Create($"INSERT INTO dbo.TaskDetails(TaskId, UserId) VALUES({taskId}, {member.UserId})");
+
+            DatabaseAccess.Instance.ExecuteQuery(query, out details);
+        }
+
+        return true;
+    }
+
+    public List<User> GetMembers(long taskId)
+    {
+        List<User> users = new();
+
+        List<TaskDetails> details;
+        System.FormattableString query = FormattableStringFactory.Create($"SELECT * FROM dbo.TaskDetails WHERE TaskId = {taskId}");
+        bool success = DatabaseAccess.Instance.ExecuteQuery(query, out details) && details != null && details.Count != 0;
+
+        if (!success)
+        {
+            return users;
+        }
+
+        foreach (TaskDetails detail in details)
+        {
+            User user;
+            success = UserManager.Instance.GetUser(detail.UserId, out user) && user != null;
+
+            if (!success)
+            {
+                continue;
+            }
+
+            users.Add(user);
+        }
+
+        return users;
+    }
+
+
     public bool DeleteMembers(long taskId)
     {
         List<TaskDetails> details;
@@ -69,7 +119,7 @@ public class TaskManager
     public bool CreateTask(Task data)
     {
         List<Task> tasks;
-        FormattableString queryTasks = FormattableStringFactory.Create($"INSERT INTO dbo.Tasks (Name, TaskListId, Description, Deadline, HandedIn) VALUES ('{data.Name}', {data.TaskListId}, '{data.Description}', '{data.Deadline.ToString("yyyy-MM-dd")}', 0)");
+        FormattableString queryTasks = FormattableStringFactory.Create($"INSERT INTO dbo.Tasks (Name, TaskListId, Description, Deadline, HandedIn) VALUES ('{data.Name}', {data.TaskListId}, '{data.Description}', '{data.Deadline.ToString("yyyy-MM-dd HH:mm:ss")}', 0)");
 
         return DatabaseAccess.Instance.ExecuteQuery(queryTasks, out tasks);
     }

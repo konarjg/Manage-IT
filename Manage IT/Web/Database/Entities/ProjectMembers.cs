@@ -6,8 +6,8 @@ namespace EFModeling.EntityProperties.DataAnnotations.Annotations;
 public class ProjectMembers
 {
     [ForeignKey("UserId")]
-    public int UserId { get; set; }
+    public long UserId { get; set; }
     [ForeignKey("ProjectId")]
-    public int ProjectId { get; set; }
+    public long ProjectId { get; set; }
     public bool InviteAccepted { get; set; }
 }

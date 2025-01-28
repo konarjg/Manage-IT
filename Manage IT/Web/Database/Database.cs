@@ -111,9 +111,10 @@ public class Database : IDisposable
             DatabaseContext.SaveChanges();
             return true;
         }
-        catch (Exception)
+        catch (Exception e)
         {
             results = null;
+            throw e;
             return false;
         }
     }
