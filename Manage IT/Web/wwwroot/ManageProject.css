@@ -792,7 +792,7 @@ input[type=date] ::-webkit-calendar-picker-indicator {
     color: white;
 }
 
-#title {
+#taskTitle {
     background-color: transparent;
     color: white;
     font-size: 24px;
