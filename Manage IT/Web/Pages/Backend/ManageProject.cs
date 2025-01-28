@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using System.Globalization;
+using System.Threading.Tasks;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 using Task = EFModeling.EntityProperties.DataAnnotations.Annotations.Task;
 
@@ -627,6 +628,7 @@ public class ManageProject : PageModel
         var task = JsonSerializer.Deserialize<Task>(taskJson);
 
         HttpContext.Session.Set("ManagedTask", task);
+        HttpContext.Session.Set("ManagedTaskMembers", TaskManager.Instance.GetMembers(task.TaskId));
 
         return new(new { success = true });
     }
@@ -634,7 +636,57 @@ public class ManageProject : PageModel
     public JsonResult OnPostStopManagingTask()
     {
         HttpContext.Session.Remove("ManagedTask");
+        HttpContext.Session.Remove("ManagedTaskMembers");
 
         return new(new { success = true });
     }
-}
+
+    public JsonResult OnPostToggleMember(string memberJson)
+    {
+        var task = HttpContext.Session.Get<Task>("ManagedTask");
+        var member = JsonSerializer.Deserialize<User>(memberJson);
+        var members = HttpContext.Session.Get<List<User>>("ManagedTaskMembers");
+
+        if (members.FirstOrDefault(x => x.UserId == member.UserId) != null)
+        {
+            members.Remove(members.FirstOrDefault(x => x.UserId == member.UserId));
+        }    
+        else
+        {
+            members.Add(member);
+        }
+
+        HttpContext.Session.Set("ManagedTaskMembers", members);
+        return new(new { success = true });
+    }
+
+    public JsonResult OnPostSelectTaskList(long taskListId)
+    {
+        var task = HttpContext.Session.Get<Task>("ManagedTask");
+        task.TaskListId = taskListId;
+
+        HttpContext.Session.Set("ManagedTask", task);
+        return new(new { success = true });
+    }
+
+    public JsonResult OnPostConfirmTask(string name, string description, string deadline)
+    {
+        var task = HttpContext.Session.Get<Task>("ManagedTask");
+        var members = HttpContext.Session.Get<List<User>>("ManagedTaskMembers");
+
+        task.Name = name;
+        task.Description = description;
+        task.Deadline = DateTime.Parse(deadline);
+
+        HttpContext.Session.Remove("ManagedTask");
+        HttpContext.Session.Remove("ManagedTaskMembers");
+
+        return new(new { success = TaskManager.Instance.UpdateTask(task, members) });
+    }
+
+    public JsonResult OnPostDeleteTask(long taskId)
+    {
+        return new(new { success = TaskManager.Instance.DeleteTask(taskId) });
+    }
+
+} 
