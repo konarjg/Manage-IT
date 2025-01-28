@@ -114,7 +114,6 @@ public class Database : IDisposable
         catch (Exception e)
         {
             results = null;
-            throw e;
             return false;
         }
     }
