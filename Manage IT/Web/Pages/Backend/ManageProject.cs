@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using System.Globalization;
-using System.Text.Json;
-using System.Xml.Linq;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 using Task = EFModeling.EntityProperties.DataAnnotations.Annotations.Task;
 
 public enum ProjectAction
@@ -17,6 +16,7 @@ public enum ProjectAction
     EditMeeting,
     DeleteMeeting,
     ManageMember,
+    KickMember,
     Delete
 }
 
@@ -27,14 +27,14 @@ public class ManageProject : PageModel
     public string Error { get; set; }
     public Project Project { get; set; }
 
-    public Meeting currentlyEditedMeeting = new();
-    public User currentlyManagedMember = new();
+    public Meeting CurrentlyEditedMeeting = new();
+    public User CurrentlyManagedMember = new();
     public UserPermissions currentlyManagedMemberPermissions = new();
     public List<Meeting> Meetings { get; set; }
 
 
     public List<User> Members { get; set; }
-    public List<bool> inviteStatuses { get; set; } //ik its not professional but GetInviteStatus for some reason refuses to fucking work properly despite working properly for me in Desktop version and JS not saying anything
+    public List<bool> InviteStatuses { get; set; } = new(); //ik its not professional but GetInviteStatus for some reason refuses to fucking work properly despite working properly for me in Desktop version and JS not saying anything
 
     public List<TaskList> TaskLists { get; set; }
     public ProjectAction Action { get; set; }
@@ -45,7 +45,7 @@ public class ManageProject : PageModel
         {
             return Redirect("~/LoginForm");
         }
-        
+
         if (id != null && id != string.Empty)
         {
             HttpContext.Session.Remove("Project");
@@ -53,7 +53,7 @@ public class ManageProject : PageModel
             HttpContext.Session.Remove("Action");
             Action = ProjectAction.Manage;
         }
-        
+
         if (HttpContext.Session.Get<Project>("Project") != null)
         {
             Project = HttpContext.Session.Get<Project>("Project");
@@ -94,7 +94,7 @@ public class ManageProject : PageModel
             Project = project;
             Members = members;
         }
-        
+
         if (HttpContext.Session.Get<List<TaskList>>("TaskLists") == null)
         {
             List<TaskList> taskLists;
@@ -187,7 +187,7 @@ public class ManageProject : PageModel
             description = Project.Description;
         }
 
-        var data = new Project();
+        Project data = new Project();
         data.ProjectId = Project.ProjectId;
         data.ManagerId = Project.ManagerId;
         data.Name = name;
@@ -196,13 +196,13 @@ public class ManageProject : PageModel
         projectID = Project.ProjectId;
 
         bool success = ProjectManager.Instance.UpdateProject(data);
-        
+
         if (!success)
         {
             Error = "Could not edit the project!";
             return null;
         }
-        
+
         string url = "~/ManageProject?id=" + data.ProjectId;
         HttpContext.Session.Remove("Project");
         HttpContext.Session.Remove("Action");
@@ -238,7 +238,7 @@ public class ManageProject : PageModel
         return Redirect("~/ProjectManagement");
     }
 
-    
+
 
     public IActionResult OnPostInfo()
     {
@@ -259,14 +259,16 @@ public class ManageProject : PageModel
         {
             Members = members;
         }
-        if(members!=null)
-        foreach (User member in members)
+        if (members != null)
         {
-            inviteStatuses.Add(ProjectManager.Instance.GetInviteStatus(HttpContext.Session.Get<Project>("Project").ProjectId, member.UserId));
+            foreach (User member in members)
+            {
+                InviteStatuses.Add(ProjectManager.Instance.GetInviteStatus(HttpContext.Session.Get<Project>("Project").ProjectId, member.UserId));
+            }
         }
 
         HttpContext.Session.Set("Members", members);
-        //HttpContext.Session.Set("InviteStatuses", inviteStatuses);
+        //HttpContext.Session.Set("InviteStatuses", InviteStatuses);
         Action = ProjectAction.Members;
         HttpContext.Session.Set("Action", Action);
         return Redirect("~/ManageProject");
@@ -289,8 +291,8 @@ public class ManageProject : PageModel
     {
         if (long.TryParse(memberID, out long userIdLong))
         {
-            bool found = UserManager.Instance.GetUser(userIdLong, out currentlyManagedMember);
-            if (!found || currentlyManagedMember == null)
+            bool found = UserManager.Instance.GetUser(userIdLong, out CurrentlyManagedMember);
+            if (!found || CurrentlyManagedMember == null)
             {
                 // Handle case where meeting is not found
                 return NotFound("Member not found.");
@@ -304,7 +306,32 @@ public class ManageProject : PageModel
             Action = ProjectAction.ManageMember;
             HttpContext.Session.Set("Action", Action);
 
-            TempData["currentlyManagedMember"] = JsonConvert.SerializeObject(currentlyManagedMember);
+            TempData["currentlyManagedMember"] = JsonConvert.SerializeObject(CurrentlyManagedMember);
+            TempData["currentlyManagedMemberPermissions"] = JsonConvert.SerializeObject(currentlyManagedMemberPermissions);
+            return Redirect("~/ManageProject");
+        }
+        else
+        {
+            // Handle parsing error
+            return BadRequest("Invalid user ID");
+        }
+    }
+    public IActionResult OnPostKickMember(string memberID)
+    {
+        if (long.TryParse(memberID, out long userIdLong))
+        {
+            bool found = UserManager.Instance.GetUser(userIdLong, out CurrentlyManagedMember);
+            if (!found || CurrentlyManagedMember == null)
+            {
+                // Handle case where member is not found
+                return NotFound("Member not found.");
+            }
+            
+            //here we don't need permissions so just proceed to moving to kicking razorPage
+            Action = ProjectAction.KickMember;
+            HttpContext.Session.Set("Action", Action);
+
+            TempData["currentlyManagedMember"] = JsonConvert.SerializeObject(CurrentlyManagedMember);
             TempData["currentlyManagedMemberPermissions"] = JsonConvert.SerializeObject(currentlyManagedMemberPermissions);
             return Redirect("~/ManageProject");
         }
@@ -318,8 +345,8 @@ public class ManageProject : PageModel
     {
         if (long.TryParse(meetingID, out long meetingIdLong))
         {
-            bool found = MeetingManager.Instance.GetMeeting(meetingIdLong, out currentlyEditedMeeting);
-            if (!found || currentlyEditedMeeting == null)
+            bool found = MeetingManager.Instance.GetMeeting(meetingIdLong, out CurrentlyEditedMeeting);
+            if (!found || CurrentlyEditedMeeting == null)
             {
                 // Handle case where meeting is not found
                 return NotFound("Meeting not found.");
@@ -329,7 +356,7 @@ public class ManageProject : PageModel
             HttpContext.Session.Set("Action", Action);
 
             // Store currentlyEditedMeeting in TempData
-            TempData["currentlyEditedMeeting"] = JsonConvert.SerializeObject(currentlyEditedMeeting);
+            TempData["currentlyEditedMeeting"] = JsonConvert.SerializeObject(CurrentlyEditedMeeting);
 
             return Redirect("~/ManageProject");
         }
@@ -346,8 +373,8 @@ public class ManageProject : PageModel
     {
         if (long.TryParse(meetingID, out long meetingIdLong))
         {
-            bool found = MeetingManager.Instance.GetMeeting(meetingIdLong, out currentlyEditedMeeting);
-            if (!found || currentlyEditedMeeting == null)
+            bool found = MeetingManager.Instance.GetMeeting(meetingIdLong, out CurrentlyEditedMeeting);
+            if (!found || CurrentlyEditedMeeting == null)
             {
                 // Handle case where meeting is not found
                 return NotFound("Meeting not found.");
@@ -357,7 +384,7 @@ public class ManageProject : PageModel
             HttpContext.Session.Set("Action", Action);
 
             // Store currentlyEditedMeeting in TempData
-            TempData["currentlyEditedMeeting"] = JsonConvert.SerializeObject(currentlyEditedMeeting);
+            TempData["currentlyEditedMeeting"] = JsonConvert.SerializeObject(CurrentlyEditedMeeting);
 
             return Redirect("~/ManageProject");
         }
@@ -366,6 +393,41 @@ public class ManageProject : PageModel
             // Handle parsing error
             return BadRequest("Invalid meeting ID");
         }
+    }
+
+    public JsonResult OnPostKickMemberConfirm(string memberId,string projectId)
+    {
+        if (CurrentlyManagedMember == null)
+        {
+            return new JsonResult(new { success = false, message = "No currently managed member" });
+        }
+
+        if (!long.TryParse(memberId, out long memberIdLong))
+        {
+            return new JsonResult(new { success = false, message = "Invalid member ID." });
+        }
+
+        if (!long.TryParse(projectId, out long projectIdLong))
+        {
+            return new JsonResult(new { success = false, message = "Invalid project ID." });
+        }
+
+        bool successMember = UserManager.Instance.GetUser(memberIdLong, out User member);
+
+        bool success = ProjectManager.Instance.RemoveProjectMember(HttpContext.Session.Get<Project>("Project"), member);
+
+        if (!success)
+        {
+            Error = "Could not delete the meeting!";
+            return new JsonResult(new { success = false, message = "Could not kick the member." });
+        }
+        HttpContext.Session.Remove("currentlyManagedMember");
+        HttpContext.Session.Remove("Members");
+        Action = ProjectAction.Members;
+        HttpContext.Session.Set("Action", Action);
+        CurrentlyEditedMeeting = null;
+        // Return JSON result indicating success
+        return new JsonResult(new { success = true });
     }
 
     public IActionResult OnPostDelete()
@@ -392,7 +454,7 @@ public class ManageProject : PageModel
 
     public JsonResult OnPostInviteUserToProject(string credential)
     {
-        if (credential == null || credential==String.Empty)
+        if (credential == null || credential == String.Empty)
         {
 
             Action = ProjectAction.Manage;
@@ -401,15 +463,15 @@ public class ManageProject : PageModel
         User data = new();
         data.Login = credential;
         data.Email = credential;
-        
-        
-        bool successInvite = UserManager.Instance.SendProjectInvite(data,HttpContext.Session.Get<Project>("Project"));
+
+
+        bool successInvite = UserManager.Instance.SendProjectInvite(data, HttpContext.Session.Get<Project>("Project"));
         return new(new { success = successInvite });
     }
-    
+
     public JsonResult OnPostUpdateTaskList(string taskListJson)
     {
-        var taskList = JsonSerializer.Deserialize<TaskList>(taskListJson);
+        TaskList? taskList = JsonSerializer.Deserialize<TaskList>(taskListJson);
         bool querySuccess = TaskListManager.Instance.UpdateTaskList(taskList);
 
         HttpContext.Session.Remove("TaskLists");
@@ -418,7 +480,7 @@ public class ManageProject : PageModel
 
     public JsonResult OnPostDeleteTaskList(string taskListJson)
     {
-        var taskList = JsonSerializer.Deserialize<TaskList>(taskListJson);
+        TaskList? taskList = JsonSerializer.Deserialize<TaskList>(taskListJson);
         bool querySuccess = TaskListManager.Instance.DeleteTaskList(taskList.TaskListId);
 
         HttpContext.Session.Remove("TaskLists");
@@ -445,7 +507,7 @@ public class ManageProject : PageModel
         }
 
         HttpContext.Session.Remove("TaskLists");
-        return new(new{ success = true });
+        return new(new { success = true });
 
 
     }
@@ -567,7 +629,7 @@ public class ManageProject : PageModel
     }
     public JsonResult OnPostDeleteConfirmMeeting(string meetingId)
     {
-        if (currentlyEditedMeeting == null)
+        if (CurrentlyEditedMeeting == null)
         {
             return new JsonResult(new { success = false, message = "No currently edited meeting." });
         }
@@ -588,7 +650,7 @@ public class ManageProject : PageModel
         HttpContext.Session.Remove("Meetings");
         Action = ProjectAction.Meetings;
         HttpContext.Session.Set("Action", Action);
-        currentlyEditedMeeting = null;
+        CurrentlyEditedMeeting = null;
         // Return JSON result indicating success
         return new JsonResult(new { success = true });
     }
@@ -617,10 +679,10 @@ public class ManageProject : PageModel
             return new JsonResult(new { success = false, message = "Could not update permissions!" });
         }
         // Return JSON result indicating success
-        //Action = ProjectAction.Members;
-        //HttpContext.Session.Set("Action", Action);
-        //currentlyManagedMember = null;
-        //currentlyManagedMemberPermissions = null;
+        Action = ProjectAction.Members;
+        HttpContext.Session.Set("Action", Action);
+        CurrentlyManagedMember = null;
+        currentlyManagedMemberPermissions = null;
         return new JsonResult(new { success = true });
     }
 
