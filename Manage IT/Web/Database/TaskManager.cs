@@ -123,4 +123,13 @@ public class TaskManager
 
         return DatabaseAccess.Instance.ExecuteQuery(queryTasks, out tasks);
     }
+
+    public bool UpdateTask(Task data, List<User> members)
+    {
+        List<Task> tasks;
+        AssignMembers(data.TaskId, members);
+
+        var query = FormattableStringFactory.Create($"UPDATE dbo.Tasks SET Name = '{data.Name}', Description = '{data.Description}', Deadline = '{data.Deadline.ToString("yyyy-MM-dd HH:mm:ss")}', HandedIn = {(data.HandedIn ? 1 : 0)}, Accepted = {data.AcceptedSql} WHERE TaskId = {data.TaskId}");
+        return DatabaseAccess.Instance.ExecuteQuery(query, out tasks);
+    }
 }

@@ -26,11 +26,11 @@
         https://github.com/dotnet/aspnetcore/issues/41580-->
         <style>
             body {
-                width: 100vw;
-                height: 100vh;
-                margin: 0px;
-                background: linear-gradient(#000000, #000040);
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            width: 100vw;
+            height: 100vh;
+            margin: 0px;
+            background: linear-gradient(#000000, #000040);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             }
         </style>
 
@@ -40,319 +40,319 @@
 
         <script>
             function createTaskList(projectId, name, description) {
-                $.ajax({
-                    type: "POST",
-                    url: "/ManageProject?handler=CreateTaskList",
-                    data: { projectId: projectId, name: name, description: description },
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.reload();
-                        } else {
-                            alert("Could not create the task list!");
-                        }
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
+            $.ajax({
+            type: "POST",
+            url: "/ManageProject?handler=CreateTaskList",
+            data: { projectId: projectId, name: name, description: description },
+            beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+            $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            success: function (response) {
+            if (response.success) {
+            window.location.reload();
+            } else {
+            alert("Could not create the task list!");
+            }
+            },
+            error: function () {
+            alert("error");
+            }
+            });
             }
 
             function createTask(taskListId, name, description, deadline) {
-                $.ajax({
-                    type: "POST",
-                    url: "/ManageProject?handler=CreateTask",
-                    data: { taskListId: taskListId, name: name, description: description, deadline: deadline },
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.reload();
-                        } else {
-                            alert("Could not create the task!");
-                        }
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
+            $.ajax({
+            type: "POST",
+            url: "/ManageProject?handler=CreateTask",
+            data: { taskListId: taskListId, name: name, description: description, deadline: deadline },
+            beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+            $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            success: function (response) {
+            if (response.success) {
+            window.location.reload();
+            } else {
+            alert("Could not create the task!");
+            }
+            },
+            error: function () {
+            alert("error");
+            }
+            });
             }
 
             var currentTaskList = null;
 
             function manageTaskList(taskListJson) {
-                var popup = document.getElementById("taskListPopup");
-                popup.style.visibility = "visible";
-                taskList = JSON.parse(taskListJson);
-                currentTaskList = taskList;
+            var popup = document.getElementById("taskListPopup");
+            popup.style.visibility = "visible";
+            taskList = JSON.parse(taskListJson);
+            currentTaskList = taskList;
 
-                var name = document.getElementById("title");
-                var description = document.getElementById("description");
+            var name = document.getElementById("title");
+            var description = document.getElementById("description");
 
-                name.value = taskList.Name;
-                description.value = taskList.Description;
+            name.value = taskList.Name;
+            description.value = taskList.Description;
             }
 
             function taskListPopupCancel() {
-                var popup = document.getElementById("taskListPopup");
-                popup.style.visibility = "collapse";
+            var popup = document.getElementById("taskListPopup");
+            popup.style.visibility = "collapse";
             }
 
             function taskListPopupConfirm() {
-                var taskList = currentTaskList;
-                taskList.Name = document.getElementById("title").value;
-                taskList.Description = document.getElementById("description").value;
+            var taskList = currentTaskList;
+            taskList.Name = document.getElementById("title").value;
+            taskList.Description = document.getElementById("description").value;
 
-                $.ajax({
-                    type: "POST",
-                    url: "/ManageProject?handler=UpdateTaskList",
-                    data: { taskListJson: JSON.stringify(taskList) },
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.reload();
-                        } else {
-                            alert("Could not update the task list!");
-                        }
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
+            $.ajax({
+            type: "POST",
+            url: "/ManageProject?handler=UpdateTaskList",
+            data: { taskListJson: JSON.stringify(taskList) },
+            beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+            $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            success: function (response) {
+            if (response.success) {
+            window.location.reload();
+            } else {
+            alert("Could not update the task list!");
+            }
+            },
+            error: function () {
+            alert("error");
+            }
+            });
             }
 
             function taskListPopupDelete() {
-                var taskList = currentTaskList;
+            var taskList = currentTaskList;
 
-                $.ajax({
-                    type: "POST",
-                    url: "/ManageProject?handler=DeleteTaskList",
-                    data: { taskListJson: JSON.stringify(taskList) },
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.reload();
-                        } else {
-                            alert("Could not delete the task list!");
-                        }
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
+            $.ajax({
+            type: "POST",
+            url: "/ManageProject?handler=DeleteTaskList",
+            data: { taskListJson: JSON.stringify(taskList) },
+            beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+            $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            success: function (response) {
+            if (response.success) {
+            window.location.reload();
+            } else {
+            alert("Could not delete the task list!");
+            }
+            },
+            error: function () {
+            alert("error");
+            }
+            });
             }
 
             function createMeeting(projectId, title, description, meetDate) {
-                console.log(`Date being sent: ${meetDate}`); // Debugging line
-                $.ajax({
-                    type: "POST",
-                    url: "/ManageProject?handler=CreateMeeting",
-                    data: { projectId: projectId, title: title, description: description, date: meetDate },
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.reload();
-                        } else {
-                            alert("Could not create the meeting!");
-                        }
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
+            console.log(`Date being sent: ${meetDate}`); // Debugging line
+            $.ajax({
+            type: "POST",
+            url: "/ManageProject?handler=CreateMeeting",
+            data: { projectId: projectId, title: title, description: description, date: meetDate },
+            beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+            $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            success: function (response) {
+            if (response.success) {
+            window.location.reload();
+            } else {
+            alert("Could not create the meeting!");
+            }
+            },
+            error: function () {
+            alert("error");
+            }
+            });
             }
             function editMeeting(meetingId) {
-                $.ajax({
-                    type: "POST",
-                    url: "/ManageProject?handler=EditMeeting",
-                    data: { meetingId: meetingId },
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.reload();
-                        } else {
-                            alert("Could not open edit meeting menu");
-                        }
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
+            $.ajax({
+            type: "POST",
+            url: "/ManageProject?handler=EditMeeting",
+            data: { meetingId: meetingId },
+            beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+            $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            success: function (response) {
+            if (response.success) {
+            window.location.reload();
+            } else {
+            alert("Could not open edit meeting menu");
+            }
+            },
+            error: function () {
+            alert("error");
+            }
+            });
             }
             function manageUser(memberId) {
-                $.ajax({
-                    type: "POST",
-                    url: "/ManageProject?handler=ManageMember",
-                    data: { memberId: memberId },
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.reload();
-                        } else {
-                            alert("Could not open edit meeting menu");
-                        }
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
+            $.ajax({
+            type: "POST",
+            url: "/ManageProject?handler=ManageMember",
+            data: { memberId: memberId },
+            beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+            $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            success: function (response) {
+            if (response.success) {
+            window.location.reload();
+            } else {
+            alert("Could not open edit meeting menu");
+            }
+            },
+            error: function () {
+            alert("error");
+            }
+            });
             }
             function deleteMeeting(meetingId) {
-                $.ajax({
-                    type: "POST",
-                    url: "/ManageProject?handler=DeleteMeeting",
-                    data: { meetingId: meetingId },
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.reload();
-                        } else {
-                            alert("Could not open meeting deletion menu");
-                        }
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
+            $.ajax({
+            type: "POST",
+            url: "/ManageProject?handler=DeleteMeeting",
+            data: { meetingId: meetingId },
+            beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+            $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            success: function (response) {
+            if (response.success) {
+            window.location.reload();
+            } else {
+            alert("Could not open meeting deletion menu");
+            }
+            },
+            error: function () {
+            alert("error");
+            }
+            });
             }
             function updateMeeting(meetingId, projectId, updatedTitle, updatedDescription, updatedDate) {
-                console.log(`Date being sent: ${updatedDate}`); // Debugging line
-                $.ajax({
-                    type: "POST",
-                    url: "/ManageProject?handler=UpdateMeeting",
-                    data: { meetingId: meetingId, projectId: projectId, title: updatedTitle, description: updatedDescription, date: updatedDate },
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.reload();
-                        } else {
-                            alert("Could not update meeting");
-                        }
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
+            console.log(`Date being sent: ${updatedDate}`); // Debugging line
+            $.ajax({
+            type: "POST",
+            url: "/ManageProject?handler=UpdateMeeting",
+            data: { meetingId: meetingId, projectId: projectId, title: updatedTitle, description: updatedDescription, date: updatedDate },
+            beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+            $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            success: function (response) {
+            if (response.success) {
+            window.location.reload();
+            } else {
+            alert("Could not update meeting");
+            }
+            },
+            error: function () {
+            alert("error");
+            }
+            });
             }
             function deleteConfirmMeeting(meetingId) {
-                $.ajax({
-                    type: "POST",
-                    url: "/ManageProject?handler=DeleteConfirmMeeting",
-                    data: { meetingId: meetingId },
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.reload();
-                        } else {
-                            alert("Could not delete meeting");
-                        }
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
+            $.ajax({
+            type: "POST",
+            url: "/ManageProject?handler=DeleteConfirmMeeting",
+            data: { meetingId: meetingId },
+            beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+            $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            success: function (response) {
+            if (response.success) {
+            window.location.reload();
+            } else {
+            alert("Could not delete meeting");
+            }
+            },
+            error: function () {
+            alert("error");
+            }
+            });
             }
             function updateMemberPermissionsConfirm(memberID, projectID, newEditing, newInviting, newKicking) {
-                $.ajax({
-                    type: "POST",
-                    url: "/ManageProject?handler=UpdateMemberPermissionsConfirm",
-                    data: { userID: memberID, projectID: projectID, newEditing: newEditing, newInviting: newInviting, newKicking: newKicking },
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            //window.location.reload();
-                            document.getElementById("manageMemberError").style.color = "white";
-                            document.getElementById("manageMemberError").innerHTML = "Member's permissions have been updated";
-                        } else {
-                            document.getElementById("manageMemberError").style.color = "red";
-                            document.getElementById("manageMemberError").innerHTML = "Could not update member's permissions";
-                        }
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
+            $.ajax({
+            type: "POST",
+            url: "/ManageProject?handler=UpdateMemberPermissionsConfirm",
+            data: { userID: memberID, projectID: projectID, newEditing: newEditing, newInviting: newInviting, newKicking: newKicking },
+            beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+            $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            success: function (response) {
+            if (response.success) {
+            //window.location.reload();
+            document.getElementById("manageMemberError").style.color = "white";
+            document.getElementById("manageMemberError").innerHTML = "Member's permissions have been updated";
+            } else {
+            document.getElementById("manageMemberError").style.color = "red";
+            document.getElementById("manageMemberError").innerHTML = "Could not update member's permissions";
+            }
+            },
+            error: function () {
+            alert("error");
+            }
+            });
             }
 
             function invite(projectId, credential) {
-                if (credential == "" || credential == " ") {
-                    document.getElementById("inviteError").style.color = "red";
-                    document.getElementById("inviteError").innerHTML = "Please fill out this field";
-                    return;
-                }
+            if (credential == "" || credential == " ") {
+            document.getElementById("inviteError").style.color = "red";
+            document.getElementById("inviteError").innerHTML = "Please fill out this field";
+            return;
+            }
 
-                $.ajax({
-                    type: "POST",
-                    url: "/ManageProject?handler=InviteUserToProject",
-                    data: { projectID: projectId, credential: credential },
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            document.getElementById("inviteError").style.color = "white";
-                            document.getElementById("inviteError").innerHTML = "User invited successfully";
-                        } else {
-                            document.getElementById("inviteError").style.color = "red";
-                            document.getElementById("inviteError").innerHTML = "Couldn't invite the user";
-                        }
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
+            $.ajax({
+            type: "POST",
+            url: "/ManageProject?handler=InviteUserToProject",
+            data: { projectID: projectId, credential: credential },
+            beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            success: function (response) {
+            if (response.success) {
+            document.getElementById("inviteError").style.color = "white";
+            document.getElementById("inviteError").innerHTML = "User invited successfully";
+            } else {
+            document.getElementById("inviteError").style.color = "red";
+            document.getElementById("inviteError").innerHTML = "Couldn't invite the user";
+            }
+            },
+            error: function () {
+            alert("error");
+            }
+            });
             }
 
             function manageTask(taskJson) {
-                $.ajax({
-                    type: "POST",
-                    url: "/ManageProject?handler=ManageTask",
-                    data: { taskJson: taskJson },
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.reload();
-                        }
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
+            $.ajax({
+            type: "POST",
+            url: "/ManageProject?handler=ManageTask",
+            data: { taskJson: taskJson },
+            beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+            $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            success: function (response) {
+            if (response.success) {
+            window.location.reload();
+            }
+            },
+            error: function () {
+            alert("error");
+            }
+            });
             }
 
             function taskPopupReview() {
@@ -360,35 +360,109 @@
             }
 
             function taskPopupCancel() {
-                var popup = document.getElementById("taskPopup");
-                popup.style.visibility = "collapse";
+            var popup = document.getElementById("taskPopup");
+            popup.style.visibility = "collapse";
 
-                $.ajax({
-                    type: "POST",
-                    url: "/ManageProject?handler=StopManagingTask",
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.reload();
-                        } 
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
+            $.ajax({
+            type: "POST",
+            url: "/ManageProject?handler=StopManagingTask",
+            beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+            $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            success: function (response) {
+            if (response.success) {
+            window.location.reload();
+            } 
+            },
+            error: function () {
+            alert("error");
+            }
+            });
             }
 
-            function taskPopupConfirm() {
-
+            function taskPopupConfirm(name, description, deadline) {
+            $.ajax({
+            type: "POST",
+            url: "/ManageProject?handler=ConfirmTask",
+            data: { name: name, description: description, deadline: deadline },
+            beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+            $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            success: function (response) {
+            if (response.success) {
+            window.location.reload();
+            }
+            },
+            error: function () {
+            alert("error");
+            }
+            });
             }
 
             function taskPopupDelete() {
+            var result = confirm("Do You really want to delete this task?");
 
+            if (result) {
+            $.ajax({
+            type: "POST",
+            url: "/ManageProject?handler=DeleteTask",
+            beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+            $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            success: function (response) {
+            if (response.success) {
+            window.location.reload();
+            }
+            },
+            error: function () {
+            alert("error");
+            }
+            });
+            }
             }
 
+            function selectMember(memberJson) {
+            $.ajax({
+            type: "POST",
+            url: "/ManageProject?handler=ToggleMember",
+            data: { memberJson: memberJson },
+            beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+            $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            success: function (response) {
+            if (response.success) {
+            window.location.reload();
+            }
+            },
+            error: function () {
+            alert("error");
+            }
+            });
+            }
+
+            function selectTaskList(taskListId) {
+            $.ajax({
+            type: "POST",
+            url: "/ManageProject?handler=SelectTaskList",
+            data: { taskListId: taskListId },
+            beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+            $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            success: function (response) {
+            if (response.success) {
+            window.location.reload();
+            }
+            },
+            error: function () {
+            alert("error");
+            }
+            });
+            }
         </script>
     </head>
 
@@ -554,7 +628,7 @@
 
                         @{
                             var currentTask = HttpContext.Session.Get<Task>("ManagedTask");
-                            var members = currentTask != null ? TaskManager.Instance.GetMembers(currentTask.TaskId) : new List<User>();
+                            var members = HttpContext.Session.Get<List<User>>("ManagedTaskMembers");
                             var taskPopupVisibility = currentTask != null ? "visible" : "collapse";
                         }
 
@@ -563,7 +637,7 @@
                             {
                                 <div class="taskPair">
                                     <label class="taskLabel">Title</label>
-                                    <input type="text" id="title" value="@currentTask.Name"/>
+                                    <input type="text" id="taskTitle" value="@currentTask.Name"/>
                                 </div>
                                 <div class="taskPair">
                                     <label class="taskLabel">Description</label>
@@ -581,7 +655,7 @@
                                         @foreach (var member in Model.Members)
                                         {
                                             var className = members.FirstOrDefault(x => x.UserId == member.UserId) != null ? "selected" : "";
-                                            <span class="listItem @className">@member.Login</span>
+                                            <span class="listItem @className" onclick="selectMember('@JsonSerializer.Serialize(member)')">@member.Login</span>
                                         }
                                     </div>
                                 </div>
@@ -591,18 +665,15 @@
                                         @foreach (var taskList in Model.TaskLists)
                                         {
                                             var className = taskList.TaskListId == currentTask.TaskListId ? "selected" : "";
-                                            <span class="listItem @className">@taskList.Name</span>
+                                            <span class="listItem @className" onclick="selectTaskList(@taskList.TaskListId)">@taskList.Name</span>
                                         }
                                     </div>
                                 </div>
 
                                 <div class="taskButtonsContainer">
                                     <div class="taskButtons">
-                                        <button id="taskReviewButton" onclick="taskPopupReview()">Review</button>
-                                    </div>
-                                    <div class="taskButtons">
                                         <button id="taskCancelButton" onclick="taskPopupCancel()">Close</button>
-                                        <button id="taskConfirmButton" onclick="taskPopupConfirm()">Confirm changes</button>
+                                        <button id="taskConfirmButton" onclick="taskPopupConfirm(document.getElementById('taskTitle').value, document.getElementById('taskDescription').value, document.getElementById('datePicker').value)">Confirm changes</button>
                                     </div>
                                     <button id="taskDeleteButton" onclick="taskPopupDelete()">Delete</button>
                                 </div>
